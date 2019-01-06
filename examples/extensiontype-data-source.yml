@@ -1,0 +1,35 @@
+apiVersion: blockware.com/v1
+kind: ExtensionType
+name: data-source #Names the extension type
+description: |
+  Shows an example of how an extension type is defined
+
+# Reusable yml components - provides no meaning by themselves. Use &ref and *ref to use repeated structures in yml
+snippets:
+
+handler:
+  # Defines the handler that will perform all non-generic operations for extensions of this type
+  # Handlers needs to implement a very specific REST interface
+  image: blockware/extensions-data-source-handler
+  transport: http
+  port: 8080
+  path: /rest/
+  health: /_health
+
+schema: #Defines the schema required by this extension type
+  type: object
+  properties:
+    configuration:
+      type: schema #Probably reference these through an URL instead
+    inputs:
+      type: schema
+    outputs:
+      type: schema
+    validate:
+      type: endpoint
+    endpoint:
+      type: endpoint
+  required:
+  - endpoint
+  - inputs
+  additionalProperties: false

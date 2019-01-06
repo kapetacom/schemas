@@ -1,0 +1,155 @@
+apiVersion: blockware.com/v1
+kind: Extension
+id: sqldb-connect
+name: SQL Database Integration
+description: Connect to a range of SQL databases. Supported databases are MySQL, PostgreSQL, MS SQL, Oracle DB and SAP HANA
+categories:
+- database
+keywords:
+- mysql
+- postgres
+- postgresql
+- mssql
+- oracle
+- sap
+- hana
+- jdbc
+
+snippets:
+
+- &tableConfiguration
+  title: Table
+  sortOrder: 1
+  type: enum
+  help: Select the table
+  required: true
+  configuration:
+    emptyText: Select table...
+
+- &dynamicSchema
+  path: "/schema"
+  method: POST
+
+- &dynamicConfiguration
+  path: "/configuration"
+  method: POST
+
+specification:
+  image: blockware/extensions-jdbc #The docker image providing this extension
+
+  validate:
+    path: /validate/activation
+    method: POST
+
+  configuration:
+    type:
+      sortOrder: 1
+      title: Type
+      required: true
+      type: enum
+      options:
+        postgresql: PostgreSQL
+        mysql: MySQL
+        sqlserver: MS SQL
+        sap: SAP Hana DB
+        oracle: Oracle DB
+      configuration:
+        emptyText: Select database type...
+
+    host:
+      sortOrder: 2
+      title: Host
+      required: true
+      help: The host of the database
+      placeholder: my-database-host.com
+      type: string
+      dependsOn: [ type ]
+
+    port:
+      sortOrder: 3
+      title: Port
+      placeholder: "1234"
+      type: integer
+      dependsOn: [ type ]
+      dynamicDefaultValue:
+        type: conditional
+        conditions:
+        - condition:
+            type: postgresql
+          value: 5432
+        - condition:
+            type: mysql
+          value: 3306
+        - condition:
+            type: sqlserver
+          value: 1433
+        - condition:
+            type: sap
+          value: 30015
+        - condition:
+            type: oracle
+          value: 1521
+    database:
+      sortOrder: 4
+      title: Database name
+      required: true
+      placeholder: myDatabase
+      type: string
+      dependsOn: [ type ]
+    username:
+      sortOrder: 5
+      title: Username
+      required: true
+      placeholder: my-user
+      type: string
+      dependsOn: [ type ]
+    password:
+      sortOrder: 6
+      title: Password
+      placeholder: my-password
+      secret: true
+      type: password
+      dependsOn: [ type ]
+
+components:
+# The individual extension components - each implements a single ExtensionType
+
+- id: insert-row-to-jdbc
+  type: data-storage
+  name: Write row to table
+  description: Write data to a SQL table
+  specification:
+    dynamicConfiguration: *dynamicConfiguration
+    configuration:
+      table: *tableConfiguration
+    validate:
+      path: /validate/component/data-storage
+      method: POST
+    dynamicInputs: *dynamicSchema
+    endpoint:
+      path: /row/write
+      method: POST
+
+- id: read-row-from-jdbc
+  type: data-source
+  name: Read row from table
+  description: Read data from a SQL Table
+  specification:
+    dynamicConfiguration: *dynamicConfiguration
+    configuration:
+      table: *tableConfiguration
+      query:
+        sortOrder: 2
+        title: Query
+        type: query
+        required: true
+        dependsOn:
+        - table
+    validate:
+      path: /validate/component/data-source
+      method: POST
+    dynamicOutputs: *dynamicSchema
+    endpoint:
+      path: /row/query
+      method: POST
+

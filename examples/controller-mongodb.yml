@@ -1,0 +1,35 @@
+apiVersion: blockware.com/v1
+kind: Controller
+id: mongodb
+name: MongoDB
+image: blockware/mongodb-controller
+
+provides:
+- type: resource
+  name: mongodb
+  autoscale: #Probably not like this - or could even just be part of the controller configuration / code itself
+  - metric: disk_free
+    minimum: 20G
+  - metric: mem_free
+    minimum: 2G
+  consumer:
+    scale:
+      type: string
+      enum:
+      - small
+      - medium
+      - large
+      - huge
+    deployment:
+      type: string
+      defaultValue: auto
+      enum:
+      - auto
+      - shared
+      - cluster
+
+
+
+
+
+

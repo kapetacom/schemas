@@ -1,0 +1,44 @@
+apiVersion: blockware.com/v1
+kind: Controller
+id: Service
+name: Service controller
+description: Controls all service blocks
+image: blockware/service-controller
+
+provides:
+- type: kind
+  name: Service
+
+- type: resource
+  name: health
+  provider:
+    #TODO
+  # Is consumed by the service-controller itself (and kubernetes)
+
+- type: resource
+  name: api
+  provider:
+    #TODO
+  consumer:
+    #TODO
+
+- type: resource
+  name: events
+  provider:
+    #TODO
+  consumer:
+    #TODO
+
+- type: resource
+  name: udp
+  provider:
+    #TODO
+  consumer:
+    #TODO
+
+- type: resource
+  name: tcp
+  provider:
+    #TODO
+  consumer:
+    #TODO

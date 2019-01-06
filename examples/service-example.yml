@@ -1,0 +1,288 @@
+apiVersion: blockware.com/v1
+kind: Service
+id: example #Should be unique per vendor
+name: Example Block #Name the block.
+description: |
+  Shows an example of every possible configuration in a service block.yml
+
+# Reusable yml components - provides no meaning by themselves. Use &ref and *ref to use repeated structures in yml
+snippets:
+  session: &session
+    type: object
+    properties:
+      sessionId:
+        type: string
+      userId:
+        type: string
+      accountId:
+        type: string
+    example:
+      sessionId: test
+      userId: test
+      accountId: test
+
+  login: &login
+    type: object
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+        x-secret: true
+
+  paymentState: &paymentState
+    type: object
+    properties:
+      reason:
+        type: string
+
+  user: &user
+    type: object
+    properties:
+      id:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+
+services:
+- name: api #Splitting things up to be able to scale background and foreground processes independently
+  image: blockware/example-service #Docker image of the container itself
+
+  provides:
+  # Contains everything this container will provide to the blockware system in which it is deployed
+
+  - type: health #Describes how to get health information for the container itself
+    options: #TODO
+
+  - type: tcp #Exposes a non-standard TCP-based service
+    description: Describes the TCP service exposed here
+    options:
+      id: custom-protocol-socket-server #Makes it possible for other blocks to require this specific service
+      port: 8090 #The port
+
+  - type: udp #Exposes a non-standard UDP-based service
+    description: Describes the UDP service exposed here
+    options:
+      id: custom-protocol-broadcast-server #Makes it possible for other blocks to require this specific service
+      port: 18090 #The port
+
+  - type: api #Describes an API this service makes available to the blockware system
+    description: Describes the API exposed here
+    options:
+      transport: http # Defines the transport of the API. Only HTTP supported
+      format: rest #Defines the format of the API itself. Only REST supported
+      port: 8080 #The port this API is exposed on
+      path: /rest/ #Base path of the HTTP based API
+      health: #Describes how to get health information for this API
+        format: default #Might make sense to have multiple formats here - e.g. define some standards
+        path: /_health
+      documentation: #Describes how to get API documentation for this service
+        format: swagger2
+        path: /_swagger2
+
+  - type: events #Describes events that this service produces to the blockware system
+    options:
+      transport: amqp #Can also be MQTT
+      # We could prevent events with no consumers to avoid
+      # spending resources on handling them
+      events:
+      - scope: users
+        name: created
+        description: Fired when a user is created
+        payload: *user
+
+      - scope: payments
+        name: rejected
+        description: Fired when a payment is rejected
+        payload: *paymentState
+
+  consumes:
+  # Resources and services consumed by this container
+  - type: memory
+    # Ties directly into kubernetes resources requests and limits. Built-in resource
+    options:
+      min: 1G
+      max: 3G
+
+  - type: cpu
+    # Ties into Kubernetes resource requests and limits - however attempts to make the configuration of those
+    # simpler to understand. Built-in resource
+    options:
+      cores: 2
+      load: 2
+
+  - type: disk
+    # Defines a dependency on a block-level resource
+    options:
+      name: shared-disk-1
+      mount: /var/temp-disk
+
+  - type: mongodb
+    # Defines a dependency on a block-level resource
+    options:
+      name: my-mongodb
+
+  - type: sqldb
+    # Defines a dependency on a block-level resource
+    options:
+      name: my-postgres
+
+  - type: api
+    # This defines a dependency on API methods from other blocks - however allows us to define later what those blocks are
+    # and also allows us to ignore specific versions of those blocks as long as the required interface
+    # is maintained. That also means we can detect incompatibility "build time".
+    # Lastly this also gives a recipe for what needs to be implemented to replace a specific piece of functionality
+    # in a blockware system.
+    # Consumers of API's should define as minimal a request / response structures as possible - containing only the
+    # values they themselves provide / require.
+    # By doing so they define exactly the requirements *they* have on the method.
+    # Blockware should then provide means on the receiving end to distinguish between what is an empty or null value
+    # and what was not part of the payload itself.
+    # Because of this loose coupling blockware can also provide mapping to make incompatible API's compatible.
+    # When adding / upgrading a block in a system the user is prompted to accept and possibly map these required
+    # http methods - giving a detailed overview of what access it requires.
+    # Blocks themselves might also have access roles - limiting their access to various data and operations.
+    options:
+      transport: http #Only HTTP supported for now
+      format: rest #Only REST supported for now
+      methods:
+      - path: /auth/current
+        method: GET
+        response: *session
+
+      - path: /auth/login
+        method: POST
+        request: *login
+        response: *session
+
+      # This method might belong to a different block and domain but that's information we do not want or need in
+      # this block. This block just knows that it can't do it itself
+      - path: /payments/get/{id}
+        method: GET
+        response: *paymentState
+
+
+- name: background #Splitting things up to be able to scale background and foreground processes independently
+  image: blockware/example-processor #Docker image of the container itself
+  provides:
+  # Contains everything this container will provide to the blockware system in which it is deployed
+
+  - type: health #Describes how to get health information for the container itself
+    options: #TODO
+
+  consumes:
+  # Resources and services consumed by this container
+  - type: memory
+    options:
+      min: 1G
+      max: 3G
+
+  - type: cpu
+    options:
+      cores: 2
+      load: 3
+
+  - type: disk
+    options:
+      name: shared-disk-1
+      mount: /var/temp-disk
+
+  - type: mongodb
+    options:
+      name: my-mongodb
+
+  - type: tcp #Requires a non-standard TCP-based service
+    optional: true #Can make a requirement optional. Needs to be handled in the code itself as well.
+    options:
+      name: my-tcp-service
+      id: custom-protocol-socket-server #Identifies the service
+
+  - type: udp #Requires a non-standard UDP-based service
+    options:
+      name: my-udp-service
+      id: custom-protocol-broadcast-server #Identifies the service
+
+  - type: api
+    options:
+      name: auth
+      transport: http
+      format: rest
+      methods:
+      - path: /auth/current
+        method: GET
+        response: *session
+
+  - type: events
+    # Defines a requirement on external blocks to provide these events as they are expected in this block. There
+    # is no mention of a specific block allowing any block that provides these events to feed into this.
+    # Multiple different blocks can provide the same events - however they must all match the payload of this
+    # consumer.
+    # Multiple consumers can consume the same events - however they must all have compatible payload definitions.
+    # Consumers should define as minimal a payload as possible - containing only the values they themselves require.
+    # By doing so they define exactly the requirements *they* have on the payload.
+    # When adding / upgrading a block to a system user is prompted to accept that the block will receive the
+    # defined events
+    options:
+      transport: amqp
+      events:
+      - scope: users
+        name: created
+        payload: *user
+
+      - scope: payments
+        name: rejected
+        payload: *paymentState
+
+
+resources: #Defines block-level resources for the individual services like disk, db etc.
+- type: configuration
+  options: #TODO
+
+# Tells the blockware system that this block can consume extension of type data-storage
+# To consume an extension the services themselves needs to integrate to the blockware extension controller
+- type: extension
+  options:
+    type: data-storage
+
+# Can consume multiple extension types
+- type: extension
+  options:
+    type: data-source
+
+- type: mongodb
+  name: my-mongodb
+  options:
+    version: 3.6.4 #Required version
+    deployment: shared #Determines if we can try to allocate from existing mongo cluster or have to create a new
+    # Could contain a way of defining (and changing) the schema itself causing migrations etc.
+
+- type: sqldb
+  name: my-postgres
+  options:
+    vendor: postgresql
+    version: 9.4.1 #Required version
+    deployment: shared #Determines if we can try to allocate from existing pg server or have to create a new
+    migrations: migrations/* #Points to path in container that contains migration scripts for creating db.
+    # It could also point to a more formal schema definition and let the system work out the migration needed
+
+- type: disk
+  name: shared-disk-1
+  options:
+    access: local #Can be local, network or san
+    speed: fast #Can be fast or default
+    temporary: true #Temporary means disk is destroyed when block is restarted / stopped
+    size: 20Gb
+    chmod: 0777
+
+autoscale: #TODO
+  min: 2
+  max: 12
+  metrics:
+  # The autoscaling system should be smart enough to determine that if scaling did not affect
+  # the metric(s) that caused it to scale it will not continue to scale and instead raise an alert
+  - metric: avg_response_time
+    value: 400ms
+    duration: 20m
+

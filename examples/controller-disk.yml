@@ -1,0 +1,35 @@
+apiVersion: blockware.com/v1
+kind: Controller
+id: Disk
+name: Disk controller
+description: Controls and acquires disks for all blocks
+image: blockware/disk-controller
+
+provides:
+- type: resource
+  name: disk
+  consumer:
+    access:
+      type: string
+      enum:
+        local: Local disk
+        network: Remote disk
+        san: SAN
+
+    speed:
+      type: string
+      enum:
+        default: Default
+        fast: Fast (SSD)
+
+    temporary:
+      type: boolean
+
+    size:
+      type: string
+
+    chmod:
+      type: string
+
+    mount:
+      type: string

@@ -1,0 +1,9 @@
+kind: core.blockware.com/v1/ResourceType/Internal
+metadata:
+  id: rest.blockware.com/v1/API
+  name: REST API
+
+schema:
+
+spec:
+

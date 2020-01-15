@@ -1,0 +1,6 @@
+kind: core.blockware.com/v1/ResourceType/Extension
+metadata:
+  id: extensions.blockware.com/v1/Payment
+  name: Payment Gateway
+spec:
+

@@ -2,10 +2,45 @@ type: object
 properties:
   name:
     type: string
+  type:
+    type: string
+    enum:
+      - dto
+      - enum
+  description:
+    type: string
   properties:
     type: object
     additionalProperties:
       type: object
       properties:
-        type: string
-  additionalProperties: false
+        type:
+          type: string
+        description:
+          type: string
+      required:
+        - type
+  values:
+    type: array
+    items:
+      type: string
+  required:
+    - name
+    - type
+  allOf:
+    - if:
+        properties:
+          type:
+            const: enum
+      then:
+        required:
+          - values
+    - if:
+        properties:
+          type:
+            const: dto
+      then:
+        required:
+          - properties
+
+

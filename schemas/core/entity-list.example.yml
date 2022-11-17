@@ -1,0 +1,41 @@
+types:
+  - type: dto
+    name: User
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      email:
+        type: string
+  - type: dto
+    name: UserAuth
+    description: My user auth type
+    properties:
+      username:
+        type: string
+        description: The user name
+      password:
+        type: string
+  - type: enum
+    name: Test
+    values:
+      - ONE
+      - TWO
+source:
+  type: blockware-dsl
+  value: |-
+    User {
+    	id: string
+    	name: string
+    	email: string
+    }
+    
+    UserAuth {
+    	username: string
+    	password: string
+    }
+    
+    enum Test {
+    	ONE,TWO
+    }

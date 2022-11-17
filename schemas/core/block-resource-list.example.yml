@@ -1,0 +1,6 @@
+- kind: my-handle/my-resource-type
+  metadata:
+    name: otherName
+- kind: my-handle/my-other-type
+  metadata:
+    name: someName

@@ -13,11 +13,19 @@ properties:
         type: string
       description:
         type: string
+
     required:
       - name
-
   spec:
     type: object
     properties:
       schema:
         $ref: "https://json-schema.org/draft/2019-09/schema"
+      dependencies:
+        type: array
+        items:
+          type: string
+      entities:
+        type: array
+        items:
+          type: string

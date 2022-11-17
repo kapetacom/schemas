@@ -1,13 +1,24 @@
 kind: core/block-type
 metadata:
-  name: some-handle/my-type
-  title: My Block Type
-  description: This adds a new block type to your system
+  name: blockware/block-type-frontend
+  title: Frontend
 spec:
   schema:
     type: object
     properties:
-      dockerImage:
-        type: string
-      dockerTag:
-        type: string
+      target:
+        $ref: core/language-target-reference
+      entities:
+        $ref: core/entity-list
+      consumers:
+        $ref: core/block-resource-list
+      providers:
+        $ref: core/block-resource-list
+    required:
+      - target
+  dependencies:
+    - consumers.kind
+    - providers.kind
+  entities:
+    - entities.types
+

@@ -1,0 +1,12 @@
+type: object
+properties:
+  kind:
+    type: string
+  metadata:
+    type: object
+    additionalProperties: true
+  spec:
+    type: object
+    additionalProperties: true
+  required:
+    - kind

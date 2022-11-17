@@ -1,0 +1,5 @@
+kind: blockware/language-target-java-spring-boot
+options:
+  groupId: org.mycompany.services
+  artifactId: users
+  basePackage: org.mycompany.services.users

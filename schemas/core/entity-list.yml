@@ -1,0 +1,13 @@
+type: object
+properties:
+  types:
+    type: array
+    items:
+      $ref: core/entity
+  source:
+    type: object
+    properties:
+      type:
+        type: string
+      value:
+        type: string

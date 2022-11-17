@@ -1,0 +1,9 @@
+type: object
+properties:
+  kind:
+    type: string
+  options:
+    type: object
+    additionalProperties: true
+  required:
+    - kind

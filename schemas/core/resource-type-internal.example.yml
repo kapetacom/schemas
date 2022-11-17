@@ -1,0 +1,13 @@
+type: core/resource-type-internal
+metadata:
+  name: some-handle/my-internal-resource-provider
+  title: My Internal Resource
+  description: Provides internal resources
+spec:
+  configuration:
+    type: object
+    properties:
+      enableSomething:
+        type: boolean
+      prefix:
+        type: string

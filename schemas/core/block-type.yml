@@ -1,0 +1,23 @@
+type: object
+properties:
+  kind:
+    type: string
+    const: core/block-type
+
+  metadata:
+    type: object
+    properties:
+      name:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+    required:
+      - name
+
+  spec:
+    type: object
+    properties:
+      schema:
+        $ref: "https://json-schema.org/draft/2019-09/schema"

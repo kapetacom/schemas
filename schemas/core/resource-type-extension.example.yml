@@ -1,0 +1,20 @@
+type: core/resource-type-extension
+metadata:
+  name: some-handle/my-extension-resource-provider
+  title: My extension Resource
+  description: Provides extension resources
+spec:
+  configuration:
+    type: object
+    properties:
+      enableSomething:
+        type: boolean
+      prefix:
+        type: string
+  schema:
+    type: object
+    properties:
+      action:
+        type: string
+      payload:
+        type: object

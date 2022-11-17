@@ -1,0 +1,13 @@
+type: core/resource-type-operator
+metadata:
+  name: some-handle/my-operator-resource-provider
+  title: My operator Resource
+  description: Provides operator resources
+spec:
+  configuration:
+    type: object
+    properties:
+      enableSomething:
+        type: boolean
+      prefix:
+        type: string

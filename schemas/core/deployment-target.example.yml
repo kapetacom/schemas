@@ -1,0 +1,13 @@
+kind: core/deployment-target
+metadata:
+  name: some-handle/my-deployment-target
+  title: My Deployment Target
+  description: This allows you to introduce a new deployment target
+spec:
+  configuration:
+    type: object
+    properties:
+      scale:
+        type: number
+      region:
+        type: string

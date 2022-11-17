@@ -1,0 +1,32 @@
+kind: core/plan
+metadata:
+  name: some-handle/my-plan
+  title: My Plan
+  description: This represents several connected groups in a plan
+spec:
+  blocks:
+    - id: block1
+      block:
+        ref: blockware://some-handle/my-block-1
+      name: My First Block
+      dimensions:
+        height: 10
+        width: 10
+        left: 10
+        top: 10
+    - id: block2
+      block:
+        ref: blockware://some-handle/my-block-2
+      name: My Second Block
+      dimensions:
+        height: 10
+        width: 10
+        left: 10
+        top: 10
+  connections:
+    - from:
+        blockId: block1
+        resourceName: my-api-server
+      to:
+        blockId: block2
+        resourceName: my-api-client

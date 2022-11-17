@@ -1,0 +1,25 @@
+type: object
+properties:
+  kind:
+    type: string
+    const: core/resource-type-extension
+
+  metadata:
+    type: object
+    properties:
+      name:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+    required:
+      - name
+
+  spec:
+    type: object
+    properties:
+      schema:
+        $ref: "https://json-schema.org/draft/2019-09/schema"
+      configuration:
+        $ref: "https://json-schema.org/draft/2019-09/schema"

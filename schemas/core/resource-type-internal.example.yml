@@ -1,4 +1,4 @@
-type: core/resource-type-internal
+kind: core/resource-type-internal
 metadata:
   name: some-handle/my-internal-resource-provider
   title: My Internal Resource

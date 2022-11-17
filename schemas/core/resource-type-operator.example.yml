@@ -1,4 +1,4 @@
-type: core/resource-type-operator
+kind: core/resource-type-operator
 metadata:
   name: some-handle/my-operator-resource-provider
   title: My operator Resource

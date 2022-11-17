@@ -1,4 +1,4 @@
-type: core/resource-type-extension
+kind: core/resource-type-extension
 metadata:
   name: some-handle/my-extension-resource-provider
   title: My extension Resource

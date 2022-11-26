@@ -1,0 +1,9 @@
+entities:
+  - reference: User
+  - reference: Organization
+    optional: true
+dependencies:
+  - reference: some-handle/some-name
+    optional: false
+  - reference: other-handle/some-name
+    optional: true

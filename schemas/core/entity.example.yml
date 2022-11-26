@@ -1,4 +1,12 @@
+name: UserType
+type: enum
+values:
+  - admin
+  - guest
+  - normal
+---
 name: User
+type: dto
 properties:
   id:
     type: string

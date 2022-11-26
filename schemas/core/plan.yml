@@ -1,3 +1,5 @@
+$id: /core/plan
+$schema: http://json-schema.org/draft-07/schema#
 type: object
 properties:
   kind:
@@ -5,17 +7,7 @@ properties:
     const: core/plan
 
   metadata:
-    type: object
-    properties:
-      name:
-        type: string
-        pattern: ^[a-z0-9-]+/[a-z0-9-]+$
-      title:
-        type: string
-      description:
-        type: string
-    required:
-      - name
+    $ref: /core/type-metadata
 
   spec:
     type: object
@@ -85,6 +77,6 @@ properties:
             mapping:
               type: object
               additionalProperties: true
-            required:
-              - from
-              - to
+          required:
+            - from
+            - to

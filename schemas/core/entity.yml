@@ -1,3 +1,5 @@
+$id: /core/entity
+$schema: http://json-schema.org/draft-07/schema#
 type: object
 properties:
   name:
@@ -24,23 +26,23 @@ properties:
     type: array
     items:
       type: string
-  required:
-    - name
-    - type
-  allOf:
-    - if:
-        properties:
-          type:
-            const: enum
-      then:
-        required:
-          - values
-    - if:
-        properties:
-          type:
-            const: dto
-      then:
-        required:
-          - properties
+required:
+  - name
+  - type
+allOf:
+  - if:
+      properties:
+        type:
+          const: enum
+    then:
+      required:
+        - values
+  - if:
+      properties:
+        type:
+          const: dto
+    then:
+      required:
+        - properties
 
 

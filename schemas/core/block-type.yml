@@ -1,3 +1,5 @@
+$id: /core/block-type
+$schema: http://json-schema.org/draft-07/schema#
 type: object
 properties:
   kind:
@@ -5,28 +7,10 @@ properties:
     const: core/block-type
 
   metadata:
-    type: object
-    properties:
-      name:
-        type: string
-        pattern: ^[a-z0-9-]+/[a-z0-9-]+$
-      title:
-        type: string
-      description:
-        type: string
+    $ref: /core/type-metadata
 
-    required:
-      - name
   spec:
     type: object
     properties:
       schema:
-        $ref: "https://json-schema.org/draft/2019-09/schema"
-      dependencies:
-        type: array
-        items:
-          type: string
-      entities:
-        type: array
-        items:
-          type: string
+        $ref: /core/type-schema

@@ -1,0 +1,26 @@
+$id: /core/type-xref
+$schema: http://json-schema.org/draft-07/schema#
+type: object
+properties:
+  entities:
+    type: array
+    items:
+      type: object
+      properties:
+        reference:
+          type: string
+        optional:
+          type: boolean
+      required:
+        - reference
+  dependencies:
+    type: array
+    items:
+      type: object
+      properties:
+        reference:
+          type: string
+        optional:
+          type: boolean
+      required:
+        - reference

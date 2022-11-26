@@ -156,3 +156,39 @@ Usually used in blocks to determine which language target to use.
 
 **Example:**
 [core/language-target-reference.example.yml](schemas/core/language-target-reference.example.yml)
+
+## core/type-metadata
+Most commonly used metadata schema
+
+**Schema:**
+[core/type-metadata.yml](schemas/core/type-metadata.yml)
+
+**Example:**
+[core/type-metadata.example.yml](schemas/core/type-metadata.example.yml)
+
+## core/type-schema
+Use this to embed a JSON schema into a JSON schema
+
+**Schema:**
+[core/type-schema.yml](schemas/core/type-schema.yml)
+
+**Example:**
+[core/type-schema.example.yml](schemas/core/type-schema.example.yml)
+
+## core/type-xref
+Used to indicate cross-references to other types
+
+**Schema:**
+[core/type-xref.yml](schemas/core/type-xref.yml)
+
+**Example:**
+[core/type-xref.example.yml](schemas/core/type-xref.example.yml)
+
+# Tests
+
+To test the schemas simply run
+
+```bash
+npm i
+npm run test
+```

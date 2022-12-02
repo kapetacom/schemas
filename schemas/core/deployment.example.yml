@@ -1,0 +1,33 @@
+kind: core/deployment
+metadata:
+  name: blockware/test-deployment
+  title: Test deployment
+  description: This is a deployment to the test environment
+spec:
+  environment:
+    ref: blockware/test
+  services:
+    - name: blockware/todo-web
+      artifact:
+        name: blockware/todo-web
+        version: "1.0.0"
+        type: docker
+      dependencies:
+        - blockware/todo-api
+
+    - name: blockware/todo-api
+      artifact: 
+        name: blockware/todo-api
+        version: latest
+        type: docker
+      configuration:
+        USE_TLS: true
+      dependencies:
+        - blockware/postgres  
+
+    - name: blockware/postgres
+      artifact: 
+        name: postgres
+        version: "12.2"
+        type: managed
+      dependencies: []

@@ -1,0 +1,19 @@
+kind: core/environment
+metadata:
+  name: blockware/test
+  title: Test Environment
+  description: This is a test environment
+spec:
+  plan: 
+    ref: blockware/test-plan:1.0.0
+    configuration:
+      awesome_plan: true
+    blocks:
+    - id: 019bc636-7ba2-5c41-c426-96e90cee21e6
+      configuration:
+        block-specific: "configuration"
+  deploymentTarget: 
+    ref: blockware/test-deployment-target:1.0.0
+    configuration:
+      env: test
+      region: us-east-1

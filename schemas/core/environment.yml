@@ -1,0 +1,51 @@
+$id: /core/environment
+type: object
+properties:
+  kind:
+    type: string
+    const: core/environment
+
+  metadata:
+    $ref: /core/type-metadata
+
+  spec:
+    type: object
+    properties:
+      plan:
+        type: object
+        properties:
+          ref:
+            type: string
+        required:
+          - ref
+      configuration:
+        type: object
+      blocks:
+          type: array
+          uniqueItems: true
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              configuration:
+                type: object
+            required:
+              - id
+              - configuration
+
+      deploymentTarget:
+        type: object
+        properties:
+          ref:
+            type: string
+          configuration:
+            type: object
+        required:
+          - ref
+      properties:
+        type: object
+required:
+  - kind
+  - metadata
+  - spec

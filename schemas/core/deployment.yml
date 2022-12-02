@@ -1,0 +1,47 @@
+$id: /core/deployment
+type: object
+properties:
+  kind:
+    type: string
+    const: core/deployment
+  metadata:
+    $ref: /core/type-metadata
+  spec:
+    type: object
+    required:
+      - services
+    properties:
+      services:
+        type: array
+        items:
+          type: object
+          required:
+            - name
+            - artifact
+          properties:
+            name:
+              type: string
+            artifact:
+              type: object
+              required:
+                - name
+                - version
+                - type
+              properties:
+                name:
+                  type: string
+                version:
+                  type: string
+                type:
+                  type: string
+                  pattern: '^(docker|managed)$'
+            dependencies:
+              type: array
+              items:
+                type: string
+            configuration:
+              type: object
+required:
+  - kind
+  - metadata
+  - spec

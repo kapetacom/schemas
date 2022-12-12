@@ -6,6 +6,8 @@ metadata:
 spec:
   environment:
     ref: blockware/test
+  target:
+    kind: blockware/deployment-target-gcp
   services:
     - name: blockware/todo-web
       artifact:

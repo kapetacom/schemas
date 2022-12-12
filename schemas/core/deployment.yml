@@ -11,6 +11,14 @@ properties:
     required:
       - services
     properties:
+      target:
+        type: object
+        properties:
+          kind:
+            type: string
+            pattern: ^[a-z0-9-_]+/[a-z0-9-_]+$
+        required:
+          - kind
       services:
         type: array
         items:

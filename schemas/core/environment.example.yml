@@ -1,11 +1,11 @@
 kind: core/environment
 metadata:
-  name: blockware/test
+  name: blockware/test_env
   title: Test Environment
   description: This is a test environment
 spec:
   plan: 
-    ref: blockware/test-plan:1.0.0
+    ref: blockware://blockware/sample_java_plan:1.0.0
     configuration:
       awesome_plan: true
     blocks:
@@ -13,7 +13,7 @@ spec:
       configuration:
         block-specific: "configuration"
   deploymentTarget: 
-    ref: blockware/test-deployment-target:1.0.0
+    ref: blockware://blockware/test-deployment-target:1.0.0
     configuration:
       env: test
       region: us-east-1

@@ -12,6 +12,8 @@ properties:
   spec:
     type: object
     properties:
+      image:
+        type: string
       configuration:
         $ref: /core/type-schema
 

@@ -4,6 +4,7 @@ metadata:
   title: My Deployment Target
   description: This allows you to introduce a new deployment target
 spec:
+  image: blockware/my-deployment-target:1.0.0
   configuration:
     type: object
     properties:

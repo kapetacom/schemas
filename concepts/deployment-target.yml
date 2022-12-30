@@ -1,0 +1,31 @@
+kind: core/concept
+metadata:
+  name: core/deployment-target
+spec:
+  schema:
+    $id: /core/deployment-target
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    required:
+      - kind
+      - metadata
+      - spec
+    properties:
+      kind:
+        type: string
+        const: core/deployment-target
+
+      metadata:
+        $ref: /core/type-metadata
+
+      spec:
+        type: object
+        required:
+          - image
+          - configuration
+        properties:
+          image:
+            type: string
+          configuration:
+            $ref: /core/type-schema
+

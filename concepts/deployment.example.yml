@@ -5,19 +5,19 @@ metadata:
   description: This is a deployment to the test environment
 spec:
   environment:
-    ref: blockware/test
+    ref: blockware/test:1.0.0
   target:
-    kind: blockware/deployment-target-gcp
+    kind: blockware/deployment-target-gcp:1.0.0
   services:
-    - name: blockware/todo-web
+    - name: blockware/todo-web:1.0.0
       artifact:
         name: blockware/todo-web
         version: "1.0.0"
         type: docker
       dependencies:
-        - blockware/todo-api
+        - blockware/todo-api:1.0.0
 
-    - name: blockware/todo-api
+    - name: blockware/todo-api:1.0.0
       artifact: 
         name: blockware/todo-api
         version: latest
@@ -25,9 +25,9 @@ spec:
       configuration:
         USE_TLS: true
       dependencies:
-        - blockware/postgres  
+        - blockware/postgres:1.0.0
 
-    - name: blockware/postgres
+    - name: blockware/postgres:1.0.0
       artifact: 
         name: postgres
         version: "12.2"

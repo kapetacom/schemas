@@ -1,10 +1,10 @@
-$id: /core/block-type
+$id: /core/concept
 $schema: http://json-schema.org/draft-07/schema#
 type: object
 properties:
   kind:
     type: string
-    const: core/block-type
+    const: core/concept
 
   metadata:
     $ref: /core/type-metadata
@@ -12,5 +12,16 @@ properties:
   spec:
     type: object
     properties:
+      dependencies:
+        type: array
+        items:
+          type: string
       schema:
         $ref: /core/type-schema
+    required:
+      - schema
+required:
+  - kind
+  - metadata
+  - spec
+

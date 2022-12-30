@@ -1,13 +1,24 @@
-export interface BlockTypeGroup {
+export interface Concept {
     kind:     string;
     metadata: Metadata;
-    spec:     BlockTypeGroupSpec;
+    spec:     ConceptSpec;
 }
 
 export interface Metadata {
     description?: string;
     name:         string;
     title?:       string;
+}
+
+export interface ConceptSpec {
+    dependencies?: string[];
+    schema:        { [key: string]: any };
+}
+
+export interface BlockTypeGroup {
+    kind:     string;
+    metadata: Metadata;
+    spec:     BlockTypeGroupSpec;
 }
 
 export interface BlockTypeGroupSpec {

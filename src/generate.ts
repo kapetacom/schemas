@@ -53,15 +53,34 @@ const languages:Language[] = [
     }
 ];
 
-const schemaStore = new InMemorySchemaStore();
-const types:Entry[] = readDirectory(typesPath);
-types.forEach(entry => {
-    schemaStore.set(entry.content.$id, entry.content);
-});
 
 (async () => {
+    const schemaStore = new InMemorySchemaStore();
+    const types:Entry[] = readDirectory(typesPath);
+    let coreConcept:any;
+    types.forEach(entry => {
+        schemaStore.set(entry.content.$id, entry.content);
+        if (entry.content.$id === '/core/concept') {
+            coreConcept = entry;
+        }
+    });
+
+    if (!coreConcept) {
+        throw new Error('Failed to find core/concept type');
+    }
+
     const concepts = readDirectory(conceptsPath);
     const inputData = new InputData();
+
+    inputData.addSourceSync(
+        'schema',
+        {
+            schema: JSON.stringify(coreConcept.content),
+            name: 'Concept'
+        },
+        () => new JSONSchemaInput(schemaStore)
+    )
+
     for(let i = 0; i < concepts.length; i++) {
         const concept = concepts[i];
         const typeName = concept.content.metadata.name.split(/\//)[1];
@@ -75,7 +94,6 @@ types.forEach(entry => {
             schema,
             () => new JSONSchemaInput(schemaStore)
         )
-
     }
 
     for(let i = 0; i < languages.length; i++) {

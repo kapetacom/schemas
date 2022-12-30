@@ -1,11 +1,8 @@
 {
   "name": "@blockware/schemas",
   "version": "local",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "description": "Contains the schemas for all core blockware types.",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/yaml": "^1.9.7",
-    "yaml": "^2.1.2",
-    "ajv": "^8.11.2"
-  }
+  "license": "MIT"
 }

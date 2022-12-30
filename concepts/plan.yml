@@ -3,7 +3,7 @@ metadata:
   name: core/plan
 spec:
   dependencies:
-    - blocks.block.ref
+    - spec.blocks.block.ref
   schema:
     $id: /core/plan
     $schema: http://json-schema.org/draft-07/schema#

@@ -73,7 +73,7 @@ const languages:Language[] = [
         throw new Error('Failed to find core/concept type');
     }
 
-    const concepts = readDirectory(conceptsPath);
+    const concepts:Entry[] = readDirectory(conceptsPath);
     const inputData = new InputData();
 
     inputData.addSourceSync(
@@ -124,8 +124,15 @@ const languages:Language[] = [
             FSExtra.rmSync(language.ymlBaseDir, {recursive:true});
         }
 
-        FSExtra.mkdirpSync(language.ymlBaseDir);
-        FSExtra.copySync(conceptsPath, join(language.ymlBaseDir, 'concepts'), {recursive: true});
-        FSExtra.copySync(typesPath, join(language.ymlBaseDir, 'types'), {recursive: true});
+        FSExtra.mkdirpSync(join(language.ymlBaseDir, 'types/core'));
+        FSExtra.mkdirpSync(join(language.ymlBaseDir, 'concepts/core'));
+
+        types.forEach(type => {
+            FS.writeFileSync(join(language.ymlBaseDir, 'types/core', type.filename.substring(0, type.filename.length - 4) + '.json'), JSON.stringify(type.content, null, 2));
+        });
+
+        concepts.forEach(concept => {
+            FS.writeFileSync(join(language.ymlBaseDir, 'concepts/core', concept.filename.substring(0, concept.filename.length - 4) + '.json'), JSON.stringify(concept.content, null, 2));
+        });
     }
 })()

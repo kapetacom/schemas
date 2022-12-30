@@ -1,7 +1,11 @@
 # Core schemas
 Contains the schemas for all core blockware types.
 
-## core/block-type
+## Concepts
+Concepts are top level definitions of the core building blocks of
+blockware.
+
+### core/block-type
 defines a block type. This typically is some sort of fundamental role
 a block can take - such as frontend / backend / desktop / embedded.
 
@@ -18,7 +22,7 @@ and ```spec.entities```.
 **Example:**
 [core/block-type.example.yml](concepts/block-type.example.yml)
 
-## core/block-type-group
+### core/block-type-group
 A special block type that allows the user to embed multiple connected
 blocks into a plan
 
@@ -28,7 +32,7 @@ blocks into a plan
 **Example:**
 [core/block-type-group.example.yml](concepts/block-type-group.example.yml)
 
-## core/plan
+### core/plan
 Contains blocks and connections between blocks. This is effectively a blue
 print of a software system.
 
@@ -39,7 +43,7 @@ print of a software system.
 **Example:**
 [core/plan.example.yml](concepts/plan.example.yml)
 
-## core/deployment-target
+### core/deployment-target
 Defines a new target where users can deploy their plans. 
 
 
@@ -49,7 +53,7 @@ Defines a new target where users can deploy their plans.
 **Example:**
 [core/deployment-target.example.yml](concepts/deployment-target.example.yml)
 
-## core/language-target
+### core/language-target
 Defines a new language target in which a block can be created. 
 This typically means a specific programming language and framework
 in that language - such as C#.NET or Java Spring Boot
@@ -60,7 +64,7 @@ in that language - such as C#.NET or Java Spring Boot
 **Example:**
 [core/language-target.example.yml](concepts/language-target.example.yml)
 
-## core/resource-type-internal
+### core/resource-type-internal
 Defines internal resources. Internal resources are resources that 
 one block can provide to another. The name internal refers
 to it being internal communication within your plan.
@@ -73,7 +77,7 @@ and consumed by a REST Client in another.
 **Example:**
 [core/resource-type-internal.example.yml](types/resource-type-internal.example.yml)
 
-## core/resource-type-operator
+### core/resource-type-operator
 Defines operator resources. An operator resource is something that
 can only be consumed by blocks - and is typically an external piece of
 software or hardware - such as a database or a disk.
@@ -84,7 +88,7 @@ software or hardware - such as a database or a disk.
 **Example:**
 [core/resource-type-operator.example.yml](types/resource-type-operator.example.yml)
 
-## core/resource-type-extension
+### core/resource-type-extension
 Extension resources defines the interface of a resource - but doesn't
 itself provide the implementation. These are meant to standardise
 certain operations and a good example could be a credit card payment 
@@ -101,11 +105,11 @@ and when designing a block - you dont have to tie in to a specific provider.
 **Example:**
 [core/resource-type-extension.example.yml](types/resource-type-extension.example.yml)
 
-# Schema Entities
+## Schema Entities
 The following can be used when defining schemas but are not themselves
 stand alone "kinds"
 
-## core/entity
+### core/entity
 Entities are usually defined in blocks. 
 These entities define the *external* data types
 for blocks - to be used in APIs or databases.
@@ -119,7 +123,7 @@ optimized data streams such as protobuf or similar.
 **Example:**
 [core/entity.example.yml](types/entity.example.yml)
 
-## core/entity-list
+### core/entity-list
 A list of core/entity. The list includes an optional source code
 for the entity list. Typically written in the Blockware schema DSL 
 language
@@ -130,7 +134,7 @@ language
 **Example:**
 [core/entity-list.example.yml](types/entity-list.example.yml)
 
-## core/block-resource
+### core/block-resource
 A block resource is usually how we define resources on blocks
 
 **Schema:**
@@ -139,7 +143,7 @@ A block resource is usually how we define resources on blocks
 **Example:**
 [core/block-resource.example.yml](types/block-resource.example.yml)
 
-## core/block-resource-list
+### core/block-resource-list
 A list of core/block-resource
 
 **Schema:**
@@ -148,7 +152,7 @@ A list of core/block-resource
 **Example:**
 [core/block-resource-list.example.yml](types/block-resource-list.example.yml)
 
-## core/language-target-reference
+### core/language-target-reference
 Usually used in blocks to determine which language target to use.
 
 **Schema:**
@@ -157,7 +161,7 @@ Usually used in blocks to determine which language target to use.
 **Example:**
 [core/language-target-reference.example.yml](types/language-target-reference.example.yml)
 
-## core/type-metadata
+### core/type-metadata
 Most commonly used metadata schema
 
 **Schema:**
@@ -166,7 +170,7 @@ Most commonly used metadata schema
 **Example:**
 [core/type-metadata.example.yml](types/type-metadata.example.yml)
 
-## core/type-schema
+### core/type-schema
 Use this to embed a JSON schema into a JSON schema
 
 **Schema:**
@@ -175,7 +179,7 @@ Use this to embed a JSON schema into a JSON schema
 **Example:**
 [core/type-schema.example.yml](types/type-schema.example.yml)
 
-## core/type-xref
+### core/type-xref
 Used to indicate cross-references to other types
 
 **Schema:**

@@ -7,7 +7,7 @@
     <groupId>blockware</groupId>
     <artifactId>schemas</artifactId>
     <packaging>jar</packaging>
-    <version>local</version>
+    <version>0.0.1</version>
 
     <licenses>
         <license>

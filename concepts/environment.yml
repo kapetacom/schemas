@@ -1,0 +1,60 @@
+kind: core/concept
+metadata:
+  name: core/environment
+spec:
+  dependencies:
+    - spec.plan.ref
+    - spec.deploymentTarget.ref
+  schema:
+    $id: /core/environment
+    type: object
+    required:
+      - kind
+      - metadata
+      - spec
+    properties:
+      kind:
+        type: string
+        const: core/environment
+      metadata:
+        $ref: /core/type-metadata
+      spec:
+        type: object
+        required:
+          - plan
+          - deploymentTarget
+        properties:
+          plan:
+            type: object
+            required:
+              - ref
+              - blocks
+            properties:
+              ref:
+                type: string
+                pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+|local))$
+              blocks:
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: object
+                    required:
+                      - id
+                      - configuration
+                    properties:
+                      id:
+                        type: string
+                      configuration:
+                        type: object
+              configuration:
+                type: object
+          deploymentTarget:
+            type: object
+            required:
+              - ref
+            properties:
+              ref:
+                type: string
+                pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+|local))$
+              configuration:
+                type: object

@@ -4,11 +4,11 @@ import {resolve,join} from 'path';
 import {readdirSync, readFileSync} from 'fs';
 import Ajv from "ajv"
 
-const basePath = resolve(__dirname, '../../schemas/core');
+const basePath = resolve(__dirname, '../../types');
 const EXAMPLE_POSTFIX = '.example.yml';
 const ajv = new Ajv();
 
-describe('schemas.core', () => {
+describe('schemas.types', () => {
     const filenames = readdirSync(basePath);
 
     filenames.forEach(filename => {

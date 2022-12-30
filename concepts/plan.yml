@@ -1,0 +1,95 @@
+kind: core/concept
+metadata:
+  name: core/plan
+spec:
+  dependencies:
+    - blocks.block.ref
+  schema:
+    $id: /core/plan
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    required:
+      - kind
+      - metadata
+      - spec
+    properties:
+      kind:
+        type: string
+        const: core/plan
+      metadata:
+        $ref: /core/type-metadata
+      spec:
+        type: object
+        required:
+          - blocks
+          - connections
+        properties:
+          blocks:
+            type: array
+            items:
+              type: object
+              required:
+                - id
+                - block
+                - name
+                - dimensions
+              properties:
+                id:
+                  type: string
+                block:
+                  type: object
+                  required:
+                    - ref
+                  properties:
+                    ref:
+                      type: string
+                      pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+|local))$
+                name:
+                  type: string
+                dimensions:
+                  type: object
+                  required:
+                    - height
+                    - width
+                    - top
+                    - left
+                  properties:
+                    height:
+                      type: number
+                    width:
+                      type: number
+                    top:
+                      type: number
+                    left:
+                      type: number
+          connections:
+            type: array
+            items:
+              type: object
+              required:
+                - from
+                - to
+              properties:
+                from:
+                  type: object
+                  required:
+                    - blockId
+                    - resourceName
+                  properties:
+                    blockId:
+                      type: string
+                    resourceName:
+                      type: string
+                to:
+                  type: object
+                  required:
+                    - blockId
+                    - resourceName
+                  properties:
+                    blockId:
+                      type: string
+                    resourceName:
+                      type: string
+                mapping:
+                  type: object
+                  additionalProperties: true

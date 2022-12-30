@@ -3,8 +3,10 @@ metadata:
   name: core/environment
 spec:
   dependencies:
-    - spec.plan.ref
-    - spec.deploymentTarget.ref
+    - path: spec.plan.ref
+      type: Plan
+    - path: spec.deploymentTarget.ref
+      type: Deployment target
   schema:
     $id: /core/environment
     $schema: http://json-schema.org/draft-07/schema#

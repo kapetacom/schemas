@@ -2,6 +2,9 @@ kind: core/concept
 metadata:
   name: core/deployment-target
 spec:
+  dependencies:
+    - path: spec.image
+      type: docker images
   schema:
     $id: /core/deployment-target
     $schema: http://json-schema.org/draft-07/schema#

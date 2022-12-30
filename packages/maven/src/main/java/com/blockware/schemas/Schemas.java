@@ -1,6 +1,7 @@
 package com.blockware.schemas;
 
 import com.blockware.schemas.entity.Concept;
+import com.blockware.schemas.entity.Dependency;
 import com.blockware.schemas.entity.Metadata;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -91,7 +92,7 @@ public class Schemas {
     @Data
     public static class CoreConceptSpec {
 
-        private Set<String> dependencies = new HashSet<>();
+        private Set<Dependency> dependencies = new HashSet<>();
 
         private JsonSchema schema;
         private CoreConceptSpec() {}

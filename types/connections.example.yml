@@ -1,0 +1,26 @@
+- from:
+    blockId: block1
+    resourceName: my-api-server
+  to:
+    blockId: block2
+    resourceName: my-api-client
+  mapping:
+    sourceMethodName:
+      target: targetMethodName
+      type: EXACT
+    sourceMethodName2:
+      target: targetMethodName2
+      type: EXACT
+- from:
+    blockId: block1
+    resourceName: my-api-server
+  to:
+    blockId: block2
+    resourceName: my-api-client
+  mapping:
+    sourceMethodName:
+      target: targetMethodName
+      type: EXACT
+    sourceMethodName2:
+      target: targetMethodName2
+      type: EXACT

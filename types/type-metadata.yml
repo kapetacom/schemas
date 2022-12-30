@@ -9,7 +9,5 @@ properties:
     type: string
   description:
     type: string
-  xref:
-    $ref: /core/type-xref
 required:
   - name

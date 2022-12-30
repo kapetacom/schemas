@@ -9,6 +9,52 @@ spec:
   schema:
     $id: /core/deployment
     $schema: http://json-schema.org/draft-07/schema#
+    definitions:
+      DeploymentArtifact:
+        type: object
+        required:
+          - name
+          - version
+          - type
+        properties:
+          name:
+            type: string
+          version:
+            type: string
+          type:
+            $ref: '#/definitions/DeploymentArtifactType'
+      DeploymentArtifactType:
+        type: string
+        enum:
+          - docker
+          - managed
+      DeploymentServices:
+        type: array
+        items:
+          type: object
+          required:
+            - name
+            - artifact
+          properties:
+            name:
+              type: string
+              pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+|local))$
+            artifact:
+              $ref: '#/definitions/DeploymentArtifact'
+            dependencies:
+              type: array
+              items:
+                type: string
+            configuration:
+              type: object
+      DeploymentTargetReference:
+        type: object
+        properties:
+          kind:
+            type: string
+            pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+|local))$
+        required:
+          - kind
     type: object
     required:
       - kind
@@ -28,47 +74,8 @@ spec:
           - services
         properties:
           environment:
-            type: object
-            properties:
-              ref:
-                type: string
-                pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+|local))$
+            $ref: /core/asset-reference
           target:
-            type: object
-            properties:
-              kind:
-                type: string
-                pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+|local))$
-            required:
-              - kind
+            $ref: '#/definitions/DeploymentTargetReference'
           services:
-            type: array
-            items:
-              type: object
-              required:
-                - name
-                - artifact
-              properties:
-                name:
-                  type: string
-                  pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+|local))$
-                artifact:
-                  type: object
-                  required:
-                    - name
-                    - version
-                    - type
-                  properties:
-                    name:
-                      type: string
-                    version:
-                      type: string
-                    type:
-                      type: string
-                      pattern: '^(docker|managed)$'
-                dependencies:
-                  type: array
-                  items:
-                    type: string
-                configuration:
-                  type: object
+            $ref: '#/definitions/DeploymentServices'

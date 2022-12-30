@@ -15,16 +15,12 @@
     "strict": true,
     "module": "commonjs",
     "resolveJsonModule": true,
-    "noEmit": true,
-    "sourceMap": true,
-    "inlineSourceMap": true,
     "experimentalDecorators": true,
     "allowJs": true,
     "jsx": "preserve",
     "moduleResolution": "node",
     "rootDirs": [
-      "src",
-      "definitions"
+      "src"
     ],
     "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
@@ -37,17 +33,5 @@
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "isolatedModules": false
-  },
-  "include": [
-    "definitions",
-    "stories",
-    "src",
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "test"
-  ]
+  }
 }

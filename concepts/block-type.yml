@@ -22,9 +22,7 @@ spec:
         type: object
         properties:
           dependencies:
-            type: array
-            items:
-              type: string
+            $ref: /core/dependencies
           schema:
             $ref: /core/type-schema
         required:

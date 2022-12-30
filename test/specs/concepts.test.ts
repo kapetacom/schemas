@@ -1,32 +1,21 @@
 import {describe, test, expect} from "@jest/globals";
-import {parse, parseAllDocuments} from 'yaml';
-import {resolve,join} from 'path';
-import {readdirSync, readFileSync} from 'fs';
+import {resolve} from 'path';
 import Ajv from "ajv"
 import {ValidateFunction} from "ajv/lib/types";
+import {readDirectory} from "../../src/utils";
 
 const typesPath = resolve(__dirname, '../../types');
 const basePath = resolve(__dirname, '../../concepts');
-const EXAMPLE_POSTFIX = '.example.yml';
+
 const ajv = new Ajv();
 
 describe('schemas.concepts', () => {
-    const typeFiles = readdirSync(typesPath);
-
     //Add all types - since they're used in the concepts
-    typeFiles.forEach(filename => {
-
-        if (filename.endsWith(EXAMPLE_POSTFIX)) {
-            return;
-        }
-
-        const schemaFile = join(typesPath, filename);
-        const schemaContent = readFileSync(schemaFile).toString();
-        const schema = parse(schemaContent);
+    readDirectory(typesPath).forEach(entry => {
         try {
-            ajv.addSchema(schema);
+            ajv.addSchema(entry.content);
         } catch (e) {
-            console.error('Failed to add schema: ' + filename, e);
+            console.error('Failed to add schema: ' + entry.filename, e);
             throw e;
         }
     });
@@ -37,25 +26,12 @@ describe('schemas.concepts', () => {
         throw new Error('Did not find core concept schema');
     }
 
-    const conceptFiles = readdirSync(basePath);
+    readDirectory(basePath).forEach(entry => {
 
-    conceptFiles.forEach(filename => {
-
-        if (filename.endsWith(EXAMPLE_POSTFIX)) {
-            return;
-        }
-
-        const conceptName = filename.substring(0, filename.length - 4);
-        const schemaFile = join(basePath, filename);
-        const schemaExampleFile = join(basePath, conceptName + EXAMPLE_POSTFIX);
-        const conceptContent = readFileSync(schemaFile).toString();
-        const exampleContent = readFileSync(schemaExampleFile).toString();
-        const conceptKind = parse(conceptContent);
-        const examples = parseAllDocuments(exampleContent);
         try {
-            ajv.addSchema(conceptKind.spec.schema);
+            ajv.addSchema(entry.content.spec.schema);
         } catch (e) {
-            console.error('Failed to add schema: ' + filename);
+            console.error('Failed to add schema: ' + entry.filename);
             throw e;
         }
 
@@ -69,12 +45,12 @@ describe('schemas.concepts', () => {
             expect(result).toBe(true);
         }
 
-        test(conceptKind.metadata.name, async () => {
+        test(entry.content.metadata.name, async () => {
 
-            doValidation(conceptSchemaValidator, conceptKind);
+            doValidation(conceptSchemaValidator, entry.content);
 
-            const validator = ajv.compile(conceptKind.spec.schema)
-            examples.forEach(example => {
+            const validator = ajv.compile(entry.content.spec.schema)
+            entry.examples.forEach(example => {
                 doValidation(validator, example.toJS());
             });
         });

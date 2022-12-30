@@ -1,16 +1,21 @@
 {
-  "name": "@blockware/schemas",
-  "version": "0.0.1",
-  "description": "Contains the schemas for all core blockware types.",
+  "name": "@blockware/schemas-test",
+  "version": "local",
+  "description": "Not to be published - just here to provide build and test tools",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "generate": "ts-node src/generate.ts"
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
     "@types/yaml": "^1.9.7",
     "ajv": "^8.11.2",
+    "fs-extra": "^11.1.0",
     "jest": "^29.1.2",
+    "quicktype-core": "^6.1.0",
     "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
     "yaml": "^2.1.2"
   }
 }

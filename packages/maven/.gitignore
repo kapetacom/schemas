@@ -1,1 +1,3 @@
 target/*
+src/main/resources/schemas/*
+src/main/java/com/blockware/schemas/entity/*

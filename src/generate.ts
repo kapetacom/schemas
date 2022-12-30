@@ -3,6 +3,7 @@ import type {TargetLanguage} from "quicktype-core/dist/TargetLanguage";
 import type {JSONSchemaSourceData} from "quicktype-core/dist/input/JSONSchemaInput";
 import type {Entry} from "./utils";
 import {JavaScriptTargetLanguage, quicktypeMultiFile} from "quicktype-core";
+import {join} from "path";
 const {
     JavaTargetLanguage,
     TypeScriptTargetLanguage,
@@ -25,6 +26,7 @@ interface Language {
         outputFilename?: string
     },
     baseDir: string
+    ymlBaseDir: string
 }
 
 const languages:Language[] = [
@@ -35,10 +37,11 @@ const languages:Language[] = [
                 'lombok': 'true',
                 'array-type': 'list',
                 'just-types': 'true',
-                'package': 'com.blockware.schemas'
+                'package': 'com.blockware.schemas.entity'
             }
         },
-        baseDir: resolve(packageBase, 'maven/src/main/java/com/blockware/schemas')
+        baseDir: resolve(packageBase, 'maven/src/main/java/com/blockware/schemas/entity'),
+        ymlBaseDir: resolve(packageBase, 'maven/src/main/resources/schemas')
     },
     {
         options: {
@@ -49,7 +52,8 @@ const languages:Language[] = [
             },
             outputFilename:'index.d.ts'
         },
-        baseDir: resolve(packageBase, 'npm/src')
+        baseDir: resolve(packageBase, 'npm/src'),
+        ymlBaseDir: resolve(packageBase, 'npm/schemas')
     }
 ];
 
@@ -104,7 +108,10 @@ const languages:Language[] = [
             ...language.options
         });
 
-        FSExtra.rmSync(language.baseDir, {recursive:true});
+        if (FS.existsSync(language.baseDir)) {
+            FSExtra.rmSync(language.baseDir, {recursive:true});
+        }
+
         FSExtra.mkdirpSync(language.baseDir);
 
         result.forEach((value, key) => {
@@ -112,5 +119,13 @@ const languages:Language[] = [
             FS.writeFileSync(filename, value.lines.join('\n'));
             console.log('Wrote type to %s',filename);
         });
+
+        if (FS.existsSync(language.ymlBaseDir)) {
+            FSExtra.rmSync(language.ymlBaseDir, {recursive:true});
+        }
+
+        FSExtra.mkdirpSync(language.ymlBaseDir);
+        FSExtra.copySync(conceptsPath, join(language.ymlBaseDir, 'concepts'), {recursive: true});
+        FSExtra.copySync(typesPath, join(language.ymlBaseDir, 'types'), {recursive: true});
     }
 })()

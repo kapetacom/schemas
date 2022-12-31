@@ -17,8 +17,8 @@ spec:
     required:
       - target
   dependencies:
-    - consumers.kind
-    - providers.kind
-  entities:
-    - entities.types
+    - path: spec.consumers.kind
+      type: Consumers
+    - path: spec.providers.kind
+      type: Providers
 

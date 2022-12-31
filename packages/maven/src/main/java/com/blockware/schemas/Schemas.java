@@ -17,6 +17,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Schemas {
@@ -33,6 +34,9 @@ public class Schemas {
         }
     }
 
+    public static boolean isCoreConcept(String kind) {
+        return kind.startsWith("core/");
+    }
 
     public static CoreConcept concept(String concept) {
         JsonNode conceptJson = json("concepts/" + concept + ".json");
@@ -40,24 +44,17 @@ public class Schemas {
             return null;
         }
 
-        Concept simpleConcept = om.convertValue(conceptJson, Concept.class);
-
-        CoreConcept out = new CoreConcept();
-        out.setKind(simpleConcept.getKind());
-        out.setMetadata(simpleConcept.getMetadata());
-        CoreConceptSpec spec = new CoreConceptSpec();
-        if (simpleConcept.getSpec().getDependencies() != null) {
-            spec.dependencies.addAll(simpleConcept.getSpec().getDependencies());
-        }
-        spec.setSchema(toSchema(conceptJson.get("spec").get("schema")));
-        out.setSpec(spec);
-        return out;
+        return CoreConcept.from(conceptJson);
     }
 
     public static JsonSchema typeSchema(String type) {
         JsonNode schemaJson = json("types/" + type + ".json");
 
         return toSchema(schemaJson);
+    }
+
+    public static JsonSchema toSchema(Map<String, Object> schemaJson) {
+        return toSchema(om.convertValue(schemaJson, JsonNode.class));
     }
 
     public static JsonSchema toSchema(JsonNode schemaJson) {
@@ -85,6 +82,23 @@ public class Schemas {
         private Metadata metadata = new Metadata();
 
         private CoreConceptSpec spec = new CoreConceptSpec();
+
+        public static CoreConcept from(JsonNode schema) {
+            return from(om.convertValue(schema, Concept.class));
+        }
+        public static CoreConcept from(Concept concept) {
+            CoreConcept out = new CoreConcept();
+            out.setKind(concept.getKind());
+            out.setMetadata(concept.getMetadata());
+            CoreConceptSpec spec = new CoreConceptSpec();
+            if (concept.getSpec().getDependencies() != null) {
+                spec.dependencies.addAll(concept.getSpec().getDependencies());
+            }
+            spec.setSchema(toSchema(concept.getSpec().getSchema()));
+            out.setSpec(spec);
+
+            return out;
+        }
 
         private CoreConcept() {}
     }

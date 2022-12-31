@@ -1,6 +1,7 @@
 package com.blockware.schemas;
 
 import com.blockware.schemas.entity.Concept;
+import com.blockware.schemas.entity.ConceptSpec;
 import com.blockware.schemas.entity.Dependency;
 import com.blockware.schemas.entity.Metadata;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -13,6 +14,7 @@ import com.networknt.schema.uri.URIFactory;
 import lombok.Data;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -53,6 +55,10 @@ public class Schemas {
         return toSchema(schemaJson);
     }
 
+    public static JsonSchema kindSchema() {
+        return typeSchema("core/kind");
+    }
+
     public static JsonSchema toSchema(Map<String, Object> schemaJson) {
         return toSchema(om.convertValue(schemaJson, JsonNode.class));
     }
@@ -68,7 +74,12 @@ public class Schemas {
 
     public static JsonNode json(String path) {
         try {
-            return om.readTree(Schemas.class.getResourceAsStream("/schemas/" + path));
+            String fullPath = "/schemas/" + path;
+            InputStream resource = Schemas.class.getResourceAsStream(fullPath);
+            if (resource == null) {
+                throw new IllegalArgumentException("File not found: " + fullPath);
+            }
+            return om.readTree(resource);
         } catch (IOException e) {
             return null;
         }
@@ -90,12 +101,20 @@ public class Schemas {
             CoreConcept out = new CoreConcept();
             out.setKind(concept.getKind());
             out.setMetadata(concept.getMetadata());
-            CoreConceptSpec spec = new CoreConceptSpec();
-            if (concept.getSpec().getDependencies() != null) {
-                spec.dependencies.addAll(concept.getSpec().getDependencies());
+            CoreConceptSpec coreSpec = new CoreConceptSpec();
+            if (concept.getSpec() != null) {
+                ConceptSpec spec = concept.getSpec();
+                if (spec.getDependencies() != null) {
+                    coreSpec.dependencies.addAll(spec.getDependencies());
+                }
+
+                if (spec.getSchema() != null)  {
+                    coreSpec.setSchema(toSchema(spec.getSchema()));
+                }
             }
-            spec.setSchema(toSchema(concept.getSpec().getSchema()));
-            out.setSpec(spec);
+
+
+            out.setSpec(coreSpec);
 
             return out;
         }

@@ -1,0 +1,6 @@
+kind: blockware/resource-type-postgresql
+metadata:
+  name: someone/usersdb
+spec:
+  some:
+    thing: here

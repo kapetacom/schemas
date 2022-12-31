@@ -33,6 +33,9 @@ class SchemasTest {
 
         Set<ValidationMessage> validate = conceptSchema.validate(Schemas.json("concepts/core/block-type.json"));
         assertTrue(validate.isEmpty());
+
+        validate = Schemas.kindSchema().validate(Schemas.json("concepts/core/block-type.json"));
+        assertTrue(validate.isEmpty());
     }
 
 }

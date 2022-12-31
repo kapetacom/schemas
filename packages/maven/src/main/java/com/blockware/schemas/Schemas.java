@@ -4,6 +4,7 @@ import com.blockware.schemas.entity.Concept;
 import com.blockware.schemas.entity.ConceptSpec;
 import com.blockware.schemas.entity.Dependency;
 import com.blockware.schemas.entity.Metadata;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.networknt.schema.JsonSchema;
@@ -24,7 +25,8 @@ import java.util.Set;
 
 public class Schemas {
 
-    private final static ObjectMapper om = new ObjectMapper();
+    private final static ObjectMapper om = new ObjectMapper()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     private static final URI baseURI;
 
@@ -64,7 +66,8 @@ public class Schemas {
     }
 
     public static JsonSchema toSchema(JsonNode schemaJson) {
-        SpecVersion.VersionFlag versionFlag = SpecVersionDetector.detect(schemaJson);
+        SpecVersion.VersionFlag versionFlag = schemaJson.has("$schema") ?
+                SpecVersionDetector.detect(schemaJson) : SpecVersion.VersionFlag.V7;
         JsonSchemaFactory factory = JsonSchemaFactory.builder(JsonSchemaFactory.getInstance(versionFlag))
                 .uriFactory(new InternalURIFactory(), "blockware", "file")
                 .build();

@@ -26,24 +26,28 @@ import java.util.Set;
 
 public class Schemas {
 
-    private final static ObjectMapper om = new ObjectMapper()
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-    private static final URI baseURI;
-
-    static {
-        try {
-            baseURI = new URI("blockware://schemas");
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+    private static Schemas instance;
+    public static Schemas getInstance() {
+        if (instance == null) {
+            instance = new Schemas();
         }
+        return instance;
     }
 
-    public static boolean isCoreConcept(String kind) {
+    private final ObjectMapper om;
+
+    private final URI baseURI = URI.create("blockware://schemas");
+
+    private Schemas() {
+        om = new ObjectMapper()
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
+    public boolean isCoreConcept(String kind) {
         return kind.startsWith("core/");
     }
 
-    public static CoreConcept concept(String concept) {
+    public CoreConcept concept(String concept) {
         JsonNode conceptJson = json("concepts/" + concept + ".json");
         if (conceptJson == null) {
             return null;
@@ -52,32 +56,32 @@ public class Schemas {
         return CoreConcept.from(conceptJson);
     }
 
-    public static JsonSchema typeSchema(String type) {
+    public JsonSchema typeSchema(String type) {
         JsonNode schemaJson = json("types/" + type + ".json");
 
         return toSchema(schemaJson);
     }
 
-    public static JsonSchema kindSchema() {
+    public JsonSchema kindSchema() {
         return typeSchema("core/kind");
     }
 
-    public static JsonSchema toSchema(Map<String, Object> schemaJson) {
+    public JsonSchema toSchema(Map<String, Object> schemaJson) {
         return toSchema(om.convertValue(schemaJson, JsonNode.class));
     }
 
-    public static JsonSchema toSchema(JsonNode schemaJson) {
+    public JsonSchema toSchema(JsonNode schemaJson) {
         SpecVersion.VersionFlag versionFlag = schemaJson.has("$schema") ?
                 SpecVersionDetector.detect(schemaJson) : SpecVersion.VersionFlag.V7;
         JsonSchemaFactory factory = JsonSchemaFactory.builder(JsonSchemaFactory.getInstance(versionFlag))
-                .uriFactory(new InternalURIFactory(), "blockware", "file")
+                .uriFactory(new InternalURIFactory(), "blockware", "file", "jar")
                 .addUrnFactory(new InternalURNFactory())
                 .build();
 
         return factory.getSchema(baseURI, schemaJson);
     }
 
-    public static JsonNode json(String path) {
+    public JsonNode json(String path) {
         try {
             String fullPath = "/schemas/" + path;
             InputStream resource = Schemas.class.getResourceAsStream(fullPath);
@@ -100,7 +104,7 @@ public class Schemas {
         private CoreConceptSpec spec = new CoreConceptSpec();
 
         public static CoreConcept from(JsonNode schema) {
-            return from(om.convertValue(schema, Concept.class));
+            return from(Schemas.getInstance().om.convertValue(schema, Concept.class));
         }
         public static CoreConcept from(Concept concept) {
             CoreConcept out = new CoreConcept();
@@ -114,7 +118,7 @@ public class Schemas {
                 }
 
                 if (spec.getSchema() != null)  {
-                    coreSpec.setSchema(toSchema(spec.getSchema()));
+                    coreSpec.setSchema(Schemas.getInstance().toSchema(spec.getSchema()));
                 }
             }
 

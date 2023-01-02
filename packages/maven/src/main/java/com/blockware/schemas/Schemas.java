@@ -12,6 +12,7 @@ import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.SpecVersionDetector;
 import com.networknt.schema.uri.URIFactory;
+import com.networknt.schema.urn.URNFactory;
 import lombok.Data;
 
 import java.io.IOException;
@@ -70,6 +71,7 @@ public class Schemas {
                 SpecVersionDetector.detect(schemaJson) : SpecVersion.VersionFlag.V7;
         JsonSchemaFactory factory = JsonSchemaFactory.builder(JsonSchemaFactory.getInstance(versionFlag))
                 .uriFactory(new InternalURIFactory(), "blockware", "file")
+                .addUrnFactory(new InternalURNFactory())
                 .build();
 
         return factory.getSchema(baseURI, schemaJson);
@@ -135,6 +137,23 @@ public class Schemas {
 
     }
 
+    public static class InternalURNFactory implements URNFactory {
+
+        @Override
+        public URI create(String urn) {
+            String path = "/schemas/types" + urn + ".json";
+            URL resource = Schemas.class.getResource(path);
+            if (resource == null) {
+                return URI.create(path);
+            }
+
+            try {
+                return resource.toURI();
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
     public static class InternalURIFactory implements URIFactory {
 
         @Override

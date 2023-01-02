@@ -3,9 +3,12 @@ metadata:
   name: core/deployment
 spec:
   dependencies:
-    - spec.environment.ref
-    - spec.target.kind
-    - spec.services.name
+    - path: spec.environment.ref
+      type: Environment
+    - path: spec.target.kind
+      type: Deployment target
+    - path: spec.services.name
+      type: Services
   schema:
     $id: /core/deployment
     $schema: http://json-schema.org/draft-07/schema#

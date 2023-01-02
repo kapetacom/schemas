@@ -72,10 +72,10 @@ Typical examples of this would be a REST API being provided by one block
 and consumed by a REST Client in another.  
 
 **Schema:**
-[core/resource-type-internal.yml](types/resource-type-internal.yml)
+[core/resource-type-internal.yml](concepts/resource-type-internal.yml)
 
 **Example:**
-[core/resource-type-internal.example.yml](types/resource-type-internal.example.yml)
+[core/resource-type-internal.example.yml](concepts/resource-type-internal.example.yml)
 
 ### core/resource-type-operator
 Defines operator resources. An operator resource is something that
@@ -83,10 +83,10 @@ can only be consumed by blocks - and is typically an external piece of
 software or hardware - such as a database or a disk.
 
 **Schema:**
-[core/resource-type-operator.yml](types/resource-type-operator.yml)
+[core/resource-type-operator.yml](concepts/resource-type-operator.yml)
 
 **Example:**
-[core/resource-type-operator.example.yml](types/resource-type-operator.example.yml)
+[core/resource-type-operator.example.yml](concepts/resource-type-operator.example.yml)
 
 ### core/resource-type-extension
 Extension resources defines the interface of a resource - but doesn't
@@ -100,10 +100,10 @@ to similar types of services - so they can be easily exchanged for others
 and when designing a block - you dont have to tie in to a specific provider.
 
 **Schema:**
-[core/resource-type-extension.yml](types/resource-type-extension.yml)
+[core/resource-type-extension.yml](concepts/resource-type-extension.yml)
 
 **Example:**
-[core/resource-type-extension.example.yml](types/resource-type-extension.example.yml)
+[core/resource-type-extension.example.yml](concepts/resource-type-extension.example.yml)
 
 ## Schema Entities
 The following can be used when defining schemas but are not themselves

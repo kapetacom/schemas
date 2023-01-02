@@ -1,0 +1,4 @@
+- path: spec.image
+  type: docker images
+- path: spec.blocks.ref
+  type: blocks

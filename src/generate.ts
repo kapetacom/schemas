@@ -3,6 +3,7 @@ import type {TargetLanguage} from "quicktype-core/dist/TargetLanguage";
 import type {JSONSchemaSourceData} from "quicktype-core/dist/input/JSONSchemaInput";
 import type {Entry} from "./utils";
 import {JavaScriptTargetLanguage, quicktypeMultiFile} from "quicktype-core";
+import {join} from "path";
 const {
     JavaTargetLanguage,
     TypeScriptTargetLanguage,
@@ -25,6 +26,7 @@ interface Language {
         outputFilename?: string
     },
     baseDir: string
+    ymlBaseDir: string
 }
 
 const languages:Language[] = [
@@ -35,10 +37,11 @@ const languages:Language[] = [
                 'lombok': 'true',
                 'array-type': 'list',
                 'just-types': 'true',
-                'package': 'com.blockware.schemas'
+                'package': 'com.blockware.schemas.entity'
             }
         },
-        baseDir: resolve(packageBase, 'maven/src/main/java/com/blockware/schemas')
+        baseDir: resolve(packageBase, 'maven/src/main/java/com/blockware/schemas/entity'),
+        ymlBaseDir: resolve(packageBase, 'maven/src/main/resources/schemas')
     },
     {
         options: {
@@ -49,7 +52,8 @@ const languages:Language[] = [
             },
             outputFilename:'index.d.ts'
         },
-        baseDir: resolve(packageBase, 'npm/src')
+        baseDir: resolve(packageBase, 'npm/src'),
+        ymlBaseDir: resolve(packageBase, 'npm/schemas')
     }
 ];
 
@@ -69,7 +73,7 @@ const languages:Language[] = [
         throw new Error('Failed to find core/concept type');
     }
 
-    const concepts = readDirectory(conceptsPath);
+    const concepts:Entry[] = readDirectory(conceptsPath);
     const inputData = new InputData();
 
     inputData.addSourceSync(
@@ -104,13 +108,31 @@ const languages:Language[] = [
             ...language.options
         });
 
-        FSExtra.rmSync(language.baseDir, {recursive:true});
+        if (FS.existsSync(language.baseDir)) {
+            FSExtra.rmSync(language.baseDir, {recursive:true});
+        }
+
         FSExtra.mkdirpSync(language.baseDir);
 
         result.forEach((value, key) => {
             const filename = resolve(language.baseDir, key);
             FS.writeFileSync(filename, value.lines.join('\n'));
             console.log('Wrote type to %s',filename);
+        });
+
+        if (FS.existsSync(language.ymlBaseDir)) {
+            FSExtra.rmSync(language.ymlBaseDir, {recursive:true});
+        }
+
+        FSExtra.mkdirpSync(join(language.ymlBaseDir, 'types/core'));
+        FSExtra.mkdirpSync(join(language.ymlBaseDir, 'concepts/core'));
+
+        types.forEach(type => {
+            FS.writeFileSync(join(language.ymlBaseDir, 'types/core', type.filename.substring(0, type.filename.length - 4) + '.json'), JSON.stringify(type.content, null, 2));
+        });
+
+        concepts.forEach(concept => {
+            FS.writeFileSync(join(language.ymlBaseDir, 'concepts/core', concept.filename.substring(0, concept.filename.length - 4) + '.json'), JSON.stringify(concept.content, null, 2));
         });
     }
 })()

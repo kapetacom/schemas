@@ -3,7 +3,8 @@ metadata:
   name: core/block-type-group
 spec:
   dependencies:
-    - spec.blocks.block.ref
+    - path: spec.blocks.block.ref
+      type: Blocks
   schema:
     $id: /core/block-type-group
     $schema: http://json-schema.org/draft-07/schema#

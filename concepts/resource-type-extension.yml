@@ -1,18 +1,15 @@
 kind: core/concept
 metadata:
-  name: core/deployment-target
+  name: core/resource-type-extension
 spec:
-  dependencies:
-    - path: spec.image
-      type: docker images
   schema:
-    $id: /core/deployment-target
+    $id: /core/resource-type-extension
     $schema: http://json-schema.org/draft-07/schema#
     type: object
     properties:
       kind:
         type: string
-        const: core/deployment-target
+        const: core/resource-type-extension
 
       metadata:
         $ref: /core/type-metadata
@@ -20,12 +17,7 @@ spec:
       spec:
         type: object
         properties:
-          image:
-            type: string
+          schema:
+            $ref: /core/type-schema
           configuration:
             $ref: /core/type-schema
-      required:
-        - kind
-        - metadata
-        - spec
-

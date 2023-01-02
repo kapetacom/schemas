@@ -9,5 +9,10 @@ properties:
     type: string
   description:
     type: string
+  visibility:
+    type: string
+    enum:
+      - public
+      - private
 required:
   - name

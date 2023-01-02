@@ -28,9 +28,6 @@ spec:
             $ref: '#/definitions/DeploymentArtifactType'
       DeploymentArtifactType:
         type: string
-        enum:
-          - docker
-          - managed
       DeploymentServices:
         type: array
         items:

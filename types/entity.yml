@@ -6,9 +6,6 @@ properties:
     type: string
   type:
     type: string
-    enum:
-      - dto
-      - enum
   description:
     type: string
   properties:

@@ -1,0 +1,10 @@
+{
+  "$id": "invalid-refs",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "title": {
+      "$ref": "/a-ref-that-does-not-exist"
+    }
+  }
+}

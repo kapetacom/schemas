@@ -18,6 +18,7 @@ const {InMemorySchemaStore, readDirectory} = require("./utils");
 const typesPath = resolve(__dirname, '../types');
 const conceptsPath = resolve(__dirname, '../concepts');
 const packageBase = resolve(__dirname, '../packages');
+const configBase = resolve(__dirname, '../config');
 
 interface Language {
     options: {
@@ -27,6 +28,7 @@ interface Language {
     },
     baseDir: string
     ymlBaseDir: string
+    configBaseDir: string
 }
 
 const languages:Language[] = [
@@ -41,7 +43,8 @@ const languages:Language[] = [
             }
         },
         baseDir: resolve(packageBase, 'maven/src/main/java/com/blockware/schemas/entity'),
-        ymlBaseDir: resolve(packageBase, 'maven/src/main/resources/schemas')
+        ymlBaseDir: resolve(packageBase, 'maven/src/main/resources/schemas'),
+        configBaseDir: resolve(packageBase, 'maven/src/main/resources/config')
     },
     {
         options: {
@@ -53,7 +56,8 @@ const languages:Language[] = [
             outputFilename:'index.d.ts'
         },
         baseDir: resolve(packageBase, 'npm/src'),
-        ymlBaseDir: resolve(packageBase, 'npm/schemas')
+        ymlBaseDir: resolve(packageBase, 'npm/schemas'),
+        configBaseDir: resolve(packageBase, 'npm/config')
     }
 ];
 
@@ -134,5 +138,8 @@ const languages:Language[] = [
         concepts.forEach(concept => {
             FS.writeFileSync(join(language.ymlBaseDir, 'concepts/core', concept.filename.substring(0, concept.filename.length - 4) + '.json'), JSON.stringify(concept.content, null, 2));
         });
+
+        FSExtra.copySync(configBase, language.configBaseDir, {recursive: true, overwrite: true});
+
     }
 })()

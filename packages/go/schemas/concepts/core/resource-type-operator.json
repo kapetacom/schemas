@@ -1,0 +1,30 @@
+{
+  "kind": "core/concept",
+  "metadata": {
+    "name": "core/resource-type-operator"
+  },
+  "spec": {
+    "schema": {
+      "$id": "/core/resource-type-operator",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "core/resource-type-operator"
+        },
+        "metadata": {
+          "$ref": "/core/type-metadata"
+        },
+        "spec": {
+          "type": "object",
+          "properties": {
+            "configuration": {
+              "$ref": "/core/type-schema"
+            }
+          }
+        }
+      }
+    }
+  }
+}

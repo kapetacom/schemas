@@ -1,0 +1,48 @@
+{
+  "$id": "/core/block-instances",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "block",
+      "name",
+      "dimensions"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "block": {
+        "$ref": "/core/asset-reference"
+      },
+      "name": {
+        "type": "string"
+      },
+      "dimensions": {
+        "type": "object",
+        "required": [
+          "height",
+          "width",
+          "top",
+          "left"
+        ],
+        "properties": {
+          "height": {
+            "type": "number"
+          },
+          "width": {
+            "type": "number"
+          },
+          "top": {
+            "type": "number"
+          },
+          "left": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

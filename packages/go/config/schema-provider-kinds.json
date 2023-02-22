@@ -1,0 +1,8 @@
+[
+  "core/block-type",
+  "core/language-target",
+  "core/deployment-target",
+  "core/resource-type-extension",
+  "core/resource-type-internal",
+  "core/resource-type-operator"
+]

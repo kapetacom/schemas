@@ -1,0 +1,107 @@
+{
+  "kind": "core/concept",
+  "metadata": {
+    "name": "core/environment"
+  },
+  "spec": {
+    "dependencies": [
+      {
+        "path": "spec.plan.ref",
+        "type": "Plan"
+      },
+      {
+        "path": "spec.deploymentTarget.ref",
+        "type": "Deployment target"
+      }
+    ],
+    "schema": {
+      "$id": "/core/environment",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "definitions": {
+        "DeploymentTargetConfiguration": {
+          "type": "object",
+          "required": [
+            "ref"
+          ],
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^(\\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\\d+\\.\\d+\\.\\d+|local))$"
+            },
+            "configuration": {
+              "type": "object"
+            }
+          }
+        },
+        "BlockInstanceConfigurations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "configuration"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "configuration": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "PlanConfiguration": {
+          "type": "object",
+          "required": [
+            "ref",
+            "blocks"
+          ],
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^(\\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\\d+\\.\\d+\\.\\d+|local))$"
+            },
+            "blocks": {
+              "$ref": "#/definitions/BlockInstanceConfigurations"
+            },
+            "configuration": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "kind",
+        "metadata",
+        "spec"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "core/environment"
+        },
+        "metadata": {
+          "$ref": "/core/type-metadata"
+        },
+        "spec": {
+          "type": "object",
+          "required": [
+            "plan",
+            "deploymentTarget"
+          ],
+          "properties": {
+            "plan": {
+              "$ref": "#/definitions/PlanConfiguration"
+            },
+            "deploymentTarget": {
+              "$ref": "#/definitions/DeploymentTargetConfiguration"
+            }
+          }
+        }
+      }
+    }
+  }
+}

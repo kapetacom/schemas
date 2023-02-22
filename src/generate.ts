@@ -2,7 +2,7 @@ import type {RendererOptions} from 'quicktype-core';
 import type {TargetLanguage} from "quicktype-core/dist/TargetLanguage";
 import type {JSONSchemaSourceData} from "quicktype-core/dist/input/JSONSchemaInput";
 import type {Entry} from "./utils";
-import {JavaScriptTargetLanguage, quicktypeMultiFile} from "quicktype-core";
+import {JavaScriptTargetLanguage, GoTargetLanguage, quicktypeMultiFile} from "quicktype-core";
 import {join} from "path";
 const {
     JavaTargetLanguage,
@@ -58,6 +58,21 @@ const languages:Language[] = [
         baseDir: resolve(packageBase, 'npm/src'),
         ymlBaseDir: resolve(packageBase, 'npm/schemas'),
         configBaseDir: resolve(packageBase, 'npm/config')
+    },
+    {
+        options: {
+            lang: new GoTargetLanguage(),
+            rendererOptions: {
+                'runtime-typecheck': 'true',
+                'just-types-and-package': 'true',
+                'package': 'model'
+
+            },
+            outputFilename:'model.go'
+        },
+        baseDir: resolve(packageBase, 'go/model'),
+        ymlBaseDir: resolve(packageBase, 'go/schemas'),
+        configBaseDir: resolve(packageBase, 'go/config')
     }
 ];
 

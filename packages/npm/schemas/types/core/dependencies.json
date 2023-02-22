@@ -1,0 +1,21 @@
+{
+  "$id": "/core/dependencies",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Dependency": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/Dependency"
+  }
+}

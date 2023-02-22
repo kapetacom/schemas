@@ -1,0 +1,48 @@
+{
+  "kind": "core/concept",
+  "metadata": {
+    "name": "core/block-type-group"
+  },
+  "spec": {
+    "dependencies": [
+      {
+        "path": "spec.blocks.block.ref",
+        "type": "Blocks"
+      }
+    ],
+    "schema": {
+      "$id": "/core/block-type-group",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "required": [
+        "kind",
+        "metadata",
+        "spec"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "core/block-type-group"
+        },
+        "metadata": {
+          "$ref": "/core/type-metadata"
+        },
+        "spec": {
+          "type": "object",
+          "required": [
+            "blocks",
+            "connections"
+          ],
+          "properties": {
+            "blocks": {
+              "$ref": "/core/block-instances"
+            },
+            "connections": {
+              "$ref": "/core/connections"
+            }
+          }
+        }
+      }
+    }
+  }
+}

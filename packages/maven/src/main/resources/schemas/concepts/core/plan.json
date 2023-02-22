@@ -1,0 +1,48 @@
+{
+  "kind": "core/concept",
+  "metadata": {
+    "name": "core/plan"
+  },
+  "spec": {
+    "dependencies": [
+      {
+        "path": "spec.blocks.block.ref",
+        "type": "Blocks"
+      }
+    ],
+    "schema": {
+      "$id": "/core/plan",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "required": [
+        "kind",
+        "metadata",
+        "spec"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "core/plan"
+        },
+        "metadata": {
+          "$ref": "/core/type-metadata"
+        },
+        "spec": {
+          "type": "object",
+          "required": [
+            "blocks",
+            "connections"
+          ],
+          "properties": {
+            "blocks": {
+              "$ref": "/core/block-instances"
+            },
+            "connections": {
+              "$ref": "/core/connections"
+            }
+          }
+        }
+      }
+    }
+  }
+}

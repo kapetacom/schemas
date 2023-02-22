@@ -1,0 +1,17 @@
+{
+  "$id": "/core/language-target-reference",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string"
+    },
+    "options": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "kind"
+  ]
+}

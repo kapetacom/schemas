@@ -1,35 +1,111 @@
 kind: core/deployment
 metadata:
-  name: blockware/test-deployment
+  name: blockware/todo-plan-test-environment-tf3
   title: Test deployment
   description: This is a deployment to the test environment
 spec:
-  environment:
-    ref: blockware/test:1.0.0
+  configuration:
+    project_id: bw-cloud-production
+    region: europe-west9
+    zone: europe-west9-a
+    strategy: test
   target:
-    kind: blockware/deployment-target-gcp:1.0.0
+    ref: blockware/deployment-target-gcp-gke:terraform
+    image: docker.blockware.com/blockware/deployment-target-gcp-gke:terraform
+  plan:
+    ref: blockware/todo-plan:1.0.0
   services:
-    - name: blockware/todo-web:1.0.0
-      artifact:
-        name: blockware/todo-web
-        version: "1.0.0"
-        type: docker
-      dependencies:
-        - blockware/todo-api:1.0.0
-
-    - name: blockware/todo-api:1.0.0
-      artifact: 
-        name: blockware/todo-api
-        version: latest
-        type: docker
+    - id: todo-web
+      kind: blockware/block-type-frontend
+      title: Todo Web
+      ref: blockware/nodejs-sample-todo-ui:0.0.8
+      image: docker.blockware.com/blockware/nodejs-sample-todo-ui:0.0.9
       configuration:
-        USE_TLS: true
-      dependencies:
-        - blockware/postgres:1.0.0
+        block-specific-config: true
 
-    - name: blockware/postgres:1.0.0
-      artifact: 
-        name: postgres
-        version: "12.2"
-        type: managed
-      dependencies: []
+    - id: todo-api
+      kind: blockware/block-type-service
+      title: Todo API
+      ref: blockware/nodejs-sample-todo-service:0.0.4
+      image: docker.blockware.com/blockware/nodejs-sample-todo-service:0.0.5
+      configuration:
+        block-specific-config: true
+
+    - id: users-api
+      title: Users API
+      kind: blockware/block-type-service
+      ref: blockware/nodejs-sample-users-service:0.0.3
+      image: docker.blockware.com/blockware/nodejs-sample-users-service:0.0.4
+      configuration:
+        block-specific-config: true
+
+    - id: postgres
+      title: Main postgres
+      kind: blockware/resource-type-postgres
+      ref: blockware/resource-type-postgres:1.0.0
+      configuration:
+        version: POSTGRES_9_6
+        tier: db-custom-1-3840
+        availabilityType: ZONAL
+        storage: 10Gi
+
+    - id: mongodb4
+      title: Main Mongo
+      kind: blockware/resource-type-mongodb
+      ref: blockware/resource-type-mongodb:1.0.0
+      configuration:
+        version: "4.4.17"
+        storage: 10Gi
+        diskType: premium-rwo
+
+    - id: mongodb6
+      title: Smaller Mongo
+      kind: blockware/resource-type-mongodb
+      ref: blockware/resource-type-mongodb:1.0.0
+      configuration:
+        version: "6.0.2"
+        storage: 10Gi
+        diskType: standard
+
+  network:
+    - type: resource
+      from:
+        id: users-api
+        resource: users
+      to:
+        id: postgres
+        portType: postgres
+
+    - type: resource
+      from:
+        id: todo-api
+        resource: myMongoDb4
+      to:
+        id: mongodb4
+        portType: mongodb
+
+    - type: resource
+      from:
+        id: todo-api
+        resource: myMongoDb6
+      to:
+        id: mongodb6
+        portType: mongodb
+
+    - type: service
+      from:
+        id: todo-web
+        resource: tasks
+      to:
+        id: todo-api
+        resource: tasks
+        portType: rest
+
+    - type: service
+      from:
+        id: todo-web
+        resource: users
+      to:
+        id: users-api
+        resource: users
+        portType: rest

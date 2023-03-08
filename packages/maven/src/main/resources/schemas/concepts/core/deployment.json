@@ -6,15 +6,15 @@
   "spec": {
     "dependencies": [
       {
-        "path": "spec.environment.ref",
-        "type": "Environment"
-      },
-      {
         "path": "spec.target.kind",
         "type": "Deployment target"
       },
       {
-        "path": "spec.services.name",
+        "path": "spec.plan.ref",
+        "type": "Plan"
+      },
+      {
+        "path": "spec.services.ref",
         "type": "Services"
       }
     ],
@@ -22,67 +22,102 @@
       "$id": "/core/deployment",
       "$schema": "http://json-schema.org/draft-07/schema#",
       "definitions": {
-        "DeploymentArtifact": {
-          "type": "object",
-          "required": [
-            "name",
-            "version",
-            "type"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "version": {
-              "type": "string"
-            },
-            "type": {
-              "$ref": "#/definitions/DeploymentArtifactType"
-            }
-          }
-        },
-        "DeploymentArtifactType": {
-          "type": "string"
-        },
-        "DeploymentServices": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "name",
-              "artifact"
-            ],
-            "properties": {
-              "name": {
-                "type": "string",
-                "pattern": "^(\\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\\d+\\.\\d+\\.\\d+|local))$"
-              },
-              "artifact": {
-                "$ref": "#/definitions/DeploymentArtifact"
-              },
-              "dependencies": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "configuration": {
-                "type": "object"
-              }
-            }
-          }
+        "DeploymentNetworkConnectionType": {
+          "type": "string",
+          "enum": [
+            "resource",
+            "service"
+          ]
         },
         "DeploymentTargetReference": {
           "type": "object",
           "properties": {
-            "kind": {
-              "type": "string",
-              "pattern": "^(\\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\\d+\\.\\d+\\.\\d+|local))$"
+            "ref": {
+              "type": "string"
+            },
+            "image": {
+              "type": "string"
             }
           },
           "required": [
-            "kind"
+            "ref",
+            "image"
           ]
+        },
+        "DeploymentServiceInstance": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "ref": {
+              "type": "string"
+            },
+            "image": {
+              "type": "string"
+            },
+            "configuration": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "required": [
+            "id",
+            "kind",
+            "ref"
+          ]
+        },
+        "DeploymentNetworkTarget": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "resource": {
+              "type": "string"
+            },
+            "portType": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "portType"
+          ]
+        },
+        "DeploymentNetworkSource": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "resource": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "DeploymentNetworkConnection": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/DeploymentNetworkConnectionType"
+            },
+            "from": {
+              "$ref": "#/definitions/DeploymentNetworkSource"
+            },
+            "to": {
+              "$ref": "#/definitions/DeploymentNetworkTarget"
+            }
+          }
         }
       },
       "type": "object",
@@ -102,19 +137,33 @@
         "spec": {
           "type": "object",
           "required": [
-            "environment",
             "target",
-            "services"
+            "plan",
+            "services",
+            "network"
           ],
           "properties": {
-            "environment": {
+            "plan": {
               "$ref": "/core/asset-reference"
+            },
+            "configuration": {
+              "type": "object",
+              "additionalProperties": true
             },
             "target": {
               "$ref": "#/definitions/DeploymentTargetReference"
             },
             "services": {
-              "$ref": "#/definitions/DeploymentServices"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeploymentServiceInstance"
+              }
+            },
+            "network": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeploymentNetworkConnection"
+              }
             }
           }
         }

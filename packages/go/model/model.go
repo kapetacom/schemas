@@ -92,26 +92,42 @@ type Deployment struct {
 }
 
 type DeploymentSpec struct {
-	Environment AssetReference            `json:"environment"`
-	Services    []DeploymentService       `json:"services"`   
-	Target      DeploymentTargetReference `json:"target"`     
+	Configuration map[string]interface{}        `json:"configuration,omitempty"`
+	Network       []DeploymentNetworkConnection `json:"network"`                
+	Plan          AssetReference                `json:"plan"`                   
+	Services      []DeploymentServiceInstance   `json:"services"`               
+	Target        DeploymentTargetReference     `json:"target"`                 
 }
 
-type DeploymentService struct {
-	Artifact      DeploymentArtifact     `json:"artifact"`               
+type DeploymentNetworkConnection struct {
+	From *DeploymentNetworkSource         `json:"from,omitempty"`
+	To   *DeploymentNetworkTarget         `json:"to,omitempty"`  
+	Type *DeploymentNetworkConnectionType `json:"type,omitempty"`
+}
+
+type DeploymentNetworkSource struct {
+	ID       string  `json:"id"`                
+	Resource *string `json:"resource,omitempty"`
+}
+
+type DeploymentNetworkTarget struct {
+	ID       string  `json:"id"`                
+	PortType string  `json:"portType"`          
+	Resource *string `json:"resource,omitempty"`
+}
+
+type DeploymentServiceInstance struct {
 	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	Dependencies  []string               `json:"dependencies,omitempty"` 
-	Name          string                 `json:"name"`                   
-}
-
-type DeploymentArtifact struct {
-	Name    string `json:"name"`   
-	Type    string `json:"type"`   
-	Version string `json:"version"`
+	ID            string                 `json:"id"`                     
+	Image         *string                `json:"image,omitempty"`        
+	Kind          string                 `json:"kind"`                   
+	Ref           string                 `json:"ref"`                    
+	Title         *string                `json:"title,omitempty"`        
 }
 
 type DeploymentTargetReference struct {
-	Kind string `json:"kind"`
+	Image string `json:"image"`
+	Ref   string `json:"ref"`  
 }
 
 type Environment struct {
@@ -192,3 +208,9 @@ type ResourceTypeOperator struct {
 type ResourceTypeOperatorSpec struct {
 	Configuration map[string]interface{} `json:"configuration,omitempty"`
 }
+
+type DeploymentNetworkConnectionType string
+const (
+	Resource DeploymentNetworkConnectionType = "resource"
+	Service DeploymentNetworkConnectionType = "service"
+)

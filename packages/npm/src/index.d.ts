@@ -90,26 +90,47 @@ export interface Deployment {
 }
 
 export interface DeploymentSpec {
-    environment: AssetReference;
-    services:    DeploymentService[];
-    target:      DeploymentTargetReference;
-}
-
-export interface DeploymentService {
-    artifact:       DeploymentArtifact;
     configuration?: { [key: string]: any };
-    dependencies?:  string[];
-    name:           string;
+    network:        DeploymentNetworkConnection[];
+    plan:           AssetReference;
+    services:       DeploymentServiceInstance[];
+    target:         DeploymentTargetReference;
 }
 
-export interface DeploymentArtifact {
-    name:    string;
-    type:    string;
-    version: string;
+export interface DeploymentNetworkConnection {
+    from?: DeploymentNetworkSource;
+    to?:   DeploymentNetworkTarget;
+    type?: DeploymentNetworkConnectionType;
+}
+
+export interface DeploymentNetworkSource {
+    id:        string;
+    resource?: string;
+}
+
+export interface DeploymentNetworkTarget {
+    id:        string;
+    portType:  string;
+    resource?: string;
+}
+
+export enum DeploymentNetworkConnectionType {
+    Resource = "resource",
+    Service = "service",
+}
+
+export interface DeploymentServiceInstance {
+    configuration?: { [key: string]: any };
+    id:             string;
+    image?:         string;
+    kind:           string;
+    ref:            string;
+    title?:         string;
 }
 
 export interface DeploymentTargetReference {
-    kind: string;
+    image: string;
+    ref:   string;
 }
 
 export interface Environment {

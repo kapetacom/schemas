@@ -1,15 +1,9 @@
 {
   "$id": "/core/entity-list",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
-  "properties": {
-    "types": {
-      "type": "array",
-      "items": {
-        "$ref": "/core/entity"
-      }
-    },
-    "source": {
+  "title": "EntityList",
+  "definitions": {
+    "SourceCode": {
       "type": "object",
       "properties": {
         "type": {
@@ -19,6 +13,18 @@
           "type": "string"
         }
       }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "types": {
+      "type": "array",
+      "items": {
+        "$ref": "/core/entity"
+      }
+    },
+    "source": {
+      "$ref": "#/definitions/SourceCode"
     }
   }
 }

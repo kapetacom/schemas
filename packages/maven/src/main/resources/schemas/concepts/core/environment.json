@@ -84,7 +84,7 @@
           "const": "core/environment"
         },
         "metadata": {
-          "$ref": "/core/type-metadata"
+          "$ref": "/core/metadata"
         },
         "spec": {
           "type": "object",

@@ -14,13 +14,13 @@
           "const": "core/resource-type-operator"
         },
         "metadata": {
-          "$ref": "/core/type-metadata"
+          "$ref": "/core/metadata"
         },
         "spec": {
           "type": "object",
           "properties": {
             "configuration": {
-              "$ref": "/core/type-schema"
+              "$ref": "/core/schema"
             }
           }
         }

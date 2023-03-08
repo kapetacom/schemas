@@ -1,9 +1,9 @@
 package model
 
-type Concept struct {
-	Kind     string      `json:"kind"`    
-	Metadata Metadata    `json:"metadata"`
-	Spec     ConceptSpec `json:"spec"`    
+type BlockDefinition struct {
+	Kind     string              `json:"kind"`    
+	Metadata Metadata            `json:"metadata"`
+	Spec     BlockDefinitionSpec `json:"spec"`    
 }
 
 type Metadata struct {
@@ -11,6 +11,57 @@ type Metadata struct {
 	Name        string  `json:"name"`                 
 	Title       *string `json:"title,omitempty"`      
 	Visibility  *string `json:"visibility,omitempty"` 
+}
+
+type BlockDefinitionSpec struct {
+	Consumers []ConsumerElement       `json:"consumers,omitempty"`
+	Entities  *EntityList             `json:"entities,omitempty"` 
+	Providers []ConsumerElement       `json:"providers,omitempty"`
+	Target    LanguageTargetReference `json:"target"`             
+}
+
+type ConsumerElement struct {
+	Kind     string                 `json:"kind"`              
+	Metadata *ResourceMetadata      `json:"metadata,omitempty"`
+	Spec     map[string]interface{} `json:"spec,omitempty"`    
+}
+
+type ResourceMetadata struct {
+	Name *string `json:"name,omitempty"`
+}
+
+type EntityList struct {
+	Source *SourceCode `json:"source,omitempty"`
+	Types  []Entity    `json:"types,omitempty"` 
+}
+
+type SourceCode struct {
+	Type  *string `json:"type,omitempty"` 
+	Value *string `json:"value,omitempty"`
+}
+
+type Entity struct {
+	Description *string                   `json:"description,omitempty"`
+	Name        string                    `json:"name"`                 
+	Properties  map[string]EntityProperty `json:"properties,omitempty"` 
+	Type        string                    `json:"type"`                 
+	Values      []string                  `json:"values,omitempty"`     
+}
+
+type EntityProperty struct {
+	Description *string `json:"description,omitempty"`
+	Type        string  `json:"type"`                 
+}
+
+type LanguageTargetReference struct {
+	Kind    string                 `json:"kind"`             
+	Options map[string]interface{} `json:"options,omitempty"`
+}
+
+type Concept struct {
+	Kind     string      `json:"kind"`    
+	Metadata Metadata    `json:"metadata"`
+	Spec     ConceptSpec `json:"spec"`    
 }
 
 type ConceptSpec struct {
@@ -21,6 +72,12 @@ type ConceptSpec struct {
 type Dependency struct {
 	Path *string `json:"path,omitempty"`
 	Type *string `json:"type,omitempty"`
+}
+
+type Kind struct {
+	Kind     string                 `json:"kind"`          
+	Metadata Metadata               `json:"metadata"`      
+	Spec     map[string]interface{} `json:"spec,omitempty"`
 }
 
 type BlockTypeGroup struct {

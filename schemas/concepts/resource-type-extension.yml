@@ -1,0 +1,23 @@
+kind: core/concept
+metadata:
+  name: core/resource-type-extension
+spec:
+  schema:
+    $id: /core/resource-type-extension
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    properties:
+      kind:
+        type: string
+        const: core/resource-type-extension
+
+      metadata:
+        $ref: /core/metadata
+
+      spec:
+        type: object
+        properties:
+          schema:
+            $ref: /core/schema
+          configuration:
+            $ref: /core/schema

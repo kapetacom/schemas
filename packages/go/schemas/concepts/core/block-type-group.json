@@ -25,7 +25,7 @@
           "const": "core/block-type-group"
         },
         "metadata": {
-          "$ref": "/core/type-metadata"
+          "$ref": "/core/metadata"
         },
         "spec": {
           "type": "object",

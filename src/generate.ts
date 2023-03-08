@@ -15,8 +15,9 @@ const FSExtra = require('fs-extra');
 const {resolve} = require("path");
 const {InMemorySchemaStore, readDirectory} = require("./utils");
 
-const typesPath = resolve(__dirname, '../types');
-const conceptsPath = resolve(__dirname, '../concepts');
+const typesPath = resolve(__dirname, '../schemas/types');
+const conceptsPath = resolve(__dirname, '../schemas/concepts');
+const abstractsPath = resolve(__dirname, '../schemas/abstracts');
 const packageBase = resolve(__dirname, '../packages');
 const configBase = resolve(__dirname, '../config');
 
@@ -80,29 +81,30 @@ const languages:Language[] = [
 (async () => {
     const schemaStore = new InMemorySchemaStore();
     const types:Entry[] = readDirectory(typesPath);
-    let coreConcept:any;
+    const abstracts:Entry[] = readDirectory(abstractsPath);
     types.forEach(entry => {
+        console.log('Type', entry.content.$id);
         schemaStore.set(entry.content.$id, entry.content);
-        if (entry.content.$id === '/core/concept') {
-            coreConcept = entry;
-        }
     });
-
-    if (!coreConcept) {
-        throw new Error('Failed to find core/concept type');
-    }
 
     const concepts:Entry[] = readDirectory(conceptsPath);
     const inputData = new InputData();
 
-    inputData.addSourceSync(
-        'schema',
-        {
-            schema: JSON.stringify(coreConcept.content),
-            name: 'Concept'
-        },
-        () => new JSONSchemaInput(schemaStore)
-    )
+    for(let i = 0; i < abstracts.length; i++) {
+        const abstract = abstracts[i];
+
+        const typeName = abstract.content.$id.substring(1).split(/\//)[1];
+        const schema:JSONSchemaSourceData = {
+            schema: JSON.stringify(abstract.content),
+            name: typeName
+        };
+
+        inputData.addSourceSync(
+            'schema',
+            schema,
+            () => new JSONSchemaInput(schemaStore)
+        )
+    }
 
     for(let i = 0; i < concepts.length; i++) {
         const concept = concepts[i];

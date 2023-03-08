@@ -1,0 +1,115 @@
+kind: core/concept
+metadata:
+  name: core/deployment
+spec:
+  dependencies:
+    - path: spec.target.kind
+      type: Deployment target
+    - path: spec.plan.ref
+      type: Plan
+    - path: spec.services.ref
+      type: Services
+  schema:
+    $id: /core/deployment
+    $schema: http://json-schema.org/draft-07/schema#
+    definitions:
+      DeploymentNetworkConnectionType:
+        type: string
+        enum:
+          - resource
+          - service
+      DeploymentTargetReference:
+        type: object
+        properties:
+          ref:
+            type: string
+          image:
+            type: string
+        required:
+          - ref
+          - image
+      DeploymentServiceInstance:
+        type: object
+        properties:
+          id:
+            type: string
+          title:
+            type: string
+          kind:
+            type: string
+          ref:
+            type: string
+          image:
+            type: string
+          configuration:
+            type: object
+            additionalProperties: true
+        required:
+          - id
+          - kind
+          - ref
+      DeploymentNetworkTarget:
+        type: object
+        properties:
+          id:
+            type: string
+          resource:
+            type: string
+          portType:
+            type: string
+        required:
+          - id
+          - portType
+      DeploymentNetworkSource:
+        type: object
+        properties:
+          id:
+            type: string
+          resource:
+            type: string
+        required:
+          - id
+      DeploymentNetworkConnection:
+        type: object
+        properties:
+          type:
+            $ref: '#/definitions/DeploymentNetworkConnectionType'
+          from:
+            $ref: '#/definitions/DeploymentNetworkSource'
+          to:
+            $ref: '#/definitions/DeploymentNetworkTarget'
+    type: object
+    required:
+      - kind
+      - metadata
+      - spec
+    properties:
+      kind:
+        type: string
+        const: core/deployment
+      metadata:
+        $ref: /core/metadata
+      spec:
+        type: object
+        required:
+          - target
+          - plan
+          - services
+          - network
+        properties:
+          plan:
+            $ref: /core/asset-reference
+          configuration:
+            type: object
+            additionalProperties: true
+          target:
+            $ref: '#/definitions/DeploymentTargetReference'
+          services:
+            type: array
+            items:
+              $ref: '#/definitions/DeploymentServiceInstance'
+          network:
+            type: array
+            items:
+              $ref: '#/definitions/DeploymentNetworkConnection'
+

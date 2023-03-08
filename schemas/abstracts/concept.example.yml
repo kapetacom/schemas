@@ -1,0 +1,31 @@
+kind: core/concept
+metadata:
+  name: core/deployment-target
+spec:
+  dependencies:
+    - path: spec.image
+      type: docker images
+  schema:
+    $id: /core/deployment-target
+    $schema: http://json-schema.org/draft-07/schema#
+    type: object
+    properties:
+      kind:
+        type: string
+        const: core/deployment-target
+
+      metadata:
+        $ref: /core/metadata
+
+      spec:
+        type: object
+        properties:
+          image:
+            type: string
+          configuration:
+            $ref: /core/schema
+      required:
+        - kind
+        - metadata
+        - spec
+

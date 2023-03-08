@@ -1,7 +1,7 @@
-export interface Concept {
+export interface BlockDefinition {
     kind:     string;
     metadata: Metadata;
-    spec:     ConceptSpec;
+    spec:     BlockDefinitionSpec;
 }
 
 export interface Metadata {
@@ -9,6 +9,57 @@ export interface Metadata {
     name:         string;
     title?:       string;
     visibility?:  string;
+}
+
+export interface BlockDefinitionSpec {
+    consumers?: Resource[];
+    entities?:  EntityList;
+    providers?: Resource[];
+    target:     LanguageTargetReference;
+}
+
+export interface Resource {
+    kind:      string;
+    metadata?: ResourceMetadata;
+    spec?:     { [key: string]: any };
+}
+
+export interface ResourceMetadata {
+    name?: string;
+}
+
+export interface EntityList {
+    source?: SourceCode;
+    types?:  Entity[];
+}
+
+export interface SourceCode {
+    type?:  string;
+    value?: string;
+}
+
+export interface Entity {
+    description?: string;
+    name:         string;
+    properties?:  { [key: string]: EntityProperty };
+    type:         string;
+    values?:      string[];
+}
+
+export interface EntityProperty {
+    description?: string;
+    type:         string;
+}
+
+export interface LanguageTargetReference {
+    kind:     string;
+    options?: { [key: string]: any };
+}
+
+export interface Concept {
+    kind:     string;
+    metadata: Metadata;
+    spec:     ConceptSpec;
 }
 
 export interface ConceptSpec {
@@ -19,6 +70,12 @@ export interface ConceptSpec {
 export interface Dependency {
     path?: string;
     type?: string;
+}
+
+export interface Kind {
+    kind:     string;
+    metadata: Metadata;
+    spec?:    { [key: string]: any };
 }
 
 export interface BlockTypeGroup {

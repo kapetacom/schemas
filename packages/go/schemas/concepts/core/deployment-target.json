@@ -19,7 +19,7 @@
           "const": "core/deployment-target"
         },
         "metadata": {
-          "$ref": "/core/type-metadata"
+          "$ref": "/core/metadata"
         },
         "spec": {
           "type": "object",
@@ -32,7 +32,7 @@
               "type": "string"
             },
             "configuration": {
-              "$ref": "/core/type-schema"
+              "$ref": "/core/schema"
             }
           }
         }

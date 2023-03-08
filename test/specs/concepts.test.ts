@@ -4,8 +4,9 @@ import Ajv from "ajv"
 import {ValidateFunction} from "ajv/lib/types";
 import {readDirectory} from "../../src/utils";
 
-const typesPath = resolve(__dirname, '../../types');
-const basePath = resolve(__dirname, '../../concepts');
+const typesPath = resolve(__dirname, '../../schemas/types');
+const conceptBasePath = resolve(__dirname, '../../schemas/concepts');
+const abstractBasePath = resolve(__dirname, '../../schemas/abstracts');
 
 const ajv = new Ajv();
 
@@ -20,41 +21,73 @@ describe('schemas.concepts', () => {
         }
     });
 
+    readDirectory(abstractBasePath).forEach(entry => {
+        try {
+            ajv.addSchema(entry.content);
+        } catch (e) {
+            console.error('Failed to add schema: ' + entry.filename, e);
+            throw e;
+        }
+    });
+
     const conceptSchemaValidator = ajv.getSchema('/core/concept');
 
     if (!conceptSchemaValidator) {
         throw new Error('Did not find core concept schema');
     }
 
-    readDirectory(basePath).forEach(entry => {
+    describe('abstracts', () => {
+        readDirectory(abstractBasePath).forEach(abstract => {
 
-        try {
-            ajv.addSchema(entry.content.spec.schema);
-        } catch (e) {
-            console.error('Failed to add schema: ' + entry.filename);
-            throw e;
-        }
+            test(abstract.content.$id, async () => {
+                const validator = ajv.getSchema(abstract.content.$id);
+                if (!validator) {
+                    throw new Error(`Schema not found: ${abstract.content.$id}`);
+                }
+                abstract.examples.forEach(example => {
+                    const result = validator(example.toJS());
+                    if (validator.errors) {
+                        console.log(example.toJS());
+                    }
+                    expect(validator.errors).toBeNull();
+                    expect(result).toBe(true);
+                });
+            });
+        });
+    })
 
-        function doValidation(validator:ValidateFunction<any>, data:object) {
-            const result = validator(data);
-            if (validator.errors) {
-                console.error(validator.errors);
-                console.log(data);
+    describe('concepts', () => {
+        readDirectory(conceptBasePath).forEach(entry => {
+
+            try {
+                ajv.addSchema(entry.content.spec.schema);
+            } catch (e) {
+                console.error('Failed to add schema: ' + entry.filename);
+                throw e;
             }
-            expect(validator.errors).toBeNull();
-            expect(result).toBe(true);
-        }
 
-        test(entry.content.metadata.name, async () => {
+            function doValidation(validator:ValidateFunction<any>, data:object) {
+                const result = validator(data);
+                if (validator.errors) {
+                    console.error(validator.errors);
+                    console.log(data);
+                }
+                expect(validator.errors).toBeNull();
+                expect(result).toBe(true);
+            }
 
-            doValidation(conceptSchemaValidator, entry.content);
+            test(entry.content.metadata.name, async () => {
 
-            const validator = ajv.compile(entry.content.spec.schema)
-            entry.examples.forEach(example => {
-                doValidation(validator, example.toJS());
+                doValidation(conceptSchemaValidator, entry.content);
+
+                const validator = ajv.compile(entry.content.spec.schema)
+                entry.examples.forEach(example => {
+                    doValidation(validator, example.toJS());
+                });
             });
         });
     });
+
 
 
 })

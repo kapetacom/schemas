@@ -14,16 +14,16 @@
           "const": "core/resource-type-extension"
         },
         "metadata": {
-          "$ref": "/core/type-metadata"
+          "$ref": "/core/metadata"
         },
         "spec": {
           "type": "object",
           "properties": {
             "schema": {
-              "$ref": "/core/type-schema"
+              "$ref": "/core/schema"
             },
             "configuration": {
-              "$ref": "/core/type-schema"
+              "$ref": "/core/schema"
             }
           }
         }

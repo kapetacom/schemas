@@ -3,7 +3,7 @@ import {resolve} from 'path';
 import Ajv from "ajv"
 import {readDirectory} from "../../src/utils";
 
-const basePath = resolve(__dirname, '../../types');
+const basePath = resolve(__dirname, '../../schemas/types');
 const ajv = new Ajv();
 
 describe('schemas.types', () => {

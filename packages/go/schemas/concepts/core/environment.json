@@ -12,12 +12,61 @@
       {
         "path": "spec.deploymentTarget.ref",
         "type": "Deployment target"
+      },
+      {
+        "path": "spec.services.ref",
+        "type": "Services"
       }
     ],
     "schema": {
       "$id": "/core/environment",
       "$schema": "http://json-schema.org/draft-07/schema#",
       "definitions": {
+        "BlockServiceConfiguration": {
+          "type": "object",
+          "required": [
+            "consumerId",
+            "serviceId",
+            "portType"
+          ],
+          "properties": {
+            "consumerId": {
+              "type": "string"
+            },
+            "serviceId": {
+              "type": "string"
+            },
+            "portType": {
+              "type": "string"
+            }
+          }
+        },
+        "EnvironmentService": {
+          "type": "object",
+          "required": [
+            "id",
+            "ref",
+            "kind"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "ref": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "configuration": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
         "DeploymentTargetConfiguration": {
           "type": "object",
           "required": [
@@ -39,15 +88,21 @@
           "items": {
             "type": "object",
             "required": [
-              "id",
-              "configuration"
+              "id"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
               "configuration": {
-                "type": "object"
+                "type": "object",
+                "additionalProperties": true
+              },
+              "services": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/BlockServiceConfiguration"
+                }
               }
             }
           }
@@ -95,6 +150,12 @@
           "properties": {
             "plan": {
               "$ref": "#/definitions/PlanConfiguration"
+            },
+            "services": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EnvironmentService"
+              }
             },
             "deploymentTarget": {
               "$ref": "#/definitions/DeploymentTargetConfiguration"

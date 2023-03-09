@@ -1,11 +1,12 @@
 package com.blockware.schemas.entity;
 
-import java.util.List;
 import java.util.Map;
 
 @lombok.Data
-public class BlockInstanceConfiguration {
+public class EnvironmentService {
     private Map<String, Object> configuration;
     private String id;
-    private List<BlockServiceConfiguration> services;
+    private String kind;
+    private String ref;
+    private String title;
 }

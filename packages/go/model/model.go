@@ -201,8 +201,9 @@ type Environment struct {
 }
 
 type EnvironmentSpec struct {
-	DeploymentTarget DeploymentTargetConfiguration `json:"deploymentTarget"`
-	Plan             PlanConfiguration             `json:"plan"`            
+	DeploymentTarget DeploymentTargetConfiguration `json:"deploymentTarget"`  
+	Plan             PlanConfiguration             `json:"plan"`              
+	Services         []EnvironmentService          `json:"services,omitempty"`
 }
 
 type DeploymentTargetConfiguration struct {
@@ -217,8 +218,23 @@ type PlanConfiguration struct {
 }
 
 type BlockInstanceConfiguration struct {
-	Configuration map[string]interface{} `json:"configuration"`
-	ID            string                 `json:"id"`           
+	Configuration map[string]interface{}      `json:"configuration,omitempty"`
+	ID            string                      `json:"id"`                     
+	Services      []BlockServiceConfiguration `json:"services,omitempty"`     
+}
+
+type BlockServiceConfiguration struct {
+	ConsumerID string `json:"consumerId"`
+	PortType   string `json:"portType"`  
+	ServiceID  string `json:"serviceId"` 
+}
+
+type EnvironmentService struct {
+	Configuration map[string]interface{} `json:"configuration,omitempty"`
+	ID            string                 `json:"id"`                     
+	Kind          string                 `json:"kind"`                   
+	Ref           string                 `json:"ref"`                    
+	Title         *string                `json:"title,omitempty"`        
 }
 
 type LanguageTarget struct {

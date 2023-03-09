@@ -12,6 +12,36 @@ spec:
     - id: 019bc636-7ba2-5c41-c426-96e90cee21e6
       configuration:
         block-specific: "configuration"
+      services:
+        - consumerId: myDb
+          serviceId: postgres
+          portType: mongodb
+
+    - id: 419bc636-75a2-5c41-c426-96e90cee21e6
+      configuration:
+        block-specific: "configuration"
+      services:
+        - consumerId: otherDb
+          serviceId: mongodb4
+          portType: mongodb
+  services:
+    - id: postgres
+      title: Main postgres
+      kind: blockware/resource-type-postgres
+      ref: blockware/resource-type-postgres:1.0.0
+      configuration:
+        version: POSTGRES_9_6
+        tier: db-custom-1-3840
+        availabilityType: ZONAL
+        storage: 10Gi
+    - id: mongodb4
+      title: Main Mongo
+      kind: blockware/resource-type-mongodb
+      ref: blockware/resource-type-mongodb:1.0.0
+      configuration:
+        version: "4.4.17"
+        storage: 10Gi
+        diskType: premium-rwo
   deploymentTarget: 
     ref: blockware://blockware/test-deployment-target:1.0.0
     configuration:

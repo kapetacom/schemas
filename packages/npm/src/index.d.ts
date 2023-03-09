@@ -206,6 +206,7 @@ export interface Environment {
 export interface EnvironmentSpec {
     deploymentTarget: DeploymentTargetConfiguration;
     plan:             PlanConfiguration;
+    services?:        EnvironmentService[];
 }
 
 export interface DeploymentTargetConfiguration {
@@ -220,8 +221,23 @@ export interface PlanConfiguration {
 }
 
 export interface BlockInstanceConfiguration {
-    configuration: { [key: string]: any };
-    id:            string;
+    configuration?: { [key: string]: any };
+    id:             string;
+    services?:      BlockServiceConfiguration[];
+}
+
+export interface BlockServiceConfiguration {
+    consumerId: string;
+    portType:   string;
+    serviceId:  string;
+}
+
+export interface EnvironmentService {
+    configuration?: { [key: string]: any };
+    id:             string;
+    kind:           string;
+    ref:            string;
+    title?:         string;
 }
 
 export interface LanguageTarget {

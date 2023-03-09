@@ -138,8 +138,14 @@ type DeploymentTarget struct {
 }
 
 type DeploymentTargetSpec struct {
-	Configuration map[string]interface{} `json:"configuration"`
-	Image         string                 `json:"image"`        
+	Configuration map[string]interface{} `json:"configuration,omitempty"`
+	Logo          string                 `json:"logo"`                   
+	Service       RemoteService          `json:"service"`                
+}
+
+type RemoteService struct {
+	APIVersion *string `json:"apiVersion,omitempty"`
+	URL        *string `json:"url,omitempty"`       
 }
 
 type Deployment struct {

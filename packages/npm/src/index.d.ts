@@ -136,8 +136,14 @@ export interface DeploymentTarget {
 }
 
 export interface DeploymentTargetSpec {
-    configuration: { [key: string]: any };
-    image:         string;
+    configuration?: { [key: string]: any };
+    logo:           string;
+    service:        RemoteService;
+}
+
+export interface RemoteService {
+    apiVersion?: string;
+    url?:        string;
 }
 
 export interface Deployment {

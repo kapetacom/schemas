@@ -21,11 +21,13 @@ spec:
       spec:
         type: object
         required:
-          - image
-          - configuration
+          - service
+          - logo
         properties:
-          image:
+          logo:
             type: string
+          service:
+            $ref: /core/remote-service
           configuration:
             $ref: /core/schema
 

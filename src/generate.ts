@@ -147,6 +147,11 @@ const languages:Language[] = [
 
         FSExtra.mkdirpSync(join(language.ymlBaseDir, 'types/core'));
         FSExtra.mkdirpSync(join(language.ymlBaseDir, 'concepts/core'));
+        FSExtra.mkdirpSync(join(language.ymlBaseDir, 'abstracts/core'));
+
+        abstracts.forEach(abstract => {
+            FS.writeFileSync(join(language.ymlBaseDir, 'abstracts/core', abstract.filename.substring(0, abstract.filename.length - 4) + '.json'), JSON.stringify(abstract.content, null, 2));
+        });
 
         types.forEach(type => {
             FS.writeFileSync(join(language.ymlBaseDir, 'types/core', type.filename.substring(0, type.filename.length - 4) + '.json'), JSON.stringify(type.content, null, 2));

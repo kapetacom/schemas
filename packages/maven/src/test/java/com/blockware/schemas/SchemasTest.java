@@ -33,7 +33,7 @@ public class SchemasTest {
 
     @Test
     public void can_get_core_types() {
-        JsonSchema conceptSchema = Schemas.getInstance().typeSchema("core/concept");
+        JsonSchema conceptSchema = Schemas.getInstance().abstractSchema("core/concept");
         assertNotNull(conceptSchema);
 
         Set<ValidationMessage> validate = conceptSchema.validate(Schemas.getInstance().jsonSchema("concepts/core/block-type.json"));

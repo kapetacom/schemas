@@ -68,6 +68,13 @@ public class Schemas {
         return SchemaProviderType.from(conceptJson);
     }
 
+
+    public JsonSchema abstractSchema(String type) {
+        JsonNode schemaJson = jsonSchema("abstracts/" + type + ".json");
+
+        return toSchema(schemaJson);
+    }
+
     public JsonSchema typeSchema(String type) {
         JsonNode schemaJson = jsonSchema("types/" + type + ".json");
 
@@ -75,7 +82,7 @@ public class Schemas {
     }
 
     public JsonSchema kindSchema() {
-        return typeSchema("core/kind");
+        return abstractSchema("core/kind");
     }
 
     public JsonSchema toSchema(Map<String, Object> schemaJson) {

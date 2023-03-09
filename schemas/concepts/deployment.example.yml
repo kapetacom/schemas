@@ -14,6 +14,8 @@ spec:
     image: docker.blockware.com/blockware/deployment-target-gcp-gke:terraform
   plan:
     ref: blockware/todo-plan:1.0.0
+  environment:
+    ref: blockware/todo-plan-test:1.0.0
   services:
     - id: todo-web
       kind: blockware/block-type-frontend

@@ -14,6 +14,10 @@
         "type": "Plan"
       },
       {
+        "path": "spec.environment.ref",
+        "type": "Environment"
+      },
+      {
         "path": "spec.services.ref",
         "type": "Services"
       }
@@ -139,11 +143,15 @@
           "required": [
             "target",
             "plan",
+            "environment",
             "services",
             "network"
           ],
           "properties": {
             "plan": {
+              "$ref": "/core/asset-reference"
+            },
+            "environment": {
               "$ref": "/core/asset-reference"
             },
             "configuration": {

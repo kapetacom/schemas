@@ -7,6 +7,8 @@ spec:
       type: Deployment target
     - path: spec.plan.ref
       type: Plan
+    - path: spec.environment.ref
+      type: Environment
     - path: spec.services.ref
       type: Services
   schema:
@@ -94,10 +96,13 @@ spec:
         required:
           - target
           - plan
+          - environment
           - services
           - network
         properties:
           plan:
+            $ref: /core/asset-reference
+          environment:
             $ref: /core/asset-reference
           configuration:
             type: object

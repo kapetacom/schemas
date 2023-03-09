@@ -154,6 +154,7 @@ export interface Deployment {
 
 export interface DeploymentSpec {
     configuration?: { [key: string]: any };
+    environment:    AssetReference;
     network:        DeploymentNetworkConnection[];
     plan:           AssetReference;
     services:       DeploymentServiceInstance[];

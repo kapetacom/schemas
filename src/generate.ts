@@ -137,7 +137,9 @@ const languages:Language[] = [
 
         result.forEach((value, key) => {
             const filename = resolve(language.baseDir, key);
-            FS.writeFileSync(filename, value.lines.join('\n'));
+            FS.writeFileSync(filename, value.lines.join('\n')
+                .replace(/ID/g,'Id') //We fix Id naming here
+            );
             console.log('Wrote type to %s',filename);
         });
 

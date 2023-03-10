@@ -94,7 +94,7 @@ type BlockTypeGroupSpec struct {
 type BlockInstance struct {
 	Block      AssetReference `json:"block"`     
 	Dimensions Dimensions     `json:"dimensions"`
-	ID         string         `json:"id"`        
+	Id         string         `json:"id"`        
 	Name       string         `json:"name"`      
 }
 
@@ -116,7 +116,7 @@ type Connection struct {
 }
 
 type Endpoint struct {
-	BlockID      string `json:"blockId"`     
+	BlockId      string `json:"blockId"`     
 	ResourceName string `json:"resourceName"`
 }
 
@@ -170,19 +170,19 @@ type DeploymentNetworkConnection struct {
 }
 
 type DeploymentNetworkSource struct {
-	ID       string  `json:"id"`                
+	Id       string  `json:"id"`                
 	Resource *string `json:"resource,omitempty"`
 }
 
 type DeploymentNetworkTarget struct {
-	ID       string  `json:"id"`                
+	Id       string  `json:"id"`                
 	PortType string  `json:"portType"`          
 	Resource *string `json:"resource,omitempty"`
 }
 
 type DeploymentServiceInstance struct {
 	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	ID            string                 `json:"id"`                     
+	Id            string                 `json:"id"`                     
 	Image         *string                `json:"image,omitempty"`        
 	Kind          string                 `json:"kind"`                   
 	Ref           string                 `json:"ref"`                    
@@ -219,19 +219,19 @@ type PlanConfiguration struct {
 
 type BlockInstanceConfiguration struct {
 	Configuration map[string]interface{}      `json:"configuration,omitempty"`
-	ID            string                      `json:"id"`                     
+	Id            string                      `json:"id"`                     
 	Services      []BlockServiceConfiguration `json:"services,omitempty"`     
 }
 
 type BlockServiceConfiguration struct {
-	ConsumerID string `json:"consumerId"`
+	ConsumerId string `json:"consumerId"`
 	PortType   string `json:"portType"`  
-	ServiceID  string `json:"serviceId"` 
+	ServiceId  string `json:"serviceId"` 
 }
 
 type EnvironmentService struct {
 	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	ID            string                 `json:"id"`                     
+	Id            string                 `json:"id"`                     
 	Kind          string                 `json:"kind"`                   
 	Ref           string                 `json:"ref"`                    
 	Title         *string                `json:"title,omitempty"`        

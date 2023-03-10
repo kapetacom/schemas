@@ -1,6 +1,6 @@
 {
   "name": "@blockware/schemas",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "",
   "types": "src/index.d.ts",
   "description": "Contains the schemas for all core blockware types.",

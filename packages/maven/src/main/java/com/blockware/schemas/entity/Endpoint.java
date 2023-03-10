@@ -2,6 +2,6 @@ package com.blockware.schemas.entity;
 
 @lombok.Data
 public class Endpoint {
-    private String blockID;
+    private String blockId;
     private String resourceName;
 }

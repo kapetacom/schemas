@@ -18,14 +18,14 @@ spec:
         required:
           - consumerId
           - serviceId
-          - portType
+          - port
         properties:
           consumerId:
             type: string
           serviceId:
             type: string
-          portType:
-            type: string
+          port:
+            $ref: '/core/port'
       EnvironmentService:
         type: object
         required:

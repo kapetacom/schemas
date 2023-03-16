@@ -112,12 +112,22 @@ type Dimensions struct {
 type Connection struct {
 	From    Endpoint               `json:"from"`             
 	Mapping map[string]interface{} `json:"mapping,omitempty"`
-	To      Endpoint               `json:"to"`               
+	To      ToEndpoint             `json:"to"`               
 }
 
 type Endpoint struct {
 	BlockId      string `json:"blockId"`     
 	ResourceName string `json:"resourceName"`
+}
+
+type ToEndpoint struct {
+	BlockId      string `json:"blockId"`     
+	Port         Port   `json:"port"`        
+	ResourceName string `json:"resourceName"`
+}
+
+type Port struct {
+	Type string `json:"type"`
 }
 
 type BlockType struct {
@@ -176,7 +186,7 @@ type DeploymentNetworkSource struct {
 
 type DeploymentNetworkTarget struct {
 	Id       string  `json:"id"`                
-	PortType string  `json:"portType"`          
+	Port     Port    `json:"port"`              
 	Resource *string `json:"resource,omitempty"`
 }
 
@@ -225,7 +235,7 @@ type BlockInstanceConfiguration struct {
 
 type BlockServiceConfiguration struct {
 	ConsumerId string `json:"consumerId"`
-	PortType   string `json:"portType"`  
+	Port       Port   `json:"port"`      
 	ServiceId  string `json:"serviceId"` 
 }
 

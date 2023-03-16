@@ -57,11 +57,11 @@ spec:
             type: string
           resource:
             type: string
-          portType:
-            type: string
+          port:
+            $ref: '/core/port'
         required:
           - id
-          - portType
+          - port
       DeploymentNetworkSource:
         type: object
         properties:

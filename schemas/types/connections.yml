@@ -11,6 +11,19 @@ definitions:
         type: string
       resourceName:
         type: string
+  ToEndpoint:
+    type: object
+    required:
+      - blockId
+      - resourceName
+      - port
+    properties:
+      blockId:
+        type: string
+      resourceName:
+        type: string
+      port:
+        $ref: "/core/port"
 type: array
 items:
   type: object
@@ -21,7 +34,8 @@ items:
     from:
       $ref: "#/definitions/endpoint"
     to:
-      $ref: "#/definitions/endpoint"
+      $ref: "#/definitions/ToEndpoint"
+
     mapping:
       type: object
       additionalProperties: true

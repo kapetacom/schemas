@@ -1,0 +1,14 @@
+{
+  "$id": "/core/port",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Port",
+  "type": "object",
+  "required": [
+    "type"
+  ],
+  "properties": {
+    "type": {
+      "type": "string"
+    }
+  }
+}

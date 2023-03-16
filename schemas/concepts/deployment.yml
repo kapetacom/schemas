@@ -58,10 +58,7 @@ spec:
           resource:
             type: string
           port:
-            type: object
-            properties:
-              type:
-                type: string
+            $ref: '/core/port'
         required:
           - id
           - port

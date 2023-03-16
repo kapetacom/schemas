@@ -110,12 +110,22 @@ export interface Dimensions {
 export interface Connection {
     from:     Endpoint;
     mapping?: { [key: string]: any };
-    to:       Endpoint;
+    to:       ToEndpoint;
 }
 
 export interface Endpoint {
     blockId:      string;
     resourceName: string;
+}
+
+export interface ToEndpoint {
+    blockId:      string;
+    port:         Port;
+    resourceName: string;
+}
+
+export interface Port {
+    type: string;
 }
 
 export interface BlockType {
@@ -174,7 +184,7 @@ export interface DeploymentNetworkSource {
 
 export interface DeploymentNetworkTarget {
     id:        string;
-    portType:  string;
+    port:      Port;
     resource?: string;
 }
 
@@ -228,7 +238,7 @@ export interface BlockInstanceConfiguration {
 
 export interface BlockServiceConfiguration {
     consumerId: string;
-    portType:   string;
+    port:       Port;
     serviceId:  string;
 }
 

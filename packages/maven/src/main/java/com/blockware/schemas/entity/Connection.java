@@ -6,5 +6,5 @@ import java.util.Map;
 public class Connection {
     private Endpoint from;
     private Map<String, Object> mapping;
-    private Endpoint to;
+    private ToEndpoint to;
 }

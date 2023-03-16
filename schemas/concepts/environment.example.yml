@@ -15,7 +15,8 @@ spec:
       services:
         - consumerId: myDb
           serviceId: postgres
-          portType: mongodb
+          port:
+            type: mongodb
 
     - id: 419bc636-75a2-5c41-c426-96e90cee21e6
       configuration:
@@ -23,7 +24,8 @@ spec:
       services:
         - consumerId: otherDb
           serviceId: mongodb4
-          portType: mongodb
+          port:
+            type: mongodb
   services:
     - id: postgres
       title: Main postgres

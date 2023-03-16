@@ -27,7 +27,7 @@
           "required": [
             "consumerId",
             "serviceId",
-            "portType"
+            "port"
           ],
           "properties": {
             "consumerId": {
@@ -36,8 +36,8 @@
             "serviceId": {
               "type": "string"
             },
-            "portType": {
-              "type": "string"
+            "port": {
+              "$ref": "/core/port"
             }
           }
         },

@@ -76,7 +76,8 @@ spec:
         resource: users
       to:
         id: postgres
-        portType: postgres
+        port: 
+          type: postgres
 
     - type: resource
       from:
@@ -84,7 +85,8 @@ spec:
         resource: myMongoDb4
       to:
         id: mongodb4
-        portType: mongodb
+        port:
+          type: mongodb
 
     - type: resource
       from:
@@ -92,7 +94,8 @@ spec:
         resource: myMongoDb6
       to:
         id: mongodb6
-        portType: mongodb
+        port:
+          type: mongodb
 
     - type: service
       from:
@@ -101,7 +104,8 @@ spec:
       to:
         id: todo-api
         resource: tasks
-        portType: rest
+        port:
+          type: rest
 
     - type: service
       from:
@@ -110,4 +114,5 @@ spec:
       to:
         id: users-api
         resource: users
-        portType: rest
+        port:
+          type: rest

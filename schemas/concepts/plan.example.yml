@@ -30,6 +30,8 @@ spec:
       to:
         blockId: block2
         resourceName: my-api-client
+        port:
+          type: rest
       mapping:
         sourceMethodName:
           target: targetMethodName

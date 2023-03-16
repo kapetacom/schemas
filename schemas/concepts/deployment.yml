@@ -57,11 +57,14 @@ spec:
             type: string
           resource:
             type: string
-          portType:
-            type: string
+          port:
+            type: object
+            properties:
+              type:
+                type: string
         required:
           - id
-          - portType
+          - port
       DeploymentNetworkSource:
         type: object
         properties:

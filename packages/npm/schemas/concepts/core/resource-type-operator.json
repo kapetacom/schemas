@@ -19,6 +19,9 @@
         "spec": {
           "type": "object",
           "properties": {
+            "local": {
+              "$ref": "/core/local-instance"
+            },
             "configuration": {
               "$ref": "/core/schema"
             },
@@ -38,7 +41,8 @@
             }
           },
           "required": [
-            "ports"
+            "ports",
+            "local"
           ]
         }
       }

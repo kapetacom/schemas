@@ -17,6 +17,8 @@ spec:
       spec:
         type: object
         properties:
+          local:
+            $ref: /core/local-instance
           configuration:
             $ref: /core/schema
           color:
@@ -31,4 +33,5 @@ spec:
               $ref: /core/port
         required:
           - ports
+          - local
 

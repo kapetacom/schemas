@@ -1,6 +1,6 @@
 {
   "name": "@kapeta/schemas",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "main": "",
   "types": "src/index.d.ts",
   "description": "Contains the schemas for all core blockware types.",

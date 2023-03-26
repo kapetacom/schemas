@@ -14,3 +14,21 @@ spec:
   ports:
     - type: main
     - type: admin
+  local:
+    image: postgres:9.6
+    health:
+      cmd: psql --user postgres postgres -c 'select true' > /dev/null,
+      interval: 5000
+    ports:
+      postgres:
+        port: 5432
+        type: tcp
+    mounts:
+      data: /var/lib/postgresql/data/pgdata
+    env:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    credentials:
+      username: postgres
+      password: postgres

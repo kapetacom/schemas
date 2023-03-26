@@ -8,5 +8,6 @@ public class ResourceTypeOperatorSpec {
     private ColorValue color;
     private Map<String, Object> configuration;
     private IconValue icon;
+    private LocalInstance local;
     private List<Port> ports;
 }

@@ -303,6 +303,7 @@ type ResourceTypeOperatorSpec struct {
 	Color         *ColorValue            `json:"color,omitempty"`        
 	Configuration map[string]interface{} `json:"configuration,omitempty"`
 	Icon          *IconValue             `json:"icon,omitempty"`         
+	Local         LocalInstance          `json:"local"`                  
 	Ports         []Port                 `json:"ports"`                  
 }
 
@@ -314,6 +315,30 @@ type ColorValue struct {
 type IconValue struct {
 	Type  IconType `json:"type"` 
 	Value string   `json:"value"`
+}
+
+type LocalInstance struct {
+	Credentials LocalInstanceCredentials     `json:"credentials"`     
+	Env         map[string]string            `json:"env,omitempty"`   
+	Health      *LocalInstanceHealth         `json:"health,omitempty"`
+	Image       string                       `json:"image"`           
+	Mounts      map[string]string            `json:"mounts,omitempty"`
+	Ports       map[string]LocalInstancePort `json:"ports"`           
+}
+
+type LocalInstanceCredentials struct {
+	Password string `json:"password"`
+	Username string `json:"username"`
+}
+
+type LocalInstanceHealth struct {
+	Cmd      string   `json:"cmd"`               
+	Interval *float64 `json:"interval,omitempty"`
+}
+
+type LocalInstancePort struct {
+	Port *float64               `json:"port,omitempty"`
+	Type *LocalInstancePortType `json:"type,omitempty"`
 }
 
 type DeploymentNetworkConnectionType string
@@ -330,4 +355,10 @@ const (
 type IconType string
 const (
 	URL IconType = "url"
+)
+
+type LocalInstancePortType string
+const (
+	TCP LocalInstancePortType = "tcp"
+	UDP LocalInstancePortType = "udp"
 )

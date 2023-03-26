@@ -306,6 +306,7 @@ export interface ResourceTypeOperatorSpec {
     color?:         ColorValue;
     configuration?: { [key: string]: any };
     icon?:          IconValue;
+    local:          LocalInstance;
     ports:          Port[];
 }
 
@@ -325,4 +326,33 @@ export interface IconValue {
 
 export enum IconType {
     URL = "url",
+}
+
+export interface LocalInstance {
+    credentials: LocalInstanceCredentials;
+    env?:        { [key: string]: string };
+    health?:     LocalInstanceHealth;
+    image:       string;
+    mounts?:     { [key: string]: string };
+    ports:       { [key: string]: LocalInstancePort };
+}
+
+export interface LocalInstanceCredentials {
+    password: string;
+    username: string;
+}
+
+export interface LocalInstanceHealth {
+    cmd:       string;
+    interval?: number;
+}
+
+export interface LocalInstancePort {
+    port?: number;
+    type?: LocalInstancePortType;
+}
+
+export enum LocalInstancePortType {
+    TCP = "tcp",
+    UDP = "udp",
 }

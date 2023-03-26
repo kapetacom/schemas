@@ -1,0 +1,54 @@
+$id: /core/local-instance
+$schema: http://json-schema.org/draft-07/schema#
+title: LocalInstance
+type: object
+required:
+  - image
+  - ports
+  - credentials
+properties:
+  image:
+    type: string
+  health:
+    type: object
+    title: LocalInstanceHealth
+    properties:
+      cmd:
+        type: string
+      interval:
+        type: number
+    required:
+      - cmd
+  ports:
+    type: object
+    additionalProperties:
+      type: object
+      title: LocalInstancePort
+      properties:
+        port:
+          type: number
+        type:
+          title: LocalInstancePortType
+          type: string
+          enum:
+            - tcp
+            - udp
+  mounts:
+    type: object
+    additionalProperties:
+      type: string
+  env:
+    type: object
+    additionalProperties:
+      type: string
+  credentials:
+    type: object
+    title: LocalInstanceCredentials
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+    required:
+      - username
+      - password

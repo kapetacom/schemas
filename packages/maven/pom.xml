@@ -6,7 +6,7 @@
 
     <groupId>com.kapeta</groupId>
     <artifactId>schemas</artifactId>
-    <version>0.0.16</version>
+    <version>0.0.17</version>
 
     <licenses>
         <license>
@@ -19,14 +19,14 @@
     <distributionManagement>
         <repository>
             <id>artifact-registry</id>
-            <url>artifactregistry://europe-maven.pkg.dev/blockware-cloud/blockware-maven-public</url>
+            <url>artifactregistry://europe-north1-maven.pkg.dev/kapeta-production/kapeta-maven-public</url>
         </repository>
     </distributionManagement>
 
     <repositories>
         <repository>
             <id>artifact-registry</id>
-            <url>artifactregistry://europe-maven.pkg.dev/blockware-cloud/blockware-maven-public</url>
+            <url>artifactregistry://europe-north1-maven.pkg.dev/kapeta-production/kapeta-maven-public</url>
             <releases>
                 <enabled>true</enabled>
             </releases>

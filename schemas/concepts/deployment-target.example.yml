@@ -4,11 +4,11 @@ metadata:
   title: My Deployment Target
   description: This allows you to introduce a new deployment target
 spec:
-  logo: https://storage.googleapis.com/cdn-public-blockware/logos/google_cloud_logo.png
+  logo: https://storage.googleapis.com/cdn-public-kapeta/logos/google_cloud_logo.png
 
   service:
     apiVersion: 1.0.0
-    url: https://deployment-target-gcp.externals.blockware.com
+    url: https://deployment-target-gcp.externals.kapeta.com
 
   configuration:
     type: object

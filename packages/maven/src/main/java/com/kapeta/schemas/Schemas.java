@@ -38,7 +38,7 @@ public class Schemas {
 
     private final ObjectMapper om;
 
-    private final URI baseURI = URI.create("blockware://schemas");
+    private final URI baseURI = URI.create("kapeta://schemas");
 
     private Schemas() {
         om = new ObjectMapper()
@@ -92,7 +92,7 @@ public class Schemas {
         SpecVersion.VersionFlag versionFlag = schemaJson.has("$schema") ?
                 SpecVersionDetector.detect(schemaJson) : SpecVersion.VersionFlag.V7;
         JsonSchemaFactory factory = JsonSchemaFactory.builder(JsonSchemaFactory.getInstance(versionFlag))
-                .uriFactory(new InternalURIFactory(), "blockware", "file", "jar")
+                .uriFactory(new InternalURIFactory(), "kapeta", "file", "jar")
                 .addUrnFactory(new InternalURNFactory())
                 .build();
 

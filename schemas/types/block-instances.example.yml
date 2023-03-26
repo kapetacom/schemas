@@ -1,6 +1,6 @@
 - id: block1
   block:
-    ref: blockware://some-handle/my-block-2:0.0.2
+    ref: kapeta://some-handle/my-block-2:0.0.2
   name: My Second Block
   dimensions:
     height: 10
@@ -9,7 +9,7 @@
     top: 10
 - id: block2
   block:
-    ref: blockware://some-handle/my-block-2:0.0.2
+    ref: kapeta://some-handle/my-block-2:0.0.2
   name: My Second Block
   dimensions:
     height: 10

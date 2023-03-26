@@ -1,6 +1,6 @@
 kind: core/deployment
 metadata:
-  name: blockware/todo-plan-test-environment-tf3
+  name: kapeta/todo-plan-test-environment-tf3
   title: Test deployment
   description: This is a deployment to the test environment
 spec:
@@ -10,41 +10,41 @@ spec:
     zone: europe-west9-a
     strategy: test
   target:
-    ref: blockware/deployment-target-gcp-gke:terraform
-    image: docker.blockware.com/blockware/deployment-target-gcp-gke:terraform
+    ref: kapeta/deployment-target-gcp-gke:terraform
+    image: docker.kapeta.com/kapeta/deployment-target-gcp-gke:terraform
   plan:
-    ref: blockware/todo-plan:1.0.0
+    ref: kapeta/todo-plan:1.0.0
   environment:
-    ref: blockware/todo-plan-test:1.0.0
+    ref: kapeta/todo-plan-test:1.0.0
   services:
     - id: todo-web
-      kind: blockware/block-type-frontend
+      kind: kapeta/block-type-frontend
       title: Todo Web
-      ref: blockware/nodejs-sample-todo-ui:0.0.8
-      image: docker.blockware.com/blockware/nodejs-sample-todo-ui:0.0.9
+      ref: kapeta/nodejs-sample-todo-ui:0.0.8
+      image: docker.kapeta.com/kapeta/nodejs-sample-todo-ui:0.0.9
       configuration:
         block-specific-config: true
 
     - id: todo-api
-      kind: blockware/block-type-service
+      kind: kapeta/block-type-service
       title: Todo API
-      ref: blockware/nodejs-sample-todo-service:0.0.4
-      image: docker.blockware.com/blockware/nodejs-sample-todo-service:0.0.5
+      ref: kapeta/nodejs-sample-todo-service:0.0.4
+      image: docker.kapeta.com/kapeta/nodejs-sample-todo-service:0.0.5
       configuration:
         block-specific-config: true
 
     - id: users-api
       title: Users API
-      kind: blockware/block-type-service
-      ref: blockware/nodejs-sample-users-service:0.0.3
-      image: docker.blockware.com/blockware/nodejs-sample-users-service:0.0.4
+      kind: kapeta/block-type-service
+      ref: kapeta/nodejs-sample-users-service:0.0.3
+      image: docker.kapeta.com/kapeta/nodejs-sample-users-service:0.0.4
       configuration:
         block-specific-config: true
 
     - id: postgres
       title: Main postgres
-      kind: blockware/resource-type-postgres
-      ref: blockware/resource-type-postgres:1.0.0
+      kind: kapeta/resource-type-postgres
+      ref: kapeta/resource-type-postgres:1.0.0
       configuration:
         version: POSTGRES_9_6
         tier: db-custom-1-3840
@@ -53,8 +53,8 @@ spec:
 
     - id: mongodb4
       title: Main Mongo
-      kind: blockware/resource-type-mongodb
-      ref: blockware/resource-type-mongodb:1.0.0
+      kind: kapeta/resource-type-mongodb
+      ref: kapeta/resource-type-mongodb:1.0.0
       configuration:
         version: "4.4.17"
         storage: 10Gi
@@ -62,8 +62,8 @@ spec:
 
     - id: mongodb6
       title: Smaller Mongo
-      kind: blockware/resource-type-mongodb
-      ref: blockware/resource-type-mongodb:1.0.0
+      kind: kapeta/resource-type-mongodb
+      ref: kapeta/resource-type-mongodb:1.0.0
       configuration:
         version: "6.0.2"
         storage: 10Gi

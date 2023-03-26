@@ -1,4 +1,4 @@
-kind: blockware/resource-type-postgresql
+kind: kapeta/resource-type-postgresql
 metadata:
   name: someone/usersdb
 spec:

@@ -1,4 +1,4 @@
-kind: blockware/language-target-java-spring-boot
+kind: kapeta/language-target-java-spring-boot
 options:
   groupId: org.mycompany.services
   artifactId: users

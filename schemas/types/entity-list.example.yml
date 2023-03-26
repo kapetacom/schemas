@@ -23,7 +23,7 @@ types:
       - ONE
       - TWO
 source:
-  type: blockware-dsl
+  type: kapeta-dsl
   value: |-
     User {
     	id: string

@@ -1,9 +1,9 @@
-kind: blockware/block-type-service:local
+kind: kapeta/block-type-service:local
 metadata:
-  name: blockware/sample-java-todo-service
+  name: kapeta/sample-java-todo-service
 spec:
   target:
-    kind: blockware/language-target-java-spring-boot:local
+    kind: kapeta/language-target-java-spring-boot:local
     options:
       basePackage: org.mycompany.services.todo
       groupId: org.mycompany.services
@@ -53,13 +53,13 @@ spec:
           password:
             type: string
   consumers:
-    - kind: blockware/resource-type-mongodb:0.0.2
+    - kind: kapeta/resource-type-mongodb:0.0.2
       metadata:
         name: tododb
       spec:
         port:
           type: mongodb
-    - kind: blockware/resource-type-rest-client:0.0.4
+    - kind: kapeta/resource-type-rest-client:0.0.4
       metadata:
         name: users
       spec:
@@ -86,7 +86,7 @@ spec:
                 type: string
                 transport: PATH
         source:
-          type: blockware-dsl
+          type: kapeta-dsl
           value: |-
             @DELETE("/users/{id}")
             deleteUser(@Path id:string):void
@@ -94,7 +94,7 @@ spec:
             @GET("/users/{id}")
             getUser(@Path id:string):User
   providers:
-    - kind: blockware/resource-type-rest-api:0.0.4
+    - kind: kapeta/resource-type-rest-api:0.0.4
       metadata:
         name: tasks
       spec:
@@ -171,7 +171,7 @@ spec:
               taskId:
                 type: string
                 transport: path
-    - kind: blockware/resource-type-rest-api:0.0.4
+    - kind: kapeta/resource-type-rest-api:0.0.4
       metadata:
         name: lists
       spec:

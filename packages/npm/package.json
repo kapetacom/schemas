@@ -1,8 +1,8 @@
 {
   "name": "@kapeta/schemas",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "main": "",
   "types": "src/index.d.ts",
-  "description": "Contains the schemas for all core blockware types.",
+  "description": "Contains the schemas for all core kapeta types.",
   "license": "MIT"
 }

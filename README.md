@@ -1,9 +1,9 @@
 # Core schemas
-Contains the schemas for all core blockware types.
+Contains the schemas for all core kapeta types.
 
 ## Concepts
 Concepts are top level definitions of the core building blocks of
-blockware.
+kapeta.
 
 ### core/block-type
 defines a block type. This typically is some sort of fundamental role
@@ -113,7 +113,7 @@ stand alone "kinds"
 Entities are usually defined in blocks. 
 These entities define the *external* data types
 for blocks - to be used in APIs or databases.
-Blockware needs to know about these entities to be able to asses a number of
+Kapeta needs to know about these entities to be able to asses a number of
 things including compatibility and also enables it to exchange
 optimized data streams such as protobuf or similar.
 
@@ -125,7 +125,7 @@ optimized data streams such as protobuf or similar.
 
 ### core/entity-list
 A list of core/entity. The list includes an optional source code
-for the entity list. Typically written in the Blockware schema DSL 
+for the entity list. Typically written in the Kapeta schema DSL 
 language
 
 **Schema:**

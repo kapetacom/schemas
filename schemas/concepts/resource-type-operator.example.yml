@@ -11,3 +11,6 @@ spec:
         type: boolean
       prefix:
         type: string
+  ports:
+    - type: main
+    - type: admin

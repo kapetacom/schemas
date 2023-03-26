@@ -300,19 +300,34 @@ type ResourceTypeOperator struct {
 }
 
 type ResourceTypeOperatorSpec struct {
-	Color         *TypedValue            `json:"color,omitempty"`        
+	Color         *ColorValue            `json:"color,omitempty"`        
 	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	Icon          *TypedValue            `json:"icon,omitempty"`         
+	Icon          *IconValue             `json:"icon,omitempty"`         
 	Ports         []Port                 `json:"ports"`                  
 }
 
-type TypedValue struct {
-	Type  string `json:"type"` 
-	Value string `json:"value"`
+type ColorValue struct {
+	Type  ColorType `json:"type"` 
+	Value string    `json:"value"`
+}
+
+type IconValue struct {
+	Type  IconType `json:"type"` 
+	Value string   `json:"value"`
 }
 
 type DeploymentNetworkConnectionType string
 const (
 	Resource DeploymentNetworkConnectionType = "resource"
 	Service DeploymentNetworkConnectionType = "service"
+)
+
+type ColorType string
+const (
+	Hex ColorType = "hex"
+)
+
+type IconType string
+const (
+	URL IconType = "url"
 )

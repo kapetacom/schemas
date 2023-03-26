@@ -1,6 +1,12 @@
 - kind: my-handle/my-resource-type
   metadata:
     name: otherName
+  spec:
+    port:
+      type: mongodb
 - kind: my-handle/my-other-type
   metadata:
     name: someName
+  spec:
+    port:
+      type: http

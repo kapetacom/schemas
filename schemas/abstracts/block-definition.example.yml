@@ -56,10 +56,15 @@ spec:
     - kind: blockware/resource-type-mongodb:0.0.2
       metadata:
         name: tododb
+      spec:
+        port:
+          type: mongodb
     - kind: blockware/resource-type-rest-client:0.0.4
       metadata:
         name: users
       spec:
+        port:
+          type: rest
         methods:
           deleteUser:
             responseType: void
@@ -93,6 +98,8 @@ spec:
       metadata:
         name: tasks
       spec:
+        port:
+          type: rest
         methods:
           addTask:
             description: Add task to list
@@ -168,6 +175,8 @@ spec:
       metadata:
         name: lists
       spec:
+        port:
+          type: rest
         methods:
           getLists:
             description: Gets all task lists

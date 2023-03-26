@@ -303,13 +303,26 @@ export interface ResourceTypeOperator {
 }
 
 export interface ResourceTypeOperatorSpec {
-    color?:         TypedValue;
+    color?:         ColorValue;
     configuration?: { [key: string]: any };
-    icon?:          TypedValue;
+    icon?:          IconValue;
     ports:          Port[];
 }
 
-export interface TypedValue {
-    type:  string;
+export interface ColorValue {
+    type:  ColorType;
     value: string;
+}
+
+export enum ColorType {
+    Hex = "hex",
+}
+
+export interface IconValue {
+    type:  IconType;
+    value: string;
+}
+
+export enum IconType {
+    URL = "url",
 }

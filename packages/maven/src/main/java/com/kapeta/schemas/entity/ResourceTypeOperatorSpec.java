@@ -5,8 +5,8 @@ import java.util.Map;
 
 @lombok.Data
 public class ResourceTypeOperatorSpec {
-    private TypedValue color;
+    private ColorValue color;
     private Map<String, Object> configuration;
-    private TypedValue icon;
+    private IconValue icon;
     private List<Port> ports;
 }

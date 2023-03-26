@@ -1,0 +1,21 @@
+{
+  "$id": "/core/color-value",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ColorValue",
+  "type": "object",
+  "required": [
+    "type",
+    "value"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "hex"
+      ]
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

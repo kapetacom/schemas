@@ -23,10 +23,10 @@
               "$ref": "/core/schema"
             },
             "color": {
-              "$ref": "/core/typed-value"
+              "$ref": "/core/color-value"
             },
             "icon": {
-              "$ref": "/core/typed-value"
+              "$ref": "/core/icon-value"
             },
             "ports": {
               "type": "array",

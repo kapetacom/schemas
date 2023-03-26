@@ -1,7 +1,7 @@
 package com.kapeta.schemas.entity;
 
 @lombok.Data
-public class TypedValue {
-    private String type;
+public class IconValue {
+    private IconType type;
     private String value;
 }

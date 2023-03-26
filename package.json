@@ -1,5 +1,5 @@
 {
-  "name": "@blockware/schemas-test",
+  "name": "@kapeta/schemas-test",
   "version": "local",
   "description": "Not to be published - just here to provide build and test tools",
   "scripts": {

@@ -7,6 +7,15 @@ definitions:
       name:
         type: string
     additionalProperties: true
+    required:
+      - name
+  ResourceSpec:
+    type: object
+    properties:
+      port:
+        $ref: /core/port
+    required:
+      - port
 type: object
 properties:
   kind:
@@ -14,7 +23,8 @@ properties:
   metadata:
     $ref: "#/definitions/ResourceMetadata"
   spec:
-    type: object
-    additionalProperties: true
+    $ref: "#/definitions/ResourceSpec"
 required:
   - kind
+  - metadata
+  - spec

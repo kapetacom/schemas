@@ -40,10 +40,10 @@ const languages:Language[] = [
                 'lombok': 'true',
                 'array-type': 'list',
                 'just-types': 'true',
-                'package': 'com.blockware.schemas.entity'
+                'package': 'com.kapeta.schemas.entity'
             }
         },
-        baseDir: resolve(packageBase, 'maven/src/main/java/com/blockware/schemas/entity'),
+        baseDir: resolve(packageBase, 'maven/src/main/java/com/kapeta/schemas/entity'),
         ymlBaseDir: resolve(packageBase, 'maven/src/main/resources/schemas'),
         configBaseDir: resolve(packageBase, 'maven/src/main/resources/config')
     },

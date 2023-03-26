@@ -1,3 +1,6 @@
 kind: blockware/resource-type-postgresql
 metadata:
   name: usersdb
+spec:
+  port:
+    type: postgres

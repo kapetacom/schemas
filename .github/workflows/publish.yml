@@ -36,13 +36,10 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
       - run: npm install
       - run: npm run generate
-
-      - run: echo '@blockware:registry=${{ secrets.GCP_ARTIFACT_NPM_URL }}' > .npmrc
+      - run: npm publish --access public
         working-directory: ./packages/npm
-      - run: npx google-artifactregistry-auth .npmrc
-        working-directory: ./packages/npm
-      - run: npm publish --registry ${{ secrets.GCP_ARTIFACT_NPM_URL }}
-        working-directory: ./packages/npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: mvn clean deploy
         working-directory: ./packages/maven
 

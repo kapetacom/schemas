@@ -19,3 +19,16 @@ spec:
         properties:
           configuration:
             $ref: /core/schema
+          color:
+            $ref: /core/typed-value
+          icon:
+            $ref: /core/typed-value
+          ports:
+            type: array
+            minItems: 1
+            uniqueItems: true
+            items:
+              $ref: /core/port
+        required:
+          - ports
+

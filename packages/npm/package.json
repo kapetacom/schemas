@@ -1,5 +1,5 @@
 {
-  "name": "@blockware/schemas",
+  "name": "@kapeta/schemas",
   "version": "0.0.14",
   "main": "",
   "types": "src/index.d.ts",

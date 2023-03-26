@@ -19,13 +19,21 @@ export interface BlockDefinitionSpec {
 }
 
 export interface Resource {
-    kind:      string;
-    metadata?: ResourceMetadata;
-    spec?:     { [key: string]: any };
+    kind:     string;
+    metadata: ResourceMetadata;
+    spec:     ResourceSpec;
 }
 
 export interface ResourceMetadata {
-    name?: string;
+    name: string;
+}
+
+export interface ResourceSpec {
+    port: Port;
+}
+
+export interface Port {
+    type: string;
 }
 
 export interface EntityList {
@@ -122,10 +130,6 @@ export interface ToEndpoint {
     blockId:      string;
     port:         Port;
     resourceName: string;
-}
-
-export interface Port {
-    type: string;
 }
 
 export interface BlockType {
@@ -299,5 +303,13 @@ export interface ResourceTypeOperator {
 }
 
 export interface ResourceTypeOperatorSpec {
+    color?:         TypedValue;
     configuration?: { [key: string]: any };
+    icon?:          TypedValue;
+    ports:          Port[];
+}
+
+export interface TypedValue {
+    type:  string;
+    value: string;
 }

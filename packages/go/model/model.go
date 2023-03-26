@@ -21,13 +21,21 @@ type BlockDefinitionSpec struct {
 }
 
 type ConsumerElement struct {
-	Kind     string                 `json:"kind"`              
-	Metadata *ResourceMetadata      `json:"metadata,omitempty"`
-	Spec     map[string]interface{} `json:"spec,omitempty"`    
+	Kind     string           `json:"kind"`    
+	Metadata ResourceMetadata `json:"metadata"`
+	Spec     ResourceSpec     `json:"spec"`    
 }
 
 type ResourceMetadata struct {
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
+}
+
+type ResourceSpec struct {
+	Port Port `json:"port"`
+}
+
+type Port struct {
+	Type string `json:"type"`
 }
 
 type EntityList struct {
@@ -124,10 +132,6 @@ type ToEndpoint struct {
 	BlockId      string `json:"blockId"`     
 	Port         Port   `json:"port"`        
 	ResourceName string `json:"resourceName"`
-}
-
-type Port struct {
-	Type string `json:"type"`
 }
 
 type BlockType struct {
@@ -296,7 +300,15 @@ type ResourceTypeOperator struct {
 }
 
 type ResourceTypeOperatorSpec struct {
+	Color         *TypedValue            `json:"color,omitempty"`        
 	Configuration map[string]interface{} `json:"configuration,omitempty"`
+	Icon          *TypedValue            `json:"icon,omitempty"`         
+	Ports         []Port                 `json:"ports"`                  
+}
+
+type TypedValue struct {
+	Type  string `json:"type"` 
+	Value string `json:"value"`
 }
 
 type DeploymentNetworkConnectionType string

@@ -9,7 +9,21 @@
           "type": "string"
         }
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "required": [
+        "name"
+      ]
+    },
+    "ResourceSpec": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "$ref": "/core/port"
+        }
+      },
+      "required": [
+        "port"
+      ]
     }
   },
   "type": "object",
@@ -21,11 +35,12 @@
       "$ref": "#/definitions/ResourceMetadata"
     },
     "spec": {
-      "type": "object",
-      "additionalProperties": true
+      "$ref": "#/definitions/ResourceSpec"
     }
   },
   "required": [
-    "kind"
+    "kind",
+    "metadata",
+    "spec"
   ]
 }

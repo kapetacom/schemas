@@ -150,9 +150,47 @@ export interface DeploymentTarget {
 }
 
 export interface DeploymentTargetSpec {
-    configuration?: { [key: string]: any };
-    logo:           string;
+    configuration?: ConfigurationSchema;
+    icon:           IconValue;
+    operators?:     { [key: string]: DeploymentTargetOperator };
     service:        RemoteService;
+}
+
+export interface ConfigurationSchema {
+    schema:    { [key: string]: any };
+    uiSchema?: { [key: string]: { [key: string]: any } };
+}
+
+export interface IconValue {
+    type:  IconType;
+    value: string;
+}
+
+export enum IconType {
+    URL = "url",
+}
+
+export interface DeploymentTargetOperator {
+    color?:         ColorValue;
+    configuration?: ConfigurationSchema;
+    description?:   string;
+    icon?:          IconValue;
+    link?:          URLValue;
+    title:          string;
+}
+
+export interface ColorValue {
+    type:  ColorType;
+    value: string;
+}
+
+export enum ColorType {
+    Hex = "hex",
+}
+
+export interface URLValue {
+    type:  IconType;
+    value: string;
 }
 
 export interface RemoteService {
@@ -308,24 +346,6 @@ export interface ResourceTypeOperatorSpec {
     icon?:          IconValue;
     local:          LocalInstance;
     ports:          Port[];
-}
-
-export interface ColorValue {
-    type:  ColorType;
-    value: string;
-}
-
-export enum ColorType {
-    Hex = "hex",
-}
-
-export interface IconValue {
-    type:  IconType;
-    value: string;
-}
-
-export enum IconType {
-    URL = "url",
 }
 
 export interface LocalInstance {

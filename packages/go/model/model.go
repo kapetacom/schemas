@@ -152,9 +152,39 @@ type DeploymentTarget struct {
 }
 
 type DeploymentTargetSpec struct {
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	Logo          string                 `json:"logo"`                   
-	Service       RemoteService          `json:"service"`                
+	Configuration *ConfigurationSchema                `json:"configuration,omitempty"`
+	Icon          IconValue                           `json:"icon"`                   
+	Operators     map[string]DeploymentTargetOperator `json:"operators,omitempty"`    
+	Service       RemoteService                       `json:"service"`                
+}
+
+type ConfigurationSchema struct {
+	Schema   map[string]interface{}            `json:"schema"`            
+	UISchema map[string]map[string]interface{} `json:"uiSchema,omitempty"`
+}
+
+type IconValue struct {
+	Type  IconType `json:"type"` 
+	Value string   `json:"value"`
+}
+
+type DeploymentTargetOperator struct {
+	Color         *ColorValue          `json:"color,omitempty"`        
+	Configuration *ConfigurationSchema `json:"configuration,omitempty"`
+	Description   *string              `json:"description,omitempty"`  
+	Icon          *IconValue           `json:"icon,omitempty"`         
+	Link          *URLValue            `json:"link,omitempty"`         
+	Title         string               `json:"title"`                  
+}
+
+type ColorValue struct {
+	Type  ColorType `json:"type"` 
+	Value string    `json:"value"`
+}
+
+type URLValue struct {
+	Type  IconType `json:"type"` 
+	Value string   `json:"value"`
 }
 
 type RemoteService struct {
@@ -307,16 +337,6 @@ type ResourceTypeOperatorSpec struct {
 	Ports         []Port                 `json:"ports"`                  
 }
 
-type ColorValue struct {
-	Type  ColorType `json:"type"` 
-	Value string    `json:"value"`
-}
-
-type IconValue struct {
-	Type  IconType `json:"type"` 
-	Value string   `json:"value"`
-}
-
 type LocalInstance struct {
 	Credentials LocalInstanceCredentials     `json:"credentials"`     
 	Env         map[string]string            `json:"env,omitempty"`   
@@ -341,10 +361,9 @@ type LocalInstancePort struct {
 	Type *LocalInstancePortType `json:"type,omitempty"`
 }
 
-type DeploymentNetworkConnectionType string
+type IconType string
 const (
-	Resource DeploymentNetworkConnectionType = "resource"
-	Service DeploymentNetworkConnectionType = "service"
+	URL IconType = "url"
 )
 
 type ColorType string
@@ -352,9 +371,10 @@ const (
 	Hex ColorType = "hex"
 )
 
-type IconType string
+type DeploymentNetworkConnectionType string
 const (
-	URL IconType = "url"
+	Resource DeploymentNetworkConnectionType = "resource"
+	Service DeploymentNetworkConnectionType = "service"
 )
 
 type LocalInstancePortType string

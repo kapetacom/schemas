@@ -1,0 +1,14 @@
+schema:
+  type: object
+  required:
+    - fieldA
+  properties:
+    fieldA:
+      type: string
+    fieldB:
+      type: number
+uiSchema:
+  fieldA:
+    "ui:autofocus": true
+  fieldB:
+    "ui:widget": range

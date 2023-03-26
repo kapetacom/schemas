@@ -4,7 +4,8 @@ import java.util.Map;
 
 @lombok.Data
 public class DeploymentTargetSpec {
-    private Map<String, Object> configuration;
-    private String logo;
+    private ConfigurationSchema configuration;
+    private IconValue icon;
+    private Map<String, DeploymentTargetOperator> operators;
     private RemoteService service;
 }

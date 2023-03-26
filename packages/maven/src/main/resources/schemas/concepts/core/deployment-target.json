@@ -8,6 +8,34 @@
       "$id": "/core/deployment-target",
       "$schema": "http://json-schema.org/draft-07/schema#",
       "type": "object",
+      "definitions": {
+        "DeploymentTargetOperator": {
+          "type": "object",
+          "required": [
+            "title"
+          ],
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "link": {
+              "$ref": "/core/url-value"
+            },
+            "icon": {
+              "$ref": "/core/icon-value"
+            },
+            "color": {
+              "$ref": "/core/color-value"
+            },
+            "configuration": {
+              "$ref": "/core/configuration-schema"
+            }
+          }
+        }
+      },
       "required": [
         "kind",
         "metadata",
@@ -25,17 +53,23 @@
           "type": "object",
           "required": [
             "service",
-            "logo"
+            "icon"
           ],
           "properties": {
-            "logo": {
-              "type": "string"
+            "icon": {
+              "$ref": "/core/icon-value"
             },
             "service": {
               "$ref": "/core/remote-service"
             },
             "configuration": {
-              "$ref": "/core/schema"
+              "$ref": "/core/configuration-schema"
+            },
+            "operators": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/DeploymentTargetOperator"
+              }
             }
           }
         }

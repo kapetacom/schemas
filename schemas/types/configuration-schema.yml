@@ -1,0 +1,11 @@
+$id: /core/configuration-schema
+$schema: http://json-schema.org/draft-07/schema#
+title: ConfigurationSchema
+type: object
+required:
+  - schema
+properties:
+  schema:
+    $ref: /core/schema
+  uiSchema:
+    $ref: /core/ui-schema

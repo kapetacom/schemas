@@ -1,0 +1,5 @@
+fieldA:
+  ui:widget: radio
+fieldB:
+  ui:options:
+    widget: range

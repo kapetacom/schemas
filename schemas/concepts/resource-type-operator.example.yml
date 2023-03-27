@@ -5,12 +5,13 @@ metadata:
   description: Provides operator resources
 spec:
   configuration:
-    type: object
-    properties:
-      enableSomething:
-        type: boolean
-      prefix:
-        type: string
+    schema:
+      type: object
+      properties:
+        enableSomething:
+          type: boolean
+        prefix:
+          type: string
   ports:
     - type: main
     - type: admin

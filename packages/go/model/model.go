@@ -309,8 +309,9 @@ type ResourceTypeExtension struct {
 }
 
 type ResourceTypeExtensionSpec struct {
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	Schema        map[string]interface{} `json:"schema,omitempty"`       
+	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
+	Ports         []Port                 `json:"ports"`                  
+	Schema        map[string]interface{} `json:"schema"`                 
 }
 
 type ResourceTypeInternal struct {
@@ -320,7 +321,8 @@ type ResourceTypeInternal struct {
 }
 
 type ResourceTypeInternalSpec struct {
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
+	Configuration *ConfigurationSchema `json:"configuration,omitempty"`
+	Ports         []Port               `json:"ports"`                  
 }
 
 type ResourceTypeOperator struct {
@@ -330,11 +332,11 @@ type ResourceTypeOperator struct {
 }
 
 type ResourceTypeOperatorSpec struct {
-	Color         *ColorValue            `json:"color,omitempty"`        
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	Icon          *IconValue             `json:"icon,omitempty"`         
-	Local         LocalInstance          `json:"local"`                  
-	Ports         []Port                 `json:"ports"`                  
+	Color         *ColorValue          `json:"color,omitempty"`        
+	Configuration *ConfigurationSchema `json:"configuration,omitempty"`
+	Icon          *IconValue           `json:"icon,omitempty"`         
+	Local         LocalInstance        `json:"local"`                  
+	Ports         []Port               `json:"ports"`                  
 }
 
 type LocalInstance struct {

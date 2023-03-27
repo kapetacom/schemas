@@ -4,10 +4,14 @@ metadata:
   title: My Internal Resource
   description: Provides internal resources
 spec:
+  ports:
+    - type: rest
+    - type: grpc
   configuration:
-    type: object
-    properties:
-      enableSomething:
-        type: boolean
-      prefix:
-        type: string
+    schema:
+      type: object
+      properties:
+        enableSomething:
+          type: boolean
+        prefix:
+          type: string

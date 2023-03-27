@@ -1,8 +1,9 @@
 package com.kapeta.schemas.entity;
 
-import java.util.Map;
+import java.util.List;
 
 @lombok.Data
 public class ResourceTypeInternalSpec {
-    private Map<String, Object> configuration;
+    private ConfigurationSchema configuration;
+    private List<Port> ports;
 }

@@ -4,13 +4,16 @@ metadata:
   title: My extension Resource
   description: Provides extension resources
 spec:
+  ports:
+    - type: my-special-type
   configuration:
-    type: object
-    properties:
-      enableSomething:
-        type: boolean
-      prefix:
-        type: string
+    schema:
+      type: object
+      properties:
+        enableSomething:
+          type: boolean
+        prefix:
+          type: string
   schema:
     type: object
     properties:

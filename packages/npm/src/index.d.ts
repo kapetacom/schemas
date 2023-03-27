@@ -320,8 +320,9 @@ export interface ResourceTypeExtension {
 }
 
 export interface ResourceTypeExtensionSpec {
-    configuration?: { [key: string]: any };
-    schema?:        { [key: string]: any };
+    configuration?: ConfigurationSchema;
+    ports:          Port[];
+    schema:         { [key: string]: any };
 }
 
 export interface ResourceTypeInternal {
@@ -331,7 +332,8 @@ export interface ResourceTypeInternal {
 }
 
 export interface ResourceTypeInternalSpec {
-    configuration?: { [key: string]: any };
+    configuration?: ConfigurationSchema;
+    ports:          Port[];
 }
 
 export interface ResourceTypeOperator {
@@ -342,7 +344,7 @@ export interface ResourceTypeOperator {
 
 export interface ResourceTypeOperatorSpec {
     color?:         ColorValue;
-    configuration?: { [key: string]: any };
+    configuration?: ConfigurationSchema;
     icon?:          IconValue;
     local:          LocalInstance;
     ports:          Port[];

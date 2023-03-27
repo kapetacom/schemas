@@ -23,7 +23,7 @@
               "$ref": "/core/local-instance"
             },
             "configuration": {
-              "$ref": "/core/schema"
+              "$ref": "/core/configuration-schema"
             },
             "color": {
               "$ref": "/core/color-value"

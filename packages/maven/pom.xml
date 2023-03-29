@@ -82,8 +82,8 @@
     </build>
 
     <scm>
-        <url>https://github.com/blockwarecom/schemas#readme</url>
-        <connection>git+https://github.com/blockwarecom/schemas.git</connection>
+        <url>https://github.com/kapetacom/schemas#readme</url>
+        <connection>git+https://github.com/kapetacom/schemas.git</connection>
     </scm>
 
     <properties>

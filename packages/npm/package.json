@@ -1,6 +1,6 @@
 {
   "name": "@kapeta/schemas",
-  "version": "0.0.21",
+  "version": "0.0.23",
   "main": "src/index.d.ts",
   "types": "src/index.d.ts",
   "description": "Contains the schemas for all core kapeta types.",

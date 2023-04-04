@@ -208,19 +208,14 @@ type DeploymentSpec struct {
 }
 
 type DeploymentNetworkConnection struct {
-	From *DeploymentNetworkSource         `json:"from,omitempty"`
-	To   *DeploymentNetworkTarget         `json:"to,omitempty"`  
-	Type *DeploymentNetworkConnectionType `json:"type,omitempty"`
+	Consumer DeploymentNetworkEndpoint       `json:"consumer"`
+	Port     Port                            `json:"port"`    
+	Provider DeploymentNetworkEndpoint       `json:"provider"`
+	Type     DeploymentNetworkConnectionType `json:"type"`    
 }
 
-type DeploymentNetworkSource struct {
+type DeploymentNetworkEndpoint struct {
 	Id       string  `json:"id"`                
-	Resource *string `json:"resource,omitempty"`
-}
-
-type DeploymentNetworkTarget struct {
-	Id       string  `json:"id"`                
-	Port     Port    `json:"port"`              
 	Resource *string `json:"resource,omitempty"`
 }
 

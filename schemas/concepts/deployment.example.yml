@@ -2,7 +2,7 @@ kind: core/deployment
 metadata:
   name: kapeta/todo-plan-test-environment-tf3
   title: Test deployment
-  description: This is a deployment to the test environment
+  description: This is a deployment consumer the test environment
 spec:
   configuration:
     project_id: bw-cloud-production
@@ -71,48 +71,48 @@ spec:
 
   network:
     - type: resource
-      from:
+      provider:
         id: users-api
         resource: users
-      to:
+      consumer:
         id: postgres
-        port: 
-          type: postgres
+      port:
+        type: postgres
 
     - type: resource
-      from:
+      provider:
         id: todo-api
         resource: myMongoDb4
-      to:
+      consumer:
         id: mongodb4
-        port:
-          type: mongodb
+      port:
+        type: mongodb
 
     - type: resource
-      from:
+      provider:
         id: todo-api
         resource: myMongoDb6
-      to:
+      consumer:
         id: mongodb6
-        port:
-          type: mongodb
+      port:
+        type: mongodb
 
     - type: service
-      from:
+      provider:
         id: todo-web
         resource: tasks
-      to:
+      consumer:
         id: todo-api
         resource: tasks
-        port:
-          type: rest
+      port:
+        type: rest
 
     - type: service
-      from:
+      provider:
         id: todo-web
         resource: users
-      to:
+      consumer:
         id: users-api
         resource: users
-        port:
-          type: rest
+      port:
+        type: rest

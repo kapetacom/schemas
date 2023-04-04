@@ -1,7 +1,7 @@
 package com.kapeta.schemas.entity;
 
 @lombok.Data
-public class DeploymentNetworkSource {
+public class DeploymentNetworkEndpoint {
     private String id;
     private String resource;
 }

@@ -2,7 +2,7 @@ kind: core/deployment
 metadata:
   name: kapeta/todo-plan-test-environment-tf3
   title: Test deployment
-  description: This is a deployment to the test environment
+  description: This is a deployment consumer the test environment
 spec:
   configuration:
     project_id: bw-cloud-production

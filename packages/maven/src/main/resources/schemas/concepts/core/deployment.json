@@ -77,25 +77,7 @@
             "ref"
           ]
         },
-        "DeploymentNetworkTarget": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "resource": {
-              "type": "string"
-            },
-            "port": {
-              "$ref": "/core/port"
-            }
-          },
-          "required": [
-            "id",
-            "port"
-          ]
-        },
-        "DeploymentNetworkSource": {
+        "DeploymentNetworkEndpoint": {
           "type": "object",
           "properties": {
             "id": {
@@ -111,15 +93,24 @@
         },
         "DeploymentNetworkConnection": {
           "type": "object",
+          "required": [
+            "type",
+            "provider",
+            "consumer",
+            "port"
+          ],
           "properties": {
             "type": {
               "$ref": "#/definitions/DeploymentNetworkConnectionType"
             },
-            "from": {
-              "$ref": "#/definitions/DeploymentNetworkSource"
+            "provider": {
+              "$ref": "#/definitions/DeploymentNetworkEndpoint"
             },
-            "to": {
-              "$ref": "#/definitions/DeploymentNetworkTarget"
+            "consumer": {
+              "$ref": "#/definitions/DeploymentNetworkEndpoint"
+            },
+            "port": {
+              "$ref": "/core/port"
             }
           }
         }

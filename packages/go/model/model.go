@@ -118,19 +118,16 @@ type Dimensions struct {
 }
 
 type Connection struct {
-	From    Endpoint               `json:"from"`             
-	Mapping map[string]interface{} `json:"mapping,omitempty"`
-	To      ToEndpoint             `json:"to"`               
+	Consumer *Endpoint              `json:"consumer,omitempty"`
+	Mapping  map[string]interface{} `json:"mapping,omitempty"` 
+	Port     *Port                  `json:"port,omitempty"`    
+	Provider *Endpoint              `json:"provider,omitempty"`
+	From     interface{}            `json:"from"`              
+	To       interface{}            `json:"to"`                
 }
 
 type Endpoint struct {
 	BlockId      string `json:"blockId"`     
-	ResourceName string `json:"resourceName"`
-}
-
-type ToEndpoint struct {
-	BlockId      string `json:"blockId"`     
-	Port         Port   `json:"port"`        
 	ResourceName string `json:"resourceName"`
 }
 

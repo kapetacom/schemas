@@ -137,21 +137,17 @@ export interface Dimensions {
 }
 
 export interface Connection {
-    from:     Endpoint;
-    mapping?: { [key: string]: any };
-    to:       ToEndpoint;
+    consumer?: Endpoint;
+    mapping?:  { [key: string]: any };
+    port?:     Port;
+    provider?: Endpoint;
+    from:      any;
+    to:        any;
     [property: string]: any;
 }
 
 export interface Endpoint {
     blockId:      string;
-    resourceName: string;
-    [property: string]: any;
-}
-
-export interface ToEndpoint {
-    blockId:      string;
-    port:         Port;
     resourceName: string;
     [property: string]: any;
 }

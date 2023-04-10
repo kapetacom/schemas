@@ -1,7 +1,7 @@
 $id: /core/connections
 $schema: http://json-schema.org/draft-07/schema#
 definitions:
-  endpoint:
+  Endpoint:
     type: object
     required:
       - blockId
@@ -11,19 +11,7 @@ definitions:
         type: string
       resourceName:
         type: string
-  ToEndpoint:
-    type: object
-    required:
-      - blockId
-      - resourceName
-      - port
-    properties:
-      blockId:
-        type: string
-      resourceName:
-        type: string
-      port:
-        $ref: "/core/port"
+
 type: array
 items:
   type: object
@@ -31,10 +19,12 @@ items:
     - from
     - to
   properties:
-    from:
-      $ref: "#/definitions/endpoint"
-    to:
-      $ref: "#/definitions/ToEndpoint"
+    provider:
+      $ref: "#/definitions/Endpoint"
+    consumer:
+      $ref: "#/definitions/Endpoint"
+    port:
+      $ref: "/core/port"
 
     mapping:
       type: object

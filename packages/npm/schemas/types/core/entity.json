@@ -3,11 +3,29 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Entity",
   "definitions": {
+    "EntityReference": {
+      "type": "object",
+      "required": [
+        "ref"
+      ],
+      "properties": {
+        "ref": {
+          "type": "string"
+        }
+      }
+    },
     "EntityProperty": {
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/definitions/EntityReference"
+            }
+          ]
         },
         "description": {
           "type": "string"
@@ -24,7 +42,12 @@
       "type": "string"
     },
     "type": {
-      "type": "string"
+      "title": "EntityType",
+      "type": "string",
+      "enum": [
+        "dto",
+        "enum"
+      ]
     },
     "description": {
       "type": "string"

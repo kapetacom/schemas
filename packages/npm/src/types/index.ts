@@ -59,15 +59,25 @@ export interface Entity {
     description?: string;
     name:         string;
     properties?:  { [key: string]: EntityProperty };
-    type:         string;
+    type:         EntityType;
     values?:      string[];
     [property: string]: any;
 }
 
 export interface EntityProperty {
     description?: string;
-    type:         string;
+    type:         EntityReference | string;
     [property: string]: any;
+}
+
+export interface EntityReference {
+    ref: string;
+    [property: string]: any;
+}
+
+export enum EntityType {
+    Dto = "dto",
+    Enum = "enum",
 }
 
 export interface LanguageTargetReference {
@@ -137,12 +147,10 @@ export interface Dimensions {
 }
 
 export interface Connection {
-    consumer?: Endpoint;
-    mapping?:  { [key: string]: any };
-    port?:     Port;
-    provider?: Endpoint;
-    from:      any;
-    to:        any;
+    consumer: Endpoint;
+    mapping?: { [key: string]: any };
+    port?:    Port;
+    provider: Endpoint;
     [property: string]: any;
 }
 
@@ -356,9 +364,9 @@ export interface PlanSpec {
 }
 
 export interface ResourceTypeExtension {
-    kind?:     string;
-    metadata?: Metadata;
-    spec?:     ResourceTypeExtensionSpec;
+    kind:     string;
+    metadata: Metadata;
+    spec:     ResourceTypeExtensionSpec;
     [property: string]: any;
 }
 
@@ -370,9 +378,9 @@ export interface ResourceTypeExtensionSpec {
 }
 
 export interface ResourceTypeInternal {
-    kind?:     string;
-    metadata?: Metadata;
-    spec?:     ResourceTypeInternalSpec;
+    kind:     string;
+    metadata: Metadata;
+    spec:     ResourceTypeInternalSpec;
     [property: string]: any;
 }
 
@@ -383,9 +391,9 @@ export interface ResourceTypeInternalSpec {
 }
 
 export interface ResourceTypeOperator {
-    kind?:     string;
-    metadata?: Metadata;
-    spec?:     ResourceTypeOperatorSpec;
+    kind:     string;
+    metadata: Metadata;
+    spec:     ResourceTypeOperatorSpec;
     [property: string]: any;
 }
 

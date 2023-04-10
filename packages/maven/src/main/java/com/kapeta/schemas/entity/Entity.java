@@ -8,6 +8,6 @@ public class Entity {
     private String description;
     private String name;
     private Map<String, EntityProperty> properties;
-    private String type;
+    private EntityType type;
     private List<String> values;
 }

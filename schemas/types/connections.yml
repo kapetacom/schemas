@@ -16,8 +16,8 @@ type: array
 items:
   type: object
   required:
-    - from
-    - to
+    - provider
+    - consumer
   properties:
     provider:
       $ref: "#/definitions/Endpoint"

@@ -1,8 +1,12 @@
 {
-  "name": "@kapeta/schemas",
-  "version": "0.0.24",
-  "main": "src/index.d.ts",
-  "types": "src/index.d.ts",
-  "description": "Contains the schemas for all core kapeta types.",
-  "license": "MIT"
+    "name": "@kapeta/schemas",
+    "version": "0.0.24",
+    "main": "dist/index.js",
+    "types": "types/index.d.ts",
+    "scripts": {
+        "build": "npm run clean && tsc",
+        "clean": "rm -rf dist types"
+    },
+    "description": "Contains the schemas for all core kapeta types.",
+    "license": "MIT"
 }

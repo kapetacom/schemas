@@ -8,6 +8,11 @@
       "$id": "/core/resource-type-internal",
       "$schema": "http://json-schema.org/draft-07/schema#",
       "type": "object",
+      "required": [
+        "kind",
+        "metadata",
+        "spec"
+      ],
       "properties": {
         "kind": {
           "type": "string",

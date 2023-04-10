@@ -8,6 +8,4 @@ public class Connection {
     private Map<String, Object> mapping;
     private Port port;
     private Endpoint provider;
-    private Object from;
-    private Object to;
 }

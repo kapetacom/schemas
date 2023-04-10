@@ -1,37 +1,23 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "es5",
-      "es6",
-      "es7",
-      "es2017"
-    ],
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "strict": true,
     "module": "commonjs",
-    "resolveJsonModule": true,
-    "experimentalDecorators": true,
+    "target": "es5",
+    "jsx": "react",
+    "sourceMap": true,
     "allowJs": true,
-    "jsx": "preserve",
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "./types",
+    "strict": false,
     "moduleResolution": "node",
-    "rootDirs": [
-      "src"
-    ],
-    "baseUrl": "src",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
+    "useDefineForClassFields": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": false,
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "isolatedModules": false
-  }
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": ["node_modules", "types", "dist"]
 }

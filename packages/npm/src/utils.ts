@@ -1,5 +1,5 @@
 import {Entity, EntityType} from "./types";
-import {EntityDTO, EntityEnum, EntityProperties, EntityPropertyType} from "./helpers";
+import {EntityDTO, EntityEnum, EntityProperties, EntityValueType} from "./helpers";
 
 
 export function isDTO(entity:Entity): entity is EntityDTO {
@@ -25,7 +25,7 @@ export function toDTO(entity:Entity):EntityDTO {
     return entity;
 }
 
-export function toStringName(type?:EntityPropertyType):string {
+export function toStringName(type?:EntityValueType):string {
     if (!type) {
         return 'void';
     }
@@ -40,7 +40,7 @@ export function toStringName(type?:EntityPropertyType):string {
     return type;
 }
 
-export function isList(type?:EntityPropertyType) {
+export function isList(type?:EntityValueType) {
     return toStringName(type).endsWith('[]')
 }
 
@@ -48,7 +48,7 @@ export function isList(type?:EntityPropertyType) {
  * Reformats value to a valid entity name
  * @param type
  */
-export function typeName(type?:EntityPropertyType) {
+export function typeName(type?:EntityValueType) {
     type = toStringName(type)
 
     if (type.endsWith('[]')) {
@@ -59,7 +59,7 @@ export function typeName(type?:EntityPropertyType) {
     return type;
 }
 
-export function typeValue(type?:EntityPropertyType) {
+export function typeValue(type?:EntityValueType) {
     if (!type) {
         return 'void';
     }
@@ -71,7 +71,7 @@ export function typeValue(type?:EntityPropertyType) {
     return '$ref:' + type.$ref;
 }
 
-export function isBuiltInType(type?:EntityPropertyType) {
+export function isBuiltInType(type?:EntityValueType) {
     if (!type) {
         return true;
     }
@@ -80,14 +80,14 @@ export function isBuiltInType(type?:EntityPropertyType) {
 }
 
 
-export function isStringableType(type:EntityPropertyType) {
+export function isStringableType(type:EntityValueType) {
     if (typeof type !== 'string') {
         return false;
     }
 
     return ['string','number','float','integer','decimal','double'].indexOf(type) > -1;
 }
-export function getCompatibilityIssuesForTypes(a: EntityPropertyType|undefined, b: EntityPropertyType|undefined, aEntities:Entity[], bEntities:Entity[]):string[] {
+export function getCompatibilityIssuesForTypes(a: EntityValueType|undefined, b: EntityValueType|undefined, aEntities:Entity[], bEntities:Entity[]):string[] {
     if (!a && !b) {
         return [];
     }
@@ -141,7 +141,7 @@ export function getCompatibilityIssuesForTypes(a: EntityPropertyType|undefined, 
     return getSchemaEntityCompatibilityIssues(aEntity, bEntity, aEntities, bEntities);
 }
 
-export function isCompatibleTypes(a: EntityPropertyType|undefined, b: EntityPropertyType|undefined, aEntities:Entity[], bEntities:Entity[]) {
+export function isCompatibleTypes(a: EntityValueType|undefined, b: EntityValueType|undefined, aEntities:Entity[], bEntities:Entity[]) {
     return getCompatibilityIssuesForTypes(a,b,aEntities, bEntities).length === 0;
 }
 

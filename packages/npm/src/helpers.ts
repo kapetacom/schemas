@@ -10,7 +10,7 @@ import {
 } from "./types";
 
 export type EntityProperties = { [key: string]: EntityProperty };
-export type EntityPropertyType = EntityReference | string;
+export type EntityValueType = EntityReference | string;
 
 export interface EntityDTO {
     type: EntityType.Dto;

@@ -30,8 +30,8 @@ export function toStringName(type?:EntityValueType):string {
         return 'void';
     }
 
-    if (typeof type !== 'string' && type.$ref) {
-        type = type.$ref;
+    if (typeof type !== 'string' && type.ref) {
+        type = type.ref;
     }
     if (typeof type !== 'string') {
         throw new Error('Invalid type:' + type);
@@ -68,7 +68,7 @@ export function typeValue(type?:EntityValueType) {
         return type;
     }
 
-    return '$ref:' + type.$ref;
+    return 'ref:' + type.ref;
 }
 
 export function isBuiltInType(type?:EntityValueType) {
@@ -237,7 +237,7 @@ export function hasEntityReference(object:any, entityName:string) {
 
     for(let i = 0 ; i < values.length; i++) {
         const value = values[i];
-        if (value && value.$ref === entityName) {
+        if (value && value.ref === entityName) {
             return true;
         }
 

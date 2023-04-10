@@ -34,8 +34,13 @@ jobs:
         uses: 'google-github-actions/setup-gcloud@v1'
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-      - run: npm install
-      - run: npm run generate
+      - name: 'Install npm for main'
+        run: npm install
+      - name: 'Generate sources'
+        run: npm run generate
+      - name: 'Install npm for package'
+        run: npm install
+        working-directory: ./packages/npm
       - run: npm publish --access public
         working-directory: ./packages/npm
         env:

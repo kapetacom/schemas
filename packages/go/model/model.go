@@ -52,13 +52,17 @@ type Entity struct {
 	Description *string                   `json:"description,omitempty"`
 	Name        string                    `json:"name"`                 
 	Properties  map[string]EntityProperty `json:"properties,omitempty"` 
-	Type        string                    `json:"type"`                 
+	Type        EntityType                `json:"type"`                 
 	Values      []string                  `json:"values,omitempty"`     
 }
 
 type EntityProperty struct {
-	Description *string `json:"description,omitempty"`
-	Type        string  `json:"type"`                 
+	Description *string    `json:"description,omitempty"`
+	Type        *TypeUnion `json:"type"`                 
+}
+
+type EntityReference struct {
+	Ref string `json:"ref"`
 }
 
 type LanguageTargetReference struct {
@@ -118,19 +122,14 @@ type Dimensions struct {
 }
 
 type Connection struct {
-	From    Endpoint               `json:"from"`             
-	Mapping map[string]interface{} `json:"mapping,omitempty"`
-	To      ToEndpoint             `json:"to"`               
+	Consumer Endpoint               `json:"consumer"`         
+	Mapping  map[string]interface{} `json:"mapping,omitempty"`
+	Port     *Port                  `json:"port,omitempty"`   
+	Provider Endpoint               `json:"provider"`         
 }
 
 type Endpoint struct {
 	BlockId      string `json:"blockId"`     
-	ResourceName string `json:"resourceName"`
-}
-
-type ToEndpoint struct {
-	BlockId      string `json:"blockId"`     
-	Port         Port   `json:"port"`        
 	ResourceName string `json:"resourceName"`
 }
 
@@ -298,9 +297,9 @@ type PlanSpec struct {
 }
 
 type ResourceTypeExtension struct {
-	Kind     *string                    `json:"kind,omitempty"`    
-	Metadata *Metadata                  `json:"metadata,omitempty"`
-	Spec     *ResourceTypeExtensionSpec `json:"spec,omitempty"`    
+	Kind     string                    `json:"kind"`    
+	Metadata Metadata                  `json:"metadata"`
+	Spec     ResourceTypeExtensionSpec `json:"spec"`    
 }
 
 type ResourceTypeExtensionSpec struct {
@@ -310,9 +309,9 @@ type ResourceTypeExtensionSpec struct {
 }
 
 type ResourceTypeInternal struct {
-	Kind     *string                   `json:"kind,omitempty"`    
-	Metadata *Metadata                 `json:"metadata,omitempty"`
-	Spec     *ResourceTypeInternalSpec `json:"spec,omitempty"`    
+	Kind     string                   `json:"kind"`    
+	Metadata Metadata                 `json:"metadata"`
+	Spec     ResourceTypeInternalSpec `json:"spec"`    
 }
 
 type ResourceTypeInternalSpec struct {
@@ -321,9 +320,9 @@ type ResourceTypeInternalSpec struct {
 }
 
 type ResourceTypeOperator struct {
-	Kind     *string                   `json:"kind,omitempty"`    
-	Metadata *Metadata                 `json:"metadata,omitempty"`
-	Spec     *ResourceTypeOperatorSpec `json:"spec,omitempty"`    
+	Kind     string                   `json:"kind"`    
+	Metadata Metadata                 `json:"metadata"`
+	Spec     ResourceTypeOperatorSpec `json:"spec"`    
 }
 
 type ResourceTypeOperatorSpec struct {
@@ -358,6 +357,12 @@ type LocalInstancePort struct {
 	Type *LocalInstancePortType `json:"type,omitempty"`
 }
 
+type EntityType string
+const (
+	Dto EntityType = "dto"
+	Enum EntityType = "enum"
+)
+
 type IconType string
 const (
 	URL IconType = "url"
@@ -379,3 +384,8 @@ const (
 	TCP LocalInstancePortType = "tcp"
 	UDP LocalInstancePortType = "udp"
 )
+
+type TypeUnion struct {
+	EntityReference *EntityReference
+	String          *string
+}

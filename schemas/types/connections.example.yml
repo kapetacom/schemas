@@ -1,11 +1,11 @@
-- from:
+- provider:
     blockId: block1
     resourceName: my-api-server
-  to:
+  consumer:
     blockId: block2
     resourceName: my-api-client
-    port:
-      type: rest
+  port:
+    type: rest
   mapping:
     sourceMethodName:
       target: targetMethodName
@@ -13,14 +13,14 @@
     sourceMethodName2:
       target: targetMethodName2
       type: EXACT
-- from:
+- provider:
     blockId: block1
     resourceName: my-api-server
-  to:
+  consumer:
     blockId: block2
     resourceName: my-api-client
-    port:
-      type: rest
+  port:
+    type: rest
   mapping:
     sourceMethodName:
       target: targetMethodName

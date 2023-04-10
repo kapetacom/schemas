@@ -2,7 +2,7 @@
   "$id": "/core/connections",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
-    "endpoint": {
+    "Endpoint": {
       "type": "object",
       "required": [
         "blockId",
@@ -16,40 +16,24 @@
           "type": "string"
         }
       }
-    },
-    "ToEndpoint": {
-      "type": "object",
-      "required": [
-        "blockId",
-        "resourceName",
-        "port"
-      ],
-      "properties": {
-        "blockId": {
-          "type": "string"
-        },
-        "resourceName": {
-          "type": "string"
-        },
-        "port": {
-          "$ref": "/core/port"
-        }
-      }
     }
   },
   "type": "array",
   "items": {
     "type": "object",
     "required": [
-      "from",
-      "to"
+      "provider",
+      "consumer"
     ],
     "properties": {
-      "from": {
-        "$ref": "#/definitions/endpoint"
+      "provider": {
+        "$ref": "#/definitions/Endpoint"
       },
-      "to": {
-        "$ref": "#/definitions/ToEndpoint"
+      "consumer": {
+        "$ref": "#/definitions/Endpoint"
+      },
+      "port": {
+        "$ref": "/core/port"
       },
       "mapping": {
         "type": "object",

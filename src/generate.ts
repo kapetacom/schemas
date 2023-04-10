@@ -54,9 +54,9 @@ const languages:Language[] = [
                 'runtime-typecheck': 'true',
                 'just-types': 'true'
             },
-            outputFilename:'index.d.ts'
+            outputFilename:'index.ts'
         },
-        baseDir: resolve(packageBase, 'npm/src'),
+        baseDir: resolve(packageBase, 'npm/src/types'),
         ymlBaseDir: resolve(packageBase, 'npm/schemas'),
         configBaseDir: resolve(packageBase, 'npm/config')
     },

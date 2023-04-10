@@ -4,7 +4,8 @@ import java.util.Map;
 
 @lombok.Data
 public class Connection {
-    private Endpoint from;
+    private Endpoint consumer;
     private Map<String, Object> mapping;
-    private ToEndpoint to;
+    private Port port;
+    private Endpoint provider;
 }

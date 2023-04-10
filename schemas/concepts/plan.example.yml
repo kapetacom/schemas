@@ -24,14 +24,14 @@ spec:
         left: 10
         top: 10
   connections:
-    - from:
+    - provider:
         blockId: block1
         resourceName: my-api-server
-      to:
+      consumer:
         blockId: block2
         resourceName: my-api-client
-        port:
-          type: rest
+      port:
+        type: rest
       mapping:
         sourceMethodName:
           target: targetMethodName

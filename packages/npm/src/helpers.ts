@@ -2,7 +2,6 @@ import {
     BlockDefinition, BlockInstance,
     ConfigurationSchema,
     EntityProperty,
-    EntityReference,
     EntityType,
     Kind,
     Port,
@@ -10,7 +9,7 @@ import {
 } from "./types";
 
 export type EntityProperties = { [key: string]: EntityProperty };
-export type EntityValueType = EntityReference | string;
+export type EntityValueType = EntityProperty | string;
 
 export interface EntityDTO {
     type: EntityType.Dto;

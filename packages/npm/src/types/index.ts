@@ -66,12 +66,8 @@ export interface Entity {
 
 export interface EntityProperty {
     description?: string;
-    type:         EntityReference | string;
-    [property: string]: any;
-}
-
-export interface EntityReference {
-    ref: string;
+    ref?:         string;
+    type?:        string;
     [property: string]: any;
 }
 

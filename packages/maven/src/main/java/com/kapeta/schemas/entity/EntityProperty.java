@@ -3,5 +3,6 @@ package com.kapeta.schemas.entity;
 @lombok.Data
 public class EntityProperty {
     private String description;
-    private TypeUnion type;
+    private String ref;
+    private String type;
 }

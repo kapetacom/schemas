@@ -1,5 +1,5 @@
-import {Entity, EntityType} from "./types";
-import {EntityDTO, EntityEnum, EntityProperties, EntityValueType} from "./helpers";
+import {Entity, EntityProperty, EntityType} from "./types";
+import {EntityDTO, EntityEnum, EntityProperties} from "./helpers";
 
 
 export function isDTO(entity:Entity): entity is EntityDTO {
@@ -25,31 +25,31 @@ export function toDTO(entity:Entity):EntityDTO {
     return entity;
 }
 
-export function toStringName(type?:EntityValueType):string {
-    if (!type) {
+export function toStringName(ep?:EntityProperty):string {
+    if (!ep) {
         return 'void';
     }
 
-    if (typeof type !== 'string' && type.ref) {
-        type = type.ref;
+    if (typeof ep.type !== 'string' && ep.ref) {
+        return ep.ref;
     }
-    if (typeof type !== 'string') {
-        throw new Error('Invalid type:' + type);
+    if (typeof ep.type !== 'string') {
+        throw new Error('Invalid type:' + ep.type);
     }
 
-    return type;
+    return ep.type;
 }
 
-export function isList(type?:EntityValueType) {
+export function isList(type?:EntityProperty) {
     return toStringName(type).endsWith('[]')
 }
 
 /**
  * Reformats value to a valid entity name
- * @param type
+ * @param ep
  */
-export function typeName(type?:EntityValueType) {
-    type = toStringName(type)
+export function typeName(ep?:EntityProperty) {
+    let type = toStringName(ep)
 
     if (type.endsWith('[]')) {
         //Handle lists
@@ -59,45 +59,51 @@ export function typeName(type?:EntityValueType) {
     return type;
 }
 
-export function typeValue(type?:EntityValueType) {
+export function typeValue(type?:EntityProperty) {
     if (!type) {
         return 'void';
     }
 
-    if (typeof type === 'string') {
-        return type;
+    if (type.type) {
+        return type.type;
     }
 
     return 'ref:' + type.ref;
 }
 
-export function isBuiltInType(type?:EntityValueType) {
+export function isBuiltInType(type?:EntityProperty) {
     if (!type) {
         return true;
     }
 
-    return typeof type === 'string';
+    return isStringableType(typeName(type));
 }
 
 
-export function isStringableType(type:EntityValueType) {
-    if (typeof type !== 'string') {
+export function isStringableType(type:string|undefined) {
+    if (!type) {
         return false;
     }
-
-    return ['string','number','float','integer','decimal','double'].indexOf(type) > -1;
+    return ['string', 'number', 'float', 'integer', 'decimal', 'double'].indexOf(type) > -1;
 }
-export function getCompatibilityIssuesForTypes(a: EntityValueType|undefined, b: EntityValueType|undefined, aEntities:Entity[], bEntities:Entity[]):string[] {
+
+export function getCompatibilityIssuesForTypes(a: EntityProperty|undefined, b: EntityProperty|undefined, aEntities:Entity[], bEntities:Entity[]):string[] {
     if (!a && !b) {
         return [];
     }
 
     if (!a) {
-        a = 'void';
+        a = {type: 'void'};
+        if(b && b.type === 'void') {
+            return [];
+        }
     }
 
     if (!b) {
-        b = 'void';
+        b = {type: 'void'};
+        if(a && a.type === 'void') {
+            return [];
+        }
     }
 
     if (isList(a) !== isList(b)) {
@@ -110,6 +116,7 @@ export function getCompatibilityIssuesForTypes(a: EntityValueType|undefined, b: 
     if (isBuiltInType(a) !== isBuiltInType(b)) {
         return [`Types are not compatible`];
     }
+
 
     if (isStringableType(aTypeName) &&
         isStringableType(bTypeName)) {
@@ -141,7 +148,7 @@ export function getCompatibilityIssuesForTypes(a: EntityValueType|undefined, b: 
     return getSchemaEntityCompatibilityIssues(aEntity, bEntity, aEntities, bEntities);
 }
 
-export function isCompatibleTypes(a: EntityValueType|undefined, b: EntityValueType|undefined, aEntities:Entity[], bEntities:Entity[]) {
+export function isCompatibleTypes(a: EntityProperty|undefined, b: EntityProperty|undefined, aEntities:Entity[], bEntities:Entity[]) {
     return getCompatibilityIssuesForTypes(a,b,aEntities, bEntities).length === 0;
 }
 
@@ -210,7 +217,7 @@ export function getSchemaPropertiesCompatibilityIssues(a:EntityProperties, b:Ent
             return [`Property not found: ${id}`];
         }
 
-        const issues = getCompatibilityIssuesForTypes(aProperty.type, bProperty.type, aEntities, bEntities)
+        const issues = getCompatibilityIssuesForTypes(aProperty, bProperty, aEntities, bEntities)
 
         if (issues.length > 0) {
             return issues.map(error => `${error} for property: ${id}`);

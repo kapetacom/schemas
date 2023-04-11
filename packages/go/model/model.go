@@ -57,12 +57,9 @@ type Entity struct {
 }
 
 type EntityProperty struct {
-	Description *string    `json:"description,omitempty"`
-	Type        *TypeUnion `json:"type"`                 
-}
-
-type EntityReference struct {
-	Ref string `json:"ref"`
+	Description *string `json:"description,omitempty"`
+	Ref         *string `json:"ref,omitempty"`        
+	Type        *string `json:"type,omitempty"`       
 }
 
 type LanguageTargetReference struct {
@@ -384,8 +381,3 @@ const (
 	TCP LocalInstancePortType = "tcp"
 	UDP LocalInstancePortType = "udp"
 )
-
-type TypeUnion struct {
-	EntityReference *EntityReference
-	String          *string
-}

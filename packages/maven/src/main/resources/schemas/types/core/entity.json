@@ -18,21 +18,26 @@
       "type": "object",
       "properties": {
         "type": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "type": "string"
+        },
+        "ref": {
+          "type": "string"
         },
         "description": {
           "type": "string"
         }
       },
-      "required": [
-        "type"
+      "oneOf": [
+        {
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "required": [
+            "ref"
+          ]
+        }
       ]
     }
   },

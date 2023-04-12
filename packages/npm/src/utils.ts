@@ -1,6 +1,12 @@
-import {Entity, EntityProperty, EntityType} from "./types";
+import {Entity, EntityType} from "./types";
 import {EntityDTO, EntityEnum, EntityProperties} from "./helpers";
 
+export interface TypeLike {
+    type?: string;
+    ref?: string;
+}
+
+export type TypeOrString = TypeLike|string;
 
 export function isDTO(entity:Entity): entity is EntityDTO {
     //Defaults to DTO
@@ -25,7 +31,7 @@ export function toDTO(entity:Entity):EntityDTO {
     return entity;
 }
 
-export function toStringName(ep?:EntityProperty):string {
+export function toStringName(ep?:TypeLike):string {
     if (!ep) {
         return 'void';
     }
@@ -40,7 +46,7 @@ export function toStringName(ep?:EntityProperty):string {
     return ep.type;
 }
 
-export function isList(type?:EntityProperty) {
+export function isList(type?:TypeLike) {
     return toStringName(type).endsWith('[]')
 }
 
@@ -48,7 +54,7 @@ export function isList(type?:EntityProperty) {
  * Reformats value to a valid entity name
  * @param ep
  */
-export function typeName(ep?:EntityProperty) {
+export function typeName(ep?:TypeLike) {
     let type = toStringName(ep)
 
     if (type.endsWith('[]')) {
@@ -59,7 +65,7 @@ export function typeName(ep?:EntityProperty) {
     return type;
 }
 
-export function typeValue(type?:EntityProperty) {
+export function typeValue(type?:TypeLike) {
     if (!type) {
         return 'void';
     }
@@ -71,7 +77,7 @@ export function typeValue(type?:EntityProperty) {
     return 'ref:' + type.ref;
 }
 
-export function isBuiltInType(type?:EntityProperty) {
+export function isBuiltInType(type?:TypeLike) {
     if (!type) {
         return true;
     }
@@ -80,14 +86,15 @@ export function isBuiltInType(type?:EntityProperty) {
 }
 
 
-export function isStringableType(type:string|undefined) {
+export function isStringableType(type:TypeOrString|undefined) {
     if (!type) {
         return false;
     }
-    return ['string', 'number', 'float', 'integer', 'decimal', 'double'].indexOf(type) > -1;
+    const typeText = typeof type === 'string' ? type : typeName(type);
+    return ['string', 'number', 'float', 'integer', 'decimal', 'double'].indexOf(typeText.toLowerCase()) > -1;
 }
 
-export function getCompatibilityIssuesForTypes(a: EntityProperty|undefined, b: EntityProperty|undefined, aEntities:Entity[], bEntities:Entity[]):string[] {
+export function getCompatibilityIssuesForTypes(a: TypeLike|undefined, b: TypeLike|undefined, aEntities:Entity[], bEntities:Entity[]):string[] {
     if (!a && !b) {
         return [];
     }
@@ -148,7 +155,7 @@ export function getCompatibilityIssuesForTypes(a: EntityProperty|undefined, b: E
     return getSchemaEntityCompatibilityIssues(aEntity, bEntity, aEntities, bEntities);
 }
 
-export function isCompatibleTypes(a: EntityProperty|undefined, b: EntityProperty|undefined, aEntities:Entity[], bEntities:Entity[]) {
+export function isCompatibleTypes(a: TypeLike|undefined, b: TypeLike|undefined, aEntities:Entity[], bEntities:Entity[]) {
     return getCompatibilityIssuesForTypes(a,b,aEntities, bEntities).length === 0;
 }
 

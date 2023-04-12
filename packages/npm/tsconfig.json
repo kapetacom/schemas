@@ -6,8 +6,9 @@
     "sourceMap": true,
     "allowJs": true,
     "outDir": "./dist",
-    "declaration": true,
     "declarationDir": "./types",
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "strict": false,
     "moduleResolution": "node",
     "useDefineForClassFields": true,
@@ -17,7 +18,9 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "sourceRoot": "./src"
   },
-  "exclude": ["node_modules", "types", "dist"]
+  "exclude": ["node_modules", "types", "dist"],
+  "include": ["src/index.ts"]
 }

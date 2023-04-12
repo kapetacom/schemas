@@ -72,6 +72,7 @@ describe('schemas', () => {
             expect(isBuiltInType()).toBe(true);
             expect(isBuiltInType({type: "string"})).toBe(true);
             expect(isBuiltInType({type: "string[]"})).toBe(true);
+            expect(isBuiltInType({type: "void"})).toBe(true);
 
             expect(isBuiltInType({ref: 'User'})).toBe(false);
             expect(isBuiltInType({ref: 'User[]'})).toBe(false);

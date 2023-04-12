@@ -75,8 +75,8 @@ export function isBuiltInType(type?:EntityProperty) {
     if (!type) {
         return true;
     }
-
-    return isStringableType(typeName(type));
+    const name = typeName(type)
+    return isStringableType(name) || "void" === name;
 }
 
 

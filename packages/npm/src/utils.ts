@@ -31,19 +31,29 @@ export function toDTO(entity:Entity):EntityDTO {
     return entity;
 }
 
-export function toStringName(ep?:TypeLike):string {
-    if (!ep) {
+export function isValidType(type?:TypeLike):boolean {
+    if (!type) {
+        //OK => void
+        return true;
+    }
+
+    return (typeof type.type === 'string' ||
+            typeof type.ref === 'string');
+}
+
+export function toStringName(type?:TypeLike):string {
+    if (!type) {
         return 'void';
     }
 
-    if (typeof ep.type !== 'string' && ep.ref) {
-        return ep.ref;
+    if (typeof type.type !== 'string' && type.ref) {
+        return type.ref;
     }
-    if (typeof ep.type !== 'string') {
-        throw new Error('Invalid type:' + ep.type);
+    if (typeof type.type !== 'string') {
+        throw new Error(`Invalid type: ${JSON.stringify(type)}`);
     }
 
-    return ep.type;
+    return type.type;
 }
 
 export function isList(type?:TypeLike) {

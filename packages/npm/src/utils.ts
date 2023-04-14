@@ -91,7 +91,11 @@ export function isBuiltInType(type?:TypeLike) {
     if (!type) {
         return true;
     }
+
     const name = typeName(type)
+    if (['boolean', 'date'].indexOf(name.toLowerCase()) > -1) {
+        return true;
+    }
     return isStringableType(name) || "void" === name;
 }
 
@@ -101,7 +105,7 @@ export function isStringableType(type:TypeOrString|undefined) {
         return false;
     }
     const typeText = typeof type === 'string' ? type : typeName(type);
-    return ['string', 'number', 'float', 'integer', 'decimal', 'double'].indexOf(typeText.toLowerCase()) > -1;
+    return ['string', 'number', 'float', 'integer', 'decimal', 'double','bigint'].indexOf(typeText.toLowerCase()) > -1;
 }
 
 export function getCompatibilityIssuesForTypes(a: TypeLike|undefined, b: TypeLike|undefined, aEntities:Entity[], bEntities:Entity[]):string[] {

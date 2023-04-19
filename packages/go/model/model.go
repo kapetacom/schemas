@@ -57,9 +57,13 @@ type Entity struct {
 }
 
 type EntityProperty struct {
-	Description *string `json:"description,omitempty"`
-	Ref         *string `json:"ref,omitempty"`        
-	Type        *string `json:"type,omitempty"`       
+	DefaultValue *string `json:"defaultValue,omitempty"`
+	Description  *string `json:"description,omitempty"` 
+	Format       *string `json:"format,omitempty"`      
+	Ref          *string `json:"ref,omitempty"`         
+	Required     *bool   `json:"required,omitempty"`    
+	Secret       *bool   `json:"secret,omitempty"`      
+	Type         *string `json:"type,omitempty"`        
 }
 
 type LanguageTargetReference struct {

@@ -10,7 +10,6 @@ import {
 
 export type EntityProperties = { [key: string]: EntityProperty };
 
-
 export interface EntityDTO {
     type: EntityType.Dto;
     name: string;

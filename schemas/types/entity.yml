@@ -18,6 +18,14 @@ definitions:
         type: string
       description:
         type: string
+      defaultValue:
+        type: string
+      required:
+        type: boolean
+      secret:
+        type: boolean
+      format:
+        type: string
     oneOf:
       - required:
           - type

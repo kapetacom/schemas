@@ -12,5 +12,9 @@ properties:
     type: string
   name:
     type: string
+    defaultValue: "John Doe"
+  age:
+    type: number
+    defaultValue: "18"
   email:
     type: string

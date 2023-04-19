@@ -2,7 +2,7 @@ import type {RendererOptions} from 'quicktype-core';
 import type {TargetLanguage} from "quicktype-core/dist/TargetLanguage";
 import type {JSONSchemaSourceData} from "quicktype-core/dist/input/JSONSchemaInput";
 import type {Entry} from "./utils";
-import {JavaScriptTargetLanguage, GoTargetLanguage, quicktypeMultiFile} from "quicktype-core";
+import {GoTargetLanguage, quicktypeMultiFile} from "quicktype-core";
 import {join} from "path";
 const {
     JavaTargetLanguage,
@@ -52,7 +52,7 @@ const languages:Language[] = [
             lang: new TypeScriptTargetLanguage(),
             rendererOptions: {
                 'runtime-typecheck': 'true',
-                'just-types': 'true'
+                'just-types': 'true',
             },
             outputFilename:'index.ts'
         },

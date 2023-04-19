@@ -65,9 +65,13 @@ export interface Entity {
 }
 
 export interface EntityProperty {
-    description?: string;
-    ref?:         string;
-    type?:        string;
+    defaultValue?: string;
+    description?:  string;
+    format?:       string;
+    ref?:          string;
+    required?:     boolean;
+    secret?:       boolean;
+    type?:         string;
     [property: string]: any;
 }
 

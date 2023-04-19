@@ -4,6 +4,7 @@ import java.util.List;
 
 @lombok.Data
 public class BlockDefinitionSpec {
+    private EntityList configuration;
     private List<Resource> consumers;
     private EntityList entities;
     private List<Resource> providers;

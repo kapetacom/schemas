@@ -4,6 +4,20 @@ metadata:
   title: My Plan
   description: This represents several connected groups in a plan
 spec:
+  entities:
+    types:
+      - name: PlanConfig
+        type: dto
+        properties:
+          apiKey:
+            type: string
+            secret: true
+            required: true
+            defaultValue: "some-api-key"
+          name:
+            type: string
+            required: true
+            defaultValue: "My Plan"
   blocks:
     - id: block1
       block:

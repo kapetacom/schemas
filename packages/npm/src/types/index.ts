@@ -14,32 +14,11 @@ export interface Metadata {
 }
 
 export interface BlockDefinitionSpec {
-    consumers?: Resource[];
-    entities?:  EntityList;
-    providers?: Resource[];
-    target:     LanguageTargetReference;
-    [property: string]: any;
-}
-
-export interface Resource {
-    kind:     string;
-    metadata: ResourceMetadata;
-    spec:     ResourceSpec;
-    [property: string]: any;
-}
-
-export interface ResourceMetadata {
-    name: string;
-    [property: string]: any;
-}
-
-export interface ResourceSpec {
-    port: Port;
-    [property: string]: any;
-}
-
-export interface Port {
-    type: string;
+    configuration?: EntityList;
+    consumers?:     Resource[];
+    entities?:      EntityList;
+    providers?:     Resource[];
+    target:         LanguageTargetReference;
     [property: string]: any;
 }
 
@@ -78,6 +57,28 @@ export interface EntityProperty {
 export enum EntityType {
     Dto = "dto",
     Enum = "enum",
+}
+
+export interface Resource {
+    kind:     string;
+    metadata: ResourceMetadata;
+    spec:     ResourceSpec;
+    [property: string]: any;
+}
+
+export interface ResourceMetadata {
+    name: string;
+    [property: string]: any;
+}
+
+export interface ResourceSpec {
+    port: Port;
+    [property: string]: any;
+}
+
+export interface Port {
+    type: string;
+    [property: string]: any;
 }
 
 export interface LanguageTargetReference {
@@ -358,8 +359,9 @@ export interface Plan {
 }
 
 export interface PlanSpec {
-    blocks:      BlockInstance[];
-    connections: Connection[];
+    blocks:         BlockInstance[];
+    configuration?: EntityList;
+    connections:    Connection[];
     [property: string]: any;
 }
 

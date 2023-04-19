@@ -14,28 +14,11 @@ type Metadata struct {
 }
 
 type BlockDefinitionSpec struct {
-	Consumers []ConsumerElement       `json:"consumers,omitempty"`
-	Entities  *EntityList             `json:"entities,omitempty"` 
-	Providers []ConsumerElement       `json:"providers,omitempty"`
-	Target    LanguageTargetReference `json:"target"`             
-}
-
-type ConsumerElement struct {
-	Kind     string           `json:"kind"`    
-	Metadata ResourceMetadata `json:"metadata"`
-	Spec     ResourceSpec     `json:"spec"`    
-}
-
-type ResourceMetadata struct {
-	Name string `json:"name"`
-}
-
-type ResourceSpec struct {
-	Port Port `json:"port"`
-}
-
-type Port struct {
-	Type string `json:"type"`
+	Configuration *EntityList             `json:"configuration,omitempty"`
+	Consumers     []ConsumerElement       `json:"consumers,omitempty"`    
+	Entities      *EntityList             `json:"entities,omitempty"`     
+	Providers     []ConsumerElement       `json:"providers,omitempty"`    
+	Target        LanguageTargetReference `json:"target"`                 
 }
 
 type EntityList struct {
@@ -64,6 +47,24 @@ type EntityProperty struct {
 	Required     *bool   `json:"required,omitempty"`    
 	Secret       *bool   `json:"secret,omitempty"`      
 	Type         *string `json:"type,omitempty"`        
+}
+
+type ConsumerElement struct {
+	Kind     string           `json:"kind"`    
+	Metadata ResourceMetadata `json:"metadata"`
+	Spec     ResourceSpec     `json:"spec"`    
+}
+
+type ResourceMetadata struct {
+	Name string `json:"name"`
+}
+
+type ResourceSpec struct {
+	Port Port `json:"port"`
+}
+
+type Port struct {
+	Type string `json:"type"`
 }
 
 type LanguageTargetReference struct {
@@ -293,8 +294,9 @@ type Plan struct {
 }
 
 type PlanSpec struct {
-	Blocks      []BlockInstance `json:"blocks"`     
-	Connections []Connection    `json:"connections"`
+	Blocks        []BlockInstance `json:"blocks"`                 
+	Configuration *EntityList     `json:"configuration,omitempty"`
+	Connections   []Connection    `json:"connections"`            
 }
 
 type ResourceTypeExtension struct {

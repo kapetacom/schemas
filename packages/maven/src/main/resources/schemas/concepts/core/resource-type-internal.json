@@ -30,6 +30,9 @@
             "configuration": {
               "$ref": "/core/configuration-schema"
             },
+            "schema": {
+              "$ref": "/core/schema"
+            },
             "ports": {
               "type": "array",
               "minItems": 1,

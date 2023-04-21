@@ -2,19 +2,6 @@
   "$id": "/core/entity-list",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "EntityList",
-  "definitions": {
-    "SourceCode": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        }
-      }
-    }
-  },
   "type": "object",
   "properties": {
     "types": {
@@ -24,7 +11,7 @@
       }
     },
     "source": {
-      "$ref": "#/definitions/SourceCode"
+      "$ref": "/core/source-code"
     }
   }
 }

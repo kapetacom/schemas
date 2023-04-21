@@ -1,0 +1,99 @@
+{
+  "$id": "/core/rest-method",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RESTMethod",
+  "definitions": {
+    "RESTMethodArgument": {
+      "type": "object",
+      "oneOf": [
+        {
+          "required": [
+            "type",
+            "transport"
+          ]
+        },
+        {
+          "required": [
+            "ref",
+            "transport"
+          ]
+        }
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "ref": {
+          "type": "string"
+        },
+        "transport": {
+          "type": "string",
+          "title": "TransportType",
+          "enum": [
+            "PATH",
+            "QUERY",
+            "BODY",
+            "HEADER",
+            "COOKIE"
+          ]
+        }
+      }
+    }
+  },
+  "type": "object",
+  "required": [
+    "method",
+    "path",
+    "responseType"
+  ],
+  "properties": {
+    "responseType": {
+      "title": "ResponseType",
+      "type": "object",
+      "oneOf": [
+        {
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "required": [
+            "ref"
+          ]
+        }
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "ref": {
+          "type": "string"
+        }
+      }
+    },
+    "method": {
+      "title": "RESTMethod",
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH",
+        "HEAD"
+      ]
+    },
+    "path": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "arguments": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/RESTMethodArgument"
+      }
+    }
+  }
+}

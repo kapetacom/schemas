@@ -1,0 +1,16 @@
+type: kapeta-dsl
+value: |-
+  User {
+      id: string
+      name: string
+      email: string
+  }
+  
+  UserAuth {
+      username: string
+      password: string
+  }
+  
+  enum Test {
+      ONE,TWO
+  }

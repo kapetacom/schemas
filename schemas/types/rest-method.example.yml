@@ -1,0 +1,15 @@
+method: POST
+path: /users/{id}
+description: Do something with user
+arguments:
+  id:
+    type: string
+    transport: PATH
+  filter:
+    type: string
+    transport: QUERY
+  user:
+    ref: User
+    transport: BODY
+responseType:
+  type: void

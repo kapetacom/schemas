@@ -29,8 +29,8 @@ export interface EntityList {
 }
 
 export interface SourceCode {
-    type?:  string;
-    value?: string;
+    type:  string;
+    value: string;
     [property: string]: any;
 }
 
@@ -389,6 +389,7 @@ export interface ResourceTypeInternal {
 export interface ResourceTypeInternalSpec {
     configuration?: ConfigurationSchema;
     ports:          Port[];
+    schema?:        { [key: string]: any };
     [property: string]: any;
 }
 
@@ -405,6 +406,7 @@ export interface ResourceTypeOperatorSpec {
     icon?:          IconValue;
     local:          LocalInstance;
     ports:          Port[];
+    schema?:        { [key: string]: any };
     [property: string]: any;
 }
 

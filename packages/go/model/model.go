@@ -27,8 +27,8 @@ type EntityList struct {
 }
 
 type SourceCode struct {
-	Type  *string `json:"type,omitempty"` 
-	Value *string `json:"value,omitempty"`
+	Type  string `json:"type"` 
+	Value string `json:"value"`
 }
 
 type Entity struct {
@@ -318,8 +318,9 @@ type ResourceTypeInternal struct {
 }
 
 type ResourceTypeInternalSpec struct {
-	Configuration *ConfigurationSchema `json:"configuration,omitempty"`
-	Ports         []Port               `json:"ports"`                  
+	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
+	Ports         []Port                 `json:"ports"`                  
+	Schema        map[string]interface{} `json:"schema,omitempty"`       
 }
 
 type ResourceTypeOperator struct {
@@ -329,11 +330,12 @@ type ResourceTypeOperator struct {
 }
 
 type ResourceTypeOperatorSpec struct {
-	Color         *ColorValue          `json:"color,omitempty"`        
-	Configuration *ConfigurationSchema `json:"configuration,omitempty"`
-	Icon          *IconValue           `json:"icon,omitempty"`         
-	Local         LocalInstance        `json:"local"`                  
-	Ports         []Port               `json:"ports"`                  
+	Color         *ColorValue            `json:"color,omitempty"`        
+	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
+	Icon          *IconValue             `json:"icon,omitempty"`         
+	Local         LocalInstance          `json:"local"`                  
+	Ports         []Port                 `json:"ports"`                  
+	Schema        map[string]interface{} `json:"schema,omitempty"`       
 }
 
 type LocalInstance struct {

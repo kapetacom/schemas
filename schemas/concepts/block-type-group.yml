@@ -25,6 +25,8 @@ spec:
           - blocks
           - connections
         properties:
+          configuration:
+            $ref: /core/entity-list
           blocks:
             $ref: /core/block-instances
           connections:

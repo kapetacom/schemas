@@ -101,8 +101,9 @@ type BlockTypeGroup struct {
 }
 
 type BlockTypeGroupSpec struct {
-	Blocks      []BlockInstance `json:"blocks"`     
-	Connections []Connection    `json:"connections"`
+	Blocks        []BlockInstance `json:"blocks"`                 
+	Configuration *EntityList     `json:"configuration,omitempty"`
+	Connections   []Connection    `json:"connections"`            
 }
 
 type BlockInstance struct {
@@ -144,6 +145,13 @@ type BlockType struct {
 type BlockTypeSpec struct {
 	Dependencies []Dependency           `json:"dependencies,omitempty"`
 	Schema       map[string]interface{} `json:"schema"`                
+	Versioning   []Versioning           `json:"versioning,omitempty"`  
+}
+
+type Versioning struct {
+	Increment VersioningIncrementType `json:"increment"`
+	On        []VersioningChangeType  `json:"on"`       
+	Paths     []string                `json:"paths"`    
 }
 
 type DeploymentTarget struct {
@@ -157,6 +165,7 @@ type DeploymentTargetSpec struct {
 	Icon          IconValue                           `json:"icon"`                   
 	Operators     map[string]DeploymentTargetOperator `json:"operators,omitempty"`    
 	Service       RemoteService                       `json:"service"`                
+	Versioning    []Versioning                        `json:"versioning,omitempty"`   
 }
 
 type ConfigurationSchema struct {
@@ -285,6 +294,7 @@ type LanguageTarget struct {
 
 type LanguageTargetSpec struct {
 	Configuration map[string]interface{} `json:"configuration,omitempty"`
+	Versioning    []Versioning           `json:"versioning,omitempty"`   
 }
 
 type Plan struct {
@@ -309,6 +319,7 @@ type ResourceTypeExtensionSpec struct {
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema"`                 
+	Versioning    []Versioning           `json:"versioning,omitempty"`   
 }
 
 type ResourceTypeInternal struct {
@@ -321,6 +332,7 @@ type ResourceTypeInternalSpec struct {
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema,omitempty"`       
+	Versioning    []Versioning           `json:"versioning,omitempty"`   
 }
 
 type ResourceTypeOperator struct {
@@ -336,6 +348,7 @@ type ResourceTypeOperatorSpec struct {
 	Local         LocalInstance          `json:"local"`                  
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema,omitempty"`       
+	Versioning    []Versioning           `json:"versioning,omitempty"`   
 }
 
 type LocalInstance struct {
@@ -366,6 +379,20 @@ type EntityType string
 const (
 	Dto EntityType = "dto"
 	Enum EntityType = "enum"
+)
+
+type VersioningIncrementType string
+const (
+	Major VersioningIncrementType = "major"
+	Minor VersioningIncrementType = "minor"
+	Patch VersioningIncrementType = "patch"
+)
+
+type VersioningChangeType string
+const (
+	Create VersioningChangeType = "create"
+	Delete VersioningChangeType = "delete"
+	Update VersioningChangeType = "update"
 )
 
 type IconType string

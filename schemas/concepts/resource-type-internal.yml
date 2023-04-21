@@ -27,6 +27,8 @@ spec:
             $ref: /core/configuration-schema
           schema:
             $ref: /core/schema
+          versioning:
+            $ref: /core/versioning
           ports:
             type: array
             minItems: 1

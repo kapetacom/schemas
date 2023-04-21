@@ -11,4 +11,5 @@ public class ResourceTypeOperatorSpec {
     private LocalInstance local;
     private List<Port> ports;
     private Map<String, Object> schema;
+    private List<Versioning> versioning;
 }

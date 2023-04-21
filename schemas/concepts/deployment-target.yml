@@ -46,6 +46,8 @@ spec:
             $ref: /core/icon-value
           service:
             $ref: /core/remote-service
+          versioning:
+            $ref: /core/versioning
           configuration:
             $ref: /core/configuration-schema
           operators:

@@ -7,4 +7,5 @@ import java.util.Map;
 public class BlockTypeSpec {
     private List<Dependency> dependencies;
     private Map<String, Object> schema;
+    private List<Versioning> versioning;
 }

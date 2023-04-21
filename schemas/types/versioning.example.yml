@@ -1,0 +1,18 @@
+- paths:
+    - methods.*.responseType
+    - methods.*.method
+    - methods.*.path
+    - methods.*.arguments
+  on:
+    - update
+  increment: major
+- paths:
+    - methods.*
+  on:
+    - delete
+  increment: major
+- paths:
+    - methods.*
+  on:
+    - create
+  increment: minor

@@ -30,6 +30,9 @@
             "configuration": {
               "$ref": "/core/configuration-schema"
             },
+            "versioning": {
+              "$ref": "/core/versioning"
+            },
             "schema": {
               "$ref": "/core/schema"
             },

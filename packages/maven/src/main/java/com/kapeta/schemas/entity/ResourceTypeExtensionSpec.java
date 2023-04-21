@@ -8,4 +8,5 @@ public class ResourceTypeExtensionSpec {
     private ConfigurationSchema configuration;
     private List<Port> ports;
     private Map<String, Object> schema;
+    private List<Versioning> versioning;
 }

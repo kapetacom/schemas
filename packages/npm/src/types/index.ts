@@ -121,8 +121,9 @@ export interface BlockTypeGroup {
 }
 
 export interface BlockTypeGroupSpec {
-    blocks:      BlockInstance[];
-    connections: Connection[];
+    blocks:         BlockInstance[];
+    configuration?: EntityList;
+    connections:    Connection[];
     [property: string]: any;
 }
 
@@ -171,7 +172,27 @@ export interface BlockType {
 export interface BlockTypeSpec {
     dependencies?: Dependency[];
     schema:        { [key: string]: any };
+    versioning?:   Versioning[];
     [property: string]: any;
+}
+
+export interface Versioning {
+    increment: VersioningIncrementType;
+    on:        VersioningChangeType[];
+    paths:     string[];
+    [property: string]: any;
+}
+
+export enum VersioningIncrementType {
+    Major = "major",
+    Minor = "minor",
+    Patch = "patch",
+}
+
+export enum VersioningChangeType {
+    Create = "create",
+    Delete = "delete",
+    Update = "update",
 }
 
 export interface DeploymentTarget {
@@ -186,6 +207,7 @@ export interface DeploymentTargetSpec {
     icon:           IconValue;
     operators?:     { [key: string]: DeploymentTargetOperator };
     service:        RemoteService;
+    versioning?:    Versioning[];
     [property: string]: any;
 }
 
@@ -348,6 +370,7 @@ export interface LanguageTarget {
 
 export interface LanguageTargetSpec {
     configuration?: { [key: string]: any };
+    versioning?:    Versioning[];
     [property: string]: any;
 }
 
@@ -376,6 +399,7 @@ export interface ResourceTypeExtensionSpec {
     configuration?: ConfigurationSchema;
     ports:          Port[];
     schema:         { [key: string]: any };
+    versioning?:    Versioning[];
     [property: string]: any;
 }
 
@@ -390,6 +414,7 @@ export interface ResourceTypeInternalSpec {
     configuration?: ConfigurationSchema;
     ports:          Port[];
     schema?:        { [key: string]: any };
+    versioning?:    Versioning[];
     [property: string]: any;
 }
 
@@ -407,6 +432,7 @@ export interface ResourceTypeOperatorSpec {
     local:          LocalInstance;
     ports:          Port[];
     schema?:        { [key: string]: any };
+    versioning?:    Versioning[];
     [property: string]: any;
 }
 

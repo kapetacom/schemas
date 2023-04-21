@@ -34,6 +34,9 @@
             "configuration": {
               "$ref": "/core/configuration-schema"
             },
+            "versioning": {
+              "$ref": "/core/versioning"
+            },
             "ports": {
               "type": "array",
               "minItems": 1,

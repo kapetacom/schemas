@@ -29,6 +29,9 @@
             },
             "schema": {
               "$ref": "/core/schema"
+            },
+            "versioning": {
+              "$ref": "/core/versioning"
             }
           },
           "required": [

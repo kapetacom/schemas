@@ -25,6 +25,9 @@
           "properties": {
             "configuration": {
               "$ref": "/core/schema"
+            },
+            "versioning": {
+              "$ref": "/core/versioning"
             }
           }
         }

@@ -293,8 +293,8 @@ type LanguageTarget struct {
 }
 
 type LanguageTargetSpec struct {
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	Versioning    []Versioning           `json:"versioning,omitempty"`   
+	Configuration *ConfigurationSchema `json:"configuration,omitempty"`
+	Versioning    []Versioning         `json:"versioning,omitempty"`   
 }
 
 type Plan struct {

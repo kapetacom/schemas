@@ -369,7 +369,7 @@ export interface LanguageTarget {
 }
 
 export interface LanguageTargetSpec {
-    configuration?: { [key: string]: any };
+    configuration?: ConfigurationSchema;
     versioning?:    Versioning[];
     [property: string]: any;
 }

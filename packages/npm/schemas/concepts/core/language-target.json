@@ -24,7 +24,7 @@
           "type": "object",
           "properties": {
             "configuration": {
-              "$ref": "/core/schema"
+              "$ref": "/core/configuration-schema"
             },
             "versioning": {
               "$ref": "/core/versioning"

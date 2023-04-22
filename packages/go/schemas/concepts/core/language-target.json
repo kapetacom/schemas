@@ -23,8 +23,8 @@
         "spec": {
           "type": "object",
           "properties": {
-            "configuration": {
-              "$ref": "/core/configuration-schema"
+            "schema": {
+              "$ref": "/core/schema"
             },
             "versioning": {
               "$ref": "/core/versioning"

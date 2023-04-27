@@ -1,9 +1,6 @@
 import Ajv from "ajv";
-import fs from "fs-extra";
 import path from "node:path";
 import schemaMap from "../schemas";
-
-const schemaDir = path.resolve(__dirname, "../schemas");
 
 /**
  * Generate a map of available schema kinds, w/ lazy loading definitions

@@ -151,19 +151,36 @@ const languages:Language[] = [
         FSExtra.mkdirpSync(join(language.ymlBaseDir, 'concepts/core'));
         FSExtra.mkdirpSync(join(language.ymlBaseDir, 'abstracts/core'));
 
+        const schemas: string[] = [];
         abstracts.forEach(abstract => {
-            FS.writeFileSync(join(language.ymlBaseDir, 'abstracts/core', abstract.filename.substring(0, abstract.filename.length - 4) + '.json'), JSON.stringify(abstract.content, null, 2));
+            const filename = join('abstracts/core', abstract.filename.substring(0, abstract.filename.length - 4) + '.json')
+            FS.writeFileSync(join(language.ymlBaseDir, filename), JSON.stringify(abstract.content, null, 2));
+            schemas.push(filename);
         });
 
         types.forEach(type => {
-            FS.writeFileSync(join(language.ymlBaseDir, 'types/core', type.filename.substring(0, type.filename.length - 4) + '.json'), JSON.stringify(type.content, null, 2));
+            const filename = join('types/core', type.filename.substring(0, type.filename.length - 4) + '.json')
+            FS.writeFileSync(join(language.ymlBaseDir, filename), JSON.stringify(type.content, null, 2));
+            schemas.push(filename);
         });
 
         concepts.forEach(concept => {
-            FS.writeFileSync(join(language.ymlBaseDir, 'concepts/core', concept.filename.substring(0, concept.filename.length - 4) + '.json'), JSON.stringify(concept.content, null, 2));
+            const filename = join('concepts/core', concept.filename.substring(0, concept.filename.length - 4) + '.json');
+            FS.writeFileSync(join(language.ymlBaseDir, filename), JSON.stringify(concept.content, null, 2));
+            schemas.push(filename);
         });
 
         FSExtra.copySync(configBase, language.configBaseDir, {recursive: true, overwrite: true});
 
+        if (language.options.lang.name === 'typescript') {
+            const filename = join(language.ymlBaseDir, 'index.ts');
+
+            const imports = schemas.map((schema, i) => `import * as schema${i} from "./${schema}";`).join('\n');
+            const schemaMap = schemas.map((schema, i) => `  "${schema}": schema${i}`).join(',\n');
+            const content = `${imports}\n\nexport default {\n${schemaMap}\n}`;
+            FSExtra.writeFileSync(filename, content);
+            
+            console.log('Wrote schema index to %s', filename);
+        }
     }
 })()

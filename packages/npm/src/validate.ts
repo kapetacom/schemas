@@ -1,5 +1,5 @@
 import Ajv from "ajv";
-import path from "node:path";
+import path from "path";
 import schemaMap from "../schemas";
 
 /**

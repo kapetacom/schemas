@@ -5,7 +5,7 @@ import schemaMap from "../schemas";
 /**
  * Generate a map of available schema kinds, w/ lazy loading definitions
  */
-async function initializeAjv() {
+function initializeAjv() {
   const ajv = new Ajv();
 
   for (const [id, content] of Object.entries(schemaMap)) {
@@ -23,9 +23,9 @@ async function initializeAjv() {
   return ajv;
 }
 
-let instance: Ajv;
-export async function validateSchema(kind: string | object, data: any) {
-  instance = instance || (await initializeAjv());
+const instance: Ajv = initializeAjv();
+
+export function validateSchema(kind: string | object, data: any) {
 
   const schema =
     typeof kind === "string"

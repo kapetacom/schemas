@@ -14,12 +14,12 @@ describe("validateSchema", () => {
         connections: [],
       },
     };
-    const errors = await validateSchema("core/plan", demoPlan);
+    const errors = validateSchema("core/plan", demoPlan);
     expect(errors).toHaveLength(0);
   });
 
   it("can validate an entity", async () => {
-    const errors = await validateSchema("core/entity", {
+    const errors = validateSchema("core/entity", {
       name: "awesome/entity",
       type: "dto",
       values: [],
@@ -29,7 +29,7 @@ describe("validateSchema", () => {
   });
 
   it("can validate w/ custom schema (w/ refs)", async () => {
-    const errors = await validateSchema(
+    const errors = validateSchema(
       {
         type: "object",
         properties: {
@@ -44,7 +44,7 @@ describe("validateSchema", () => {
     expect(errors).toHaveLength(0);
 
     expect(
-      await validateSchema(
+      validateSchema(
         {
           type: "object",
           properties: {
@@ -60,6 +60,6 @@ describe("validateSchema", () => {
   });
 
   it("throws if used w/ unknown schema", async () => {
-    expect(validateSchema("derp", {})).rejects.toThrow(/unknown schema/i);
+    expect(() => validateSchema("derp", {})).toThrow(/unknown schema/i);
   });
 });

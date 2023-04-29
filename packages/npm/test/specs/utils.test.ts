@@ -1,17 +1,17 @@
 import {describe, expect, test} from "@jest/globals";
 import {
+    createDefaultValue,
     EntityType,
-    getCompatibilityIssuesForTypes, getSchemaEntityCompatibilityIssues, getSchemaEnumValuesCompatibilityIssues,
+    getCompatibilityIssuesForTypes,
+    getSchemaEntityCompatibilityIssues,
+    getSchemaEnumValuesCompatibilityIssues,
     hasEntityReference,
     isBuiltInType,
     isCompatibleTypes,
-    isDTO,
-    isEnum,
     isList,
-    isSchemaEntityCompatible, isSchemaEnumValuesCompatible,
+    isSchemaEntityCompatible,
+    isSchemaEnumValuesCompatible,
     isStringableType,
-    toDTO,
-    toEnum,
     toStringName,
     typeName,
     typeValue
@@ -89,6 +89,36 @@ describe('schemas', () => {
             expect(isStringableType('float[]')).toBe(false);
         });
     });
+
+    describe('default values', () => {
+        test('can create default object for entity', () => {
+
+            expect(createDefaultValue({
+                type: EntityType.Dto,
+                name: 'Test',
+                properties: {
+                    name: {
+                        type: 'string',
+                        defaultValue: 'default-name'
+                    },
+                    age: {
+                        type: 'float',
+                        defaultValue: "10"
+                    },
+                    type: {
+                        ref: 'SomeEnum',
+                        defaultValue: 'SomeEnum.ONE'
+                    }
+                }
+            })).toEqual({
+                Test: {
+                    name: 'default-name',
+                    age: 10,
+                    type: 'ONE'
+                }
+            });
+        })
+    })
 
     describe('references', () => {
 

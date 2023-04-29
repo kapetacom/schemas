@@ -1,5 +1,6 @@
-import {Entity, EntityType} from "./types";
+import {Entity, EntityProperty, EntityType} from "./types";
 import {EntityDTO, EntityEnum, EntityProperties} from "./helpers";
+import * as _ from "lodash";
 
 export interface TypeLike {
     type?: string;
@@ -277,4 +278,60 @@ export function hasEntityReference(object:any, entityName:string) {
     }
 
     return false;
+}
+
+export function isNumber(type: string) {
+    return ['integer', 'number', 'double', 'float', 'bigint'].includes(type)
+}
+
+export function toRefValue(ref, value) {
+    let out = value;
+    if (out.startsWith(ref + '.')) {
+        out = out.substring(ref.length + 1);
+    }
+    return out;
+}
+
+export function createDefaultValue(entity:Entity) {
+    const out = {};
+    if (!entity.properties) {
+        return out;
+    }
+    Object.entries(entity.properties).forEach(([fieldId, field]: [string, EntityProperty]) => {
+        const fullId = `${entity.name}.${fieldId}`;
+        if (field.defaultValue !== undefined) {
+            _.set(out, fullId, toDefaultValue(field));
+        }
+    })
+    return out;
+}
+
+export function toDefaultValue(field: EntityProperty) {
+    if (!field.defaultValue) {
+        return undefined;
+    }
+
+    if (field.type === 'boolean') {
+        return field.defaultValue === 'true';
+    }
+
+    if (field.type && isNumber(field.type)) {
+        return parseFloat(field.defaultValue);
+    }
+
+    if (field.ref) {
+        return toRefValue(field.ref, field.defaultValue);
+    }
+
+    if (field.defaultValue.startsWith('"') &&
+        field.defaultValue.endsWith('"')) {
+        return field.defaultValue.substring(1, field.defaultValue.length - 1);
+    }
+
+    if (field.defaultValue.startsWith("'") &&
+        field.defaultValue.endsWith("'")) {
+        return field.defaultValue.substring(1, field.defaultValue.length - 1);
+    }
+
+    return field.defaultValue;
 }

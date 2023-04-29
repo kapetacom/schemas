@@ -110,7 +110,7 @@ function validateEntityType(typeMap: { [key: string]: Entity }, type: Entity, co
     return errors;
 }
 
-function stripUndefinedProps(object: any) {
+export function stripUndefinedProps(object: any) {
     if (typeof object !== 'object') {
         return object;
     }

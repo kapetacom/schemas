@@ -236,7 +236,7 @@ type DeploymentNetworkEndpoint struct {
 
 type DeploymentServiceInstance struct {
 	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	FallbackDNS   string                 `json:"fallback_dns"`           
+	FallbackDNS   string                 `json:"fallbackDNS"`            
 	Id            string                 `json:"id"`                     
 	Image         *string                `json:"image,omitempty"`        
 	Kind          string                 `json:"kind"`                   

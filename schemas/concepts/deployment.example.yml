@@ -20,6 +20,7 @@ spec:
     - id: todo-web
       kind: kapeta/block-type-frontend
       title: Todo Web
+      fallback_dns: todo-web.kapeta-todo-plan-test-environment-tf3.kapeta.dev
       ref: kapeta/nodejs-sample-todo-ui:0.0.8
       image: docker.kapeta.com/kapeta/nodejs-sample-todo-ui:0.0.9
       configuration:
@@ -28,6 +29,7 @@ spec:
     - id: todo-api
       kind: kapeta/block-type-service
       title: Todo API
+      fallback_dns: todo-api.kapeta-todo-plan-test-environment-tf3.kapeta.dev
       ref: kapeta/nodejs-sample-todo-service:0.0.4
       image: docker.kapeta.com/kapeta/nodejs-sample-todo-service:0.0.5
       configuration:
@@ -35,6 +37,7 @@ spec:
 
     - id: users-api
       title: Users API
+      fallback_dns: users-api.kapeta-todo-plan-test-environment-tf3.kapeta.dev
       kind: kapeta/block-type-service
       ref: kapeta/nodejs-sample-users-service:0.0.3
       image: docker.kapeta.com/kapeta/nodejs-sample-users-service:0.0.4
@@ -43,6 +46,7 @@ spec:
 
     - id: postgres
       title: Main postgres
+      fallback_dns: postgres.kapeta-todo-plan-test-environment-tf3.kapeta.dev
       kind: kapeta/resource-type-postgres
       ref: kapeta/resource-type-postgres:1.0.0
       configuration:
@@ -53,6 +57,7 @@ spec:
 
     - id: mongodb4
       title: Main Mongo
+      fallback_dns: mongodb4.kapeta-todo-plan-test-environment-tf3.kapeta.dev
       kind: kapeta/resource-type-mongodb
       ref: kapeta/resource-type-mongodb:1.0.0
       configuration:
@@ -62,6 +67,7 @@ spec:
 
     - id: mongodb6
       title: Smaller Mongo
+      fallback_dns: mongodb6.kapeta-todo-plan-test-environment-tf3.kapeta.dev
       kind: kapeta/resource-type-mongodb
       ref: kapeta/resource-type-mongodb:1.0.0
       configuration:

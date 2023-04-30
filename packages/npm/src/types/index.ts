@@ -297,6 +297,7 @@ export enum DeploymentNetworkConnectionType {
 
 export interface DeploymentServiceInstance {
     configuration?: { [key: string]: any };
+    fallback_dns:   string;
     id:             string;
     image?:         string;
     kind:           string;

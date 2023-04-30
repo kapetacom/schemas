@@ -284,7 +284,7 @@ export function isNumber(type: string) {
     return ['integer', 'number', 'double', 'float', 'bigint'].includes(type)
 }
 
-export function toRefValue(ref, value) {
+export function toRefValue(ref:string, value:string) {
     let out = value;
     if (out.startsWith(ref + '.')) {
         out = out.substring(ref.length + 1);

@@ -63,6 +63,9 @@
             "ref": {
               "type": "string"
             },
+            "fallback_dns": {
+              "type": "string"
+            },
             "image": {
               "type": "string"
             },
@@ -73,6 +76,7 @@
           },
           "required": [
             "id",
+            "fallback_dns",
             "kind",
             "ref"
           ]

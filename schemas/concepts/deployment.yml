@@ -41,6 +41,8 @@ spec:
             type: string
           ref:
             type: string
+          fallback_dns:
+            type: string
           image:
             type: string
           configuration:
@@ -48,6 +50,7 @@ spec:
             additionalProperties: true
         required:
           - id
+          - fallback_dns
           - kind
           - ref
       DeploymentNetworkEndpoint:

@@ -9,6 +9,8 @@ spec:
     region: europe-west9
     zone: europe-west9-a
     strategy: test
+  insights:
+    domain: insights.kapeta-todo-plan-test-environment-tf3.kapeta.dev
   target:
     ref: kapeta/deployment-target-gcp-gke:terraform
     image: docker.kapeta.com/kapeta/deployment-target-gcp-gke:terraform

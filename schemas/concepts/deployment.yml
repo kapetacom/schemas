@@ -97,7 +97,16 @@ spec:
           - environment
           - services
           - network
+          - insights
         properties:
+          insights:
+            title: InsightsSettings
+            type: object
+            required:
+              - domain
+            properties:
+              domain:
+                type: string
           plan:
             $ref: /core/asset-reference
           environment:

@@ -269,10 +269,16 @@ export interface Deployment {
 export interface DeploymentSpec {
     configuration?: { [key: string]: any };
     environment:    AssetReference;
+    insights:       InsightsSettings;
     network:        DeploymentNetworkConnection[];
     plan:           AssetReference;
     services:       DeploymentServiceInstance[];
     target:         DeploymentTargetReference;
+    [property: string]: any;
+}
+
+export interface InsightsSettings {
+    domain: string;
     [property: string]: any;
 }
 

@@ -140,9 +140,22 @@
             "plan",
             "environment",
             "services",
-            "network"
+            "network",
+            "insights"
           ],
           "properties": {
+            "insights": {
+              "title": "InsightsSettings",
+              "type": "object",
+              "required": [
+                "domain"
+              ],
+              "properties": {
+                "domain": {
+                  "type": "string"
+                }
+              }
+            },
             "plan": {
               "$ref": "/core/asset-reference"
             },

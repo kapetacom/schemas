@@ -211,10 +211,15 @@ type Deployment struct {
 type DeploymentSpec struct {
 	Configuration map[string]interface{}        `json:"configuration,omitempty"`
 	Environment   AssetReference                `json:"environment"`            
+	Insights      InsightsSettings              `json:"insights"`               
 	Network       []DeploymentNetworkConnection `json:"network"`                
 	Plan          AssetReference                `json:"plan"`                   
 	Services      []DeploymentServiceInstance   `json:"services"`               
 	Target        DeploymentTargetReference     `json:"target"`                 
+}
+
+type InsightsSettings struct {
+	Domain string `json:"domain"`
 }
 
 type DeploymentNetworkConnection struct {

@@ -52,7 +52,7 @@ spec:
         properties:
           ref:
             type: string
-            pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+|local))$
+            pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+(-[a-z0-9][a-z0-9_-]*)?|local))$
           configuration:
             type: object
       BlockInstanceConfigurations:
@@ -80,7 +80,7 @@ spec:
         properties:
           ref:
             type: string
-            pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+|local))$
+            pattern: ^(\w+://)?[a-z0-9-_]+/[a-z0-9-_]+(:(\d+\.\d+\.\d+(-[a-z0-9][a-z0-9_-]*)?|local))$
           blocks:
             $ref: '#/definitions/BlockInstanceConfigurations'
           configuration:

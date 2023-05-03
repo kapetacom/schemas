@@ -1,0 +1,48 @@
+{
+  "kind": "core/concept",
+  "metadata": {
+    "name": "core/block-type-operator"
+  },
+  "spec": {
+    "schema": {
+      "$id": "/core/block-type-operator",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "type": "object",
+      "required": [
+        "kind",
+        "metadata",
+        "spec"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "core/block-type-operator"
+        },
+        "metadata": {
+          "$ref": "/core/metadata"
+        },
+        "spec": {
+          "type": "object",
+          "properties": {
+            "dependencies": {
+              "$ref": "/core/dependencies"
+            },
+            "schema": {
+              "$ref": "/core/schema"
+            },
+            "versioning": {
+              "$ref": "/core/versioning"
+            },
+            "local": {
+              "$ref": "/core/local-instance"
+            }
+          },
+          "required": [
+            "schema",
+            "local"
+          ]
+        }
+      }
+    }
+  }
+}

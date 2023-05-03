@@ -162,18 +162,52 @@ export interface Endpoint {
     [property: string]: any;
 }
 
-export interface BlockType {
+export interface BlockTypeOperator {
     kind:     string;
     metadata: Metadata;
-    spec:     BlockTypeSpec;
+    spec:     BlockTypeOperatorSpec;
     [property: string]: any;
 }
 
-export interface BlockTypeSpec {
+export interface BlockTypeOperatorSpec {
     dependencies?: Dependency[];
+    local:         LocalInstance;
     schema:        { [key: string]: any };
     versioning?:   Versioning[];
     [property: string]: any;
+}
+
+export interface LocalInstance {
+    credentials?: LocalInstanceCredentials;
+    env?:         { [key: string]: string };
+    health?:      LocalInstanceHealth;
+    image:        string;
+    mounts?:      { [key: string]: string };
+    ports:        { [key: string]: LocalInstancePort };
+    [property: string]: any;
+}
+
+export interface LocalInstanceCredentials {
+    password: string;
+    username: string;
+    [property: string]: any;
+}
+
+export interface LocalInstanceHealth {
+    cmd:       string;
+    interval?: number;
+    [property: string]: any;
+}
+
+export interface LocalInstancePort {
+    port?: number;
+    type?: LocalInstancePortType;
+    [property: string]: any;
+}
+
+export enum LocalInstancePortType {
+    TCP = "tcp",
+    UDP = "udp",
 }
 
 export interface Versioning {
@@ -193,6 +227,20 @@ export enum VersioningChangeType {
     Create = "create",
     Delete = "delete",
     Update = "update",
+}
+
+export interface BlockType {
+    kind:     string;
+    metadata: Metadata;
+    spec:     BlockTypeSpec;
+    [property: string]: any;
+}
+
+export interface BlockTypeSpec {
+    dependencies?: Dependency[];
+    schema:        { [key: string]: any };
+    versioning?:   Versioning[];
+    [property: string]: any;
 }
 
 export interface DeploymentTarget {
@@ -441,37 +489,4 @@ export interface ResourceTypeOperatorSpec {
     schema?:        { [key: string]: any };
     versioning?:    Versioning[];
     [property: string]: any;
-}
-
-export interface LocalInstance {
-    credentials: LocalInstanceCredentials;
-    env?:        { [key: string]: string };
-    health?:     LocalInstanceHealth;
-    image:       string;
-    mounts?:     { [key: string]: string };
-    ports:       { [key: string]: LocalInstancePort };
-    [property: string]: any;
-}
-
-export interface LocalInstanceCredentials {
-    password: string;
-    username: string;
-    [property: string]: any;
-}
-
-export interface LocalInstanceHealth {
-    cmd:       string;
-    interval?: number;
-    [property: string]: any;
-}
-
-export interface LocalInstancePort {
-    port?: number;
-    type?: LocalInstancePortType;
-    [property: string]: any;
-}
-
-export enum LocalInstancePortType {
-    TCP = "tcp",
-    UDP = "udp",
 }

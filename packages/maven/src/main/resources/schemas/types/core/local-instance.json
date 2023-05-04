@@ -5,8 +5,7 @@
   "type": "object",
   "required": [
     "image",
-    "ports",
-    "credentials"
+    "ports"
   ],
   "properties": {
     "image": {

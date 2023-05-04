@@ -1,0 +1,41 @@
+kind: core/block-type-operator
+metadata:
+  name: kapeta/block-type-gateway-http
+  title: HTTP Gateway
+spec:
+  dependencies:
+    - path: spec.consumers.kind
+      type: Consumers
+  configuration:
+    schema:
+      type: object
+      required:
+        - domain
+        - paths
+      properties:
+        domain:
+          type: string
+          title: Domain
+          description: Domain name of the HTTP gateway
+        paths:
+          type: object
+          title: Paths
+          description: Set public paths for each consumed resource
+          additionalProperties:
+            type: string
+  schema:
+    type: object
+    properties:
+      entities:
+        $ref: /core/entity-list
+      consumers:
+        $ref: /core/block-resource-list
+  local:
+    image: kapetacom/local-gateway:1.0
+    health:
+      cmd: curl http://localhost/_health
+      interval: 5000
+    ports:
+      web:
+        port: 80
+        type: tcp

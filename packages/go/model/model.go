@@ -136,6 +136,49 @@ type Endpoint struct {
 	ResourceName string `json:"resourceName"`
 }
 
+type BlockTypeOperator struct {
+	Kind     string                `json:"kind"`    
+	Metadata Metadata              `json:"metadata"`
+	Spec     BlockTypeOperatorSpec `json:"spec"`    
+}
+
+type BlockTypeOperatorSpec struct {
+	Dependencies []Dependency           `json:"dependencies,omitempty"`
+	Local        LocalInstance          `json:"local"`                 
+	Schema       map[string]interface{} `json:"schema"`                
+	Versioning   []Versioning           `json:"versioning,omitempty"`  
+}
+
+type LocalInstance struct {
+	Credentials *LocalInstanceCredentials    `json:"credentials,omitempty"`
+	Env         map[string]string            `json:"env,omitempty"`        
+	Health      *LocalInstanceHealth         `json:"health,omitempty"`     
+	Image       string                       `json:"image"`                
+	Mounts      map[string]string            `json:"mounts,omitempty"`     
+	Ports       map[string]LocalInstancePort `json:"ports"`                
+}
+
+type LocalInstanceCredentials struct {
+	Password string `json:"password"`
+	Username string `json:"username"`
+}
+
+type LocalInstanceHealth struct {
+	Cmd      string   `json:"cmd"`               
+	Interval *float64 `json:"interval,omitempty"`
+}
+
+type LocalInstancePort struct {
+	Port *float64               `json:"port,omitempty"`
+	Type *LocalInstancePortType `json:"type,omitempty"`
+}
+
+type Versioning struct {
+	Increment VersioningIncrementType `json:"increment"`
+	On        []VersioningChangeType  `json:"on"`       
+	Paths     []string                `json:"paths"`    
+}
+
 type BlockType struct {
 	Kind     string        `json:"kind"`    
 	Metadata Metadata      `json:"metadata"`
@@ -146,12 +189,6 @@ type BlockTypeSpec struct {
 	Dependencies []Dependency           `json:"dependencies,omitempty"`
 	Schema       map[string]interface{} `json:"schema"`                
 	Versioning   []Versioning           `json:"versioning,omitempty"`  
-}
-
-type Versioning struct {
-	Increment VersioningIncrementType `json:"increment"`
-	On        []VersioningChangeType  `json:"on"`       
-	Paths     []string                `json:"paths"`    
 }
 
 type DeploymentTarget struct {
@@ -357,34 +394,16 @@ type ResourceTypeOperatorSpec struct {
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
 }
 
-type LocalInstance struct {
-	Credentials LocalInstanceCredentials     `json:"credentials"`     
-	Env         map[string]string            `json:"env,omitempty"`   
-	Health      *LocalInstanceHealth         `json:"health,omitempty"`
-	Image       string                       `json:"image"`           
-	Mounts      map[string]string            `json:"mounts,omitempty"`
-	Ports       map[string]LocalInstancePort `json:"ports"`           
-}
-
-type LocalInstanceCredentials struct {
-	Password string `json:"password"`
-	Username string `json:"username"`
-}
-
-type LocalInstanceHealth struct {
-	Cmd      string   `json:"cmd"`               
-	Interval *float64 `json:"interval,omitempty"`
-}
-
-type LocalInstancePort struct {
-	Port *float64               `json:"port,omitempty"`
-	Type *LocalInstancePortType `json:"type,omitempty"`
-}
-
 type EntityType string
 const (
 	Dto EntityType = "dto"
 	Enum EntityType = "enum"
+)
+
+type LocalInstancePortType string
+const (
+	TCP LocalInstancePortType = "tcp"
+	UDP LocalInstancePortType = "udp"
 )
 
 type VersioningIncrementType string
@@ -415,10 +434,4 @@ type DeploymentNetworkConnectionType string
 const (
 	Resource DeploymentNetworkConnectionType = "resource"
 	Service DeploymentNetworkConnectionType = "service"
-)
-
-type LocalInstancePortType string
-const (
-	TCP LocalInstancePortType = "tcp"
-	UDP LocalInstancePortType = "udp"
 )

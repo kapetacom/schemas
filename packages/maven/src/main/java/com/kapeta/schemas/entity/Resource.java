@@ -1,8 +1,10 @@
 package com.kapeta.schemas.entity;
 
+import java.util.Map;
+
 @lombok.Data
 public class Resource {
     private String kind;
     private ResourceMetadata metadata;
-    private ResourceSpec spec;
+    private Map<String, Object> spec;
 }

@@ -62,22 +62,12 @@ export enum EntityType {
 export interface Resource {
     kind:     string;
     metadata: ResourceMetadata;
-    spec:     ResourceSpec;
+    spec:     { [key: string]: any };
     [property: string]: any;
 }
 
 export interface ResourceMetadata {
     name: string;
-    [property: string]: any;
-}
-
-export interface ResourceSpec {
-    port: Port;
-    [property: string]: any;
-}
-
-export interface Port {
-    type: string;
     [property: string]: any;
 }
 
@@ -159,6 +149,11 @@ export interface Connection {
 export interface Endpoint {
     blockId:      string;
     resourceName: string;
+    [property: string]: any;
+}
+
+export interface Port {
+    type: string;
     [property: string]: any;
 }
 

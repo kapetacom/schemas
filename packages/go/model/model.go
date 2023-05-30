@@ -50,21 +50,13 @@ type EntityProperty struct {
 }
 
 type ConsumerElement struct {
-	Kind     string           `json:"kind"`    
-	Metadata ResourceMetadata `json:"metadata"`
-	Spec     ResourceSpec     `json:"spec"`    
+	Kind     string                 `json:"kind"`    
+	Metadata ResourceMetadata       `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`    
 }
 
 type ResourceMetadata struct {
 	Name string `json:"name"`
-}
-
-type ResourceSpec struct {
-	Port Port `json:"port"`
-}
-
-type Port struct {
-	Type string `json:"type"`
 }
 
 type LanguageTargetReference struct {
@@ -134,6 +126,10 @@ type Connection struct {
 type Endpoint struct {
 	BlockId      string `json:"blockId"`     
 	ResourceName string `json:"resourceName"`
+}
+
+type Port struct {
+	Type string `json:"type"`
 }
 
 type BlockTypeOperator struct {

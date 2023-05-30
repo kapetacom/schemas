@@ -12,11 +12,7 @@ definitions:
       - name
   ResourceSpec:
     type: object
-    properties:
-      port:
-        $ref: /core/port
-    required:
-      - port
+    additionalProperties: true
 type: object
 properties:
   kind:

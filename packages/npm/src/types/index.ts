@@ -2,7 +2,6 @@ export interface BlockDefinition {
     kind:     string;
     metadata: Metadata;
     spec:     BlockDefinitionSpec;
-    [property: string]: any;
 }
 
 export interface Metadata {
@@ -19,7 +18,6 @@ export interface BlockDefinitionSpec {
     entities?:      EntityList;
     providers?:     Resource[];
     target:         LanguageTargetReference;
-    [property: string]: any;
 }
 
 export interface EntityList {
@@ -81,7 +79,6 @@ export interface Concept {
     kind:     string;
     metadata: Metadata;
     spec:     ConceptSpec;
-    [property: string]: any;
 }
 
 export interface ConceptSpec {
@@ -263,7 +260,6 @@ export interface ConfigurationSchema {
 export interface IconValue {
     type:  IconType;
     value: string;
-    [property: string]: any;
 }
 
 export enum IconType {
@@ -415,13 +411,25 @@ export interface LanguageTarget {
     kind:     string;
     metadata: Metadata;
     spec?:    LanguageTargetSpec;
-    [property: string]: any;
 }
 
 export interface LanguageTargetSpec {
+    local:       LocalDevContainer;
     schema?:     { [key: string]: any };
     versioning?: Versioning[];
-    [property: string]: any;
+}
+
+export interface LocalDevContainer {
+    handlers?:    LocalDevContainerHandlers;
+    healthcheck?: string;
+    image:        string;
+    options?:     { [key: string]: any };
+    userHome?:    string;
+    workingDir?:  string;
+}
+
+export interface LocalDevContainerHandlers {
+    onCreate?: string;
 }
 
 export interface Plan {

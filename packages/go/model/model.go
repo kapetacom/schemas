@@ -332,8 +332,22 @@ type LanguageTarget struct {
 }
 
 type LanguageTargetSpec struct {
+	Local      LocalDevContainer      `json:"local"`               
 	Schema     map[string]interface{} `json:"schema,omitempty"`    
 	Versioning []Versioning           `json:"versioning,omitempty"`
+}
+
+type LocalDevContainer struct {
+	Handlers    *LocalDevContainerHandlers `json:"handlers,omitempty"`   
+	Healthcheck *string                    `json:"healthcheck,omitempty"`
+	Image       string                     `json:"image"`                
+	Options     map[string]interface{}     `json:"options,omitempty"`    
+	UserHome    *string                    `json:"userHome,omitempty"`   
+	WorkingDir  *string                    `json:"workingDir,omitempty"` 
+}
+
+type LocalDevContainerHandlers struct {
+	OnCreate *string `json:"onCreate,omitempty"`
 }
 
 type Plan struct {

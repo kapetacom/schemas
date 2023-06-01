@@ -2,6 +2,7 @@ $id: /core/block-definition
 $schema: http://json-schema.org/draft-07/schema#
 title: BlockDefinition
 type: object
+additionalProperties: false
 required:
   - kind
   - metadata
@@ -15,6 +16,7 @@ properties:
 
   spec:
     type: object
+    additionalProperties: false
     properties:
       target:
         $ref: /core/language-target-reference

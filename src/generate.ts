@@ -182,5 +182,22 @@ const languages:Language[] = [
             
             console.log('Wrote schema index to %s', filename);
         }
+
+        if (language.options.lang.name === 'go') {
+            function generateEnumValue(str: string): string {
+                const sanitized = str
+                  .replace(/\.json$/, '')
+                  .replace(/[\/-]/g, '_');
+                
+                return sanitized.toUpperCase();
+              }
+            const filename = join(language.baseDir, '../files.go');
+            const schemaFileType = 'type SchemaFile string';
+            const imports = schemas.map((schema, i) => `const ${generateEnumValue(schema)} SchemaFile = "${schema}";`).join('\n');
+            const content = `package validate\n\n${schemaFileType}\n\n${imports}\n`;
+            FSExtra.writeFileSync(filename, content);
+            
+            console.log('Wrote schema index to %s', filename);
+        }
     }
 })()

@@ -192,9 +192,9 @@ const languages:Language[] = [
                 return sanitized.toUpperCase();
               }
             const filename = join(language.baseDir, '../files.go');
-            const schemaFileType = 'type SchemaFile string';
-            const imports = schemas.map((schema, i) => `const ${generateEnumValue(schema)} SchemaFile = "${schema}";`).join('\n');
-            const content = `package validate\n\n${schemaFileType}\n\n${imports}\n`;
+            const allFilenames = schemas.map((schema, i) => `"${schema}"`).join(',\n');
+            const types = schemas.map((schema, i) => `const ${generateEnumValue(schema)} SchemaFile = "${schema}"`).join('\n');
+            const content = `package validate\n\ntype SchemaFile string\n\n${types}\n\nvar allFiles = []string{${allFilenames}}\n`;
             FSExtra.writeFileSync(filename, content);
             
             console.log('Wrote schema index to %s', filename);

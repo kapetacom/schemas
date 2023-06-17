@@ -408,6 +408,7 @@ type EntityType string
 const (
 	Dto EntityType = "dto"
 	Enum EntityType = "enum"
+	Native EntityType = "native"
 )
 
 type LocalInstancePortType string

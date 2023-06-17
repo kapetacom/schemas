@@ -55,6 +55,7 @@ export interface EntityProperty {
 export enum EntityType {
     Dto = "dto",
     Enum = "enum",
+    Native = "native",
 }
 
 export interface Resource {

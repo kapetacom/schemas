@@ -10,7 +10,9 @@ export function validateEntities(typeList: Entity[], config: any) {
     });
 
     typeList?.forEach((type) => {
-        if (type.type === EntityType.Enum) {
+        if (type.type === EntityType.Enum ||
+            type.type === EntityType.Native) {
+            // We don't expect / want these to be available in the config
             return;
         }
 

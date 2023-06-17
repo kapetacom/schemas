@@ -63,7 +63,8 @@
       "type": "string",
       "enum": [
         "dto",
-        "enum"
+        "enum",
+        "native"
       ]
     },
     "description": {
@@ -106,6 +107,20 @@
         "properties": {
           "type": {
             "const": "dto"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "properties"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "native"
           }
         }
       },

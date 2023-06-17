@@ -40,8 +40,9 @@ properties:
     title: EntityType
     type: string
     enum:
-      - dto
+      - dto # User defined data transfer objects.
       - enum
+      - native # Built-in types - like DTOs but hard-coded into the system
   description:
     type: string
   properties:
@@ -67,6 +68,13 @@ allOf:
       properties:
         type:
           const: dto
+    then:
+      required:
+        - properties
+  - if:
+      properties:
+        type:
+          const: native
     then:
       required:
         - properties

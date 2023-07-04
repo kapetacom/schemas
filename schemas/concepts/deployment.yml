@@ -89,6 +89,9 @@ spec:
         const: core/deployment
       metadata:
         $ref: /core/metadata
+        properties:
+          assetId:
+            type: string
       spec:
         type: object
         required:

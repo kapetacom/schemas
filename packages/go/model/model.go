@@ -236,9 +236,17 @@ type RemoteService struct {
 }
 
 type Deployment struct {
-	Kind     string         `json:"kind"`    
-	Metadata Metadata       `json:"metadata"`
-	Spec     DeploymentSpec `json:"spec"`    
+	Kind     string             `json:"kind"`    
+	Metadata DeploymentMetadata `json:"metadata"`
+	Spec     DeploymentSpec     `json:"spec"`    
+}
+
+type DeploymentMetadata struct {
+	AssetId     *string `json:"assetId,omitempty"`    
+	Description *string `json:"description,omitempty"`
+	Name        string  `json:"name"`                 
+	Title       *string `json:"title,omitempty"`      
+	Visibility  *string `json:"visibility,omitempty"` 
 }
 
 type DeploymentSpec struct {

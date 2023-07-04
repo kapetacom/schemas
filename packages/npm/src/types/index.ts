@@ -301,8 +301,17 @@ export interface RemoteService {
 
 export interface Deployment {
     kind:     string;
-    metadata: Metadata;
+    metadata: DeploymentMetadata;
     spec:     DeploymentSpec;
+    [property: string]: any;
+}
+
+export interface DeploymentMetadata {
+    assetId?:     string;
+    description?: string;
+    name:         string;
+    title?:       string;
+    visibility?:  string;
     [property: string]: any;
 }
 

@@ -23,7 +23,6 @@ spec:
         additionalProperties: false
         required:
           - local
-          - icon
         properties:
           schema:
             $ref: /core/schema

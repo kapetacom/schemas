@@ -34,5 +34,4 @@ spec:
         required:
           - schema
           - local
-          - icon
 

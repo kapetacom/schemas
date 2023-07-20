@@ -42,8 +42,7 @@
           },
           "required": [
             "schema",
-            "local",
-            "icon"
+            "local"
           ]
         }
       }

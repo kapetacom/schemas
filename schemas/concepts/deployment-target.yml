@@ -40,7 +40,6 @@ spec:
         type: object
         required:
           - service
-          - icon
         properties:
           icon:
             $ref: /core/icon-value

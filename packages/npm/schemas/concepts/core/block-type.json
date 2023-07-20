@@ -38,8 +38,7 @@
             }
           },
           "required": [
-            "schema",
-            "icon"
+            "schema"
           ]
         }
       }

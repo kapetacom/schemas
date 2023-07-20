@@ -52,8 +52,7 @@
         "spec": {
           "type": "object",
           "required": [
-            "service",
-            "icon"
+            "service"
           ],
           "properties": {
             "icon": {

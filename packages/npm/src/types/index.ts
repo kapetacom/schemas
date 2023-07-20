@@ -175,7 +175,7 @@ export interface BlockTypeOperator {
 
 export interface BlockTypeOperatorSpec {
     dependencies?: Dependency[];
-    icon:          IconValue;
+    icon?:         IconValue;
     local:         LocalInstance;
     schema:        { [key: string]: any };
     versioning?:   Versioning[];
@@ -243,7 +243,7 @@ export interface BlockType {
 
 export interface BlockTypeSpec {
     dependencies?: Dependency[];
-    icon:          IconValue;
+    icon?:         IconValue;
     schema:        { [key: string]: any };
     versioning?:   Versioning[];
     [property: string]: any;
@@ -258,7 +258,7 @@ export interface DeploymentTarget {
 
 export interface DeploymentTargetSpec {
     configuration?: ConfigurationSchema;
-    icon:           IconValue;
+    icon?:          IconValue;
     operators?:     { [key: string]: DeploymentTargetOperator };
     service:        RemoteService;
     versioning?:    Versioning[];
@@ -432,7 +432,7 @@ export interface LanguageTarget {
 }
 
 export interface LanguageTargetSpec {
-    icon:        IconValue;
+    icon?:       IconValue;
     local:       LocalDevContainer;
     schema?:     { [key: string]: any };
     versioning?: Versioning[];
@@ -474,7 +474,7 @@ export interface ResourceTypeExtension {
 
 export interface ResourceTypeExtensionSpec {
     configuration?: ConfigurationSchema;
-    icon:           IconValue;
+    icon?:          IconValue;
     ports:          Port[];
     schema:         { [key: string]: any };
     versioning?:    Versioning[];
@@ -507,7 +507,7 @@ export interface ResourceTypeOperator {
 export interface ResourceTypeOperatorSpec {
     color?:         ColorValue;
     configuration?: ConfigurationSchema;
-    icon:           IconValue;
+    icon?:          IconValue;
     local:          LocalInstance;
     ports:          Port[];
     schema?:        { [key: string]: any };

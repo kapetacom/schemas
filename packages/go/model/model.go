@@ -146,7 +146,7 @@ type BlockTypeOperator struct {
 
 type BlockTypeOperatorSpec struct {
 	Dependencies []Dependency           `json:"dependencies,omitempty"`
-	Icon         IconValue              `json:"icon"`                  
+	Icon         *IconValue             `json:"icon,omitempty"`        
 	Local        LocalInstance          `json:"local"`                 
 	Schema       map[string]interface{} `json:"schema"`                
 	Versioning   []Versioning           `json:"versioning,omitempty"`  
@@ -190,7 +190,7 @@ type BlockType struct {
 
 type BlockTypeSpec struct {
 	Dependencies []Dependency           `json:"dependencies,omitempty"`
-	Icon         IconValue              `json:"icon"`                  
+	Icon         *IconValue             `json:"icon,omitempty"`        
 	Schema       map[string]interface{} `json:"schema"`                
 	Versioning   []Versioning           `json:"versioning,omitempty"`  
 }
@@ -203,7 +203,7 @@ type DeploymentTarget struct {
 
 type DeploymentTargetSpec struct {
 	Configuration *ConfigurationSchema                `json:"configuration,omitempty"`
-	Icon          IconValue                           `json:"icon"`                   
+	Icon          *IconValue                          `json:"icon,omitempty"`         
 	Operators     map[string]DeploymentTargetOperator `json:"operators,omitempty"`    
 	Service       RemoteService                       `json:"service"`                
 	Versioning    []Versioning                        `json:"versioning,omitempty"`   
@@ -343,7 +343,7 @@ type LanguageTarget struct {
 }
 
 type LanguageTargetSpec struct {
-	Icon       IconValue              `json:"icon"`                
+	Icon       *IconValue             `json:"icon,omitempty"`      
 	Local      LocalDevContainer      `json:"local"`               
 	Schema     map[string]interface{} `json:"schema,omitempty"`    
 	Versioning []Versioning           `json:"versioning,omitempty"`
@@ -382,7 +382,7 @@ type ResourceTypeExtension struct {
 
 type ResourceTypeExtensionSpec struct {
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
-	Icon          IconValue              `json:"icon"`                   
+	Icon          *IconValue             `json:"icon,omitempty"`         
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema"`                 
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
@@ -411,7 +411,7 @@ type ResourceTypeOperator struct {
 type ResourceTypeOperatorSpec struct {
 	Color         *ColorValue            `json:"color,omitempty"`        
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
-	Icon          IconValue              `json:"icon"`                   
+	Icon          *IconValue             `json:"icon,omitempty"`         
 	Local         LocalInstance          `json:"local"`                  
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema,omitempty"`       

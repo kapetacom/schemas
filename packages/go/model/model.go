@@ -17,6 +17,7 @@ type BlockDefinitionSpec struct {
 	Configuration *EntityList             `json:"configuration,omitempty"`
 	Consumers     []ConsumerElement       `json:"consumers,omitempty"`    
 	Entities      *EntityList             `json:"entities,omitempty"`     
+	Icon          *IconValue              `json:"icon,omitempty"`         
 	Providers     []ConsumerElement       `json:"providers,omitempty"`    
 	Target        LanguageTargetReference `json:"target"`                 
 }
@@ -57,6 +58,11 @@ type ConsumerElement struct {
 
 type ResourceMetadata struct {
 	Name string `json:"name"`
+}
+
+type IconValue struct {
+	Type  IconType `json:"type"` 
+	Value string   `json:"value"`
 }
 
 type LanguageTargetReference struct {
@@ -140,6 +146,7 @@ type BlockTypeOperator struct {
 
 type BlockTypeOperatorSpec struct {
 	Dependencies []Dependency           `json:"dependencies,omitempty"`
+	Icon         IconValue              `json:"icon"`                  
 	Local        LocalInstance          `json:"local"`                 
 	Schema       map[string]interface{} `json:"schema"`                
 	Versioning   []Versioning           `json:"versioning,omitempty"`  
@@ -183,6 +190,7 @@ type BlockType struct {
 
 type BlockTypeSpec struct {
 	Dependencies []Dependency           `json:"dependencies,omitempty"`
+	Icon         IconValue              `json:"icon"`                  
 	Schema       map[string]interface{} `json:"schema"`                
 	Versioning   []Versioning           `json:"versioning,omitempty"`  
 }
@@ -206,11 +214,6 @@ type ConfigurationSchema struct {
 	UISchema map[string]map[string]interface{} `json:"uiSchema,omitempty"`
 }
 
-type IconValue struct {
-	Type  IconType `json:"type"` 
-	Value string   `json:"value"`
-}
-
 type DeploymentTargetOperator struct {
 	Color         *ColorValue          `json:"color,omitempty"`        
 	Configuration *ConfigurationSchema `json:"configuration,omitempty"`
@@ -226,7 +229,7 @@ type ColorValue struct {
 }
 
 type URLValue struct {
-	Type  IconType `json:"type"` 
+	Type  LinkType `json:"type"` 
 	Value string   `json:"value"`
 }
 
@@ -340,6 +343,7 @@ type LanguageTarget struct {
 }
 
 type LanguageTargetSpec struct {
+	Icon       IconValue              `json:"icon"`                
 	Local      LocalDevContainer      `json:"local"`               
 	Schema     map[string]interface{} `json:"schema,omitempty"`    
 	Versioning []Versioning           `json:"versioning,omitempty"`
@@ -378,6 +382,7 @@ type ResourceTypeExtension struct {
 
 type ResourceTypeExtensionSpec struct {
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
+	Icon          IconValue              `json:"icon"`                   
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema"`                 
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
@@ -391,6 +396,7 @@ type ResourceTypeInternal struct {
 
 type ResourceTypeInternalSpec struct {
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
+	Icon          *IconValue             `json:"icon,omitempty"`         
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema,omitempty"`       
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
@@ -405,7 +411,7 @@ type ResourceTypeOperator struct {
 type ResourceTypeOperatorSpec struct {
 	Color         *ColorValue            `json:"color,omitempty"`        
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
-	Icon          *IconValue             `json:"icon,omitempty"`         
+	Icon          IconValue              `json:"icon"`                   
 	Local         LocalInstance          `json:"local"`                  
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema,omitempty"`       
@@ -417,6 +423,12 @@ const (
 	Dto EntityType = "dto"
 	Enum EntityType = "enum"
 	Native EntityType = "native"
+)
+
+type IconType string
+const (
+	Fontawesome5 IconType = "fontawesome5"
+	PurpleURL IconType = "url"
 )
 
 type LocalInstancePortType string
@@ -439,14 +451,14 @@ const (
 	Update VersioningChangeType = "update"
 )
 
-type IconType string
-const (
-	URL IconType = "url"
-)
-
 type ColorType string
 const (
 	Hex ColorType = "hex"
+)
+
+type LinkType string
+const (
+	FluffyURL LinkType = "url"
 )
 
 type DeploymentNetworkConnectionType string

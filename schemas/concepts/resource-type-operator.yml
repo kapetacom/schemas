@@ -42,4 +42,5 @@ spec:
         required:
           - ports
           - local
+          - icon
 

@@ -25,9 +25,13 @@
           "type": "object",
           "required": [
             "schema",
-            "ports"
+            "ports",
+            "icon"
           ],
           "properties": {
+            "icon": {
+              "$ref": "/core/icon-value"
+            },
             "schema": {
               "$ref": "/core/schema"
             },

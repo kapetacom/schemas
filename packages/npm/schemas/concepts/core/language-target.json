@@ -25,7 +25,8 @@
           "type": "object",
           "additionalProperties": false,
           "required": [
-            "local"
+            "local",
+            "icon"
           ],
           "properties": {
             "schema": {
@@ -33,6 +34,9 @@
             },
             "versioning": {
               "$ref": "/core/versioning"
+            },
+            "icon": {
+              "$ref": "/core/icon-value"
             },
             "local": {
               "title": "LocalDevContainer",

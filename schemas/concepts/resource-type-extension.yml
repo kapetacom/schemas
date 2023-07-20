@@ -23,7 +23,10 @@ spec:
         required:
           - schema
           - ports
+          - icon
         properties:
+          icon:
+            $ref: /core/icon-value
           schema:
             $ref: /core/schema
           configuration:

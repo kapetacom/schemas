@@ -24,6 +24,9 @@
         "spec": {
           "type": "object",
           "properties": {
+            "icon": {
+              "$ref": "/core/icon-value"
+            },
             "dependencies": {
               "$ref": "/core/dependencies"
             },
@@ -39,7 +42,8 @@
           },
           "required": [
             "schema",
-            "local"
+            "local",
+            "icon"
           ]
         }
       }

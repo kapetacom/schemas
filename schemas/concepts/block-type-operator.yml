@@ -21,6 +21,8 @@ spec:
       spec:
         type: object
         properties:
+          icon:
+            $ref: /core/icon-value
           dependencies:
             $ref: /core/dependencies
           schema:
@@ -32,4 +34,5 @@ spec:
         required:
           - schema
           - local
+          - icon
 

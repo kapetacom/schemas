@@ -23,11 +23,14 @@ spec:
         additionalProperties: false
         required:
           - local
+          - icon
         properties:
           schema:
             $ref: /core/schema
           versioning:
             $ref: /core/versioning
+          icon:
+            $ref: /core/icon-value
           local:
             title: LocalDevContainer
             type: object

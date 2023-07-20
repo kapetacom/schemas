@@ -11,5 +11,6 @@ properties:
     type: string
     enum:
       - url
+      - fontawesome5
   value:
     type: string

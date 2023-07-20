@@ -27,6 +27,9 @@
             "ports"
           ],
           "properties": {
+            "icon": {
+              "$ref": "/core/icon-value"
+            },
             "configuration": {
               "$ref": "/core/configuration-schema"
             },

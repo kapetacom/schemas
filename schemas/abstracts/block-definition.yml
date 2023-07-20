@@ -28,5 +28,7 @@ properties:
         $ref: /core/block-resource-list
       providers:
         $ref: /core/block-resource-list
+      icon:
+        $ref: /core/icon-value
     required:
       - target

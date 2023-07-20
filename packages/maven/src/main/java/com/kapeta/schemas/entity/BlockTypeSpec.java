@@ -6,6 +6,7 @@ import java.util.Map;
 @lombok.Data
 public class BlockTypeSpec {
     private List<Dependency> dependencies;
+    private IconValue icon;
     private Map<String, Object> schema;
     private List<Versioning> versioning;
 }

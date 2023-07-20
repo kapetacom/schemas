@@ -12,7 +12,8 @@
     "type": {
       "type": "string",
       "enum": [
-        "url"
+        "url",
+        "fontawesome5"
       ]
     },
     "value": {

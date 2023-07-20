@@ -53,7 +53,8 @@
           },
           "required": [
             "ports",
-            "local"
+            "local",
+            "icon"
           ]
         }
       }

@@ -16,6 +16,7 @@ export interface BlockDefinitionSpec {
     configuration?: EntityList;
     consumers?:     Resource[];
     entities?:      EntityList;
+    icon?:          IconValue;
     providers?:     Resource[];
     target:         LanguageTargetReference;
 }
@@ -68,6 +69,16 @@ export interface Resource {
 export interface ResourceMetadata {
     name: string;
     [property: string]: any;
+}
+
+export interface IconValue {
+    type:  IconType;
+    value: string;
+}
+
+export enum IconType {
+    Fontawesome5 = "fontawesome5",
+    URL = "url",
 }
 
 export interface LanguageTargetReference {
@@ -164,6 +175,7 @@ export interface BlockTypeOperator {
 
 export interface BlockTypeOperatorSpec {
     dependencies?: Dependency[];
+    icon:          IconValue;
     local:         LocalInstance;
     schema:        { [key: string]: any };
     versioning?:   Versioning[];
@@ -231,6 +243,7 @@ export interface BlockType {
 
 export interface BlockTypeSpec {
     dependencies?: Dependency[];
+    icon:          IconValue;
     schema:        { [key: string]: any };
     versioning?:   Versioning[];
     [property: string]: any;
@@ -258,15 +271,6 @@ export interface ConfigurationSchema {
     [property: string]: any;
 }
 
-export interface IconValue {
-    type:  IconType;
-    value: string;
-}
-
-export enum IconType {
-    URL = "url",
-}
-
 export interface DeploymentTargetOperator {
     color?:         ColorValue;
     configuration?: ConfigurationSchema;
@@ -288,9 +292,13 @@ export enum ColorType {
 }
 
 export interface URLValue {
-    type:  IconType;
+    type:  LinkType;
     value: string;
     [property: string]: any;
+}
+
+export enum LinkType {
+    URL = "url",
 }
 
 export interface RemoteService {
@@ -424,6 +432,7 @@ export interface LanguageTarget {
 }
 
 export interface LanguageTargetSpec {
+    icon:        IconValue;
     local:       LocalDevContainer;
     schema?:     { [key: string]: any };
     versioning?: Versioning[];
@@ -465,6 +474,7 @@ export interface ResourceTypeExtension {
 
 export interface ResourceTypeExtensionSpec {
     configuration?: ConfigurationSchema;
+    icon:           IconValue;
     ports:          Port[];
     schema:         { [key: string]: any };
     versioning?:    Versioning[];
@@ -480,6 +490,7 @@ export interface ResourceTypeInternal {
 
 export interface ResourceTypeInternalSpec {
     configuration?: ConfigurationSchema;
+    icon?:          IconValue;
     ports:          Port[];
     schema?:        { [key: string]: any };
     versioning?:    Versioning[];
@@ -496,7 +507,7 @@ export interface ResourceTypeOperator {
 export interface ResourceTypeOperatorSpec {
     color?:         ColorValue;
     configuration?: ConfigurationSchema;
-    icon?:          IconValue;
+    icon:           IconValue;
     local:          LocalInstance;
     ports:          Port[];
     schema?:        { [key: string]: any };

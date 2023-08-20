@@ -146,7 +146,7 @@ public class Schemas {
         }
         public static SchemaProviderType from(Concept concept) {
             SchemaProviderType out = new SchemaProviderType();
-            out.setKind(concept.getKind());
+            out.setKind(concept.getKind().toValue());
             out.setMetadata(concept.getMetadata());
             SchemaProviderTypeSpec coreSpec = new SchemaProviderTypeSpec();
             if (concept.getSpec() != null) {

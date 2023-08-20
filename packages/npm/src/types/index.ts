@@ -88,9 +88,13 @@ export interface LanguageTargetReference {
 }
 
 export interface Concept {
-    kind:     string;
+    kind:     ConceptKind;
     metadata: Metadata;
     spec:     ConceptSpec;
+}
+
+export enum ConceptKind {
+    CoreConcept = "core/concept",
 }
 
 export interface ConceptSpec {
@@ -113,10 +117,14 @@ export interface Kind {
 }
 
 export interface BlockTypeGroup {
-    kind:     string;
+    kind:     BlockTypeGroupKind;
     metadata: Metadata;
     spec:     BlockTypeGroupSpec;
     [property: string]: any;
+}
+
+export enum BlockTypeGroupKind {
+    CoreBlockTypeGroup = "core/block-type-group",
 }
 
 export interface BlockTypeGroupSpec {
@@ -167,10 +175,14 @@ export interface Port {
 }
 
 export interface BlockTypeOperator {
-    kind:     string;
+    kind:     BlockTypeOperatorKind;
     metadata: Metadata;
     spec:     BlockTypeOperatorSpec;
     [property: string]: any;
+}
+
+export enum BlockTypeOperatorKind {
+    CoreBlockTypeOperator = "core/block-type-operator",
 }
 
 export interface BlockTypeOperatorSpec {
@@ -235,10 +247,14 @@ export enum VersioningChangeType {
 }
 
 export interface BlockType {
-    kind:     string;
+    kind:     BlockTypeKind;
     metadata: Metadata;
     spec:     BlockTypeSpec;
     [property: string]: any;
+}
+
+export enum BlockTypeKind {
+    CoreBlockType = "core/block-type",
 }
 
 export interface BlockTypeSpec {
@@ -250,10 +266,14 @@ export interface BlockTypeSpec {
 }
 
 export interface DeploymentTarget {
-    kind:     string;
+    kind:     DeploymentTargetKind;
     metadata: Metadata;
     spec:     DeploymentTargetSpec;
     [property: string]: any;
+}
+
+export enum DeploymentTargetKind {
+    CoreDeploymentTarget = "core/deployment-target",
 }
 
 export interface DeploymentTargetSpec {
@@ -308,10 +328,14 @@ export interface RemoteService {
 }
 
 export interface Deployment {
-    kind:     string;
+    kind:     DeploymentKind;
     metadata: DeploymentMetadata;
     spec:     DeploymentSpec;
     [property: string]: any;
+}
+
+export enum DeploymentKind {
+    CoreDeployment = "core/deployment",
 }
 
 export interface DeploymentMetadata {
@@ -376,10 +400,14 @@ export interface DeploymentTargetReference {
 }
 
 export interface Environment {
-    kind:     string;
+    kind:     EnvironmentKind;
     metadata: Metadata;
     spec:     EnvironmentSpec;
     [property: string]: any;
+}
+
+export enum EnvironmentKind {
+    CoreEnvironment = "core/environment",
 }
 
 export interface EnvironmentSpec {
@@ -426,9 +454,13 @@ export interface EnvironmentService {
 }
 
 export interface LanguageTarget {
-    kind:     string;
+    kind:     LanguageTargetKind;
     metadata: Metadata;
     spec?:    LanguageTargetSpec;
+}
+
+export enum LanguageTargetKind {
+    CoreLanguageTarget = "core/language-target",
 }
 
 export interface LanguageTargetSpec {
@@ -452,10 +484,14 @@ export interface LocalDevContainerHandlers {
 }
 
 export interface Plan {
-    kind:     string;
+    kind:     PlanKind;
     metadata: Metadata;
     spec:     PlanSpec;
     [property: string]: any;
+}
+
+export enum PlanKind {
+    CorePlan = "core/plan",
 }
 
 export interface PlanSpec {
@@ -466,10 +502,14 @@ export interface PlanSpec {
 }
 
 export interface ResourceTypeExtension {
-    kind:     string;
+    kind:     ResourceTypeExtensionKind;
     metadata: Metadata;
     spec:     ResourceTypeExtensionSpec;
     [property: string]: any;
+}
+
+export enum ResourceTypeExtensionKind {
+    CoreResourceTypeExtension = "core/resource-type-extension",
 }
 
 export interface ResourceTypeExtensionSpec {
@@ -482,10 +522,14 @@ export interface ResourceTypeExtensionSpec {
 }
 
 export interface ResourceTypeInternal {
-    kind:     string;
+    kind:     ResourceTypeInternalKind;
     metadata: Metadata;
     spec:     ResourceTypeInternalSpec;
     [property: string]: any;
+}
+
+export enum ResourceTypeInternalKind {
+    CoreResourceTypeInternal = "core/resource-type-internal",
 }
 
 export interface ResourceTypeInternalSpec {
@@ -498,10 +542,14 @@ export interface ResourceTypeInternalSpec {
 }
 
 export interface ResourceTypeOperator {
-    kind:     string;
+    kind:     ResourceTypeOperatorKind;
     metadata: Metadata;
     spec:     ResourceTypeOperatorSpec;
     [property: string]: any;
+}
+
+export enum ResourceTypeOperatorKind {
+    CoreResourceTypeOperator = "core/resource-type-operator",
 }
 
 export interface ResourceTypeOperatorSpec {

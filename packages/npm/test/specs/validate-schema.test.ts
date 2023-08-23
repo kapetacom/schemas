@@ -1,11 +1,11 @@
 import { describe, it, expect } from "@jest/globals";
-import type { Plan } from "../../src";
+import { Plan, PlanKind } from "../../src";
 import { validateSchema } from "../../src";
 
 describe("validateSchema", () => {
   it("can validate a plan", async () => {
     const demoPlan: Plan = {
-      kind: "core/plan",
+      kind: PlanKind.CorePlan,
       metadata: {
         name: "awesome/plan",
       },

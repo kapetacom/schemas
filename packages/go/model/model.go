@@ -1,443 +1,459 @@
 package model
 
 type BlockDefinition struct {
-	Kind     string              `json:"kind"`    
-	Metadata Metadata            `json:"metadata"`
-	Spec     BlockDefinitionSpec `json:"spec"`    
+	Kind     string              `json:"kind" yaml:"kind"`
+	Metadata Metadata            `json:"metadata" yaml:"metadata"`
+	Spec     BlockDefinitionSpec `json:"spec" yaml:"spec"`
 }
 
 type Metadata struct {
-	Description *string `json:"description,omitempty"`
-	Name        string  `json:"name"`                 
-	Title       *string `json:"title,omitempty"`      
-	Visibility  *string `json:"visibility,omitempty"` 
+	Description *string `json:"description,omitempty" yaml:"description,omitempty"`
+	Name        string  `json:"name" yaml:"name"`
+	Title       *string `json:"title,omitempty" yaml:"title,omitempty"`
+	Visibility  *string `json:"visibility,omitempty" yaml:"visibility,omitempty"`
 }
 
 type BlockDefinitionSpec struct {
-	Configuration *EntityList             `json:"configuration,omitempty"`
-	Consumers     []ConsumerElement       `json:"consumers,omitempty"`    
-	Entities      *EntityList             `json:"entities,omitempty"`     
-	Icon          *IconValue              `json:"icon,omitempty"`         
-	Providers     []ConsumerElement       `json:"providers,omitempty"`    
-	Target        LanguageTargetReference `json:"target"`                 
+	Configuration *EntityList             `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Consumers     []ConsumerElement       `json:"consumers,omitempty" yaml:"consumers,omitempty"`
+	Entities      *EntityList             `json:"entities,omitempty" yaml:"entities,omitempty"`
+	Icon          *IconValue              `json:"icon,omitempty" yaml:"icon,omitempty"`
+	Providers     []ConsumerElement       `json:"providers,omitempty" yaml:"providers,omitempty"`
+	Target        LanguageTargetReference `json:"target" yaml:"target"`
 }
 
 type EntityList struct {
-	Source *SourceCode `json:"source,omitempty"`
-	Types  []Entity    `json:"types,omitempty"` 
+	Source *SourceCode `json:"source,omitempty" yaml:"source,omitempty"`
+	Types  []Entity    `json:"types,omitempty" yaml:"types,omitempty"`
 }
 
 type SourceCode struct {
-	Type  string `json:"type"` 
-	Value string `json:"value"`
+	Type  string `json:"type" yaml:"type"`
+	Value string `json:"value" yaml:"value"`
 }
 
 type Entity struct {
-	Description *string                   `json:"description,omitempty"`
-	Name        string                    `json:"name"`                 
-	Properties  map[string]EntityProperty `json:"properties,omitempty"` 
-	Type        EntityType                `json:"type"`                 
-	Values      []string                  `json:"values,omitempty"`     
+	Description *string                   `json:"description,omitempty" yaml:"description,omitempty"`
+	Name        string                    `json:"name" yaml:"name"`
+	Properties  map[string]EntityProperty `json:"properties,omitempty" yaml:"properties,omitempty"`
+	Type        EntityType                `json:"type" yaml:"type"`
+	Values      []string                  `json:"values,omitempty" yaml:"values,omitempty"`
 }
 
 type EntityProperty struct {
-	DefaultValue *string `json:"defaultValue,omitempty"`
-	Description  *string `json:"description,omitempty"` 
-	Format       *string `json:"format,omitempty"`      
-	Ref          *string `json:"ref,omitempty"`         
-	Required     *bool   `json:"required,omitempty"`    
-	Secret       *bool   `json:"secret,omitempty"`      
-	Type         *string `json:"type,omitempty"`        
+	DefaultValue *string `json:"defaultValue,omitempty" yaml:"defaultValue,omitempty"`
+	Description  *string `json:"description,omitempty" yaml:"description,omitempty"`
+	Format       *string `json:"format,omitempty" yaml:"format,omitempty"`
+	Ref          *string `json:"ref,omitempty" yaml:"ref,omitempty"`
+	Required     *bool   `json:"required,omitempty" yaml:"required,omitempty"`
+	Secret       *bool   `json:"secret,omitempty" yaml:"secret,omitempty"`
+	Type         *string `json:"type,omitempty" yaml:"type,omitempty"`
 }
 
 type ConsumerElement struct {
-	Kind     string                 `json:"kind"`    
-	Metadata ResourceMetadata       `json:"metadata"`
-	Spec     map[string]interface{} `json:"spec"`    
+	Kind     string                 `json:"kind" yaml:"kind"`
+	Metadata ResourceMetadata       `json:"metadata" yaml:"metadata"`
+	Spec     map[string]interface{} `json:"spec" yaml:"spec"`
 }
 
 type ResourceMetadata struct {
-	Name string `json:"name"`
+	Name string `json:"name" yaml:"name"`
 }
 
 type IconValue struct {
-	Type  IconType `json:"type"` 
-	Value string   `json:"value"`
+	Type  IconType `json:"type" yaml:"type"`
+	Value string   `json:"value" yaml:"value"`
 }
 
 type LanguageTargetReference struct {
-	Kind    string                 `json:"kind"`             
-	Options map[string]interface{} `json:"options,omitempty"`
+	Kind    string                 `json:"kind" yaml:"kind"`
+	Options map[string]interface{} `json:"options,omitempty" yaml:"options,omitempty"`
 }
 
 type Concept struct {
-	Kind     string      `json:"kind"`    
-	Metadata Metadata    `json:"metadata"`
-	Spec     ConceptSpec `json:"spec"`    
+	Kind     string      `json:"kind" yaml:"kind"`
+	Metadata Metadata    `json:"metadata" yaml:"metadata"`
+	Spec     ConceptSpec `json:"spec" yaml:"spec"`
 }
 
 type ConceptSpec struct {
-	Dependencies []Dependency           `json:"dependencies,omitempty"`
-	Schema       map[string]interface{} `json:"schema"`                
+	Dependencies []Dependency           `json:"dependencies,omitempty" yaml:"dependencies,omitempty"`
+	Schema       map[string]interface{} `json:"schema" yaml:"schema"`
 }
 
 type Dependency struct {
-	Path *string `json:"path,omitempty"`
-	Type *string `json:"type,omitempty"`
+	Path *string `json:"path,omitempty" yaml:"path,omitempty"`
+	Type *string `json:"type,omitempty" yaml:"type,omitempty"`
 }
 
 type Kind struct {
-	Kind     string                 `json:"kind"`          
-	Metadata Metadata               `json:"metadata"`      
-	Spec     map[string]interface{} `json:"spec,omitempty"`
+	Kind     string                 `json:"kind" yaml:"kind"`
+	Metadata Metadata               `json:"metadata" yaml:"metadata"`
+	Spec     map[string]interface{} `json:"spec,omitempty" yaml:"spec,omitempty"`
 }
 
 type BlockTypeGroup struct {
-	Kind     string             `json:"kind"`    
-	Metadata Metadata           `json:"metadata"`
-	Spec     BlockTypeGroupSpec `json:"spec"`    
+	Kind     BlockTypeGroupKind `json:"kind" yaml:"kind"`
+	Metadata Metadata           `json:"metadata" yaml:"metadata"`
+	Spec     BlockTypeGroupSpec `json:"spec" yaml:"spec"`
 }
 
 type BlockTypeGroupSpec struct {
-	Blocks        []BlockInstance `json:"blocks"`                 
-	Configuration *EntityList     `json:"configuration,omitempty"`
-	Connections   []Connection    `json:"connections"`            
+	Blocks        []BlockInstance `json:"blocks" yaml:"blocks"`
+	Configuration *EntityList     `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Connections   []Connection    `json:"connections" yaml:"connections"`
 }
 
 type BlockInstance struct {
-	Block      AssetReference `json:"block"`     
-	Dimensions Dimensions     `json:"dimensions"`
-	Id         string         `json:"id"`        
-	Name       string         `json:"name"`      
+	Block      AssetReference `json:"block" yaml:"block"`
+	Dimensions Dimensions     `json:"dimensions" yaml:"dimensions"`
+	Id         string         `json:"id" yaml:"id"`
+	Name       string         `json:"name" yaml:"name"`
 }
 
 type AssetReference struct {
-	Ref string `json:"ref"`
+	Ref string `json:"ref" yaml:"ref"`
 }
 
 type Dimensions struct {
-	Height float64 `json:"height"`
-	Left   float64 `json:"left"`  
-	Top    float64 `json:"top"`   
-	Width  float64 `json:"width"` 
+	Height float64 `json:"height" yaml:"height"`
+	Left   float64 `json:"left" yaml:"left"`
+	Top    float64 `json:"top" yaml:"top"`
+	Width  float64 `json:"width" yaml:"width"`
 }
 
 type Connection struct {
-	Consumer Endpoint               `json:"consumer"`         
-	Mapping  map[string]interface{} `json:"mapping,omitempty"`
-	Port     *Port                  `json:"port,omitempty"`   
-	Provider Endpoint               `json:"provider"`         
+	Consumer Endpoint               `json:"consumer" yaml:"consumer"`
+	Mapping  map[string]interface{} `json:"mapping,omitempty" yaml:"mapping,omitempty"`
+	Port     *Port                  `json:"port,omitempty" yaml:"port,omitempty"`
+	Provider Endpoint               `json:"provider" yaml:"provider"`
 }
 
 type Endpoint struct {
-	BlockId      string `json:"blockId"`     
-	ResourceName string `json:"resourceName"`
+	BlockId      string `json:"blockId" yaml:"blockId"`
+	ResourceName string `json:"resourceName" yaml:"resourceName"`
 }
 
 type Port struct {
-	Type string `json:"type"`
+	Type string `json:"type" yaml:"type"`
 }
 
 type BlockTypeOperator struct {
-	Kind     string                `json:"kind"`    
-	Metadata Metadata              `json:"metadata"`
-	Spec     BlockTypeOperatorSpec `json:"spec"`    
+	Kind     BlockTypeOperatorKind `json:"kind" yaml:"kind"`
+	Metadata Metadata              `json:"metadata" yaml:"metadata"`
+	Spec     BlockTypeOperatorSpec `json:"spec" yaml:"spec"`
 }
 
 type BlockTypeOperatorSpec struct {
-	Dependencies []Dependency           `json:"dependencies,omitempty"`
-	Icon         *IconValue             `json:"icon,omitempty"`        
-	Local        LocalInstance          `json:"local"`                 
-	Schema       map[string]interface{} `json:"schema"`                
-	Versioning   []Versioning           `json:"versioning,omitempty"`  
+	Dependencies []Dependency           `json:"dependencies,omitempty" yaml:"dependencies,omitempty"`
+	Icon         *IconValue             `json:"icon,omitempty" yaml:"icon,omitempty"`
+	Local        LocalInstance          `json:"local" yaml:"local"`
+	Schema       map[string]interface{} `json:"schema" yaml:"schema"`
+	Versioning   []Versioning           `json:"versioning,omitempty" yaml:"versioning,omitempty"`
 }
 
 type LocalInstance struct {
-	Credentials *LocalInstanceCredentials    `json:"credentials,omitempty"`
-	Env         map[string]string            `json:"env,omitempty"`        
-	Health      *LocalInstanceHealth         `json:"health,omitempty"`     
-	Image       string                       `json:"image"`                
-	Mounts      map[string]string            `json:"mounts,omitempty"`     
-	Ports       map[string]LocalInstancePort `json:"ports"`                
+	Credentials *LocalInstanceCredentials    `json:"credentials,omitempty" yaml:"credentials,omitempty"`
+	Env         map[string]string            `json:"env,omitempty" yaml:"env,omitempty"`
+	Health      *LocalInstanceHealth         `json:"health,omitempty" yaml:"health,omitempty"`
+	Image       string                       `json:"image" yaml:"image"`
+	Mounts      map[string]string            `json:"mounts,omitempty" yaml:"mounts,omitempty"`
+	Ports       map[string]LocalInstancePort `json:"ports" yaml:"ports"`
 }
 
 type LocalInstanceCredentials struct {
-	Password string `json:"password"`
-	Username string `json:"username"`
+	Password string `json:"password" yaml:"password"`
+	Username string `json:"username" yaml:"username"`
 }
 
 type LocalInstanceHealth struct {
-	Cmd      string   `json:"cmd"`               
-	Interval *float64 `json:"interval,omitempty"`
+	Cmd      string   `json:"cmd" yaml:"cmd"`
+	Interval *float64 `json:"interval,omitempty" yaml:"interval,omitempty"`
 }
 
 type LocalInstancePort struct {
-	Port *float64               `json:"port,omitempty"`
-	Type *LocalInstancePortType `json:"type,omitempty"`
+	Port *float64               `json:"port,omitempty" yaml:"port,omitempty"`
+	Type *LocalInstancePortType `json:"type,omitempty" yaml:"type,omitempty"`
 }
 
 type Versioning struct {
-	Increment VersioningIncrementType `json:"increment"`
-	On        []VersioningChangeType  `json:"on"`       
-	Paths     []string                `json:"paths"`    
+	Increment VersioningIncrementType `json:"increment" yaml:"increment"`
+	On        []VersioningChangeType  `json:"on" yaml:"on"`
+	Paths     []string                `json:"paths" yaml:"paths"`
 }
 
 type BlockType struct {
-	Kind     string        `json:"kind"`    
-	Metadata Metadata      `json:"metadata"`
-	Spec     BlockTypeSpec `json:"spec"`    
+	Kind     BlockTypeKind `json:"kind" yaml:"kind"`
+	Metadata Metadata      `json:"metadata" yaml:"metadata"`
+	Spec     BlockTypeSpec `json:"spec" yaml:"spec"`
 }
 
 type BlockTypeSpec struct {
-	Dependencies []Dependency           `json:"dependencies,omitempty"`
-	Icon         *IconValue             `json:"icon,omitempty"`        
-	Schema       map[string]interface{} `json:"schema"`                
-	Versioning   []Versioning           `json:"versioning,omitempty"`  
+	Dependencies []Dependency           `json:"dependencies,omitempty" yaml:"dependencies,omitempty"`
+	Icon         *IconValue             `json:"icon,omitempty" yaml:"icon,omitempty"`
+	Schema       map[string]interface{} `json:"schema" yaml:"schema"`
+	Versioning   []Versioning           `json:"versioning,omitempty" yaml:"versioning,omitempty"`
 }
 
 type DeploymentTarget struct {
-	Kind     string               `json:"kind"`    
-	Metadata Metadata             `json:"metadata"`
-	Spec     DeploymentTargetSpec `json:"spec"`    
+	Kind     DeploymentTargetKind `json:"kind" yaml:"kind"`
+	Metadata Metadata             `json:"metadata" yaml:"metadata"`
+	Spec     DeploymentTargetSpec `json:"spec" yaml:"spec"`
 }
 
 type DeploymentTargetSpec struct {
-	Configuration *ConfigurationSchema                `json:"configuration,omitempty"`
-	Icon          *IconValue                          `json:"icon,omitempty"`         
-	Operators     map[string]DeploymentTargetOperator `json:"operators,omitempty"`    
-	Service       RemoteService                       `json:"service"`                
-	Versioning    []Versioning                        `json:"versioning,omitempty"`   
+	Configuration *ConfigurationSchema                `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Icon          *IconValue                          `json:"icon,omitempty" yaml:"icon,omitempty"`
+	Operators     map[string]DeploymentTargetOperator `json:"operators,omitempty" yaml:"operators,omitempty"`
+	Service       RemoteService                       `json:"service" yaml:"service"`
+	Versioning    []Versioning                        `json:"versioning,omitempty" yaml:"versioning,omitempty"`
 }
 
 type ConfigurationSchema struct {
-	Schema   map[string]interface{}            `json:"schema"`            
-	UISchema map[string]map[string]interface{} `json:"uiSchema,omitempty"`
+	Schema   map[string]interface{}            `json:"schema" yaml:"schema"`
+	UISchema map[string]map[string]interface{} `json:"uiSchema,omitempty" yaml:"uiSchema,omitempty"`
 }
 
 type DeploymentTargetOperator struct {
-	Color         *ColorValue          `json:"color,omitempty"`        
-	Configuration *ConfigurationSchema `json:"configuration,omitempty"`
-	Description   *string              `json:"description,omitempty"`  
-	Icon          *IconValue           `json:"icon,omitempty"`         
-	Link          *URLValue            `json:"link,omitempty"`         
-	Title         string               `json:"title"`                  
+	Color         *ColorValue          `json:"color,omitempty" yaml:"color,omitempty"`
+	Configuration *ConfigurationSchema `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Description   *string              `json:"description,omitempty" yaml:"description,omitempty"`
+	Icon          *IconValue           `json:"icon,omitempty" yaml:"icon,omitempty"`
+	Link          *URLValue            `json:"link,omitempty" yaml:"link,omitempty"`
+	Title         string               `json:"title" yaml:"title"`
 }
 
 type ColorValue struct {
-	Type  ColorType `json:"type"` 
-	Value string    `json:"value"`
+	Type  ColorType `json:"type" yaml:"type"`
+	Value string    `json:"value" yaml:"value"`
 }
 
 type URLValue struct {
-	Type  LinkType `json:"type"` 
-	Value string   `json:"value"`
+	Type  LinkType `json:"type" yaml:"type"`
+	Value string   `json:"value" yaml:"value"`
 }
 
 type RemoteService struct {
-	APIVersion *string `json:"apiVersion,omitempty"`
-	URL        *string `json:"url,omitempty"`       
+	APIVersion *string `json:"apiVersion,omitempty" yaml:"apiVersion,omitempty"`
+	URL        *string `json:"url,omitempty" yaml:"url,omitempty"`
 }
 
 type Deployment struct {
-	Kind     string             `json:"kind"`    
-	Metadata DeploymentMetadata `json:"metadata"`
-	Spec     DeploymentSpec     `json:"spec"`    
+	Kind     DeploymentKind     `json:"kind" yaml:"kind"`
+	Metadata DeploymentMetadata `json:"metadata" yaml:"metadata"`
+	Spec     DeploymentSpec     `json:"spec" yaml:"spec"`
 }
 
 type DeploymentMetadata struct {
-	AssetId     *string `json:"assetId,omitempty"`    
-	Description *string `json:"description,omitempty"`
-	Name        string  `json:"name"`                 
-	Title       *string `json:"title,omitempty"`      
-	Visibility  *string `json:"visibility,omitempty"` 
+	AssetId     *string `json:"assetId,omitempty" yaml:"assetId,omitempty"`
+	Description *string `json:"description,omitempty" yaml:"description,omitempty"`
+	Name        string  `json:"name" yaml:"name"`
+	Title       *string `json:"title,omitempty" yaml:"title,omitempty"`
+	Visibility  *string `json:"visibility,omitempty" yaml:"visibility,omitempty"`
 }
 
 type DeploymentSpec struct {
-	Configuration map[string]interface{}        `json:"configuration,omitempty"`
-	Environment   AssetReference                `json:"environment"`            
-	Insights      InsightsSettings              `json:"insights"`               
-	Network       []DeploymentNetworkConnection `json:"network"`                
-	Plan          AssetReference                `json:"plan"`                   
-	Services      []DeploymentServiceInstance   `json:"services"`               
-	Target        DeploymentTargetReference     `json:"target"`                 
+	Configuration map[string]interface{}        `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Environment   AssetReference                `json:"environment" yaml:"environment"`
+	Insights      InsightsSettings              `json:"insights" yaml:"insights"`
+	Network       []DeploymentNetworkConnection `json:"network" yaml:"network"`
+	Plan          AssetReference                `json:"plan" yaml:"plan"`
+	Services      []DeploymentServiceInstance   `json:"services" yaml:"services"`
+	Target        DeploymentTargetReference     `json:"target" yaml:"target"`
 }
 
 type InsightsSettings struct {
-	Domain string `json:"domain"`
+	Domain string `json:"domain" yaml:"domain"`
 }
 
 type DeploymentNetworkConnection struct {
-	Consumer DeploymentNetworkEndpoint       `json:"consumer"`
-	Port     Port                            `json:"port"`    
-	Provider DeploymentNetworkEndpoint       `json:"provider"`
-	Type     DeploymentNetworkConnectionType `json:"type"`    
+	Consumer DeploymentNetworkEndpoint       `json:"consumer" yaml:"consumer"`
+	Port     Port                            `json:"port" yaml:"port"`
+	Provider DeploymentNetworkEndpoint       `json:"provider" yaml:"provider"`
+	Type     DeploymentNetworkConnectionType `json:"type" yaml:"type"`
 }
 
 type DeploymentNetworkEndpoint struct {
-	Id       string  `json:"id"`                
-	Resource *string `json:"resource,omitempty"`
+	Id       string  `json:"id" yaml:"id"`
+	Resource *string `json:"resource,omitempty" yaml:"resource,omitempty"`
 }
 
 type DeploymentServiceInstance struct {
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	FallbackDNS   string                 `json:"fallbackDNS"`            
-	Id            string                 `json:"id"`                     
-	Image         *string                `json:"image,omitempty"`        
-	Kind          string                 `json:"kind"`                   
-	Ref           string                 `json:"ref"`                    
-	Title         *string                `json:"title,omitempty"`        
+	Configuration map[string]interface{} `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	FallbackDNS   string                 `json:"fallbackDNS" yaml:"fallbackDNS"`
+	Id            string                 `json:"id" yaml:"id"`
+	Image         *string                `json:"image,omitempty" yaml:"image,omitempty"`
+	Kind          string                 `json:"kind" yaml:"kind"`
+	Ref           string                 `json:"ref" yaml:"ref"`
+	Title         *string                `json:"title,omitempty" yaml:"title,omitempty"`
 }
 
 type DeploymentTargetReference struct {
-	Image string `json:"image"`
-	Ref   string `json:"ref"`  
+	Image string `json:"image" yaml:"image"`
+	Ref   string `json:"ref" yaml:"ref"`
 }
 
 type Environment struct {
-	Kind     string          `json:"kind"`    
-	Metadata Metadata        `json:"metadata"`
-	Spec     EnvironmentSpec `json:"spec"`    
+	Kind     EnvironmentKind `json:"kind" yaml:"kind"`
+	Metadata Metadata        `json:"metadata" yaml:"metadata"`
+	Spec     EnvironmentSpec `json:"spec" yaml:"spec"`
 }
 
 type EnvironmentSpec struct {
-	DeploymentTarget DeploymentTargetConfiguration `json:"deploymentTarget"`  
-	Plan             PlanConfiguration             `json:"plan"`              
-	Services         []EnvironmentService          `json:"services,omitempty"`
+	DeploymentTarget DeploymentTargetConfiguration `json:"deploymentTarget" yaml:"deploymentTarget"`
+	Plan             PlanConfiguration             `json:"plan" yaml:"plan"`
+	Services         []EnvironmentService          `json:"services,omitempty" yaml:"services,omitempty"`
 }
 
 type DeploymentTargetConfiguration struct {
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	Ref           string                 `json:"ref"`                    
+	Configuration map[string]interface{} `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Ref           string                 `json:"ref" yaml:"ref"`
 }
 
 type PlanConfiguration struct {
-	Blocks        []BlockInstanceConfiguration `json:"blocks"`                 
-	Configuration map[string]interface{}       `json:"configuration,omitempty"`
-	Ref           string                       `json:"ref"`                    
+	Blocks        []BlockInstanceConfiguration `json:"blocks" yaml:"blocks"`
+	Configuration map[string]interface{}       `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Ref           string                       `json:"ref" yaml:"ref"`
 }
 
 type BlockInstanceConfiguration struct {
-	Configuration map[string]interface{}      `json:"configuration,omitempty"`
-	Id            string                      `json:"id"`                     
-	Services      []BlockServiceConfiguration `json:"services,omitempty"`     
+	Configuration map[string]interface{}      `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Id            string                      `json:"id" yaml:"id"`
+	Services      []BlockServiceConfiguration `json:"services,omitempty" yaml:"services,omitempty"`
 }
 
 type BlockServiceConfiguration struct {
-	ConsumerId string `json:"consumerId"`
-	Port       Port   `json:"port"`      
-	ServiceId  string `json:"serviceId"` 
+	ConsumerId string `json:"consumerId" yaml:"consumerId"`
+	Port       Port   `json:"port" yaml:"port"`
+	ServiceId  string `json:"serviceId" yaml:"serviceId"`
 }
 
 type EnvironmentService struct {
-	Configuration map[string]interface{} `json:"configuration,omitempty"`
-	Id            string                 `json:"id"`                     
-	Kind          string                 `json:"kind"`                   
-	Ref           string                 `json:"ref"`                    
-	Title         *string                `json:"title,omitempty"`        
+	Configuration map[string]interface{} `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Id            string                 `json:"id" yaml:"id"`
+	Kind          string                 `json:"kind" yaml:"kind"`
+	Ref           string                 `json:"ref" yaml:"ref"`
+	Title         *string                `json:"title,omitempty" yaml:"title,omitempty"`
 }
 
 type LanguageTarget struct {
-	Kind     string              `json:"kind"`          
-	Metadata Metadata            `json:"metadata"`      
-	Spec     *LanguageTargetSpec `json:"spec,omitempty"`
+	Kind     LanguageTargetKind  `json:"kind" yaml:"kind"`
+	Metadata Metadata            `json:"metadata" yaml:"metadata"`
+	Spec     *LanguageTargetSpec `json:"spec,omitempty" yaml:"spec,omitempty"`
 }
 
 type LanguageTargetSpec struct {
-	Icon       *IconValue             `json:"icon,omitempty"`      
-	Local      LocalDevContainer      `json:"local"`               
-	Schema     map[string]interface{} `json:"schema,omitempty"`    
-	Versioning []Versioning           `json:"versioning,omitempty"`
+	Icon       *IconValue             `json:"icon,omitempty" yaml:"icon,omitempty"`
+	Local      LocalDevContainer      `json:"local" yaml:"local"`
+	Schema     map[string]interface{} `json:"schema,omitempty" yaml:"schema,omitempty"`
+	Versioning []Versioning           `json:"versioning,omitempty" yaml:"versioning,omitempty"`
 }
 
 type LocalDevContainer struct {
-	Handlers    *LocalDevContainerHandlers `json:"handlers,omitempty"`   
-	Healthcheck *string                    `json:"healthcheck,omitempty"`
-	Image       string                     `json:"image"`                
-	Options     map[string]interface{}     `json:"options,omitempty"`    
-	UserHome    *string                    `json:"userHome,omitempty"`   
-	WorkingDir  *string                    `json:"workingDir,omitempty"` 
+	Handlers    *LocalDevContainerHandlers `json:"handlers,omitempty" yaml:"handlers,omitempty"`
+	Healthcheck *string                    `json:"healthcheck,omitempty" yaml:"healthcheck,omitempty"`
+	Image       string                     `json:"image" yaml:"image"`
+	Options     map[string]interface{}     `json:"options,omitempty" yaml:"options,omitempty"`
+	UserHome    *string                    `json:"userHome,omitempty" yaml:"userHome,omitempty"`
+	WorkingDir  *string                    `json:"workingDir,omitempty" yaml:"workingDir,omitempty"`
 }
 
 type LocalDevContainerHandlers struct {
-	OnCreate *string `json:"onCreate,omitempty"`
+	OnCreate *string `json:"onCreate,omitempty" yaml:"onCreate,omitempty"`
 }
 
 type Plan struct {
-	Kind     string   `json:"kind"`    
-	Metadata Metadata `json:"metadata"`
-	Spec     PlanSpec `json:"spec"`    
+	Kind     PlanKind `json:"kind" yaml:"kind"`
+	Metadata Metadata `json:"metadata" yaml:"metadata"`
+	Spec     PlanSpec `json:"spec" yaml:"spec"`
 }
 
 type PlanSpec struct {
-	Blocks        []BlockInstance `json:"blocks"`                 
-	Configuration *EntityList     `json:"configuration,omitempty"`
-	Connections   []Connection    `json:"connections"`            
+	Blocks        []BlockInstance `json:"blocks" yaml:"blocks"`
+	Configuration *EntityList     `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Connections   []Connection    `json:"connections" yaml:"connections"`
 }
 
 type ResourceTypeExtension struct {
-	Kind     string                    `json:"kind"`    
-	Metadata Metadata                  `json:"metadata"`
-	Spec     ResourceTypeExtensionSpec `json:"spec"`    
+	Kind     ResourceTypeExtensionKind `json:"kind" yaml:"kind"`
+	Metadata Metadata                  `json:"metadata" yaml:"metadata"`
+	Spec     ResourceTypeExtensionSpec `json:"spec" yaml:"spec"`
 }
 
 type ResourceTypeExtensionSpec struct {
-	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
-	Icon          *IconValue             `json:"icon,omitempty"`         
-	Ports         []Port                 `json:"ports"`                  
-	Schema        map[string]interface{} `json:"schema"`                 
-	Versioning    []Versioning           `json:"versioning,omitempty"`   
+	Configuration *ConfigurationSchema   `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Icon          *IconValue             `json:"icon,omitempty" yaml:"icon,omitempty"`
+	Ports         []Port                 `json:"ports" yaml:"ports"`
+	Schema        map[string]interface{} `json:"schema" yaml:"schema"`
+	Versioning    []Versioning           `json:"versioning,omitempty" yaml:"versioning,omitempty"`
 }
 
 type ResourceTypeInternal struct {
-	Kind     string                   `json:"kind"`    
-	Metadata Metadata                 `json:"metadata"`
-	Spec     ResourceTypeInternalSpec `json:"spec"`    
+	Kind     ResourceTypeInternalKind `json:"kind" yaml:"kind"`
+	Metadata Metadata                 `json:"metadata" yaml:"metadata"`
+	Spec     ResourceTypeInternalSpec `json:"spec" yaml:"spec"`
 }
 
 type ResourceTypeInternalSpec struct {
-	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
-	Icon          *IconValue             `json:"icon,omitempty"`         
-	Ports         []Port                 `json:"ports"`                  
-	Schema        map[string]interface{} `json:"schema,omitempty"`       
-	Versioning    []Versioning           `json:"versioning,omitempty"`   
+	Configuration *ConfigurationSchema   `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Icon          *IconValue             `json:"icon,omitempty" yaml:"icon,omitempty"`
+	Ports         []Port                 `json:"ports" yaml:"ports"`
+	Schema        map[string]interface{} `json:"schema,omitempty" yaml:"schema,omitempty"`
+	Versioning    []Versioning           `json:"versioning,omitempty" yaml:"versioning,omitempty"`
 }
 
 type ResourceTypeOperator struct {
-	Kind     string                   `json:"kind"`    
-	Metadata Metadata                 `json:"metadata"`
-	Spec     ResourceTypeOperatorSpec `json:"spec"`    
+	Kind     ResourceTypeOperatorKind `json:"kind" yaml:"kind"`
+	Metadata Metadata                 `json:"metadata" yaml:"metadata"`
+	Spec     ResourceTypeOperatorSpec `json:"spec" yaml:"spec"`
 }
 
 type ResourceTypeOperatorSpec struct {
-	Color         *ColorValue            `json:"color,omitempty"`        
-	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
-	Icon          *IconValue             `json:"icon,omitempty"`         
-	Local         LocalInstance          `json:"local"`                  
-	Ports         []Port                 `json:"ports"`                  
-	Schema        map[string]interface{} `json:"schema,omitempty"`       
-	Versioning    []Versioning           `json:"versioning,omitempty"`   
+	Color         *ColorValue            `json:"color,omitempty" yaml:"color,omitempty"`
+	Configuration *ConfigurationSchema   `json:"configuration,omitempty" yaml:"configuration,omitempty"`
+	Icon          *IconValue             `json:"icon,omitempty" yaml:"icon,omitempty"`
+	Local         LocalInstance          `json:"local" yaml:"local"`
+	Ports         []Port                 `json:"ports" yaml:"ports"`
+	Schema        map[string]interface{} `json:"schema,omitempty" yaml:"schema,omitempty"`
+	Versioning    []Versioning           `json:"versioning,omitempty" yaml:"versioning,omitempty"`
 }
 
 type EntityType string
+
 const (
-	Dto EntityType = "dto"
-	Enum EntityType = "enum"
+	Dto    EntityType = "dto"
+	Enum   EntityType = "enum"
 	Native EntityType = "native"
 )
 
 type IconType string
+
 const (
 	Fontawesome5 IconType = "fontawesome5"
-	PurpleURL IconType = "url"
+	PurpleURL    IconType = "url"
+)
+
+type BlockTypeGroupKind string
+
+const (
+	CoreBlockTypeGroup BlockTypeGroupKind = "core/block-type-group"
+)
+
+type BlockTypeOperatorKind string
+
+const (
+	CoreBlockTypeOperator BlockTypeOperatorKind = "core/block-type-operator"
 )
 
 type LocalInstancePortType string
+
 const (
 	TCP LocalInstancePortType = "tcp"
 	UDP LocalInstancePortType = "udp"
 )
 
 type VersioningIncrementType string
+
 const (
 	Major VersioningIncrementType = "major"
 	Minor VersioningIncrementType = "minor"
@@ -445,24 +461,82 @@ const (
 )
 
 type VersioningChangeType string
+
 const (
 	Create VersioningChangeType = "create"
 	Delete VersioningChangeType = "delete"
 	Update VersioningChangeType = "update"
 )
 
+type BlockTypeKind string
+
+const (
+	CoreBlockType BlockTypeKind = "core/block-type"
+)
+
+type DeploymentTargetKind string
+
+const (
+	CoreDeploymentTarget DeploymentTargetKind = "core/deployment-target"
+)
+
 type ColorType string
+
 const (
 	Hex ColorType = "hex"
 )
 
 type LinkType string
+
 const (
 	FluffyURL LinkType = "url"
 )
 
+type DeploymentKind string
+
+const (
+	CoreDeployment DeploymentKind = "core/deployment"
+)
+
 type DeploymentNetworkConnectionType string
+
 const (
 	Resource DeploymentNetworkConnectionType = "resource"
-	Service DeploymentNetworkConnectionType = "service"
+	Service  DeploymentNetworkConnectionType = "service"
+)
+
+type EnvironmentKind string
+
+const (
+	CoreEnvironment EnvironmentKind = "core/environment"
+)
+
+type LanguageTargetKind string
+
+const (
+	CoreLanguageTarget LanguageTargetKind = "core/language-target"
+)
+
+type PlanKind string
+
+const (
+	CorePlan PlanKind = "core/plan"
+)
+
+type ResourceTypeExtensionKind string
+
+const (
+	CoreResourceTypeExtension ResourceTypeExtensionKind = "core/resource-type-extension"
+)
+
+type ResourceTypeInternalKind string
+
+const (
+	CoreResourceTypeInternal ResourceTypeInternalKind = "core/resource-type-internal"
+)
+
+type ResourceTypeOperatorKind string
+
+const (
+	CoreResourceTypeOperator ResourceTypeOperatorKind = "core/resource-type-operator"
 )

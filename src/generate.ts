@@ -66,6 +66,7 @@ const languages:Language[] = [
             rendererOptions: {
                 'runtime-typecheck': 'true',
                 'just-types-and-package': 'true',
+                "field-tags": "json,yaml",
                 'package': 'model'
 
             },

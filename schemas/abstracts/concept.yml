@@ -5,7 +5,7 @@ additionalProperties: false
 properties:
   kind:
     type: string
-    const: core/concept
+    default: core/concept
 
   metadata:
     $ref: /core/metadata

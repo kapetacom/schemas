@@ -2,7 +2,7 @@ package com.kapeta.schemas.entity;
 
 @lombok.Data
 public class LanguageTarget {
-    private String kind;
+    private LanguageTargetKind kind;
     private Metadata metadata;
     private LanguageTargetSpec spec;
 }

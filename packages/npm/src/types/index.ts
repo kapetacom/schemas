@@ -18,7 +18,7 @@ export interface BlockDefinitionSpec {
     entities?:      EntityList;
     icon?:          IconValue;
     providers?:     Resource[];
-    target:         LanguageTargetReference;
+    target?:        LanguageTargetReference;
 }
 
 export interface EntityList {

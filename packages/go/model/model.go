@@ -14,12 +14,12 @@ type Metadata struct {
 }
 
 type BlockDefinitionSpec struct {
-	Configuration *EntityList             `json:"configuration,omitempty"`
-	Consumers     []ConsumerElement       `json:"consumers,omitempty"`    
-	Entities      *EntityList             `json:"entities,omitempty"`     
-	Icon          *IconValue              `json:"icon,omitempty"`         
-	Providers     []ConsumerElement       `json:"providers,omitempty"`    
-	Target        LanguageTargetReference `json:"target"`                 
+	Configuration *EntityList              `json:"configuration,omitempty"`
+	Consumers     []ConsumerElement        `json:"consumers,omitempty"`    
+	Entities      *EntityList              `json:"entities,omitempty"`     
+	Icon          *IconValue               `json:"icon,omitempty"`         
+	Providers     []ConsumerElement        `json:"providers,omitempty"`    
+	Target        *LanguageTargetReference `json:"target,omitempty"`       
 }
 
 type EntityList struct {

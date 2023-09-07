@@ -131,6 +131,7 @@
           "const": "core/deployment"
         },
         "metadata": {
+          "type": "object",
           "$ref": "/core/metadata",
           "properties": {
             "assetId": {

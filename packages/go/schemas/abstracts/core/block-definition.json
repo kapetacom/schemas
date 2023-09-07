@@ -38,10 +38,7 @@
         "icon": {
           "$ref": "/core/icon-value"
         }
-      },
-      "required": [
-        "target"
-      ]
+      }
     }
   }
 }

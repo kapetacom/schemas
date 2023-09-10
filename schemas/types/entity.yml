@@ -24,6 +24,8 @@ definitions:
         type: boolean
       secret:
         type: boolean
+      global:
+        type: boolean
       format:
         type: string
     oneOf:

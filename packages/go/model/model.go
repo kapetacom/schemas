@@ -44,6 +44,7 @@ type EntityProperty struct {
 	DefaultValue *string `json:"defaultValue,omitempty"`
 	Description  *string `json:"description,omitempty"` 
 	Format       *string `json:"format,omitempty"`      
+	Global       *bool   `json:"global,omitempty"`      
 	Ref          *string `json:"ref,omitempty"`         
 	Required     *bool   `json:"required,omitempty"`    
 	Secret       *bool   `json:"secret,omitempty"`      

@@ -46,6 +46,7 @@ export interface EntityProperty {
     defaultValue?: string;
     description?:  string;
     format?:       string;
+    global?:       boolean;
     ref?:          string;
     required?:     boolean;
     secret?:       boolean;

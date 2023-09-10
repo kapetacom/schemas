@@ -127,10 +127,11 @@ export interface BlockTypeGroupSpec {
 }
 
 export interface BlockInstance {
-    block:      AssetReference;
-    dimensions: Dimensions;
-    id:         string;
-    name:       string;
+    block:                 AssetReference;
+    defaultConfiguration?: { [key: string]: any };
+    dimensions:            Dimensions;
+    id:                    string;
+    name:                  string;
     [property: string]: any;
 }
 
@@ -459,9 +460,10 @@ export interface Plan {
 }
 
 export interface PlanSpec {
-    blocks:         BlockInstance[];
-    configuration?: EntityList;
-    connections:    Connection[];
+    blocks:                BlockInstance[];
+    configuration?:        EntityList;
+    connections:           Connection[];
+    defaultConfiguration?: { [key: string]: any };
     [property: string]: any;
 }
 

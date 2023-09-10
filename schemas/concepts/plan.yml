@@ -31,3 +31,6 @@ spec:
             $ref: /core/block-instances
           connections:
             $ref: /core/connections
+          defaultConfiguration:
+            type: object
+            additionalProperties: true

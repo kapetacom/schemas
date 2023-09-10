@@ -105,10 +105,11 @@ type BlockTypeGroupSpec struct {
 }
 
 type BlockInstance struct {
-	Block      AssetReference `json:"block"`     
-	Dimensions Dimensions     `json:"dimensions"`
-	Id         string         `json:"id"`        
-	Name       string         `json:"name"`      
+	Block                AssetReference         `json:"block"`                         
+	DefaultConfiguration map[string]interface{} `json:"defaultConfiguration,omitempty"`
+	Dimensions           Dimensions             `json:"dimensions"`                    
+	Id                   string                 `json:"id"`                            
+	Name                 string                 `json:"name"`                          
 }
 
 type AssetReference struct {
@@ -369,9 +370,10 @@ type Plan struct {
 }
 
 type PlanSpec struct {
-	Blocks        []BlockInstance `json:"blocks"`                 
-	Configuration *EntityList     `json:"configuration,omitempty"`
-	Connections   []Connection    `json:"connections"`            
+	Blocks               []BlockInstance        `json:"blocks"`                        
+	Configuration        *EntityList            `json:"configuration,omitempty"`       
+	Connections          []Connection           `json:"connections"`                   
+	DefaultConfiguration map[string]interface{} `json:"defaultConfiguration,omitempty"`
 }
 
 type ResourceTypeExtension struct {

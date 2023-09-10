@@ -20,6 +20,10 @@
       "name": {
         "type": "string"
       },
+      "defaultConfiguration": {
+        "type": "object",
+        "additionalProperties": true
+      },
       "dimensions": {
         "type": "object",
         "required": [

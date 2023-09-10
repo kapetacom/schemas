@@ -42,6 +42,10 @@
             },
             "connections": {
               "$ref": "/core/connections"
+            },
+            "defaultConfiguration": {
+              "type": "object",
+              "additionalProperties": true
             }
           }
         }

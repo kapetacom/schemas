@@ -105,10 +105,11 @@ type BlockTypeGroupSpec struct {
 }
 
 type BlockInstance struct {
-	Block      AssetReference `json:"block"`     
-	Dimensions Dimensions     `json:"dimensions"`
-	Id         string         `json:"id"`        
-	Name       string         `json:"name"`      
+	Block                AssetReference         `json:"block"`                         
+	DefaultConfiguration map[string]interface{} `json:"defaultConfiguration,omitempty"`
+	Dimensions           Dimensions             `json:"dimensions"`                    
+	Id                   string                 `json:"id"`                            
+	Name                 string                 `json:"name"`                          
 }
 
 type AssetReference struct {

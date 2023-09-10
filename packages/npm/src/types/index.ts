@@ -127,10 +127,11 @@ export interface BlockTypeGroupSpec {
 }
 
 export interface BlockInstance {
-    block:      AssetReference;
-    dimensions: Dimensions;
-    id:         string;
-    name:       string;
+    block:                 AssetReference;
+    defaultConfiguration?: { [key: string]: any };
+    dimensions:            Dimensions;
+    id:                    string;
+    name:                  string;
     [property: string]: any;
 }
 

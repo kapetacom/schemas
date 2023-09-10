@@ -370,9 +370,10 @@ type Plan struct {
 }
 
 type PlanSpec struct {
-	Blocks        []BlockInstance `json:"blocks"`                 
-	Configuration *EntityList     `json:"configuration,omitempty"`
-	Connections   []Connection    `json:"connections"`            
+	Blocks               []BlockInstance        `json:"blocks"`                        
+	Configuration        *EntityList            `json:"configuration,omitempty"`       
+	Connections          []Connection           `json:"connections"`                   
+	DefaultConfiguration map[string]interface{} `json:"defaultConfiguration,omitempty"`
 }
 
 type ResourceTypeExtension struct {

@@ -460,9 +460,10 @@ export interface Plan {
 }
 
 export interface PlanSpec {
-    blocks:         BlockInstance[];
-    configuration?: EntityList;
-    connections:    Connection[];
+    blocks:                BlockInstance[];
+    configuration?:        EntityList;
+    connections:           Connection[];
+    defaultConfiguration?: { [key: string]: any };
     [property: string]: any;
 }
 

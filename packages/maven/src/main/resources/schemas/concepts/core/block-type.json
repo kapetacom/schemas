@@ -35,6 +35,9 @@
             },
             "versioning": {
               "$ref": "/core/versioning"
+            },
+            "defaultPort": {
+              "$ref": "/core/port"
             }
           },
           "required": [

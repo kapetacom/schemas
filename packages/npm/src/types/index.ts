@@ -244,6 +244,7 @@ export interface BlockType {
 }
 
 export interface BlockTypeSpec {
+    defaultPort?:  Port;
     dependencies?: Dependency[];
     icon?:         IconValue;
     schema:        { [key: string]: any };

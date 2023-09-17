@@ -191,6 +191,7 @@ type BlockType struct {
 }
 
 type BlockTypeSpec struct {
+	DefaultPort  *Port                  `json:"defaultPort,omitempty"` 
 	Dependencies []Dependency           `json:"dependencies,omitempty"`
 	Icon         *IconValue             `json:"icon,omitempty"`        
 	Schema       map[string]interface{} `json:"schema"`                

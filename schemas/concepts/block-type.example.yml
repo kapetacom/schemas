@@ -21,4 +21,6 @@ spec:
       type: Consumers
     - path: spec.providers.kind
       type: Providers
+  defaultPort:
+    type: web
 

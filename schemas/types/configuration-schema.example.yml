@@ -1,3 +1,6 @@
+defaultValue:
+  fieldA: "Some value"
+  fieldB: 42
 schema:
   type: object
   required:

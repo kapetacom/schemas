@@ -269,8 +269,9 @@ export interface DeploymentTargetSpec {
 }
 
 export interface ConfigurationSchema {
-    schema:    { [key: string]: any };
-    uiSchema?: { [key: string]: { [key: string]: any } };
+    defaultValue?: { [key: string]: any };
+    schema:        { [key: string]: any };
+    uiSchema?:     { [key: string]: { [key: string]: any } };
     [property: string]: any;
 }
 

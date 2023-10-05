@@ -5,6 +5,9 @@ type: object
 required:
   - schema
 properties:
+  defaultValue:
+    type: object
+    additionalProperties: true
   schema:
     $ref: /core/schema
   uiSchema:

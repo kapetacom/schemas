@@ -213,8 +213,9 @@ type DeploymentTargetSpec struct {
 }
 
 type ConfigurationSchema struct {
-	Schema   map[string]interface{}            `json:"schema"`            
-	UISchema map[string]map[string]interface{} `json:"uiSchema,omitempty"`
+	DefaultValue map[string]interface{}            `json:"defaultValue,omitempty"`
+	Schema       map[string]interface{}            `json:"schema"`                
+	UISchema     map[string]map[string]interface{} `json:"uiSchema,omitempty"`    
 }
 
 type DeploymentTargetOperator struct {

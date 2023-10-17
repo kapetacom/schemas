@@ -9,7 +9,7 @@
   "properties": {
     "defaultValue": {
       "type": "object",
-      "allowAdditionalProperties": true
+      "additionalProperties": true
     },
     "schema": {
       "$ref": "/core/schema"

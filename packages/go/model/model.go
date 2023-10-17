@@ -354,9 +354,12 @@ type LanguageTargetSpec struct {
 }
 
 type LocalDevContainer struct {
+	Env         []string                   `json:"Env,omitempty"`        
 	Handlers    *LocalDevContainerHandlers `json:"handlers,omitempty"`   
 	Healthcheck *string                    `json:"healthcheck,omitempty"`
+	HostConfig  map[string]interface{}     `json:"HostConfig,omitempty"` 
 	Image       string                     `json:"image"`                
+	Labels      map[string]interface{}     `json:"Labels,omitempty"`     
 	Options     map[string]interface{}     `json:"options,omitempty"`    
 	UserHome    *string                    `json:"userHome,omitempty"`   
 	WorkingDir  *string                    `json:"workingDir,omitempty"` 

@@ -443,9 +443,12 @@ export interface LanguageTargetSpec {
 }
 
 export interface LocalDevContainer {
+    Env?:         string[];
     handlers?:    LocalDevContainerHandlers;
     healthcheck?: string;
+    HostConfig?:  { [key: string]: any };
     image:        string;
+    Labels?:      { [key: string]: any };
     options?:     { [key: string]: any };
     userHome?:    string;
     workingDir?:  string;

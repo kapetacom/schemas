@@ -61,6 +61,20 @@
                 "healthcheck": {
                   "type": "string"
                 },
+                "HostConfig": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "Labels": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "Env": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "handlers": {
                   "title": "LocalDevContainerHandlers",
                   "type": "object",

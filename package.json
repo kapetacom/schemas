@@ -7,6 +7,11 @@
     "generate": "ts-node src/generate.ts"
   },
   "license": "MIT",
+  "author": {
+    "email": "engineering@kapeta.com",
+    "name": "Kapeta",
+    "url": "https://kapeta.com"
+  },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
     "@types/yaml": "^1.9.7",

@@ -1,3 +1,8 @@
+/*
+ * Copyright 2023 Kapeta Inc.
+ * SPDX-License-Identifier: MIT
+ */
+
 package com.kapeta.schemas;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;

@@ -1,3 +1,6 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
 - id: block1
   block:
     ref: kapeta://some-handle/my-block-2:0.0.2

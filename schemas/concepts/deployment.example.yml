@@ -1,3 +1,6 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
 kind: core/deployment
 metadata:
   name: kapeta/todo-plan-test-environment-tf3

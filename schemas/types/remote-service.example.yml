@@ -1,2 +1,5 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
 apiVersion: 1.0.0
 url: https://deployment-target-gcp.externals.kapeta.com

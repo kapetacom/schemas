@@ -1,3 +1,8 @@
+/**
+ * Copyright 2023 Kapeta Inc.
+ * SPDX-License-Identifier: MIT
+ */
+
 import { describe, it, expect } from "@jest/globals";
 import type { Plan } from "../../src";
 import { validateSchema } from "../../src";

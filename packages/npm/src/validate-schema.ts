@@ -1,3 +1,8 @@
+/**
+ * Copyright 2023 Kapeta Inc.
+ * SPDX-License-Identifier: MIT
+ */
+
 import Ajv from "ajv";
 import path from "path";
 import schemaMap from "../schemas";

@@ -1,3 +1,8 @@
+/**
+ * Copyright 2023 Kapeta Inc.
+ * SPDX-License-Identifier: MIT
+ */
+
 import {Entity, EntityProperty, EntityType} from "./types";
 import {EntityDTO, EntityEnum, EntityProperties} from "./helpers";
 import * as _ from "lodash";

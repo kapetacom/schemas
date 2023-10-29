@@ -1,3 +1,6 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
 kind: core/language-target
 metadata:
   name: kapeta/language-target-java-spring-boot

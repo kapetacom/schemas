@@ -1,6 +1,3 @@
-// Copyright 2023 Kapeta Inc.
-// SPDX-License-Identifier: MIT
-
 package validate
 
 type SchemaFile string

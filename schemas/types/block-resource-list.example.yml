@@ -1,3 +1,6 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
 - kind: my-handle/my-resource-type
   metadata:
     name: otherName

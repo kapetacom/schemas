@@ -1,2 +1,5 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
 type: hex
 value: '#121212'

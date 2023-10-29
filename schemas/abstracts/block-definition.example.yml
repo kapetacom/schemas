@@ -1,3 +1,6 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
 kind: kapeta/block-type-service:local
 metadata:
   name: kapeta/sample-java-todo-service

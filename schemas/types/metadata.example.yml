@@ -1,3 +1,6 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
 name: some-handle/my-operator-resource-provider
 title: My operator Resource
 description: Provides operator resources

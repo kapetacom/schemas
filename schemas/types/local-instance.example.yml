@@ -1,3 +1,6 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
 image: postgres:9.6
 health:
   cmd: psql --user postgres postgres -c 'select true' > /dev/null,

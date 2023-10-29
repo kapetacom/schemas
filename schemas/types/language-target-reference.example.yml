@@ -1,3 +1,6 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
 kind: kapeta/language-target-java-spring-boot
 options:
   groupId: org.mycompany.services

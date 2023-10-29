@@ -1,3 +1,8 @@
+/**
+ * Copyright 2023 Kapeta Inc.
+ * SPDX-License-Identifier: MIT
+ */
+
 import type {RendererOptions} from 'quicktype-core';
 import type {TargetLanguage} from "quicktype-core/dist/TargetLanguage";
 import type {JSONSchemaSourceData} from "quicktype-core/dist/input/JSONSchemaInput";

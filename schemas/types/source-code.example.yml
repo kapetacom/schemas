@@ -1,3 +1,5 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
 type: kapeta-dsl
 value: |-
   User {

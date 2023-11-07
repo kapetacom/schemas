@@ -99,10 +99,10 @@ export function isBuiltInType(type?:TypeLike) {
     }
 
     const name = typeName(type)
-    if (['boolean', 'date'].indexOf(name.toLowerCase()) > -1) {
+    if (['byte','void','date'].includes(name.toLowerCase())) {
         return true;
     }
-    return isStringableType(name) || "void" === name;
+    return isStringableType(name);
 }
 
 
@@ -111,7 +111,19 @@ export function isStringableType(type:TypeOrString|undefined) {
         return false;
     }
     const typeText = typeof type === 'string' ? type : typeName(type);
-    return ['string', 'number', 'float', 'integer', 'decimal', 'double','bigint'].indexOf(typeText.toLowerCase()) > -1;
+    return [
+        'string',
+        'number',
+        'boolean',
+        'float',
+        'integer',
+        'decimal',
+        'double',
+        'long',
+        'short',
+        'bigint',
+        'char'
+    ].includes(typeText.toLowerCase());
 }
 
 export function getCompatibilityIssuesForTypes(a: TypeLike|undefined, b: TypeLike|undefined, aEntities:Entity[], bEntities:Entity[]):string[] {

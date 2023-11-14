@@ -1,3 +1,8 @@
+/**
+ * Copyright 2023 Kapeta Inc.
+ * SPDX-License-Identifier: MIT
+ */
+
 import {Dependency, Kind} from "./types";
 import schemaMap from "../schemas";
 

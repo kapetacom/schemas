@@ -89,7 +89,7 @@ describe('schemas', () => {
             expect(isStringableType("string")).toBe(true);
             expect(isStringableType("string[]")).toBe(false);
 
-            expect(isStringableType('boolean')).toBe(false);
+            expect(isStringableType('boolean')).toBe(true);
             expect(isStringableType('float')).toBe(true);
             expect(isStringableType('float[]')).toBe(false);
         });

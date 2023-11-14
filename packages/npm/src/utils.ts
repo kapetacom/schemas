@@ -6,10 +6,15 @@
 import {Entity, EntityProperty, EntityType} from "./types";
 import {EntityDTO, EntityEnum, EntityProperties} from "./helpers";
 import * as _ from "lodash";
+import schemaMap from "../schemas";
 
 export interface TypeLike {
     type?: string;
     ref?: string;
+}
+
+export function getSchema(type:'concept'|'types'|'abstracts', name:string) {
+    return schemaMap[type + '/' + name + '.json'];
 }
 
 export type TypeOrString = TypeLike|string;
@@ -153,6 +158,11 @@ export function getCompatibilityIssuesForTypes(a: TypeLike|undefined, b: TypeLik
     const bTypeName = typeName(b);
 
     if (isBuiltInType(a) !== isBuiltInType(b)) {
+        return [`Types are not compatible`];
+    }
+
+    if (aTypeName === 'boolean' && bTypeName !== 'boolean' ||
+        bTypeName === 'boolean' && aTypeName !== 'boolean') {
         return [`Types are not compatible`];
     }
 

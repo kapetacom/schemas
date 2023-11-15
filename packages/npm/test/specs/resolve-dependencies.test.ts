@@ -6,6 +6,7 @@
 import {describe, expect, it} from "@jest/globals";
 import {BlockDefinition, BlockType, Plan} from "../../src";
 import {resolveDependencies} from "../../src/resolve-dependencies";
+import * as _ from "lodash";
 
 
 describe("resolveDependencies", () => {
@@ -49,15 +50,36 @@ describe("resolveDependencies", () => {
             }
         }
 
-        const dependencies = resolveDependencies(plan);
+        let dependencies = resolveDependencies(plan);
 
         expect(dependencies).toEqual([
             {
                 name: 'somehandle/someblock:1.2.3',
+                path: 'spec.blocks.0.block.ref',
                 type: 'Blocks'
             },
             {
                 name: 'somehandle/otherblock:1.2.3',
+                path: 'spec.blocks.1.block.ref',
+                type: 'Blocks'
+            }
+        ])
+
+        dependencies.forEach(dep => {
+            _.set(plan, dep.path, 'changed:' + dep.name);
+        });
+
+        dependencies = resolveDependencies(plan);
+
+        expect(dependencies).toEqual([
+            {
+                name: 'changed:somehandle/someblock:1.2.3',
+                path: 'spec.blocks.0.block.ref',
+                type: 'Blocks'
+            },
+            {
+                name: 'changed:somehandle/otherblock:1.2.3',
+                path: 'spec.blocks.1.block.ref',
                 type: 'Blocks'
             }
         ])
@@ -112,19 +134,46 @@ describe("resolveDependencies", () => {
             }
         }
 
-        const dependencies = resolveDependencies(block, blockType);
+        let dependencies = resolveDependencies(block, blockType);
 
         expect(dependencies).toEqual([
             {
                 name: 'someone/block-type-service:1.2.3',
+                path: 'kind',
                 type: 'Kind'
             },
             {
                 name: 'someone/api:1.2.3',
+                path: 'spec.providers.0.kind',
                 type: 'Providers'
             },
             {
                 name: 'someone/javascript:1.2.3',
+                path: 'spec.target.kind',
+                type: 'Language target'
+            }
+        ]);
+
+        dependencies.forEach(dep => {
+            _.set(block, dep.path, 'changed:' + dep.name);
+        });
+
+        dependencies = resolveDependencies(block, blockType);
+
+        expect(dependencies).toEqual([
+            {
+                name: 'changed:someone/block-type-service:1.2.3',
+                path: 'kind',
+                type: 'Kind'
+            },
+            {
+                name: 'changed:someone/api:1.2.3',
+                path: 'spec.providers.0.kind',
+                type: 'Providers'
+            },
+            {
+                name: 'changed:someone/javascript:1.2.3',
+                path: 'spec.target.kind',
                 type: 'Language target'
             }
         ])

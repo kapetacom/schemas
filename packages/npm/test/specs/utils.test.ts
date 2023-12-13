@@ -230,6 +230,20 @@ describe('schemas', () => {
             ])).toBe(true);
         })
 
+        test('any types is compatible with anything', () => {
+            expect(isCompatibleTypes({type:'any'}, {ref:'Person'}, [], [
+                {
+                    type: EntityType.Dto,
+                    name: 'Person',
+                    properties: {}
+                }
+            ])).toBe(true);
+
+            expect(isCompatibleTypes({type:'any'}, {type:'string'}, [], [])).toBe(true);
+
+            expect(isCompatibleTypes({type:'any'}, {type:'date'}, [], [])).toBe(true);
+        })
+
         test('Simple entity that matches is compatible', () => {
 
             expect(isSchemaEntityCompatible(

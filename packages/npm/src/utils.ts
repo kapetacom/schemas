@@ -104,7 +104,7 @@ export function isBuiltInType(type?:TypeLike) {
     }
 
     const name = typeName(type)
-    if (['byte','void','date'].includes(name.toLowerCase())) {
+    if (['byte','void','date','any'].includes(name.toLowerCase())) {
         return true;
     }
     return isStringableType(name);
@@ -157,6 +157,10 @@ export function getCompatibilityIssuesForTypes(a: TypeLike|undefined, b: TypeLik
     const aTypeName = typeName(a);
     const bTypeName = typeName(b);
 
+    if (aTypeName === 'any' || bTypeName === 'any') {
+        return [];
+    }
+
     if (isBuiltInType(a) !== isBuiltInType(b)) {
         return [`Types are not compatible`];
     }
@@ -165,7 +169,6 @@ export function getCompatibilityIssuesForTypes(a: TypeLike|undefined, b: TypeLik
         bTypeName === 'boolean' && aTypeName !== 'boolean') {
         return [`Types are not compatible`];
     }
-
 
     if (isStringableType(aTypeName) &&
         isStringableType(bTypeName)) {

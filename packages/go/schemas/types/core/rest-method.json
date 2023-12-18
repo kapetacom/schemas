@@ -97,21 +97,6 @@
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/RESTMethodArgument"
-      },
-      "if": {
-        "properties": {
-          "transport": {
-            "const": "QUERY"
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "optional": {
-            "type": "boolean",
-            "title": "Optional"
-          }
-        }
       }
     }
   }

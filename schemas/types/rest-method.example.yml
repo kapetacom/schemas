@@ -8,9 +8,11 @@ arguments:
   id:
     type: string
     transport: PATH
+    optional: false
   filter:
     type: string
     transport: QUERY
+    optional: true
   user:
     ref: User
     transport: BODY

@@ -28,6 +28,9 @@ definitions:
           - BODY
           - HEADER
           - COOKIE
+      optional:
+        type: boolean
+        title: Optional
 type: object
 required:
   - method

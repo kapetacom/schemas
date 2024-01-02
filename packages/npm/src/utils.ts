@@ -110,6 +110,36 @@ export function isBuiltInType(type?:TypeLike) {
     return isStringableType(name);
 }
 
+export function parseGeneric(type?:TypeLike) {
+    if (!type) {
+        return null;
+    }
+
+    const name = typeName(type)
+    if (!name.includes('<') || !name.endsWith('>')) {
+        return null;
+    }
+
+    const [genericName, argRaw] = name.split('<');
+    const args = argRaw.substring(0, argRaw.length - 1);
+    const genericArguments = args.split(',').map(a => a.trim());
+
+    return {
+        name: genericName,
+        arguments: genericArguments
+    };
+}
+
+export function isBuiltInGeneric(type?:TypeLike) {
+    if (!type) {
+        return false;
+    }
+
+    const generic = parseGeneric(type)
+
+    return Boolean(generic && ['map', 'set'].includes(generic.name.toLowerCase()));
+}
+
 
 export function isStringableType(type:TypeOrString|undefined) {
     if (!type) {
@@ -180,6 +210,33 @@ export function getCompatibilityIssuesForTypes(a: TypeLike|undefined, b: TypeLik
             return [];
         }
         return [`Types are not compatible`];
+    }
+
+    if (isBuiltInGeneric(a) !== isBuiltInGeneric(b)) {
+        return [`Types are not compatible`];
+    }
+
+    if (isBuiltInGeneric(a)) {
+        const aGeneric = parseGeneric(a);
+        const bGeneric = parseGeneric(b);
+        if (!aGeneric || !bGeneric) {
+            return [`Types are not compatible`];
+        }
+        if (aGeneric.name !== bGeneric.name) {
+            return [`Types are not compatible`];
+        }
+        if (aGeneric.arguments.length !== bGeneric.arguments.length) {
+            return [`Types are not compatible`];
+        }
+        for(let i = 0; i < aGeneric.arguments.length; i++) {
+            const aArg = aGeneric.arguments[i];
+            const bArg = bGeneric.arguments[i];
+            const issues = getCompatibilityIssuesForTypes({type: aArg}, {type: bArg}, aEntities, bEntities);
+            if (issues.length > 0) {
+                return issues;
+            }
+        }
+        return [];
     }
 
     let aEntity:Entity|undefined = aEntities.find(e => e.name === aTypeName);
@@ -298,6 +355,18 @@ export function hasEntityReference(object:any, entityName:string) {
         const value = values[i];
         if (value && value.ref === entityName) {
             return true;
+        }
+
+        if (value.ref) {
+            const generic = parseGeneric(value);
+            if (generic) {
+                if (!isBuiltInGeneric(value) && generic.name === entityName) {
+                    return true;
+                }
+                if (generic.arguments.some(a => a === entityName)) {
+                    return true;
+                }
+            }
         }
 
         if (typeof value === 'object' || Array.isArray(value)) {

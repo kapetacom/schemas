@@ -9,6 +9,99 @@ import {EntityType, validateSchema} from "../../src";
 import {validateEntities} from "../../src/validate-entity";
 
 describe("validateSchema", () => {
+    it("can validate an entity with generic types", async () => {
+        const user: Entity = {
+            name: 'User',
+            type: EntityType.Dto,
+            properties: {
+                name: {
+                    type: 'string',
+                    required: true,
+                }
+            }
+        };
+        const entity: Entity = {
+            name: 'Basic',
+            type: EntityType.Dto,
+            properties: {
+                userMap: {
+                    ref: 'Map<string, User>',
+                    required: true,
+                },
+                setString: {
+                    ref: 'Set<string>',
+                    defaultValue: "[\"a\",\"b\"]",
+                },
+                mapString: {
+                    ref: 'Map<string, string>'
+                }
+            }
+        };
+
+        const entities = [entity];
+
+        let errors = validateEntities(entities, {
+            Basic: {
+                userMap: {
+                    a: {
+                        name: 'a',
+                    },
+                    b: {
+                        name: 'b',
+                    }
+                },
+                setString: ["a", "b"],
+                mapString: {
+                    a: "b",
+                    c: "d",
+                }
+            }
+        }, [user]);
+        expect(errors).toHaveLength(0);
+
+        errors = validateEntities(entities, {
+            Basic: {
+                userMap: {
+                    a: {
+                        other: 'a',
+                    },
+                    b: {
+                        name: 'b',
+                    }
+                },
+                setString: ["a", "b"],
+                mapString: {
+                    a: "b",
+                    c: "d",
+                }
+            }
+        }, [user]);
+        expect(errors).toEqual([
+            'Basic.userMap.a value is invalid: User.name is missing and required'
+        ]);
+
+        errors = validateEntities(entities, {
+            Basic: {
+                userMap: {
+                    a: {
+                        name: 'a',
+                    },
+                    b: {
+                        name: 'b',
+                    }
+                },
+                setString: ["a", {b:1}],
+                mapString: {
+                    a: "b",
+                    c: {title:'test'},
+                }
+            }
+        }, [user]);
+        expect(errors).toEqual([
+            'Basic.setString map value is invalid: Value is not a string',
+            'Basic.mapString.c value is invalid: Value is not a string'
+        ]);
+    })
     it("can validate a simple entity", async () => {
         const enumEntity: Entity = {
             name: 'SomeEnum',

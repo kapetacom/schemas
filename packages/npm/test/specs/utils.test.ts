@@ -10,13 +10,13 @@ import {
     getCompatibilityIssuesForTypes,
     getSchemaEntityCompatibilityIssues,
     getSchemaEnumValuesCompatibilityIssues,
-    hasEntityReference,
+    hasEntityReference, isBuiltInGeneric,
     isBuiltInType,
     isCompatibleTypes,
     isList,
     isSchemaEntityCompatible,
     isSchemaEnumValuesCompatible,
-    isStringableType,
+    isStringableType, parseGeneric,
     toStringName,
     typeName,
     typeValue
@@ -37,6 +37,8 @@ describe('schemas', () => {
             expect(toStringName({ref: 'User'})).toBe('User');
             expect(toStringName({ref: 'User[]'})).toBe('User[]');
 
+            expect(toStringName({ref: 'Map<string,User>'})).toBe('Map<string,User>');
+
         });
 
         test('can determine if type is list', () => {
@@ -47,6 +49,8 @@ describe('schemas', () => {
 
             expect(isList({ref: 'User'})).toBe(false);
             expect(isList({ref: 'User[]'})).toBe(true);
+
+            expect(isList({ref: 'Map<string,User>[]'})).toBe(true);
 
         });
 
@@ -59,6 +63,8 @@ describe('schemas', () => {
             expect(typeName({ref: 'User'})).toBe('User');
             expect(typeName({ref: 'User[]'})).toBe('User');
 
+            expect(typeName({ref: 'Map<string,User>[]'})).toBe('Map<string,User>');
+
         });
 
         test('can get type value', () => {
@@ -69,6 +75,8 @@ describe('schemas', () => {
 
             expect(typeValue({ref: 'User'})).toBe('ref:User');
             expect(typeValue({ref: 'User[]'})).toBe('ref:User[]');
+
+            expect(typeValue({ref: 'Map<string,User>'})).toBe('ref:Map<string,User>');
 
         });
 
@@ -82,6 +90,8 @@ describe('schemas', () => {
             expect(isBuiltInType({ref: 'User'})).toBe(false);
             expect(isBuiltInType({ref: 'User[]'})).toBe(false);
 
+            expect(isBuiltInType({ref: 'Map<string,User>'})).toBe(false);
+
         });
 
         test('can determine if type is stringable', () => {
@@ -92,6 +102,8 @@ describe('schemas', () => {
             expect(isStringableType('boolean')).toBe(true);
             expect(isStringableType('float')).toBe(true);
             expect(isStringableType('float[]')).toBe(false);
+
+            expect(isStringableType('Map<string,User>')).toBe(false);
         });
     });
 
@@ -162,6 +174,46 @@ describe('schemas', () => {
                     ]
                 }]
             }, 'More')).toBe(true);
+
+            expect(hasEntityReference({
+                anything: [{
+                    inner: [
+                        {
+                            ref: 'Map<string, More>'
+                        }
+                    ]
+                }]
+            }, 'More')).toBe(true);
+
+            expect(hasEntityReference({
+                anything: [{
+                    inner: [
+                        {
+                            ref: 'Set<More>'
+                        }
+                    ]
+                }]
+            }, 'More')).toBe(true);
+
+            expect(hasEntityReference({
+                anything: [{
+                    inner: [
+                        {
+                            ref: 'Set<More>'
+                        }
+                    ]
+                }]
+            }, 'Set')).toBe(false);
+
+            expect(hasEntityReference({
+                anything: [{
+                    inner: [
+                        {
+                            ref: 'Test<More>'
+                        }
+                    ]
+                }]
+            }, 'Test')).toBe(true);
 
             expect(hasEntityReference(null, 'More')).toBe(false);
         })
@@ -244,6 +296,56 @@ describe('schemas', () => {
             expect(isCompatibleTypes({type:'any'}, {type:'date'}, [], [])).toBe(true);
         })
 
+        test('can parse generic types', () => {
+            const person = {
+                type: EntityType.Dto,
+                name: 'Person',
+                properties: {}
+            };
+
+            const user = {
+                type: EntityType.Dto,
+                name: 'User',
+                properties: {}
+            };
+
+            expect(isBuiltInGeneric({ref: 'Map<string,User>'})).toBe(true);
+            expect(isBuiltInGeneric({ref: 'Set<string,User>'})).toBe(true);
+            expect(isBuiltInGeneric({ref: 'Other<string,User>'})).toBe(false);
+
+            expect(isBuiltInGeneric({ref: 'User'})).toBe(false);
+
+            expect(parseGeneric({ref: 'User<string,More>'})).toEqual({
+                name: 'User',
+                arguments: ['string', 'More']
+            });
+
+            expect(parseGeneric({ref: 'Map<string,More>'})).toEqual({
+                name: 'Map',
+                arguments: ['string', 'More']
+            });
+        })
+
+        test('can compare generic types', () => {
+            const person = {
+                type: EntityType.Dto,
+                name: 'Person',
+                properties: {}
+            };
+
+            const user = {
+                type: EntityType.Dto,
+                name: 'User',
+                properties: {}
+            };
+
+            expect(isCompatibleTypes({ref:'Map<string,User>'}, {ref:'Map<string,Person>'}, [user], [person])).toBe(true);
+            expect(isCompatibleTypes({ref:'Map<string,User>'}, {ref:'Map<string,any>'}, [user], [person])).toBe(true);
+
+            expect(isCompatibleTypes({type:'any'}, {ref:'Map<string,any>'}, [], [])).toBe(true);
+            expect(isCompatibleTypes({type:'User'}, {ref:'Map<string,User>'}, [user], [user])).toBe(false);
+        })
+
         test('Simple entity that matches is compatible', () => {
 
             expect(isSchemaEntityCompatible(
@@ -288,6 +390,28 @@ describe('schemas', () => {
                     properties: {
                         id: {
                             type: 'integer'
+                        }
+                    }
+                },
+                [],[]
+            )).toBe(true);
+
+            expect(isSchemaEntityCompatible(
+                {
+                    type: EntityType.Dto,
+                    name: 'User',
+                    properties: {
+                        id: {
+                            ref: 'Map<string,string>'
+                        }
+                    }
+                },
+                {
+                    type: EntityType.Dto,
+                    name: 'User',
+                    properties: {
+                        id: {
+                            ref: 'Map<string,integer>'
                         }
                     }
                 },

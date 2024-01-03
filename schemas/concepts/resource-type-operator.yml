@@ -44,5 +44,4 @@ spec:
               $ref: /core/port
         required:
           - ports
-          - local
 

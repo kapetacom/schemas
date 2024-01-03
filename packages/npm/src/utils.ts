@@ -326,6 +326,13 @@ export function getSchemaPropertiesCompatibilityIssues(a:EntityProperties, b:Ent
             return [`Property not found: ${id}`];
         }
 
+        const aRequired = !!aProperty.required;
+        const bRequired = !!bProperty.required;
+
+        if (aRequired !== bRequired) {
+            return [`Both properties were not required: ${id}`];
+        }
+
         const issues = getCompatibilityIssuesForTypes(aProperty, bProperty, aEntities, bEntities)
 
         if (issues.length > 0) {

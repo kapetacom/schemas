@@ -9,7 +9,7 @@ import {
     EntityType,
     getCompatibilityIssuesForTypes,
     getSchemaEntityCompatibilityIssues,
-    getSchemaEnumValuesCompatibilityIssues,
+    getSchemaEnumValuesCompatibilityIssues, getSchemaPropertiesCompatibilityIssues,
     hasEntityReference, isBuiltInGeneric,
     isBuiltInType,
     isCompatibleTypes,
@@ -266,6 +266,46 @@ describe('schemas', () => {
             ]);
         })
 
+        test('required properties must match', () => {
+
+            expect(getSchemaPropertiesCompatibilityIssues({
+                id: {
+                    type: 'string',
+                    required: false
+                }
+            },{
+                id: {
+                    type: 'string',
+                    required: true
+                }
+            }, [], [])).toEqual([
+                'Both properties were not required: id'
+            ]);
+
+            expect(getSchemaPropertiesCompatibilityIssues({
+                id: {
+                    type: 'string',
+                    required: false
+                }
+            },{
+                id: {
+                    type: 'string'
+                }
+            }, [], [])).toEqual([]);
+
+            expect(getSchemaPropertiesCompatibilityIssues({
+                id: {
+                    type: 'string',
+                    required: true
+                }
+            },{
+                id: {
+                    type: 'string',
+                    required: true
+                }
+            }, [], [])).toEqual([]);
+        })
+
         test('entities of different name can be compatible', () => {
             expect(isCompatibleTypes({ref:'User'}, {ref:'Person'}, [
                 {
@@ -419,6 +459,32 @@ describe('schemas', () => {
             )).toBe(true);
 
         });
+
+        test('required properties must match', () => {
+            expect(isSchemaEntityCompatible(
+                {
+                    type: EntityType.Dto,
+                    name: 'User',
+                    properties: {
+                        id: {
+                            type: 'string',
+                            required: true
+                        }
+                    }
+                },
+                {
+                    type: EntityType.Dto,
+                    name: 'User',
+                    properties: {
+                        id: {
+                            type: 'string',
+                            required: false
+                        }
+                    }
+                },
+                [],[]
+            )).toBe(false);
+        })
 
         test('Simple entity with different properties is not compatible', () => {
             expect(isSchemaEntityCompatible(

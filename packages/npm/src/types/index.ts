@@ -1,7 +1,7 @@
-export interface BlockDefinition {
+export interface Concept {
     kind:     string;
     metadata: Metadata;
-    spec:     BlockDefinitionSpec;
+    spec:     ConceptSpec;
 }
 
 export interface Metadata {
@@ -10,88 +10,6 @@ export interface Metadata {
     title?:       string;
     visibility?:  string;
     [property: string]: any;
-}
-
-export interface BlockDefinitionSpec {
-    configuration?: EntityList;
-    consumers?:     Resource[];
-    entities?:      EntityList;
-    icon?:          IconValue;
-    providers?:     Resource[];
-    target?:        LanguageTargetReference;
-}
-
-export interface EntityList {
-    source?: SourceCode;
-    types?:  Entity[];
-    [property: string]: any;
-}
-
-export interface SourceCode {
-    type:  string;
-    value: string;
-    [property: string]: any;
-}
-
-export interface Entity {
-    description?: string;
-    name:         string;
-    properties?:  { [key: string]: EntityProperty };
-    type:         EntityType;
-    values?:      string[];
-    [property: string]: any;
-}
-
-export interface EntityProperty {
-    defaultValue?: string;
-    description?:  string;
-    format?:       string;
-    global?:       boolean;
-    ref?:          string;
-    required?:     boolean;
-    secret?:       boolean;
-    type?:         string;
-    [property: string]: any;
-}
-
-export enum EntityType {
-    Dto = "dto",
-    Enum = "enum",
-    Native = "native",
-}
-
-export interface Resource {
-    kind:     string;
-    metadata: ResourceMetadata;
-    spec:     { [key: string]: any };
-    [property: string]: any;
-}
-
-export interface ResourceMetadata {
-    name: string;
-    [property: string]: any;
-}
-
-export interface IconValue {
-    type:  IconType;
-    value: string;
-}
-
-export enum IconType {
-    Fontawesome5 = "fontawesome5",
-    URL = "url",
-}
-
-export interface LanguageTargetReference {
-    kind:     string;
-    options?: { [key: string]: any };
-    [property: string]: any;
-}
-
-export interface Concept {
-    kind:     string;
-    metadata: Metadata;
-    spec:     ConceptSpec;
 }
 
 export interface ConceptSpec {
@@ -149,6 +67,45 @@ export interface Dimensions {
     [property: string]: any;
 }
 
+export interface EntityList {
+    source?: SourceCode;
+    types?:  Entity[];
+    [property: string]: any;
+}
+
+export interface SourceCode {
+    type:  string;
+    value: string;
+    [property: string]: any;
+}
+
+export interface Entity {
+    description?: string;
+    name:         string;
+    properties?:  { [key: string]: EntityProperty };
+    type:         EntityType;
+    values?:      string[];
+    [property: string]: any;
+}
+
+export interface EntityProperty {
+    defaultValue?: string;
+    description?:  string;
+    format?:       string;
+    global?:       boolean;
+    ref?:          string;
+    required?:     boolean;
+    secret?:       boolean;
+    type?:         string;
+    [property: string]: any;
+}
+
+export enum EntityType {
+    Dto = "dto",
+    Enum = "enum",
+    Native = "native",
+}
+
 export interface Connection {
     consumer: Endpoint;
     mapping?: { [key: string]: any };
@@ -182,6 +139,16 @@ export interface BlockTypeOperatorSpec {
     schema:        { [key: string]: any };
     versioning?:   Versioning[];
     [property: string]: any;
+}
+
+export interface IconValue {
+    type:  IconType;
+    value: string;
+}
+
+export enum IconType {
+    Fontawesome5 = "fontawesome5",
+    URL = "url",
 }
 
 export interface LocalInstance {
@@ -363,13 +330,47 @@ export enum DeploymentNetworkConnectionType {
 }
 
 export interface DeploymentServiceInstance {
-    configuration?: { [key: string]: any };
-    fallbackDNS:    string;
-    id:             string;
-    image?:         string;
-    kind:           string;
-    ref:            string;
-    title?:         string;
+    blockdefinition?: BlockDefinition;
+    configuration?:   { [key: string]: any };
+    fallbackDNS:      string;
+    id:               string;
+    image?:           string;
+    kind:             string;
+    ref:              string;
+    title?:           string;
+    [property: string]: any;
+}
+
+export interface BlockDefinition {
+    kind:     string;
+    metadata: Metadata;
+    spec:     BlockDefinitionSpec;
+}
+
+export interface BlockDefinitionSpec {
+    configuration?: EntityList;
+    consumers?:     Resource[];
+    entities?:      EntityList;
+    icon?:          IconValue;
+    providers?:     Resource[];
+    target?:        LanguageTargetReference;
+}
+
+export interface Resource {
+    kind:     string;
+    metadata: ResourceMetadata;
+    spec:     { [key: string]: any };
+    [property: string]: any;
+}
+
+export interface ResourceMetadata {
+    name: string;
+    [property: string]: any;
+}
+
+export interface LanguageTargetReference {
+    kind:     string;
+    options?: { [key: string]: any };
     [property: string]: any;
 }
 

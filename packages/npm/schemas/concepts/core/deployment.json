@@ -72,6 +72,9 @@
             "configuration": {
               "type": "object",
               "additionalProperties": true
+            },
+            "blockdefinition": {
+              "$ref": "/core/block-definition"
             }
           },
           "required": [

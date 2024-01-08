@@ -516,7 +516,7 @@ export interface ResourceTypeOperatorSpec {
     color?:         ColorValue;
     configuration?: ConfigurationSchema;
     icon?:          IconValue;
-    local:          LocalInstance;
+    local?:         LocalInstance;
     ports:          Port[];
     schema?:        { [key: string]: any };
     versioning?:    Versioning[];

@@ -52,8 +52,7 @@
             }
           },
           "required": [
-            "ports",
-            "local"
+            "ports"
           ]
         }
       }

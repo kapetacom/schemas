@@ -1,0 +1,326 @@
+{
+    "kind": "kapeta/block-type-service:local",
+    "metadata": {
+        "name": "kapeta/sample-java-todo-service"
+    },
+    "spec": {
+        "target": {
+            "kind": "kapeta/language-target-java-spring-boot:local",
+            "options": {
+                "basePackage": "org.mycompany.services.todo",
+                "groupId": "org.mycompany.services",
+                "artifactId": "todo"
+            }
+        },
+        "entities": {
+            "types": [
+                {
+                    "name": "Task",
+                    "type": "dto",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "listId": {
+                            "type": "string"
+                        },
+                        "userId": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "done": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                {
+                    "name": "User",
+                    "type": "dto",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "email": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "name": "TaskList",
+                    "type": "dto",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "createdBy": {
+                            "type": "string"
+                        },
+                        "created": {
+                            "type": "long"
+                        }
+                    }
+                },
+                {
+                    "name": "UserAuth",
+                    "type": "dto",
+                    "properties": {
+                        "username": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "consumers": [
+            {
+                "kind": "kapeta/resource-type-mongodb:0.0.2",
+                "metadata": {
+                    "name": "tododb"
+                },
+                "spec": {
+                    "port": {
+                        "type": "mongodb"
+                    }
+                }
+            },
+            {
+                "kind": "kapeta/resource-type-rest-client:0.0.4",
+                "metadata": {
+                    "name": "users"
+                },
+                "spec": {
+                    "port": {
+                        "type": "rest"
+                    },
+                    "methods": {
+                        "deleteUser": {
+                            "responseType": "void",
+                            "method": "DELETE",
+                            "path": "/users/{id}",
+                            "description": null,
+                            "arguments": {
+                                "id": {
+                                    "type": "string",
+                                    "transport": "PATH"
+                                }
+                            }
+                        },
+                        "getUser": {
+                            "responseType": {
+                                "$ref": "User"
+                            },
+                            "method": "GET",
+                            "path": "/users/{id}",
+                            "description": null,
+                            "arguments": {
+                                "id": {
+                                    "type": "string",
+                                    "transport": "PATH"
+                                }
+                            }
+                        }
+                    },
+                    "source": {
+                        "type": "kapeta-dsl",
+                        "value": "@DELETE(\"/users/{id}\")\ndeleteUser(@Path id:string):void\n\n@GET(\"/users/{id}\")\ngetUser(@Path id:string):User"
+                    }
+                }
+            }
+        ],
+        "providers": [
+            {
+                "kind": "kapeta/resource-type-rest-api:0.0.4",
+                "metadata": {
+                    "name": "tasks"
+                },
+                "spec": {
+                    "port": {
+                        "type": "rest"
+                    },
+                    "methods": {
+                        "addTask": {
+                            "description": "Add task to list",
+                            "method": "POST",
+                            "path": "/tasks/{listId}/new",
+                            "arguments": {
+                                "listId": {
+                                    "type": "string",
+                                    "transport": "PATH",
+                                    "id": "listId"
+                                },
+                                "task": {
+                                    "id": "task",
+                                    "type": {
+                                        "$ref": "Task"
+                                    },
+                                    "transport": "BODY"
+                                }
+                            }
+                        },
+                        "removeTask": {
+                            "description": "Remove task from list",
+                            "method": "DELETE",
+                            "path": "/tasks/{listId}/{taskId}",
+                            "arguments": {
+                                "listId": {
+                                    "id": "listId",
+                                    "type": "string",
+                                    "transport": "PATH"
+                                },
+                                "taskId": {
+                                    "id": "taskId",
+                                    "type": "string",
+                                    "transport": "PATH"
+                                }
+                            },
+                            "responseType": ""
+                        },
+                        "getTasks": {
+                            "description": "Get tasks for list",
+                            "method": "GET",
+                            "path": "/tasks/{listId}",
+                            "arguments": {
+                                "listId": {
+                                    "id": "listId",
+                                    "type": "string",
+                                    "transport": "PATH"
+                                }
+                            },
+                            "responseType": {
+                                "$ref": "Task[]"
+                            }
+                        },
+                        "updateTask": {
+                            "description": "Update task",
+                            "method": "PUT",
+                            "path": "/tasks/{listId}/{taskId}",
+                            "arguments": {
+                                "listId": {
+                                    "id": "listId",
+                                    "type": "string",
+                                    "transport": "PATH"
+                                },
+                                "taskId": {
+                                    "id": "taskId",
+                                    "type": "string",
+                                    "transport": "PATH"
+                                },
+                                "task": {
+                                    "id": "task",
+                                    "type": {
+                                        "$ref": "Task"
+                                    },
+                                    "transport": "BODY"
+                                }
+                            },
+                            "responseType": {
+                                "$ref": "Task"
+                            }
+                        },
+                        "markAsDone": {
+                            "description": "Mark task as done",
+                            "method": "POST",
+                            "path": "/tasks/{listId}/{taskId}/done",
+                            "arguments": {
+                                "listId": {
+                                    "type": "string",
+                                    "transport": "PATH"
+                                },
+                                "taskId": {
+                                    "type": "string",
+                                    "transport": "path"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "kind": "kapeta/resource-type-rest-api:0.0.4",
+                "metadata": {
+                    "name": "lists"
+                },
+                "spec": {
+                    "port": {
+                        "type": "rest"
+                    },
+                    "methods": {
+                        "getLists": {
+                            "description": "Gets all task lists",
+                            "method": "GET",
+                            "path": "/lists",
+                            "arguments": {},
+                            "responseType": {
+                                "$ref": "TaskList[]"
+                            }
+                        },
+                        "addList": {
+                            "description": "Create new list",
+                            "method": "POST",
+                            "path": "/lists/new",
+                            "arguments": {
+                                "list": {
+                                    "id": "list",
+                                    "type": {
+                                        "$ref": "TaskList"
+                                    },
+                                    "transport": "BODY"
+                                }
+                            },
+                            "responseType": ""
+                        },
+                        "updateList": {
+                            "description": "Updates a list",
+                            "method": "PUT",
+                            "path": "/lists/{listId}",
+                            "arguments": {
+                                "listId": {
+                                    "id": "listId",
+                                    "type": "string",
+                                    "transport": "PATH"
+                                },
+                                "list": {
+                                    "id": "list",
+                                    "type": {
+                                        "$ref": "TaskList"
+                                    },
+                                    "transport": "BODY"
+                                }
+                            },
+                            "responseType": ""
+                        },
+                        "removeList": {
+                            "description": "Deletes a list and all tasks in it",
+                            "method": "DELETE",
+                            "path": "/lists/{listId}",
+                            "arguments": {
+                                "listId": {
+                                    "id": "listId",
+                                    "type": "string",
+                                    "transport": "PATH"
+                                }
+                            },
+                            "responseType": ""
+                        }
+                    }
+                }
+            }
+        ]
+    }
+  }
+
+  

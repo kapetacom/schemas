@@ -16,6 +16,8 @@ jobs:
         run: npm install
       - name: 'Generate sources'
         run: npm run generate
+      - name: 'Run the tests'
+        run: npm run test
 
   build-node:
     runs-on: ubuntu-latest
@@ -33,6 +35,9 @@ jobs:
         run: npm run build
         working-directory: ./packages/npm
 
+      - name: 'Run tests'
+        run: npm run test
+        working-directory: ./packages/npm
   build-java:
     runs-on: ubuntu-latest
     steps:

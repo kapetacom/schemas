@@ -420,7 +420,7 @@ type ResourceTypeOperatorSpec struct {
 	Color         *ColorValue            `json:"color,omitempty"`        
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
 	Icon          *IconValue             `json:"icon,omitempty"`         
-	Local         LocalInstance          `json:"local"`                  
+	Local         *LocalInstance         `json:"local,omitempty"`        
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema,omitempty"`       
 	Versioning    []Versioning           `json:"versioning,omitempty"`   

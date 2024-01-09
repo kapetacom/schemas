@@ -51,7 +51,7 @@ spec:
           configuration:
             type: object
             additionalProperties: true
-          blockdefinition:
+          blockDefinition:
             $ref: /core/block-definition
         required:
           - id

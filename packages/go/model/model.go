@@ -253,7 +253,7 @@ type DeploymentNetworkEndpoint struct {
 }
 
 type DeploymentServiceInstance struct {
-	Blockdefinition *BlockDefinition       `json:"blockdefinition,omitempty"`
+	BlockDefinition *BlockDefinition       `json:"blockDefinition,omitempty"`
 	Configuration   map[string]interface{} `json:"configuration,omitempty"`  
 	FallbackDNS     string                 `json:"fallbackDNS"`              
 	Id              string                 `json:"id"`                       

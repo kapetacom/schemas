@@ -330,7 +330,7 @@ export enum DeploymentNetworkConnectionType {
 }
 
 export interface DeploymentServiceInstance {
-    blockdefinition?: BlockDefinition;
+    blockDefinition?: BlockDefinition;
     configuration?:   { [key: string]: any };
     fallbackDNS:      string;
     id:               string;

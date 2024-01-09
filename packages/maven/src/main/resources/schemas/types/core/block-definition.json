@@ -17,6 +17,7 @@
       "$ref": "/core/metadata"
     },
     "spec": {
+      "title": "BlockDefinitionSpec",
       "type": "object",
       "additionalProperties": false,
       "properties": {

@@ -19,6 +19,6 @@ func TestValidateJSON(t *testing.T) {
 }
 
 func TestValidate_Block(t *testing.T) {
-	err := ValidateJSON(block, ABSTRACTS_CORE_BLOCK_DEFINITION)
+	err := ValidateJSON(block, TYPES_CORE_BLOCK_DEFINITION)
 	assert.NoError(t, err)
 }

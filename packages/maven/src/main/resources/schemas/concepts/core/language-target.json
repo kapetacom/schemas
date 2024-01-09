@@ -22,6 +22,7 @@
           "$ref": "/core/metadata"
         },
         "spec": {
+          "title": "LanguageTargetSpec",
           "type": "object",
           "additionalProperties": false,
           "required": [

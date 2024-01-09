@@ -73,7 +73,7 @@
               "type": "object",
               "additionalProperties": true
             },
-            "blockdefinition": {
+            "blockDefinition": {
               "$ref": "/core/block-definition"
             }
           },

@@ -4,7 +4,7 @@ import java.util.Map;
 
 @lombok.Data
 public class DeploymentServiceInstance {
-    private BlockDefinition blockdefinition;
+    private Block blockdefinition;
     private Map<String, Object> configuration;
     private String fallbackDNS;
     private String id;

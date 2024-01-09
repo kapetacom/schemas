@@ -101,7 +101,7 @@ const languages:Language[] = [
         const typeName = abstract.content.$id.substring(1).split(/\//)[1];
         const schema:JSONSchemaSourceData = {
             schema: JSON.stringify(abstract.content),
-            name: abstract.content.$id
+            name: typeName
         };
 
         inputData.addSourceSync(

@@ -29,35 +29,19 @@ type Kind struct {
 	Spec     map[string]interface{} `json:"spec,omitempty"`
 }
 
-type BlockTypeGroup struct {
-	Kind     string             `json:"kind"`    
-	Metadata Metadata           `json:"metadata"`
-	Spec     BlockTypeGroupSpec `json:"spec"`    
+type BlockDefinition struct {
+	Kind     string              `json:"kind"`    
+	Metadata Metadata            `json:"metadata"`
+	Spec     BlockDefinitionSpec `json:"spec"`    
 }
 
-type BlockTypeGroupSpec struct {
-	Blocks        []BlockInstance `json:"blocks"`                 
-	Configuration *EntityList     `json:"configuration,omitempty"`
-	Connections   []Connection    `json:"connections"`            
-}
-
-type BlockInstance struct {
-	Block                AssetReference         `json:"block"`                         
-	DefaultConfiguration map[string]interface{} `json:"defaultConfiguration,omitempty"`
-	Dimensions           Dimensions             `json:"dimensions"`                    
-	Id                   string                 `json:"id"`                            
-	Name                 string                 `json:"name"`                          
-}
-
-type AssetReference struct {
-	Ref string `json:"ref"`
-}
-
-type Dimensions struct {
-	Height float64 `json:"height"`
-	Left   float64 `json:"left"`  
-	Top    float64 `json:"top"`   
-	Width  float64 `json:"width"` 
+type BlockDefinitionSpec struct {
+	Configuration *EntityList              `json:"configuration,omitempty"`
+	Consumers     []ConsumerElement        `json:"consumers,omitempty"`    
+	Entities      *EntityList              `json:"entities,omitempty"`     
+	Icon          *IconValue               `json:"icon,omitempty"`         
+	Providers     []ConsumerElement        `json:"providers,omitempty"`    
+	Target        *LanguageTargetReference `json:"target,omitempty"`       
 }
 
 type EntityList struct {
@@ -89,6 +73,57 @@ type EntityProperty struct {
 	Type         *string `json:"type,omitempty"`        
 }
 
+type ConsumerElement struct {
+	Kind     string                 `json:"kind"`    
+	Metadata ResourceMetadata       `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`    
+}
+
+type ResourceMetadata struct {
+	Name string `json:"name"`
+}
+
+type IconValue struct {
+	Type  IconType `json:"type"` 
+	Value string   `json:"value"`
+}
+
+type LanguageTargetReference struct {
+	Kind    string                 `json:"kind"`             
+	Options map[string]interface{} `json:"options,omitempty"`
+}
+
+type BlockTypeGroup struct {
+	Kind     string             `json:"kind"`    
+	Metadata Metadata           `json:"metadata"`
+	Spec     BlockTypeGroupSpec `json:"spec"`    
+}
+
+type BlockTypeGroupSpec struct {
+	Blocks        []BlockInstance `json:"blocks"`                 
+	Configuration *EntityList     `json:"configuration,omitempty"`
+	Connections   []Connection    `json:"connections"`            
+}
+
+type BlockInstance struct {
+	Block                AssetReference         `json:"block"`                         
+	DefaultConfiguration map[string]interface{} `json:"defaultConfiguration,omitempty"`
+	Dimensions           Dimensions             `json:"dimensions"`                    
+	Id                   string                 `json:"id"`                            
+	Name                 string                 `json:"name"`                          
+}
+
+type AssetReference struct {
+	Ref string `json:"ref"`
+}
+
+type Dimensions struct {
+	Height float64 `json:"height"`
+	Left   float64 `json:"left"`  
+	Top    float64 `json:"top"`   
+	Width  float64 `json:"width"` 
+}
+
 type Connection struct {
 	Consumer Endpoint               `json:"consumer"`         
 	Mapping  map[string]interface{} `json:"mapping,omitempty"`
@@ -117,11 +152,6 @@ type BlockTypeOperatorSpec struct {
 	Local        LocalInstance          `json:"local"`                 
 	Schema       map[string]interface{} `json:"schema"`                
 	Versioning   []Versioning           `json:"versioning,omitempty"`  
-}
-
-type IconValue struct {
-	Type  IconType `json:"type"` 
-	Value string   `json:"value"`
 }
 
 type LocalInstance struct {
@@ -253,7 +283,7 @@ type DeploymentNetworkEndpoint struct {
 }
 
 type DeploymentServiceInstance struct {
-	Blockdefinition *BlockDefinition       `json:"blockdefinition,omitempty"`
+	Blockdefinition *Block                 `json:"blockdefinition,omitempty"`
 	Configuration   map[string]interface{} `json:"configuration,omitempty"`  
 	FallbackDNS     string                 `json:"fallbackDNS"`              
 	Id              string                 `json:"id"`                       
@@ -263,34 +293,19 @@ type DeploymentServiceInstance struct {
 	Title           *string                `json:"title,omitempty"`          
 }
 
-type BlockDefinition struct {
+type Block struct {
 	Kind     string              `json:"kind"`    
 	Metadata Metadata            `json:"metadata"`
-	Spec     BlockDefinitionSpec `json:"spec"`    
+	Spec     BlockdefinitionSpec `json:"spec"`    
 }
 
-type BlockDefinitionSpec struct {
+type BlockdefinitionSpec struct {
 	Configuration *EntityList              `json:"configuration,omitempty"`
 	Consumers     []ConsumerElement        `json:"consumers,omitempty"`    
 	Entities      *EntityList              `json:"entities,omitempty"`     
 	Icon          *IconValue               `json:"icon,omitempty"`         
 	Providers     []ConsumerElement        `json:"providers,omitempty"`    
 	Target        *LanguageTargetReference `json:"target,omitempty"`       
-}
-
-type ConsumerElement struct {
-	Kind     string                 `json:"kind"`    
-	Metadata ResourceMetadata       `json:"metadata"`
-	Spec     map[string]interface{} `json:"spec"`    
-}
-
-type ResourceMetadata struct {
-	Name string `json:"name"`
-}
-
-type LanguageTargetReference struct {
-	Kind    string                 `json:"kind"`             
-	Options map[string]interface{} `json:"options,omitempty"`
 }
 
 type DeploymentTargetReference struct {

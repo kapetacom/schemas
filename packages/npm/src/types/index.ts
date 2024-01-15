@@ -74,8 +74,9 @@ export interface EntityList {
 }
 
 export interface SourceCode {
-    type:  string;
-    value: string;
+    type:     string;
+    value:    string;
+    version?: string;
     [property: string]: any;
 }
 

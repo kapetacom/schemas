@@ -66,8 +66,9 @@ type EntityList struct {
 }
 
 type SourceCode struct {
-	Type  string `json:"type"` 
-	Value string `json:"value"`
+	Type    string  `json:"type"`             
+	Value   string  `json:"value"`            
+	Version *string `json:"version,omitempty"`
 }
 
 type Entity struct {

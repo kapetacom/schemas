@@ -4,4 +4,5 @@ package com.kapeta.schemas.entity;
 public class SourceCode {
     private String type;
     private String value;
+    private String version;
 }

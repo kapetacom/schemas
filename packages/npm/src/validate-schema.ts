@@ -4,7 +4,7 @@
  */
 
 import Ajv from "ajv";
-import path from "path";
+import {basename} from "path";
 import schemaMap from "../schemas";
 
 /**
@@ -15,7 +15,7 @@ function initializeAjv() {
 
   for (const [id, content] of Object.entries(schemaMap)) {
     const category = id.split("/").slice(1, -1).join("/");
-    const kindId = `${category}/${path.basename(id, ".json")}`;
+    const kindId = `${category}/${basename(id, ".json")}`;
 
     if ("kind" in content) {
       // concepts have a different wrapper

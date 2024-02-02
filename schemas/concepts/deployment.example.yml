@@ -30,6 +30,7 @@ spec:
       image: docker.kapeta.com/kapeta/nodejs-sample-todo-ui:0.0.9
       configuration:
         block-specific-config: true
+      type: service
 
     - id: todo-api
       kind: kapeta/block-type-service
@@ -39,6 +40,7 @@ spec:
       image: docker.kapeta.com/kapeta/nodejs-sample-todo-service:0.0.5
       configuration:
         block-specific-config: true
+      type: service
 
     - id: users-api
       title: Users API
@@ -48,6 +50,7 @@ spec:
       image: docker.kapeta.com/kapeta/nodejs-sample-users-service:0.0.4
       configuration:
         block-specific-config: true
+      type: service
 
     - id: postgres
       title: Main postgres
@@ -59,6 +62,7 @@ spec:
         tier: db-custom-1-3840
         availabilityType: ZONAL
         storage: 10Gi
+      type: operator
 
     - id: mongodb4
       title: Main Mongo
@@ -69,6 +73,7 @@ spec:
         version: "4.4.17"
         storage: 10Gi
         diskType: premium-rwo
+      type: operator
 
     - id: mongodb6
       title: Smaller Mongo
@@ -79,6 +84,7 @@ spec:
         version: "6.0.2"
         storage: 10Gi
         diskType: standard
+      type: operator
 
   network:
     - type: resource

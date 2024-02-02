@@ -339,6 +339,7 @@ export interface DeploymentServiceInstance {
     kind:             string;
     ref:              string;
     title?:           string;
+    type:             DeploymentServiceInstanceType;
     [property: string]: any;
 }
 
@@ -373,6 +374,11 @@ export interface LanguageTargetReference {
     kind:     string;
     options?: { [key: string]: any };
     [property: string]: any;
+}
+
+export enum DeploymentServiceInstanceType {
+    Operator = "operator",
+    Service = "service",
 }
 
 export interface DeploymentTargetReference {

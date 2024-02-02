@@ -12,4 +12,5 @@ public class DeploymentServiceInstance {
     private String kind;
     private String ref;
     private String title;
+    private DeploymentServiceInstanceType type;
 }

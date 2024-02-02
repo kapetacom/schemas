@@ -75,13 +75,22 @@
             },
             "blockDefinition": {
               "$ref": "/core/block-definition"
+            },
+            "type": {
+              "title": "DeploymentServiceInstanceType",
+              "type": "string",
+              "enum": [
+                "operator",
+                "service"
+              ]
             }
           },
           "required": [
             "id",
             "fallbackDNS",
             "kind",
-            "ref"
+            "ref",
+            "type"
           ]
         },
         "DeploymentNetworkEndpoint": {

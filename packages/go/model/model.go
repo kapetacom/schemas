@@ -254,14 +254,15 @@ type DeploymentNetworkEndpoint struct {
 }
 
 type DeploymentServiceInstance struct {
-	BlockDefinition *BlockDefinition       `json:"blockDefinition,omitempty"`
-	Configuration   map[string]interface{} `json:"configuration,omitempty"`  
-	FallbackDNS     string                 `json:"fallbackDNS"`              
-	Id              string                 `json:"id"`                       
-	Image           *string                `json:"image,omitempty"`          
-	Kind            string                 `json:"kind"`                     
-	Ref             string                 `json:"ref"`                      
-	Title           *string                `json:"title,omitempty"`          
+	BlockDefinition *BlockDefinition              `json:"blockDefinition,omitempty"`
+	Configuration   map[string]interface{}        `json:"configuration,omitempty"`  
+	FallbackDNS     string                        `json:"fallbackDNS"`              
+	Id              string                        `json:"id"`                       
+	Image           *string                       `json:"image,omitempty"`          
+	Kind            string                        `json:"kind"`                     
+	Ref             string                        `json:"ref"`                      
+	Title           *string                       `json:"title,omitempty"`          
+	Type            DeploymentServiceInstanceType `json:"type"`                     
 }
 
 type BlockDefinition struct {
@@ -473,6 +474,12 @@ const (
 
 type DeploymentNetworkConnectionType string
 const (
+	DeploymentNetworkConnectionTypeService DeploymentNetworkConnectionType = "service"
 	Resource DeploymentNetworkConnectionType = "resource"
-	Service DeploymentNetworkConnectionType = "service"
+)
+
+type DeploymentServiceInstanceType string
+const (
+	DeploymentServiceInstanceTypeService DeploymentServiceInstanceType = "service"
+	Operator DeploymentServiceInstanceType = "operator"
 )

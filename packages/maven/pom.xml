@@ -8,6 +8,10 @@
     <artifactId>schemas</artifactId>
     <version>2.1.0</version>
 
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Data schemas for Kapeta</description>
+    <url>https://kapeta.com</url>
+
     <licenses>
         <license>
             <name>MIT License</name>
@@ -16,43 +20,46 @@
         </license>
     </licenses>
 
+
+    <developers>
+        <developer>
+            <name>Kapeta Engineering</name>
+            <email>engineering@kapeta.com</email>
+            <organization>Kapeta</organization>
+            <organizationUrl>https://kapeta.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/kapetacom/schemas#readme</url>
+        <connection>git+https://github.com/kapetacom/schemas.git</connection>
+    </scm>
+
     <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
         <repository>
-            <id>artifact-registry</id>
-            <url>artifactregistry://europe-north1-maven.pkg.dev/kapeta-production/kapeta-maven-public</url>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
 
-    <repositories>
-        <repository>
-            <id>artifact-registry</id>
-            <url>artifactregistry://europe-north1-maven.pkg.dev/kapeta-production/kapeta-maven-public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <build>
-        <extensions>
-            <extension>
-                <groupId>com.google.cloud.artifactregistry</groupId>
-                <artifactId>artifactregistry-maven-wagon</artifactId>
-                <version>2.1.0</version>
-            </extension>
-        </extensions>
         <plugins>
             <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -60,11 +67,12 @@
                     <execution>
                         <id>attach-sources</id>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -77,14 +85,29 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <gpgArguments>
+                        <arg>--pinentry-mode</arg>
+                        <arg>loopback</arg>
+                    </gpgArguments>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-
     </build>
-
-    <scm>
-        <url>https://github.com/kapetacom/schemas#readme</url>
-        <connection>git+https://github.com/kapetacom/schemas.git</connection>
-    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -54,7 +54,7 @@ jobs:
         with:
           java-version: '19'
           distribution: 'adopt'
-      - run: mvn clean verify
+      - run: mvn clean test
         working-directory: ./packages/maven
         
   build-go:

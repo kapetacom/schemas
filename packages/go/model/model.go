@@ -113,11 +113,19 @@ type BlockTypeOperator struct {
 }
 
 type BlockTypeOperatorSpec struct {
-	Dependencies []Dependency           `json:"dependencies,omitempty"`
-	Icon         *IconValue             `json:"icon,omitempty"`        
-	Local        LocalInstance          `json:"local"`                 
-	Schema       map[string]interface{} `json:"schema"`                
-	Versioning   []Versioning           `json:"versioning,omitempty"`  
+	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
+	Dependencies  []Dependency           `json:"dependencies,omitempty"` 
+	Icon          *IconValue             `json:"icon,omitempty"`         
+	Local         LocalInstance          `json:"local"`                  
+	Schema        map[string]interface{} `json:"schema"`                 
+	Type          *BlockOperatorType     `json:"type,omitempty"`         
+	Versioning    []Versioning           `json:"versioning,omitempty"`   
+}
+
+type ConfigurationSchema struct {
+	DefaultValue map[string]interface{}            `json:"defaultValue,omitempty"`
+	Schema       map[string]interface{}            `json:"schema"`                
+	UISchema     map[string]map[string]interface{} `json:"uiSchema,omitempty"`    
 }
 
 type IconValue struct {
@@ -126,17 +134,13 @@ type IconValue struct {
 }
 
 type LocalInstance struct {
-	Credentials *LocalInstanceCredentials    `json:"credentials,omitempty"`
+	Credentials map[string]interface{}       `json:"credentials,omitempty"`
 	Env         map[string]string            `json:"env,omitempty"`        
 	Health      *LocalInstanceHealth         `json:"health,omitempty"`     
 	Image       string                       `json:"image"`                
 	Mounts      map[string]string            `json:"mounts,omitempty"`     
 	Ports       map[string]LocalInstancePort `json:"ports"`                
-}
-
-type LocalInstanceCredentials struct {
-	Password string `json:"password"`
-	Username string `json:"username"`
+	Singleton   *bool                        `json:"singleton,omitempty"`  
 }
 
 type LocalInstanceHealth struct {
@@ -181,12 +185,6 @@ type DeploymentTargetSpec struct {
 	Operators     map[string]DeploymentTargetOperator `json:"operators,omitempty"`    
 	Service       RemoteService                       `json:"service"`                
 	Versioning    []Versioning                        `json:"versioning,omitempty"`   
-}
-
-type ConfigurationSchema struct {
-	DefaultValue map[string]interface{}            `json:"defaultValue,omitempty"`
-	Schema       map[string]interface{}            `json:"schema"`                
-	UISchema     map[string]map[string]interface{} `json:"uiSchema,omitempty"`    
 }
 
 type DeploymentTargetOperator struct {
@@ -446,6 +444,12 @@ type LocalInstancePortType string
 const (
 	TCP LocalInstancePortType = "tcp"
 	UDP LocalInstancePortType = "udp"
+)
+
+type BlockOperatorType string
+const (
+	Image BlockOperatorType = "image"
+	Instance BlockOperatorType = "instance"
 )
 
 type VersioningIncrementType string

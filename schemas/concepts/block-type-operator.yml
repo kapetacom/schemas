@@ -23,6 +23,8 @@ spec:
 
       spec:
         type: object
+        additionalProperties: false
+        title: BlockTypeOperatorSpec
         properties:
           icon:
             $ref: /core/icon-value
@@ -30,10 +32,18 @@ spec:
             $ref: /core/dependencies
           schema:
             $ref: /core/schema
+          configuration:
+            $ref: /core/configuration-schema
           versioning:
             $ref: /core/versioning
           local:
             $ref: /core/local-instance
+          type:
+            title: BlockOperatorType
+            type: string
+            enum:
+              - instance
+              - image
         required:
           - schema
           - local

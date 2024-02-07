@@ -45,12 +45,6 @@ properties:
       type: string
   credentials:
     type: object
-    title: LocalInstanceCredentials
-    properties:
-      username:
-        type: string
-      password:
-        type: string
-    required:
-      - username
-      - password
+    additionalProperties: true
+  singleton:
+    type: boolean

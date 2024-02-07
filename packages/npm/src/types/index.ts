@@ -134,11 +134,19 @@ export interface BlockTypeOperator {
 }
 
 export interface BlockTypeOperatorSpec {
-    dependencies?: Dependency[];
-    icon?:         IconValue;
-    local:         LocalInstance;
+    configuration?: ConfigurationSchema;
+    dependencies?:  Dependency[];
+    icon?:          IconValue;
+    local:          LocalInstance;
+    schema:         { [key: string]: any };
+    type?:          BlockOperatorType;
+    versioning?:    Versioning[];
+}
+
+export interface ConfigurationSchema {
+    defaultValue?: { [key: string]: any };
     schema:        { [key: string]: any };
-    versioning?:   Versioning[];
+    uiSchema?:     { [key: string]: { [key: string]: any } };
     [property: string]: any;
 }
 
@@ -153,18 +161,13 @@ export enum IconType {
 }
 
 export interface LocalInstance {
-    credentials?: LocalInstanceCredentials;
+    credentials?: { [key: string]: any };
     env?:         { [key: string]: string };
     health?:      LocalInstanceHealth;
     image:        string;
     mounts?:      { [key: string]: string };
     ports:        { [key: string]: LocalInstancePort };
-    [property: string]: any;
-}
-
-export interface LocalInstanceCredentials {
-    password: string;
-    username: string;
+    singleton?:   boolean;
     [property: string]: any;
 }
 
@@ -183,6 +186,11 @@ export interface LocalInstancePort {
 export enum LocalInstancePortType {
     TCP = "tcp",
     UDP = "udp",
+}
+
+export enum BlockOperatorType {
+    Image = "image",
+    Instance = "instance",
 }
 
 export interface Versioning {
@@ -233,13 +241,6 @@ export interface DeploymentTargetSpec {
     operators?:     { [key: string]: DeploymentTargetOperator };
     service:        RemoteService;
     versioning?:    Versioning[];
-    [property: string]: any;
-}
-
-export interface ConfigurationSchema {
-    defaultValue?: { [key: string]: any };
-    schema:        { [key: string]: any };
-    uiSchema?:     { [key: string]: { [key: string]: any } };
     [property: string]: any;
 }
 

@@ -126,6 +126,15 @@ export interface Port {
     [property: string]: any;
 }
 
+/**
+ * A block type operator provides a type of block that does not require code to be written.
+ * This can be anywhere from a HTTP gateway to a database block.
+ * Note that most databases can more easily be implemented as a resource operator.
+ * Blocks are good for representing more complex scenarios where there are connections
+ * between this and other services.
+ * Message queues, for example, are a good example of something that could be an operator
+ * block.
+ */
 export interface BlockTypeOperator {
     kind:     string;
     metadata: Metadata;
@@ -138,9 +147,21 @@ export interface BlockTypeOperatorSpec {
     dependencies?:  Dependency[];
     icon?:          IconValue;
     local:          LocalInstance;
-    schema:         { [key: string]: any };
-    type?:          BlockOperatorType;
-    versioning?:    Versioning[];
+    /**
+     * Ports that the operator will expose.
+     * The primary port is the one that will be used to access the operator.
+     */
+    ports:  OperatorPorts;
+    schema: { [key: string]: any };
+    /**
+     * Determines the type of operator.
+     * "logical" means the operator is a logical component and won't necessarily actually create
+     * a service.
+     * "instance" means the operator is an instance and will create a service and be connectable
+     * to one or more operators.
+     */
+    type:        BlockOperatorType;
+    versioning?: Versioning[];
 }
 
 export interface ConfigurationSchema {
@@ -188,9 +209,24 @@ export enum LocalInstancePortType {
     UDP = "udp",
 }
 
+/**
+ * Ports that the operator will expose.
+ * The primary port is the one that will be used to access the operator.
+ */
+export interface OperatorPorts {
+    primary: Port;
+}
+
+/**
+ * Determines the type of operator.
+ * "logical" means the operator is a logical component and won't necessarily actually create
+ * a service.
+ * "instance" means the operator is an instance and will create a service and be connectable
+ * to one or more operators.
+ */
 export enum BlockOperatorType {
-    Image = "image",
     Instance = "instance",
+    Logical = "logical",
 }
 
 export interface Versioning {

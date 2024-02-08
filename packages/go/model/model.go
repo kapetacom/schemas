@@ -106,6 +106,13 @@ type Port struct {
 	Type string `json:"type"`
 }
 
+// A block type operator provides a type of block that does not require code to be written.
+// This can be anywhere from a HTTP gateway to a database block.
+// Note that most databases can more easily be implemented as a resource operator.
+// Blocks are good for representing more complex scenarios where there are connections
+// between this and other services.
+// Message queues, for example, are a good example of something that could be an operator
+// block.
 type BlockTypeOperator struct {
 	Kind     string                `json:"kind"`    
 	Metadata Metadata              `json:"metadata"`
@@ -117,8 +124,9 @@ type BlockTypeOperatorSpec struct {
 	Dependencies  []Dependency           `json:"dependencies,omitempty"` 
 	Icon          *IconValue             `json:"icon,omitempty"`         
 	Local         LocalInstance          `json:"local"`                  
+	Ports         OperatorPorts          `json:"ports"`                  // Ports that the operator will expose.; The primary port is the one that will be used to access the operator.
 	Schema        map[string]interface{} `json:"schema"`                 
-	Type          *BlockOperatorType     `json:"type,omitempty"`         
+	Type          BlockOperatorType      `json:"type"`                   // Determines the type of operator.; "logical" means the operator is a logical component and won't necessarily actually create; a service.; "instance" means the operator is an instance and will create a service and be connectable; to one or more operators.
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
 }
 
@@ -151,6 +159,12 @@ type LocalInstanceHealth struct {
 type LocalInstancePort struct {
 	Port *float64               `json:"port,omitempty"`
 	Type *LocalInstancePortType `json:"type,omitempty"`
+}
+
+// Ports that the operator will expose.
+// The primary port is the one that will be used to access the operator.
+type OperatorPorts struct {
+	Primary Port `json:"primary"`
 }
 
 type Versioning struct {
@@ -446,10 +460,15 @@ const (
 	UDP LocalInstancePortType = "udp"
 )
 
+// Determines the type of operator.
+// "logical" means the operator is a logical component and won't necessarily actually create
+// a service.
+// "instance" means the operator is an instance and will create a service and be connectable
+// to one or more operators.
 type BlockOperatorType string
 const (
-	Image BlockOperatorType = "image"
 	Instance BlockOperatorType = "instance"
+	Logical BlockOperatorType = "logical"
 )
 
 type VersioningIncrementType string

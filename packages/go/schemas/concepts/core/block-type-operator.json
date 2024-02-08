@@ -8,6 +8,7 @@
       "$id": "/core/block-type-operator",
       "$schema": "http://json-schema.org/draft-07/schema#",
       "type": "object",
+      "description": "A block type operator provides a type of block that does not require code to be written.\nThis can be anywhere from a HTTP gateway to a database block.\nNote that most databases can more easily be implemented as a resource operator. \nBlocks are good for representing more complex scenarios where there are connections between this and other services.\nMessage queues, for example, are a good example of something that could be an operator block.",
       "required": [
         "kind",
         "metadata",
@@ -46,16 +47,33 @@
             },
             "type": {
               "title": "BlockOperatorType",
+              "description": "Determines the type of operator. \n\"logical\" means the operator is a logical component and won't necessarily actually create a service.\n\"instance\" means the operator is an instance and will create a service and be connectable to one or more operators.",
               "type": "string",
               "enum": [
                 "instance",
-                "image"
+                "logical"
               ]
+            },
+            "ports": {
+              "title": "OperatorPorts",
+              "description": "Ports that the operator will expose. \nThe primary port is the one that will be used to access the operator.",
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "primary"
+              ],
+              "properties": {
+                "primary": {
+                  "$ref": "/core/port"
+                }
+              }
             }
           },
           "required": [
             "schema",
-            "local"
+            "local",
+            "ports",
+            "type"
           ]
         }
       }

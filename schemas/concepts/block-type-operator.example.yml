@@ -6,6 +6,10 @@ metadata:
   name: kapeta/block-type-gateway-http
   title: HTTP Gateway
 spec:
+  type: logical
+  ports:
+    primary:
+      type: web
   dependencies:
     - path: spec.consumers.kind
       type: Consumers
@@ -42,3 +46,4 @@ spec:
       web:
         port: 80
         type: tcp
+

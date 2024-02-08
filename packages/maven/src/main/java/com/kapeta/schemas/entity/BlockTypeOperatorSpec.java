@@ -9,6 +9,7 @@ public class BlockTypeOperatorSpec {
     private List<Dependency> dependencies;
     private IconValue icon;
     private LocalInstance local;
+    private OperatorPorts ports;
     private Map<String, Object> schema;
     private BlockOperatorType type;
     private List<Versioning> versioning;

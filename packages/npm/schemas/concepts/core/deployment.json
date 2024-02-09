@@ -74,7 +74,7 @@
               "additionalProperties": true
             },
             "blockDefinition": {
-              "$ref": "/core/block-definition"
+              "$ref": "/core/kind"
             },
             "type": {
               "title": "DeploymentServiceInstanceType",

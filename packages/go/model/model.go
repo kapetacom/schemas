@@ -1,9 +1,9 @@
 package model
 
-type Concept struct {
-	Kind     string      `json:"kind"`    
-	Metadata Metadata    `json:"metadata"`
-	Spec     ConceptSpec `json:"spec"`    
+type BlockDefinition struct {
+	Kind     string              `json:"kind"`    
+	Metadata Metadata            `json:"metadata"`
+	Spec     BlockDefinitionSpec `json:"spec"`    
 }
 
 type Metadata struct {
@@ -11,6 +11,71 @@ type Metadata struct {
 	Name        string  `json:"name"`                 
 	Title       *string `json:"title,omitempty"`      
 	Visibility  *string `json:"visibility,omitempty"` 
+}
+
+type BlockDefinitionSpec struct {
+	Configuration *EntityList              `json:"configuration,omitempty"`
+	Consumers     []ConsumerElement        `json:"consumers,omitempty"`    
+	Entities      *EntityList              `json:"entities,omitempty"`     
+	Icon          *IconValue               `json:"icon,omitempty"`         
+	Providers     []ConsumerElement        `json:"providers,omitempty"`    
+	Target        *LanguageTargetReference `json:"target,omitempty"`       
+}
+
+type EntityList struct {
+	Source *SourceCode `json:"source,omitempty"`
+	Types  []Entity    `json:"types,omitempty"` 
+}
+
+type SourceCode struct {
+	Type    string  `json:"type"`             
+	Value   string  `json:"value"`            
+	Version *string `json:"version,omitempty"`
+}
+
+type Entity struct {
+	Description *string                   `json:"description,omitempty"`
+	Name        string                    `json:"name"`                 
+	Properties  map[string]EntityProperty `json:"properties,omitempty"` 
+	Type        EntityType                `json:"type"`                 
+	Values      []string                  `json:"values,omitempty"`     
+}
+
+type EntityProperty struct {
+	DefaultValue *string `json:"defaultValue,omitempty"`
+	Description  *string `json:"description,omitempty"` 
+	Format       *string `json:"format,omitempty"`      
+	Global       *bool   `json:"global,omitempty"`      
+	Ref          *string `json:"ref,omitempty"`         
+	Required     *bool   `json:"required,omitempty"`    
+	Secret       *bool   `json:"secret,omitempty"`      
+	Type         *string `json:"type,omitempty"`        
+}
+
+type ConsumerElement struct {
+	Kind     string                 `json:"kind"`    
+	Metadata ResourceMetadata       `json:"metadata"`
+	Spec     map[string]interface{} `json:"spec"`    
+}
+
+type ResourceMetadata struct {
+	Name string `json:"name"`
+}
+
+type IconValue struct {
+	Type  IconType `json:"type"` 
+	Value string   `json:"value"`
+}
+
+type LanguageTargetReference struct {
+	Kind    string                 `json:"kind"`             
+	Options map[string]interface{} `json:"options,omitempty"`
+}
+
+type Concept struct {
+	Kind     string      `json:"kind"`    
+	Metadata Metadata    `json:"metadata"`
+	Spec     ConceptSpec `json:"spec"`    
 }
 
 type ConceptSpec struct {
@@ -21,12 +86,6 @@ type ConceptSpec struct {
 type Dependency struct {
 	Path *string `json:"path,omitempty"`
 	Type *string `json:"type,omitempty"`
-}
-
-type Kind struct {
-	Kind     string                 `json:"kind"`          
-	Metadata Metadata               `json:"metadata"`      
-	Spec     map[string]interface{} `json:"spec,omitempty"`
 }
 
 type BlockTypeGroup struct {
@@ -58,36 +117,6 @@ type Dimensions struct {
 	Left   float64 `json:"left"`  
 	Top    float64 `json:"top"`   
 	Width  float64 `json:"width"` 
-}
-
-type EntityList struct {
-	Source *SourceCode `json:"source,omitempty"`
-	Types  []Entity    `json:"types,omitempty"` 
-}
-
-type SourceCode struct {
-	Type    string  `json:"type"`             
-	Value   string  `json:"value"`            
-	Version *string `json:"version,omitempty"`
-}
-
-type Entity struct {
-	Description *string                   `json:"description,omitempty"`
-	Name        string                    `json:"name"`                 
-	Properties  map[string]EntityProperty `json:"properties,omitempty"` 
-	Type        EntityType                `json:"type"`                 
-	Values      []string                  `json:"values,omitempty"`     
-}
-
-type EntityProperty struct {
-	DefaultValue *string `json:"defaultValue,omitempty"`
-	Description  *string `json:"description,omitempty"` 
-	Format       *string `json:"format,omitempty"`      
-	Global       *bool   `json:"global,omitempty"`      
-	Ref          *string `json:"ref,omitempty"`         
-	Required     *bool   `json:"required,omitempty"`    
-	Secret       *bool   `json:"secret,omitempty"`      
-	Type         *string `json:"type,omitempty"`        
 }
 
 type Connection struct {
@@ -134,11 +163,6 @@ type ConfigurationSchema struct {
 	DefaultValue map[string]interface{}            `json:"defaultValue,omitempty"`
 	Schema       map[string]interface{}            `json:"schema"`                
 	UISchema     map[string]map[string]interface{} `json:"uiSchema,omitempty"`    
-}
-
-type IconValue struct {
-	Type  IconType `json:"type"` 
-	Value string   `json:"value"`
 }
 
 type LocalInstance struct {
@@ -266,7 +290,7 @@ type DeploymentNetworkEndpoint struct {
 }
 
 type DeploymentServiceInstance struct {
-	BlockDefinition *BlockDefinition              `json:"blockDefinition,omitempty"`
+	BlockDefinition *Kind                         `json:"blockDefinition,omitempty"`
 	Configuration   map[string]interface{}        `json:"configuration,omitempty"`  
 	FallbackDNS     string                        `json:"fallbackDNS"`              
 	Id              string                        `json:"id"`                       
@@ -277,34 +301,10 @@ type DeploymentServiceInstance struct {
 	Type            DeploymentServiceInstanceType `json:"type"`                     
 }
 
-type BlockDefinition struct {
-	Kind     string              `json:"kind"`    
-	Metadata Metadata            `json:"metadata"`
-	Spec     BlockDefinitionSpec `json:"spec"`    
-}
-
-type BlockDefinitionSpec struct {
-	Configuration *EntityList              `json:"configuration,omitempty"`
-	Consumers     []ConsumerElement        `json:"consumers,omitempty"`    
-	Entities      *EntityList              `json:"entities,omitempty"`     
-	Icon          *IconValue               `json:"icon,omitempty"`         
-	Providers     []ConsumerElement        `json:"providers,omitempty"`    
-	Target        *LanguageTargetReference `json:"target,omitempty"`       
-}
-
-type ConsumerElement struct {
-	Kind     string                 `json:"kind"`    
-	Metadata ResourceMetadata       `json:"metadata"`
-	Spec     map[string]interface{} `json:"spec"`    
-}
-
-type ResourceMetadata struct {
-	Name string `json:"name"`
-}
-
-type LanguageTargetReference struct {
-	Kind    string                 `json:"kind"`             
-	Options map[string]interface{} `json:"options,omitempty"`
+type Kind struct {
+	Kind     string                 `json:"kind"`          
+	Metadata Metadata               `json:"metadata"`      
+	Spec     map[string]interface{} `json:"spec,omitempty"`
 }
 
 type DeploymentTargetReference struct {

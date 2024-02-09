@@ -1,7 +1,7 @@
-import * as schema0 from "./abstracts/core/concept.json";
-import * as schema1 from "./abstracts/core/kind.json";
-import * as schema2 from "./types/core/asset-reference.json";
-import * as schema3 from "./types/core/block-definition.json";
+import * as schema0 from "./abstracts/core/block-definition.json";
+import * as schema1 from "./abstracts/core/concept.json";
+import * as schema2 from "./abstracts/core/kind.json";
+import * as schema3 from "./types/core/asset-reference.json";
 import * as schema4 from "./types/core/block-instances.json";
 import * as schema5 from "./types/core/block-resource-list.json";
 import * as schema6 from "./types/core/block-resource.json";
@@ -37,10 +37,10 @@ import * as schema35 from "./concepts/core/resource-type-internal.json";
 import * as schema36 from "./concepts/core/resource-type-operator.json";
 
 export default {
-  "abstracts/core/concept.json": schema0,
-  "abstracts/core/kind.json": schema1,
-  "types/core/asset-reference.json": schema2,
-  "types/core/block-definition.json": schema3,
+  "abstracts/core/block-definition.json": schema0,
+  "abstracts/core/concept.json": schema1,
+  "abstracts/core/kind.json": schema2,
+  "types/core/asset-reference.json": schema3,
   "types/core/block-instances.json": schema4,
   "types/core/block-resource-list.json": schema5,
   "types/core/block-resource.json": schema6,

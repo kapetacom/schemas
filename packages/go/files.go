@@ -2,10 +2,10 @@ package validate
 
 type SchemaFile string
 
+const ABSTRACTS_CORE_BLOCK_DEFINITION SchemaFile = "abstracts/core/block-definition.json"
 const ABSTRACTS_CORE_CONCEPT SchemaFile = "abstracts/core/concept.json"
 const ABSTRACTS_CORE_KIND SchemaFile = "abstracts/core/kind.json"
 const TYPES_CORE_ASSET_REFERENCE SchemaFile = "types/core/asset-reference.json"
-const TYPES_CORE_BLOCK_DEFINITION SchemaFile = "types/core/block-definition.json"
 const TYPES_CORE_BLOCK_INSTANCES SchemaFile = "types/core/block-instances.json"
 const TYPES_CORE_BLOCK_RESOURCE_LIST SchemaFile = "types/core/block-resource-list.json"
 const TYPES_CORE_BLOCK_RESOURCE SchemaFile = "types/core/block-resource.json"
@@ -40,10 +40,10 @@ const CONCEPTS_CORE_RESOURCE_TYPE_EXTENSION SchemaFile = "concepts/core/resource
 const CONCEPTS_CORE_RESOURCE_TYPE_INTERNAL SchemaFile = "concepts/core/resource-type-internal.json"
 const CONCEPTS_CORE_RESOURCE_TYPE_OPERATOR SchemaFile = "concepts/core/resource-type-operator.json"
 
-var allFiles = []string{"abstracts/core/concept.json",
+var allFiles = []string{"abstracts/core/block-definition.json",
+"abstracts/core/concept.json",
 "abstracts/core/kind.json",
 "types/core/asset-reference.json",
-"types/core/block-definition.json",
 "types/core/block-instances.json",
 "types/core/block-resource-list.json",
 "types/core/block-resource.json",

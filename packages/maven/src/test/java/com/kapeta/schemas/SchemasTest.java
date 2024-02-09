@@ -44,6 +44,12 @@ public class SchemasTest {
     }
 
     @Test
+    public void can_get_core_kind() {
+        JsonSchema conceptSchema = Schemas.getInstance().kindSchema();
+        assertNotNull(conceptSchema);
+    }
+
+    @Test
     public void throws_if_invalid_schema() {
 
 

@@ -23,6 +23,21 @@ describe("validateSchema", () => {
     expect(errors).toHaveLength(0);
   });
 
+  it("can validate a kind", async () => {
+    const demoPlan: Plan = {
+      kind: "core/plan",
+      metadata: {
+        name: "awesome/plan",
+      },
+      spec: {
+        blocks: [],
+        connections: [],
+      },
+    };
+    const errors = validateSchema("core/kind", demoPlan);
+    expect(errors).toHaveLength(0);
+  });
+
   it("can validate an entity", async () => {
     const errors = validateSchema("core/entity", {
       name: "awesome/entity",

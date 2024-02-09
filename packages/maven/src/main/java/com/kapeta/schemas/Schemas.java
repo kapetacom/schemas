@@ -86,7 +86,7 @@ public class Schemas {
     }
 
     public JsonSchema kindSchema() {
-        return abstractSchema("core/kind");
+        return typeSchema("core/kind");
     }
 
     public JsonSchema toSchema(Map<String, Object> schemaJson) {

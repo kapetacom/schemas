@@ -56,6 +56,9 @@ export const resolveDependencies = (data:Kind, schema?:any):DependencyReference[
     const coreConcept = data.kind.startsWith('core/');
     if (coreConcept) {
         schema = schemaMap['concepts/' + data.kind + '.json'];
+        if (!schema) {
+            schema = schemaMap['types/' + data.kind + '.json'];
+        }
     }
 
     if (!schema) {

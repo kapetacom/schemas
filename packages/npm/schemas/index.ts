@@ -1,17 +1,17 @@
 import * as schema0 from "./abstracts/core/block-definition.json";
 import * as schema1 from "./abstracts/core/concept.json";
-import * as schema2 from "./abstracts/core/kind.json";
-import * as schema3 from "./types/core/asset-reference.json";
-import * as schema4 from "./types/core/block-instances.json";
-import * as schema5 from "./types/core/block-resource-list.json";
-import * as schema6 from "./types/core/block-resource.json";
-import * as schema7 from "./types/core/color-value.json";
-import * as schema8 from "./types/core/configuration-schema.json";
-import * as schema9 from "./types/core/connections.json";
-import * as schema10 from "./types/core/dependencies.json";
-import * as schema11 from "./types/core/entity-list.json";
-import * as schema12 from "./types/core/entity.json";
-import * as schema13 from "./types/core/icon-value.json";
+import * as schema2 from "./types/core/asset-reference.json";
+import * as schema3 from "./types/core/block-instances.json";
+import * as schema4 from "./types/core/block-resource-list.json";
+import * as schema5 from "./types/core/block-resource.json";
+import * as schema6 from "./types/core/color-value.json";
+import * as schema7 from "./types/core/configuration-schema.json";
+import * as schema8 from "./types/core/connections.json";
+import * as schema9 from "./types/core/dependencies.json";
+import * as schema10 from "./types/core/entity-list.json";
+import * as schema11 from "./types/core/entity.json";
+import * as schema12 from "./types/core/icon-value.json";
+import * as schema13 from "./types/core/kind.json";
 import * as schema14 from "./types/core/language-target-reference.json";
 import * as schema15 from "./types/core/local-instance.json";
 import * as schema16 from "./types/core/metadata.json";
@@ -39,18 +39,18 @@ import * as schema36 from "./concepts/core/resource-type-operator.json";
 export default {
   "abstracts/core/block-definition.json": schema0,
   "abstracts/core/concept.json": schema1,
-  "abstracts/core/kind.json": schema2,
-  "types/core/asset-reference.json": schema3,
-  "types/core/block-instances.json": schema4,
-  "types/core/block-resource-list.json": schema5,
-  "types/core/block-resource.json": schema6,
-  "types/core/color-value.json": schema7,
-  "types/core/configuration-schema.json": schema8,
-  "types/core/connections.json": schema9,
-  "types/core/dependencies.json": schema10,
-  "types/core/entity-list.json": schema11,
-  "types/core/entity.json": schema12,
-  "types/core/icon-value.json": schema13,
+  "types/core/asset-reference.json": schema2,
+  "types/core/block-instances.json": schema3,
+  "types/core/block-resource-list.json": schema4,
+  "types/core/block-resource.json": schema5,
+  "types/core/color-value.json": schema6,
+  "types/core/configuration-schema.json": schema7,
+  "types/core/connections.json": schema8,
+  "types/core/dependencies.json": schema9,
+  "types/core/entity-list.json": schema10,
+  "types/core/entity.json": schema11,
+  "types/core/icon-value.json": schema12,
+  "types/core/kind.json": schema13,
   "types/core/language-target-reference.json": schema14,
   "types/core/local-instance.json": schema15,
   "types/core/metadata.json": schema16,

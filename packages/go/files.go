@@ -4,7 +4,6 @@ type SchemaFile string
 
 const ABSTRACTS_CORE_BLOCK_DEFINITION SchemaFile = "abstracts/core/block-definition.json"
 const ABSTRACTS_CORE_CONCEPT SchemaFile = "abstracts/core/concept.json"
-const ABSTRACTS_CORE_KIND SchemaFile = "abstracts/core/kind.json"
 const TYPES_CORE_ASSET_REFERENCE SchemaFile = "types/core/asset-reference.json"
 const TYPES_CORE_BLOCK_INSTANCES SchemaFile = "types/core/block-instances.json"
 const TYPES_CORE_BLOCK_RESOURCE_LIST SchemaFile = "types/core/block-resource-list.json"
@@ -16,6 +15,7 @@ const TYPES_CORE_DEPENDENCIES SchemaFile = "types/core/dependencies.json"
 const TYPES_CORE_ENTITY_LIST SchemaFile = "types/core/entity-list.json"
 const TYPES_CORE_ENTITY SchemaFile = "types/core/entity.json"
 const TYPES_CORE_ICON_VALUE SchemaFile = "types/core/icon-value.json"
+const TYPES_CORE_KIND SchemaFile = "types/core/kind.json"
 const TYPES_CORE_LANGUAGE_TARGET_REFERENCE SchemaFile = "types/core/language-target-reference.json"
 const TYPES_CORE_LOCAL_INSTANCE SchemaFile = "types/core/local-instance.json"
 const TYPES_CORE_METADATA SchemaFile = "types/core/metadata.json"
@@ -42,7 +42,6 @@ const CONCEPTS_CORE_RESOURCE_TYPE_OPERATOR SchemaFile = "concepts/core/resource-
 
 var allFiles = []string{"abstracts/core/block-definition.json",
 "abstracts/core/concept.json",
-"abstracts/core/kind.json",
 "types/core/asset-reference.json",
 "types/core/block-instances.json",
 "types/core/block-resource-list.json",
@@ -54,6 +53,7 @@ var allFiles = []string{"abstracts/core/block-definition.json",
 "types/core/entity-list.json",
 "types/core/entity.json",
 "types/core/icon-value.json",
+"types/core/kind.json",
 "types/core/language-target-reference.json",
 "types/core/local-instance.json",
 "types/core/metadata.json",

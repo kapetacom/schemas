@@ -88,6 +88,38 @@ type Dependency struct {
 	Type *string `json:"type,omitempty"`
 }
 
+// An executable block provides a type of block that does not get deployed as a service.
+// This is typically a command line tool, a desktop block or a mobile app.
+// What's also common for executable blocks is that they do not have direct access to other
+// service blocks, and can't rely on other services or software being available at runtime.
+// They are also typically distributed as a downloadable artifact - like a setup file or a
+// package.
+type BlockTypeExecutable struct {
+	Kind     string                  `json:"kind"`    
+	Metadata Metadata                `json:"metadata"`
+	Spec     BlockTypeExecutableSpec `json:"spec"`    
+}
+
+type BlockTypeExecutableSpec struct {
+	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
+	Dependencies  []Dependency           `json:"dependencies,omitempty"` 
+	Icon          *IconValue             `json:"icon,omitempty"`         
+	Schema        map[string]interface{} `json:"schema"`                 
+	Versioning    []Versioning           `json:"versioning,omitempty"`   
+}
+
+type ConfigurationSchema struct {
+	DefaultValue map[string]interface{}            `json:"defaultValue,omitempty"`
+	Schema       map[string]interface{}            `json:"schema"`                
+	UISchema     map[string]map[string]interface{} `json:"uiSchema,omitempty"`    
+}
+
+type Versioning struct {
+	Increment VersioningIncrementType `json:"increment"`
+	On        []VersioningChangeType  `json:"on"`       
+	Paths     []string                `json:"paths"`    
+}
+
 type BlockTypeGroup struct {
 	Kind     string             `json:"kind"`    
 	Metadata Metadata           `json:"metadata"`
@@ -159,12 +191,6 @@ type BlockTypeOperatorSpec struct {
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
 }
 
-type ConfigurationSchema struct {
-	DefaultValue map[string]interface{}            `json:"defaultValue,omitempty"`
-	Schema       map[string]interface{}            `json:"schema"`                
-	UISchema     map[string]map[string]interface{} `json:"uiSchema,omitempty"`    
-}
-
 type LocalInstance struct {
 	Credentials map[string]interface{}       `json:"credentials,omitempty"`
 	Env         map[string]string            `json:"env,omitempty"`        
@@ -191,12 +217,10 @@ type OperatorPorts struct {
 	Primary Port `json:"primary"`
 }
 
-type Versioning struct {
-	Increment VersioningIncrementType `json:"increment"`
-	On        []VersioningChangeType  `json:"on"`       
-	Paths     []string                `json:"paths"`    
-}
-
+// The standard block type which is used to define a block that can be deployed as a
+// service.
+// The expected output of any such block is a docker image that can be deployed to a
+// kubernetes cluster.
 type BlockType struct {
 	Kind     string        `json:"kind"`    
 	Metadata Metadata      `json:"metadata"`
@@ -454,6 +478,20 @@ const (
 	PurpleURL IconType = "url"
 )
 
+type VersioningIncrementType string
+const (
+	Major VersioningIncrementType = "major"
+	Minor VersioningIncrementType = "minor"
+	Patch VersioningIncrementType = "patch"
+)
+
+type VersioningChangeType string
+const (
+	Create VersioningChangeType = "create"
+	Delete VersioningChangeType = "delete"
+	Update VersioningChangeType = "update"
+)
+
 type LocalInstancePortType string
 const (
 	TCP LocalInstancePortType = "tcp"
@@ -469,20 +507,6 @@ type BlockOperatorType string
 const (
 	Instance BlockOperatorType = "instance"
 	Logical BlockOperatorType = "logical"
-)
-
-type VersioningIncrementType string
-const (
-	Major VersioningIncrementType = "major"
-	Minor VersioningIncrementType = "minor"
-	Patch VersioningIncrementType = "patch"
-)
-
-type VersioningChangeType string
-const (
-	Create VersioningChangeType = "create"
-	Delete VersioningChangeType = "delete"
-	Update VersioningChangeType = "update"
 )
 
 type ColorType string

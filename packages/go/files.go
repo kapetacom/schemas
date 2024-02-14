@@ -28,6 +28,7 @@ const TYPES_CORE_TYPED_VALUE SchemaFile = "types/core/typed-value.json"
 const TYPES_CORE_UI_SCHEMA SchemaFile = "types/core/ui-schema.json"
 const TYPES_CORE_URL_VALUE SchemaFile = "types/core/url-value.json"
 const TYPES_CORE_VERSIONING SchemaFile = "types/core/versioning.json"
+const CONCEPTS_CORE_BLOCK_TYPE_EXECUTABLE SchemaFile = "concepts/core/block-type-executable.json"
 const CONCEPTS_CORE_BLOCK_TYPE_GROUP SchemaFile = "concepts/core/block-type-group.json"
 const CONCEPTS_CORE_BLOCK_TYPE_OPERATOR SchemaFile = "concepts/core/block-type-operator.json"
 const CONCEPTS_CORE_BLOCK_TYPE SchemaFile = "concepts/core/block-type.json"
@@ -66,6 +67,7 @@ var allFiles = []string{"abstracts/core/block-definition.json",
 "types/core/ui-schema.json",
 "types/core/url-value.json",
 "types/core/versioning.json",
+"concepts/core/block-type-executable.json",
 "concepts/core/block-type-group.json",
 "concepts/core/block-type-operator.json",
 "concepts/core/block-type.json",

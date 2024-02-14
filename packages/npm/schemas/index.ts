@@ -24,17 +24,18 @@ import * as schema22 from "./types/core/typed-value.json";
 import * as schema23 from "./types/core/ui-schema.json";
 import * as schema24 from "./types/core/url-value.json";
 import * as schema25 from "./types/core/versioning.json";
-import * as schema26 from "./concepts/core/block-type-group.json";
-import * as schema27 from "./concepts/core/block-type-operator.json";
-import * as schema28 from "./concepts/core/block-type.json";
-import * as schema29 from "./concepts/core/deployment-target.json";
-import * as schema30 from "./concepts/core/deployment.json";
-import * as schema31 from "./concepts/core/environment.json";
-import * as schema32 from "./concepts/core/language-target.json";
-import * as schema33 from "./concepts/core/plan.json";
-import * as schema34 from "./concepts/core/resource-type-extension.json";
-import * as schema35 from "./concepts/core/resource-type-internal.json";
-import * as schema36 from "./concepts/core/resource-type-operator.json";
+import * as schema26 from "./concepts/core/block-type-executable.json";
+import * as schema27 from "./concepts/core/block-type-group.json";
+import * as schema28 from "./concepts/core/block-type-operator.json";
+import * as schema29 from "./concepts/core/block-type.json";
+import * as schema30 from "./concepts/core/deployment-target.json";
+import * as schema31 from "./concepts/core/deployment.json";
+import * as schema32 from "./concepts/core/environment.json";
+import * as schema33 from "./concepts/core/language-target.json";
+import * as schema34 from "./concepts/core/plan.json";
+import * as schema35 from "./concepts/core/resource-type-extension.json";
+import * as schema36 from "./concepts/core/resource-type-internal.json";
+import * as schema37 from "./concepts/core/resource-type-operator.json";
 
 export default {
   "abstracts/core/block-definition.json": schema0,
@@ -63,15 +64,16 @@ export default {
   "types/core/ui-schema.json": schema23,
   "types/core/url-value.json": schema24,
   "types/core/versioning.json": schema25,
-  "concepts/core/block-type-group.json": schema26,
-  "concepts/core/block-type-operator.json": schema27,
-  "concepts/core/block-type.json": schema28,
-  "concepts/core/deployment-target.json": schema29,
-  "concepts/core/deployment.json": schema30,
-  "concepts/core/environment.json": schema31,
-  "concepts/core/language-target.json": schema32,
-  "concepts/core/plan.json": schema33,
-  "concepts/core/resource-type-extension.json": schema34,
-  "concepts/core/resource-type-internal.json": schema35,
-  "concepts/core/resource-type-operator.json": schema36
+  "concepts/core/block-type-executable.json": schema26,
+  "concepts/core/block-type-group.json": schema27,
+  "concepts/core/block-type-operator.json": schema28,
+  "concepts/core/block-type.json": schema29,
+  "concepts/core/deployment-target.json": schema30,
+  "concepts/core/deployment.json": schema31,
+  "concepts/core/environment.json": schema32,
+  "concepts/core/language-target.json": schema33,
+  "concepts/core/plan.json": schema34,
+  "concepts/core/resource-type-extension.json": schema35,
+  "concepts/core/resource-type-internal.json": schema36,
+  "concepts/core/resource-type-operator.json": schema37
 }

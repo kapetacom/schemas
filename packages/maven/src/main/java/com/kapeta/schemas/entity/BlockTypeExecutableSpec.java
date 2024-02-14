@@ -1,0 +1,13 @@
+package com.kapeta.schemas.entity;
+
+import java.util.List;
+import java.util.Map;
+
+@lombok.Data
+public class BlockTypeExecutableSpec {
+    private ConfigurationSchema configuration;
+    private List<Dependency> dependencies;
+    private IconValue icon;
+    private Map<String, Object> schema;
+    private List<Versioning> versioning;
+}

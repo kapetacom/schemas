@@ -1,0 +1,18 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
+kind: core/block-type-executable
+metadata:
+  name: kapeta/block-type-cli
+  title: Command Line Interface
+spec:
+  dependencies:
+    - path: spec.consumers.kind
+      type: Consumers
+  schema:
+    type: object
+    properties:
+      entities:
+        $ref: /core/entity-list
+      consumers:
+        $ref: /core/block-resource-list

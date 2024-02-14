@@ -107,6 +107,55 @@ export interface Dependency {
     [property: string]: any;
 }
 
+/**
+ * An executable block provides a type of block that does not get deployed as a service.
+ * This is typically a command line tool, a desktop block or a mobile app.
+ * What's also common for executable blocks is that they do not have direct access to other
+ * service blocks, and can't rely on other services or software being available at runtime.
+ * They are also typically distributed as a downloadable artifact - like a setup file or a
+ * package.
+ */
+export interface BlockTypeExecutable {
+    kind:     string;
+    metadata: Metadata;
+    spec:     BlockTypeExecutableSpec;
+    [property: string]: any;
+}
+
+export interface BlockTypeExecutableSpec {
+    configuration?: ConfigurationSchema;
+    dependencies?:  Dependency[];
+    icon?:          IconValue;
+    schema:         { [key: string]: any };
+    versioning?:    Versioning[];
+}
+
+export interface ConfigurationSchema {
+    defaultValue?: { [key: string]: any };
+    schema:        { [key: string]: any };
+    uiSchema?:     { [key: string]: { [key: string]: any } };
+    [property: string]: any;
+}
+
+export interface Versioning {
+    increment: VersioningIncrementType;
+    on:        VersioningChangeType[];
+    paths:     string[];
+    [property: string]: any;
+}
+
+export enum VersioningIncrementType {
+    Major = "major",
+    Minor = "minor",
+    Patch = "patch",
+}
+
+export enum VersioningChangeType {
+    Create = "create",
+    Delete = "delete",
+    Update = "update",
+}
+
 export interface BlockTypeGroup {
     kind:     string;
     metadata: Metadata;
@@ -200,13 +249,6 @@ export interface BlockTypeOperatorSpec {
     versioning?: Versioning[];
 }
 
-export interface ConfigurationSchema {
-    defaultValue?: { [key: string]: any };
-    schema:        { [key: string]: any };
-    uiSchema?:     { [key: string]: { [key: string]: any } };
-    [property: string]: any;
-}
-
 export interface LocalInstance {
     credentials?: { [key: string]: any };
     env?:         { [key: string]: string };
@@ -255,25 +297,12 @@ export enum BlockOperatorType {
     Logical = "logical",
 }
 
-export interface Versioning {
-    increment: VersioningIncrementType;
-    on:        VersioningChangeType[];
-    paths:     string[];
-    [property: string]: any;
-}
-
-export enum VersioningIncrementType {
-    Major = "major",
-    Minor = "minor",
-    Patch = "patch",
-}
-
-export enum VersioningChangeType {
-    Create = "create",
-    Delete = "delete",
-    Update = "update",
-}
-
+/**
+ * The standard block type which is used to define a block that can be deployed as a
+ * service.
+ * The expected output of any such block is a docker image that can be deployed to a
+ * kubernetes cluster.
+ */
 export interface BlockType {
     kind:     string;
     metadata: Metadata;

@@ -387,21 +387,27 @@ type LanguageTarget struct {
 
 type LanguageTargetSpec struct {
 	Icon       *IconValue             `json:"icon,omitempty"`      
-	Local      LocalDevContainer      `json:"local"`               
+	Local      LocalDevContainer      `json:"local"`               // if type is "docker" or empty - Local development container using a fixed docker image.; User code will be mounted into the container.; if type is "dockerfile" - Local development container using a Dockerfile. User code will; be built into the container.
 	Schema     map[string]interface{} `json:"schema,omitempty"`    
 	Versioning []Versioning           `json:"versioning,omitempty"`
 }
 
+// if type is "docker" or empty - Local development container using a fixed docker image.
+// User code will be mounted into the container.
+// if type is "dockerfile" - Local development container using a Dockerfile. User code will
+// be built into the container.
 type LocalDevContainer struct {
 	Env         []string                   `json:"Env,omitempty"`        
 	Handlers    *LocalDevContainerHandlers `json:"handlers,omitempty"`   
 	Healthcheck *string                    `json:"healthcheck,omitempty"`
 	HostConfig  map[string]interface{}     `json:"HostConfig,omitempty"` 
-	Image       string                     `json:"image"`                
+	Image       *string                    `json:"image,omitempty"`      
 	Labels      map[string]interface{}     `json:"Labels,omitempty"`     
 	Options     map[string]interface{}     `json:"options,omitempty"`    
+	Type        *string                    `json:"type,omitempty"`       
 	UserHome    *string                    `json:"userHome,omitempty"`   
 	WorkingDir  *string                    `json:"workingDir,omitempty"` 
+	File        *string                    `json:"file,omitempty"`       
 }
 
 type LocalDevContainerHandlers struct {

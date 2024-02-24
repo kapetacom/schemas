@@ -510,22 +510,36 @@ export interface LanguageTarget {
 }
 
 export interface LanguageTargetSpec {
-    icon?:       IconValue;
+    icon?: IconValue;
+    /**
+     * if type is "docker" or empty - Local development container using a fixed docker image.
+     * User code will be mounted into the container.
+     * if type is "dockerfile" - Local development container using a Dockerfile. User code will
+     * be built into the container.
+     */
     local:       LocalDevContainer;
     schema?:     { [key: string]: any };
     versioning?: Versioning[];
 }
 
+/**
+ * if type is "docker" or empty - Local development container using a fixed docker image.
+ * User code will be mounted into the container.
+ * if type is "dockerfile" - Local development container using a Dockerfile. User code will
+ * be built into the container.
+ */
 export interface LocalDevContainer {
     Env?:         string[];
     handlers?:    LocalDevContainerHandlers;
     healthcheck?: string;
     HostConfig?:  { [key: string]: any };
-    image:        string;
+    image?:       string;
     Labels?:      { [key: string]: any };
     options?:     { [key: string]: any };
+    type?:        string;
     userHome?:    string;
     workingDir?:  string;
+    file?:        string;
 }
 
 export interface LocalDevContainerHandlers {

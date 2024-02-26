@@ -4,7 +4,7 @@
 filename: kapeta.config.env
 contentType: text/plain
 content:
-  type: plain
+  format: plain
   value: |
     POSTGRES_USER=postgres
     POSTGRES_PASSWORD=postgres

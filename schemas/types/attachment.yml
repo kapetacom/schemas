@@ -22,11 +22,11 @@ properties:
     additionalProperties: false
     description: The content of the file.
     required:
-      - type
+      - format
       - value
     properties:
-      type:
-        title: AttachmentContentType
+      format:
+        title: AttachmentContentFormat
         type: string
         enum:
           - url

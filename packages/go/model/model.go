@@ -16,8 +16,8 @@ type Attachment struct {
 
 // The content of the file.
 type AttachmentContent struct {
-	Type  AttachmentContentType `json:"type"` 
-	Value string                `json:"value"`
+	Format AttachmentContentFormat `json:"format"`
+	Value  string                  `json:"value"` 
 }
 
 type Metadata struct {
@@ -486,12 +486,12 @@ type ResourceTypeOperatorSpec struct {
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
 }
 
-type AttachmentContentType string
+type AttachmentContentFormat string
 const (
-	AttachmentContentTypeURL AttachmentContentType = "url"
-	Base64 AttachmentContentType = "base64"
-	Base64Gzip AttachmentContentType = "base64-gzip"
-	Plain AttachmentContentType = "plain"
+	AttachmentContentFormatURL AttachmentContentFormat = "url"
+	Base64 AttachmentContentFormat = "base64"
+	Base64Gzip AttachmentContentFormat = "base64-gzip"
+	Plain AttachmentContentFormat = "plain"
 )
 
 type EntityType string

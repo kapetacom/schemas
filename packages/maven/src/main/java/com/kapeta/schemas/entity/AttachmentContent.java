@@ -5,6 +5,6 @@ package com.kapeta.schemas.entity;
  */
 @lombok.Data
 public class AttachmentContent {
-    private AttachmentContentType type;
+    private AttachmentContentFormat format;
     private String value;
 }

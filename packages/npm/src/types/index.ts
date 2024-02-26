@@ -24,11 +24,11 @@ export interface Attachment {
  * The content of the file.
  */
 export interface AttachmentContent {
-    type:  AttachmentContentType;
-    value: string;
+    format: AttachmentContentFormat;
+    value:  string;
 }
 
-export enum AttachmentContentType {
+export enum AttachmentContentFormat {
     Base64 = "base64",
     Base64Gzip = "base64-gzip",
     Plain = "plain",

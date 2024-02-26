@@ -1,7 +1,38 @@
 export interface BlockDefinition {
-    kind:     string;
-    metadata: Metadata;
-    spec:     BlockDefinitionSpec;
+    attachments?: Attachment[];
+    kind:         string;
+    metadata:     Metadata;
+    spec:         BlockDefinitionSpec;
+}
+
+/**
+ * An attachment is a file that is associated with a definition.
+ */
+export interface Attachment {
+    /**
+     * The content of the file.
+     */
+    content: AttachmentContent;
+    /**
+     * The MIME type of the file.
+     */
+    contentType?: string;
+    filename:     string;
+}
+
+/**
+ * The content of the file.
+ */
+export interface AttachmentContent {
+    format: AttachmentContentFormat;
+    value:  string;
+}
+
+export enum AttachmentContentFormat {
+    Base64 = "base64",
+    Base64Gzip = "base64-gzip",
+    Plain = "plain",
+    URL = "url",
 }
 
 export interface Metadata {
@@ -436,9 +467,10 @@ export interface DeploymentServiceInstance {
 }
 
 export interface Kind {
-    kind:     string;
-    metadata: Metadata;
-    spec?:    { [key: string]: any };
+    attachments?: Attachment[];
+    kind:         string;
+    metadata:     Metadata;
+    spec?:        { [key: string]: any };
     [property: string]: any;
 }
 

@@ -13,6 +13,10 @@ properties:
   spec:
     type: object
     additionalProperties: true
+  attachments:
+    type: array
+    items:
+      $ref: /core/attachment
 required:
   - kind
   - metadata

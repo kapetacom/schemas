@@ -40,6 +40,12 @@
           "$ref": "/core/icon-value"
         }
       }
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "$ref": "/core/attachment"
+      }
     }
   }
 }

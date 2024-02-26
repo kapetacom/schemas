@@ -1,0 +1,11 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
+filename: kapeta.config.env
+contentType: text/plain
+content:
+  format: plain
+  value: |
+    POSTGRES_USER=postgres
+    POSTGRES_PASSWORD=postgres
+    POSTGRES_DB=postgres

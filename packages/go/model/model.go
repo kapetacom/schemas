@@ -1,9 +1,23 @@
 package model
 
 type BlockDefinition struct {
-	Kind     string              `json:"kind"`    
-	Metadata Metadata            `json:"metadata"`
-	Spec     BlockDefinitionSpec `json:"spec"`    
+	Attachments []Attachment        `json:"attachments,omitempty"`
+	Kind        string              `json:"kind"`                 
+	Metadata    Metadata            `json:"metadata"`             
+	Spec        BlockDefinitionSpec `json:"spec"`                 
+}
+
+// An attachment is a file that is associated with a definition.
+type Attachment struct {
+	Content     AttachmentContent `json:"content"`              // The content of the file.
+	ContentType *string           `json:"contentType,omitempty"`// The MIME type of the file.
+	Filename    string            `json:"filename"`             
+}
+
+// The content of the file.
+type AttachmentContent struct {
+	Format AttachmentContentFormat `json:"format"`
+	Value  string                  `json:"value"` 
 }
 
 type Metadata struct {
@@ -326,9 +340,10 @@ type DeploymentServiceInstance struct {
 }
 
 type Kind struct {
-	Kind     string                 `json:"kind"`          
-	Metadata Metadata               `json:"metadata"`      
-	Spec     map[string]interface{} `json:"spec,omitempty"`
+	Attachments []Attachment           `json:"attachments,omitempty"`
+	Kind        string                 `json:"kind"`                 
+	Metadata    Metadata               `json:"metadata"`             
+	Spec        map[string]interface{} `json:"spec,omitempty"`       
 }
 
 type DeploymentTargetReference struct {
@@ -470,6 +485,14 @@ type ResourceTypeOperatorSpec struct {
 	Schema        map[string]interface{} `json:"schema,omitempty"`       
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
 }
+
+type AttachmentContentFormat string
+const (
+	AttachmentContentFormatURL AttachmentContentFormat = "url"
+	Base64 AttachmentContentFormat = "base64"
+	Base64Gzip AttachmentContentFormat = "base64-gzip"
+	Plain AttachmentContentFormat = "plain"
+)
 
 type EntityType string
 const (

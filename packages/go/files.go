@@ -5,6 +5,7 @@ type SchemaFile string
 const ABSTRACTS_CORE_BLOCK_DEFINITION SchemaFile = "abstracts/core/block-definition.json"
 const ABSTRACTS_CORE_CONCEPT SchemaFile = "abstracts/core/concept.json"
 const TYPES_CORE_ASSET_REFERENCE SchemaFile = "types/core/asset-reference.json"
+const TYPES_CORE_ATTACHMENT SchemaFile = "types/core/attachment.json"
 const TYPES_CORE_BLOCK_INSTANCES SchemaFile = "types/core/block-instances.json"
 const TYPES_CORE_BLOCK_RESOURCE_LIST SchemaFile = "types/core/block-resource-list.json"
 const TYPES_CORE_BLOCK_RESOURCE SchemaFile = "types/core/block-resource.json"
@@ -44,6 +45,7 @@ const CONCEPTS_CORE_RESOURCE_TYPE_OPERATOR SchemaFile = "concepts/core/resource-
 var allFiles = []string{"abstracts/core/block-definition.json",
 "abstracts/core/concept.json",
 "types/core/asset-reference.json",
+"types/core/attachment.json",
 "types/core/block-instances.json",
 "types/core/block-resource-list.json",
 "types/core/block-resource.json",

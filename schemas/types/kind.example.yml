@@ -6,3 +6,27 @@ metadata:
 spec:
   some:
     thing: here
+attachments:
+  - filename: kapeta.config.env
+    contentType: text/plain
+    content:
+      type: plain
+      value: |
+        POSTGRES_USER=postgres
+        POSTGRES_PASSWORD=postgres
+        POSTGRES_DB=postgres
+  - filename: kapeta.config.yml
+    contentType: application/yaml
+    content:
+      type: base64
+      value: eyJjb25maWcuY29uZiI6InRlc3Quc29tZT10cnVlIn0K
+  - filename: big.txt
+    contentType: text/plain
+    content:
+      type: base64-gzip
+      value: H4sIANRH3GUAA6tWSs7PS8tM1wNRSlZKJanFJXrF+bmptiVFpalKtVwAwGy6HSEAAAA=
+  - filename: remote.txt
+    contentType: text/plain
+    content:
+      type: url
+      value: https://example.com/remote.txt

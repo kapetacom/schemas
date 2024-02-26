@@ -1,0 +1,37 @@
+# Copyright 2023 Kapeta Inc.
+# SPDX-License-Identifier: MIT
+
+$id: /core/attachment
+$schema: http://json-schema.org/draft-07/schema#
+title: Attachment
+description: An attachment is a file that is associated with a definition.
+type: object
+additionalProperties: false
+required:
+  - filename
+  - content
+properties:
+  filename:
+    type: string
+  contentType:
+    description: The MIME type of the file.
+    type: string
+  content:
+    type: object
+    title: AttachmentContent
+    additionalProperties: false
+    description: The content of the file.
+    required:
+      - type
+      - value
+    properties:
+      type:
+        title: AttachmentContentType
+        type: string
+        enum:
+          - url
+          - base64
+          - base64-gzip
+          - plain
+      value:
+        type: string

@@ -63,6 +63,7 @@ type EntityProperty struct {
 	Ref          *string `json:"ref,omitempty"`         
 	Required     *bool   `json:"required,omitempty"`    
 	Secret       *bool   `json:"secret,omitempty"`      
+	Sensitive    *bool   `json:"sensitive,omitempty"`   
 	Type         *string `json:"type,omitempty"`        
 }
 

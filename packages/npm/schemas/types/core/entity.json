@@ -35,6 +35,9 @@
         "secret": {
           "type": "boolean"
         },
+        "sensitive": {
+          "type": "boolean"
+        },
         "global": {
           "type": "boolean"
         },

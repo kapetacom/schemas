@@ -9,5 +9,6 @@ public class EntityProperty {
     private String ref;
     private Boolean required;
     private Boolean secret;
+    private Boolean sensitive;
     private String type;
 }

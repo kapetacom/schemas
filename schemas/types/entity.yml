@@ -8,7 +8,7 @@ definitions:
   EntityReference:
     type: object
     required:
-    - ref
+      - ref
     properties:
       ref:
         type: string
@@ -26,6 +26,8 @@ definitions:
       required:
         type: boolean
       secret:
+        type: boolean
+      sensitive:
         type: boolean
       global:
         type: boolean
@@ -83,5 +85,3 @@ allOf:
     then:
       required:
         - properties
-
-

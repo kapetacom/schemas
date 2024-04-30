@@ -21,3 +21,4 @@ properties:
     defaultValue: "18"
   email:
     type: string
+    sensitive: true

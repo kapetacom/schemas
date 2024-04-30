@@ -82,6 +82,7 @@ export interface EntityProperty {
     ref?:          string;
     required?:     boolean;
     secret?:       boolean;
+    sensitive?:    boolean;
     type?:         string;
     [property: string]: any;
 }

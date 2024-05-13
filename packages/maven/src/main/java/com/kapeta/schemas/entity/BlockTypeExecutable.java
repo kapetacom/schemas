@@ -10,7 +10,7 @@ package com.kapeta.schemas.entity;
  */
 @lombok.Data
 public class BlockTypeExecutable {
-    private String kind;
+    private BlockTypeExecutableKind kind;
     private Metadata metadata;
     private BlockTypeExecutableSpec spec;
 }

@@ -20,7 +20,7 @@
     "fs-extra": "^11.1.0",
     "jest": "^29.1.2",
     "lodash": "4.17.21",
-    "quicktype-core": "^6.1.0",
+    "quicktype-core": "^23.0.161",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
     "yaml": "^2.1.2"

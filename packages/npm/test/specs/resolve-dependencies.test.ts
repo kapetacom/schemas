@@ -4,7 +4,7 @@
  */
 
 import {describe, expect, it} from "@jest/globals";
-import {BlockDefinition, BlockType, Plan} from "../../src";
+import {BlockDefinition, BlockType, BlockTypeKind, Plan, PlanKind} from "../../src";
 import {resolveDependencies} from "../../src/resolve-dependencies";
 import * as _ from "lodash";
 
@@ -12,7 +12,7 @@ import * as _ from "lodash";
 describe("resolveDependencies", () => {
     it("can resolve dependencies from plan", async () => {
         const plan: Plan = {
-            kind: 'core/plan',
+            kind: PlanKind.CorePlan,
             metadata: {
                 name: 'test',
                 version: '1.0.0',
@@ -88,7 +88,7 @@ describe("resolveDependencies", () => {
 
     it("can resolve dependencies from block", async () => {
         const blockType: BlockType = {
-            kind: 'core/block-type',
+            kind: BlockTypeKind.CoreBlockType,
             metadata: {
                 name: 'someone/block-type-service',
             },

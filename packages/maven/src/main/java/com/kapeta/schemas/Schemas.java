@@ -5,10 +5,9 @@
 
 package com.kapeta.schemas;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 import com.kapeta.schemas.entity.Concept;
+import com.kapeta.schemas.entity.ConceptKind;
 import com.kapeta.schemas.entity.ConceptSpec;
 import com.kapeta.schemas.entity.Dependency;
 import com.kapeta.schemas.entity.Metadata;
@@ -47,7 +46,7 @@ public class Schemas {
 
     private Schemas() {
         om = new ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
 
         this.schemaProviderKinds = this.readSchemaProviderKinds().stream()
                 .map(String::toLowerCase)
@@ -140,7 +139,7 @@ public class Schemas {
     @Data
     public static class SchemaProviderType {
 
-        private String kind;
+        private ConceptKind kind;
 
         private Metadata metadata = new Metadata();
 

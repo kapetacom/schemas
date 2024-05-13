@@ -5,12 +5,12 @@
 
 import { describe, it, expect } from "@jest/globals";
 import type { Plan } from "../../src";
-import { validateSchema } from "../../src";
+import { PlanKind, validateSchema } from "../../src";
 
 describe("validateSchema", () => {
   it("can validate a plan", async () => {
     const demoPlan: Plan = {
-      kind: "core/plan",
+      kind: PlanKind.CorePlan,
       metadata: {
         name: "awesome/plan",
       },
@@ -19,13 +19,13 @@ describe("validateSchema", () => {
         connections: [],
       },
     };
-    const errors = validateSchema("core/plan", demoPlan);
+    const errors = validateSchema(PlanKind.CorePlan, demoPlan);
     expect(errors).toHaveLength(0);
   });
 
   it("can validate a kind", async () => {
     const demoPlan: Plan = {
-      kind: "core/plan",
+      kind: PlanKind.CorePlan,
       metadata: {
         name: "awesome/plan",
       },
@@ -34,7 +34,7 @@ describe("validateSchema", () => {
         connections: [],
       },
     };
-    const errors = validateSchema("core/kind", demoPlan);
+    const errors = validateSchema(PlanKind.CorePlan, demoPlan);
     expect(errors).toHaveLength(0);
   });
 

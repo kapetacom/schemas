@@ -71,7 +71,8 @@ const languages:Language[] = [
             rendererOptions: {
                 'runtime-typecheck': 'true',
                 'just-types-and-package': 'true',
-                'package': 'model'
+                'package': 'model',
+                'field-tags': 'json,yaml'
 
             },
             outputFilename:'model.go'

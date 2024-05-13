@@ -18,7 +18,7 @@ public class LocalDevContainer {
     private String image;
     private Map<String, Object> labels;
     private Map<String, Object> options;
-    private String type;
+    private LocalDevContainerType type;
     private String userHome;
     private String workingDir;
     private String file;

@@ -6,6 +6,7 @@ public class EntityProperty {
     private String description;
     private String format;
     private Boolean global;
+    private Boolean primary;
     private String ref;
     private Boolean required;
     private Boolean secret;

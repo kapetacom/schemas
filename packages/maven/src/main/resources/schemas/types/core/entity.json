@@ -43,6 +43,9 @@
         },
         "format": {
           "type": "string"
+        },
+        "primary": {
+          "type": "boolean"
         }
       },
       "oneOf": [
@@ -70,7 +73,8 @@
       "enum": [
         "dto",
         "enum",
-        "native"
+        "native",
+        "model"
       ]
     },
     "description": {
@@ -127,6 +131,20 @@
         "properties": {
           "type": {
             "const": "native"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "properties"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "enum"
           }
         }
       },

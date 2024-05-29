@@ -33,6 +33,8 @@ definitions:
         type: boolean
       format:
         type: string
+      primary:
+        type: boolean
     oneOf:
       - required:
           - type
@@ -50,6 +52,7 @@ properties:
       - dto # User defined data transfer objects.
       - enum
       - native # Built-in types - like DTOs but hard-coded into the system
+      - model
   description:
     type: string
   properties:
@@ -82,6 +85,13 @@ allOf:
       properties:
         type:
           const: native
+    then:
+      required:
+        - properties
+  - if:
+      properties:
+        type:
+          const: enum
     then:
       required:
         - properties

@@ -1,0 +1,19 @@
+{
+  "responseType": {
+    "type": "boolean"
+  },
+  "method": "GET",
+  "path": "/oauth2/clients/{clientId}/access",
+  "arguments": {
+    "clientId": {
+      "type": "string",
+      "transport": "PATH",
+      "optional": false
+    },
+    "request": {
+      "ref": "ClientAccessRequest",
+      "transport": "QUERY",
+      "optional": true
+    }
+  }
+}

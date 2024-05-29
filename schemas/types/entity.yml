@@ -91,7 +91,7 @@ allOf:
   - if:
       properties:
         type:
-          const: enum
+          const: model
     then:
       required:
         - properties

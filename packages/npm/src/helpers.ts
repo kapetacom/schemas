@@ -15,6 +15,13 @@ import {
 
 export type EntityProperties = { [key: string]: EntityProperty };
 
+export interface EntityModel {
+    type: EntityType.Model;
+    name: string;
+    properties: EntityProperties;
+    description?: string;
+}
+
 export interface EntityDTO {
     type: EntityType.Dto;
     name: string;

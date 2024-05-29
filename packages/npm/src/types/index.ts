@@ -79,6 +79,7 @@ export interface EntityProperty {
     description?:  string;
     format?:       string;
     global?:       boolean;
+    primary?:      boolean;
     ref?:          string;
     required?:     boolean;
     secret?:       boolean;
@@ -90,6 +91,7 @@ export interface EntityProperty {
 export enum EntityType {
     Dto = "dto",
     Enum = "enum",
+    Model = "model",
     Native = "native",
 }
 

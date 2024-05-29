@@ -27,7 +27,7 @@ describe('schemas.types', () => {
             entry.examples.forEach(example => {
                 const result = validator(example.toJS());
                 if (validator.errors) {
-                    console.log(example.toJS());
+                    console.log("errors", entry.filename, example.toJS());
                 }
                 expect(validator.errors).toBeNull();
                 expect(result).toBe(true);

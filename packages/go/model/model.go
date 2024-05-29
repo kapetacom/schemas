@@ -60,6 +60,7 @@ type EntityProperty struct {
 	Description  *string `json:"description,omitempty"` 
 	Format       *string `json:"format,omitempty"`      
 	Global       *bool   `json:"global,omitempty"`      
+	Primary      *bool   `json:"primary,omitempty"`     
 	Ref          *string `json:"ref,omitempty"`         
 	Required     *bool   `json:"required,omitempty"`    
 	Secret       *bool   `json:"secret,omitempty"`      
@@ -499,6 +500,7 @@ type EntityType string
 const (
 	Dto EntityType = "dto"
 	Enum EntityType = "enum"
+	Model EntityType = "model"
 	Native EntityType = "native"
 )
 

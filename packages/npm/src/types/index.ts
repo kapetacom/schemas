@@ -47,7 +47,9 @@ export interface BlockDefinitionSpec {
     configuration?: EntityList;
     consumers?:     Resource[];
     entities?:      EntityList;
-    icon?:          IconValue;
+    /** @deprecated use icons instead */
+    icon?: IconValue;
+    icons?: IconValue[];
     providers?:     Resource[];
     target?:        LanguageTargetReference;
 }
@@ -110,6 +112,7 @@ export interface ResourceMetadata {
 export interface IconValue {
     type:  IconType;
     value: string;
+    theme?: 'light' | 'dark';
 }
 
 export enum IconType {
@@ -159,7 +162,9 @@ export interface BlockTypeExecutable {
 export interface BlockTypeExecutableSpec {
     configuration?: ConfigurationSchema;
     dependencies?:  Dependency[];
-    icon?:          IconValue;
+    /** @deprecated use icons instead */
+    icon?: IconValue;
+    icons?: IconValue[];
     schema:         { [key: string]: any };
     versioning?:    Versioning[];
 }
@@ -264,7 +269,9 @@ export interface BlockTypeOperator {
 export interface BlockTypeOperatorSpec {
     configuration?: ConfigurationSchema;
     dependencies?:  Dependency[];
-    icon?:          IconValue;
+    /** @deprecated use icons instead */
+    icon?: IconValue;
+    icons?: IconValue[];
     local:          LocalInstance;
     /**
      * Ports that the operator will expose.
@@ -347,7 +354,9 @@ export interface BlockType {
 export interface BlockTypeSpec {
     defaultPort?:  Port;
     dependencies?: Dependency[];
-    icon?:         IconValue;
+    /** @deprecated use icons instead */
+    icon?: IconValue;
+    icons?: IconValue[];
     schema:        { [key: string]: any };
     versioning?:   Versioning[];
     [property: string]: any;
@@ -362,7 +371,9 @@ export interface DeploymentTarget {
 
 export interface DeploymentTargetSpec {
     configuration?: ConfigurationSchema;
-    icon?:          IconValue;
+    /** @deprecated use icons instead */
+    icon?: IconValue;
+    icons?: IconValue[];
     operators?:     { [key: string]: DeploymentTargetOperator };
     service:        RemoteService;
     versioning?:    Versioning[];
@@ -373,7 +384,9 @@ export interface DeploymentTargetOperator {
     color?:         ColorValue;
     configuration?: ConfigurationSchema;
     description?:   string;
-    icon?:          IconValue;
+    /** @deprecated use icons instead */
+    icon?: IconValue;
+    icons?: IconValue[];
     link?:          URLValue;
     title:          string;
     [property: string]: any;
@@ -545,7 +558,9 @@ export interface LanguageTarget {
 }
 
 export interface LanguageTargetSpec {
+    /** @deprecated use icons instead */
     icon?: IconValue;
+    icons?: IconValue[];
     /**
      * if type is "docker" or empty - Local development container using a fixed docker image.
      * User code will be mounted into the container.
@@ -605,7 +620,9 @@ export interface ResourceTypeExtension {
 
 export interface ResourceTypeExtensionSpec {
     configuration?: ConfigurationSchema;
-    icon?:          IconValue;
+    /** @deprecated use icons instead */
+    icon?: IconValue;
+    icons?: IconValue[];
     ports:          Port[];
     schema:         { [key: string]: any };
     versioning?:    Versioning[];
@@ -621,7 +638,9 @@ export interface ResourceTypeInternal {
 
 export interface ResourceTypeInternalSpec {
     configuration?: ConfigurationSchema;
-    icon?:          IconValue;
+    /** @deprecated use icons instead */
+    icon?: IconValue;
+    icons?: IconValue[];
     ports:          Port[];
     schema?:        { [key: string]: any };
     versioning?:    Versioning[];
@@ -638,7 +657,9 @@ export interface ResourceTypeOperator {
 export interface ResourceTypeOperatorSpec {
     color?:         ColorValue;
     configuration?: ConfigurationSchema;
-    icon?:          IconValue;
+    /** @deprecated use icons instead */
+    icon?: IconValue;
+    icons?: IconValue[];
     local?:         LocalInstance;
     ports:          Port[];
     schema?:        { [key: string]: any };

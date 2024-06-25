@@ -7,7 +7,9 @@ import java.util.Map;
 public class BlockTypeOperatorSpec {
     private ConfigurationSchema configuration;
     private List<Dependency> dependencies;
+    @Deprecated
     private IconValue icon;
+    private List<IconValue> icons;
     private LocalInstance local;
     private OperatorPorts ports;
     private Map<String, Object> schema;

@@ -4,11 +4,7 @@
   "title": "BlockDefinition",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "kind",
-    "metadata",
-    "spec"
-  ],
+  "required": ["kind", "metadata", "spec"],
   "properties": {
     "kind": {
       "type": "string"
@@ -38,6 +34,12 @@
         },
         "icon": {
           "$ref": "/core/icon-value"
+        },
+        "icons": {
+          "type": "array",
+          "items": {
+            "$ref": "/core/icon-value"
+          }
         }
       }
     },

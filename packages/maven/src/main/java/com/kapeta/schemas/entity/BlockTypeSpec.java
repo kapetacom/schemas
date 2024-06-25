@@ -7,7 +7,9 @@ import java.util.Map;
 public class BlockTypeSpec {
     private Port defaultPort;
     private List<Dependency> dependencies;
+    @Deprecated
     private IconValue icon;
+    private List<IconValue> icons;
     private Map<String, Object> schema;
     private List<Versioning> versioning;
 }

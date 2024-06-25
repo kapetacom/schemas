@@ -7,7 +7,9 @@ import java.util.Map;
 public class ResourceTypeOperatorSpec {
     private ColorValue color;
     private ConfigurationSchema configuration;
+    @Deprecated
     private IconValue icon;
+    private List<IconValue> icons;
     private LocalInstance local;
     private List<Port> ports;
     private Map<String, Object> schema;

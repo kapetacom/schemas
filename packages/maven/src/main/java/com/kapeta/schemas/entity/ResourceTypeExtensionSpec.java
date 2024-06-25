@@ -6,7 +6,9 @@ import java.util.Map;
 @lombok.Data
 public class ResourceTypeExtensionSpec {
     private ConfigurationSchema configuration;
+    @Deprecated
     private IconValue icon;
+    private List<IconValue> icons;
     private List<Port> ports;
     private Map<String, Object> schema;
     private List<Versioning> versioning;

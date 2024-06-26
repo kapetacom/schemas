@@ -4,4 +4,5 @@ package com.kapeta.schemas.entity;
 public class IconValue {
     private IconType type;
     private String value;
+    private String theme;
 }

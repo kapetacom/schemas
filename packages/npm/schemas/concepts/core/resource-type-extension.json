@@ -31,6 +31,12 @@
             "icon": {
               "$ref": "/core/icon-value"
             },
+            "icons": {
+              "type": "array",
+              "items": {
+                "$ref": "/core/icon-value"
+              }
+            },
             "schema": {
               "$ref": "/core/schema"
             },

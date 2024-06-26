@@ -36,6 +36,10 @@ spec:
             $ref: /core/color-value
           icon:
             $ref: /core/icon-value
+          icons:
+            type: array
+            items:
+              $ref: /core/icon-value
           ports:
             type: array
             minItems: 1

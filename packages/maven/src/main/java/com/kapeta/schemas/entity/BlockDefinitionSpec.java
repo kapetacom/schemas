@@ -8,6 +8,7 @@ public class BlockDefinitionSpec {
     private List<Resource> consumers;
     private EntityList entities;
     private IconValue icon;
+    private List<IconValue> icons;
     private List<Resource> providers;
     private LanguageTargetReference target;
 }

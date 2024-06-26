@@ -7,6 +7,7 @@ import java.util.Map;
 public class DeploymentTargetSpec {
     private ConfigurationSchema configuration;
     private IconValue icon;
+    private List<IconValue> icons;
     private Map<String, DeploymentTargetOperator> operators;
     private RemoteService service;
     private List<Versioning> versioning;

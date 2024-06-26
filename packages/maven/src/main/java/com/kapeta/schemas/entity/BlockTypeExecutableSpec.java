@@ -8,6 +8,7 @@ public class BlockTypeExecutableSpec {
     private ConfigurationSchema configuration;
     private List<Dependency> dependencies;
     private IconValue icon;
+    private List<IconValue> icons;
     private Map<String, Object> schema;
     private List<Versioning> versioning;
 }

@@ -17,3 +17,8 @@ properties:
       - fontawesome5
   value:
     type: string
+  theme:
+    type: string
+    enum:
+      - light
+      - dark

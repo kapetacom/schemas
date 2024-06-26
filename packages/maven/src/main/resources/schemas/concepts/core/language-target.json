@@ -109,12 +109,6 @@
             "icon": {
               "$ref": "/core/icon-value"
             },
-            "icons": {
-              "type": "array",
-              "items": {
-                "$ref": "/core/icon-value"
-              }
-            },
             "local": {
               "title": "LocalDevContainer",
               "description": "if type is \"docker\" or empty - Local development container using a fixed docker image. User code will be mounted into the container.\nif type is \"dockerfile\" - Local development container using a Dockerfile. User code will be built into the container.",

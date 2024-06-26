@@ -27,12 +27,6 @@
             "icon": {
               "$ref": "/core/icon-value"
             },
-            "icons": {
-              "type": "array",
-              "items": {
-                "$ref": "/core/icon-value"
-              }
-            },
             "color": {
               "$ref": "/core/color-value"
             },
@@ -63,12 +57,6 @@
           "properties": {
             "icon": {
               "$ref": "/core/icon-value"
-            },
-            "icons": {
-              "type": "array",
-              "items": {
-                "$ref": "/core/icon-value"
-              }
             },
             "service": {
               "$ref": "/core/remote-service"

@@ -144,7 +144,7 @@
       "if": {
         "properties": {
           "type": {
-            "const": "enum"
+            "const": "model"
           }
         }
       },

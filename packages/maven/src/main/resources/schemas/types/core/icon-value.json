@@ -18,6 +18,13 @@
     },
     "value": {
       "type": "string"
+    },
+    "theme": {
+      "type": "string",
+      "enum": [
+        "light",
+        "dark"
+      ]
     }
   }
 }

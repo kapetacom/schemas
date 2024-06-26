@@ -7,9 +7,7 @@ public class BlockDefinitionSpec {
     private EntityList configuration;
     private List<Resource> consumers;
     private EntityList entities;
-    @Deprecated
     private IconValue icon;
-    private List<IconValue> icons;
     private List<Resource> providers;
     private LanguageTargetReference target;
 }

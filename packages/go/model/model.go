@@ -32,6 +32,7 @@ type BlockDefinitionSpec struct {
 	Consumers     []ConsumerElement        `json:"consumers,omitempty"`    
 	Entities      *EntityList              `json:"entities,omitempty"`     
 	Icon          *IconValue               `json:"icon,omitempty"`         
+	Icons         []IconValue              `json:"icons,omitempty"`        
 	Providers     []ConsumerElement        `json:"providers,omitempty"`    
 	Target        *LanguageTargetReference `json:"target,omitempty"`       
 }
@@ -121,6 +122,7 @@ type BlockTypeExecutableSpec struct {
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
 	Dependencies  []Dependency           `json:"dependencies,omitempty"` 
 	Icon          *IconValue             `json:"icon,omitempty"`         
+	Icons         []IconValue            `json:"icons,omitempty"`        
 	Schema        map[string]interface{} `json:"schema"`                 
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
 }
@@ -201,6 +203,7 @@ type BlockTypeOperatorSpec struct {
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
 	Dependencies  []Dependency           `json:"dependencies,omitempty"` 
 	Icon          *IconValue             `json:"icon,omitempty"`         
+	Icons         []IconValue            `json:"icons,omitempty"`        
 	Local         LocalInstance          `json:"local"`                  
 	Ports         OperatorPorts          `json:"ports"`                  // Ports that the operator will expose.; The primary port is the one that will be used to access the operator.
 	Schema        map[string]interface{} `json:"schema"`                 
@@ -248,6 +251,7 @@ type BlockTypeSpec struct {
 	DefaultPort  *Port                  `json:"defaultPort,omitempty"` 
 	Dependencies []Dependency           `json:"dependencies,omitempty"`
 	Icon         *IconValue             `json:"icon,omitempty"`        
+	Icons        []IconValue            `json:"icons,omitempty"`       
 	Schema       map[string]interface{} `json:"schema"`                
 	Versioning   []Versioning           `json:"versioning,omitempty"`  
 }
@@ -261,6 +265,7 @@ type DeploymentTarget struct {
 type DeploymentTargetSpec struct {
 	Configuration *ConfigurationSchema                `json:"configuration,omitempty"`
 	Icon          *IconValue                          `json:"icon,omitempty"`         
+	Icons         []IconValue                         `json:"icons,omitempty"`        
 	Operators     map[string]DeploymentTargetOperator `json:"operators,omitempty"`    
 	Service       RemoteService                       `json:"service"`                
 	Versioning    []Versioning                        `json:"versioning,omitempty"`   
@@ -271,6 +276,7 @@ type DeploymentTargetOperator struct {
 	Configuration *ConfigurationSchema `json:"configuration,omitempty"`
 	Description   *string              `json:"description,omitempty"`  
 	Icon          *IconValue           `json:"icon,omitempty"`         
+	Icons         []IconValue          `json:"icons,omitempty"`        
 	Link          *URLValue            `json:"link,omitempty"`         
 	Title         string               `json:"title"`                  
 }
@@ -405,6 +411,7 @@ type LanguageTarget struct {
 
 type LanguageTargetSpec struct {
 	Icon       *IconValue             `json:"icon,omitempty"`      
+	Icons      []IconValue            `json:"icons,omitempty"`     
 	Local      LocalDevContainer      `json:"local"`               // if type is "docker" or empty - Local development container using a fixed docker image.; User code will be mounted into the container.; if type is "dockerfile" - Local development container using a Dockerfile. User code will; be built into the container.
 	Schema     map[string]interface{} `json:"schema,omitempty"`    
 	Versioning []Versioning           `json:"versioning,omitempty"`
@@ -454,6 +461,7 @@ type ResourceTypeExtension struct {
 type ResourceTypeExtensionSpec struct {
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
 	Icon          *IconValue             `json:"icon,omitempty"`         
+	Icons         []IconValue            `json:"icons,omitempty"`        
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema"`                 
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
@@ -468,6 +476,7 @@ type ResourceTypeInternal struct {
 type ResourceTypeInternalSpec struct {
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
 	Icon          *IconValue             `json:"icon,omitempty"`         
+	Icons         []IconValue            `json:"icons,omitempty"`        
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema,omitempty"`       
 	Versioning    []Versioning           `json:"versioning,omitempty"`   
@@ -483,6 +492,7 @@ type ResourceTypeOperatorSpec struct {
 	Color         *ColorValue            `json:"color,omitempty"`        
 	Configuration *ConfigurationSchema   `json:"configuration,omitempty"`
 	Icon          *IconValue             `json:"icon,omitempty"`         
+	Icons         []IconValue            `json:"icons,omitempty"`        
 	Local         *LocalInstance         `json:"local,omitempty"`        
 	Ports         []Port                 `json:"ports"`                  
 	Schema        map[string]interface{} `json:"schema,omitempty"`       

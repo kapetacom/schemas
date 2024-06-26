@@ -34,6 +34,10 @@ properties:
         $ref: /core/block-resource-list
       icon:
         $ref: /core/icon-value
+      icons:
+        type: array
+        items:
+          $ref: /core/icon-value
   attachments:
     type: array
     items:
